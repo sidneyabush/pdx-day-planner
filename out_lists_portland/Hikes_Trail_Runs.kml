@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document id="root_doc">
+<Schema name="Hikes_Trail_Runs" id="Hikes_Trail_Runs">
+	<SimpleField name="title" type="string"></SimpleField>
+	<SimpleField name="desc" type="string"></SimpleField>
+	<SimpleField name="address" type="string"></SimpleField>
+	<SimpleField name="url" type="string"></SimpleField>
+	<SimpleField name="lon" type="float"></SimpleField>
+	<SimpleField name="lat" type="float"></SimpleField>
+</Schema>
+<Folder><name>Hikes_Trail_Runs</name>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Hikes_Trail_Runs">
+		<SimpleData name="title"></SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url"></SimpleData>
+		<SimpleData name="lon">-122.681425</SimpleData>
+		<SimpleData name="lat">45.516018</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.681425,45.516018</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Hikes_Trail_Runs">
+		<SimpleData name="title">Leif Erikson Trail</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Leif+Erikson+Trail/data=!4m2!3m1!1s0x549509c7457aab53:0xdabe371ac5b325d7</SimpleData>
+		<SimpleData name="lon">-122.725341</SimpleData>
+		<SimpleData name="lat">45.539118</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.725341,45.539118</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Hikes_Trail_Runs">
+		<SimpleData name="title">Aspen Trail</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Aspen+Trail/data=!4m2!3m1!1s0x549509c0e5bcb817:0x440f9d640eefaf5d</SimpleData>
+		<SimpleData name="lon">-122.597115382969</SimpleData>
+		<SimpleData name="lat">45.434939190113</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.597115382969,45.434939190113</coordinates></Point>
+  </Placemark>
+</Folder>
+</Document></kml>

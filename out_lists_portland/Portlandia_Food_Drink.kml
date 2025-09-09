@@ -1,0 +1,2746 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document id="root_doc">
+<Schema name="Portlandia_Food_Drink" id="Portlandia_Food_Drink">
+	<SimpleField name="title" type="string"></SimpleField>
+	<SimpleField name="desc" type="string"></SimpleField>
+	<SimpleField name="address" type="string"></SimpleField>
+	<SimpleField name="url" type="string"></SimpleField>
+	<SimpleField name="lon" type="float"></SimpleField>
+	<SimpleField name="lat" type="float"></SimpleField>
+</Schema>
+<Folder><name>Portlandia_Food_Drink</name>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title"></SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url"></SimpleData>
+		<SimpleData name="lon">-122.681425</SimpleData>
+		<SimpleData name="lat">45.516018</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.681425,45.516018</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Cornet Custard</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Cornet+Custard/data=!4m2!3m1!1s0x5495a700307f8397:0x8ebee843d99522a5</SimpleData>
+		<SimpleData name="lon">-122.615464</SimpleData>
+		<SimpleData name="lat">45.50538</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.615464,45.50538</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Cloud City Ice Cream</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Cloud+City+Ice+Cream/data=!4m2!3m1!1s0x54950aa0c90fe67f:0x8a96585e19715cf3</SimpleData>
+		<SimpleData name="lon">-122.615975</SimpleData>
+		<SimpleData name="lat">45.479501</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.615975,45.479501</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Based General Store</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Based+General+Store/data=!4m2!3m1!1s0x54950b233a453961:0xe74f120f00d8a353</SimpleData>
+		<SimpleData name="lon">-122.68356</SimpleData>
+		<SimpleData name="lat">45.521027</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.68356,45.521027</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Caffeine Withdrawal</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Caffeine+Withdrawal/data=!4m2!3m1!1s0x5495a14b5a6ea68b:0xa7e2a34358006400</SimpleData>
+		<SimpleData name="lon">-122.681425</SimpleData>
+		<SimpleData name="lat">45.516018</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.681425,45.516018</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Kaleido Coffee</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Kaleido+Coffee/data=!4m2!3m1!1s0x54950976d05f8253:0x90c33657e360e5e7</SimpleData>
+		<SimpleData name="lon">-122.681425</SimpleData>
+		<SimpleData name="lat">45.516018</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.681425,45.516018</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Exquisite Creatures Coffee</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Exquisite+Creatures+Coffee/data=!4m2!3m1!1s0x5495a34c62483999:0x45239e39f2ef9ac3</SimpleData>
+		<SimpleData name="lon">-122.660048</SimpleData>
+		<SimpleData name="lat">45.521735</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.660048,45.521735</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Cafe Olli</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Cafe+Olli/data=!4m2!3m1!1s0x54858547a12ea479:0xf982bfd23df24fe6</SimpleData>
+		<SimpleData name="lon">-122.662078</SimpleData>
+		<SimpleData name="lat">45.551321</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.662078,45.551321</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Mudd Works Roastery</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Mudd+Works+Roastery/data=!4m2!3m1!1s0x54950a5b8bdf1289:0x6ee024d18d6aae5d</SimpleData>
+		<SimpleData name="lon">-122.591823</SimpleData>
+		<SimpleData name="lat">45.526227</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.591823,45.526227</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Cubo</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Cubo/data=!4m2!3m1!1s0x5495a7be8064663d:0xb41b2676267bb4fc</SimpleData>
+		<SimpleData name="lon">-122.67539</SimpleData>
+		<SimpleData name="lat">45.550198</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.67539,45.550198</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Doe Donuts + Ice Cream</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Doe+Donuts+%2B+Ice+Cream/data=!4m2!3m1!1s0x5495a049b38d84eb:0x926ccba0e1ec836f</SimpleData>
+		<SimpleData name="lon">-122.578301</SimpleData>
+		<SimpleData name="lat">45.497869</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.578301,45.497869</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Basilisk</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Basilisk/data=!4m2!3m1!1s0x5495a0c7dd2b6e09:0xf44de90e4777939e</SimpleData>
+		<SimpleData name="lon">-122.638219</SimpleData>
+		<SimpleData name="lat">45.529045</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.638219,45.529045</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Missionary Chocolates</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Missionary+Chocolates/data=!4m2!3m1!1s0x5495a0bba1f47bd3:0x685a7e701a69e774</SimpleData>
+		<SimpleData name="lon">-122.637843</SimpleData>
+		<SimpleData name="lat">45.526152</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.637843,45.526152</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Friendship Kitchen</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Friendship+Kitchen/data=!4m2!3m1!1s0x5495a16eb1cabda9:0x9c638a80010c26fa</SimpleData>
+		<SimpleData name="lon">-122.641607</SimpleData>
+		<SimpleData name="lat">45.526694</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.641607,45.526694</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Lauretta Jean's</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Lauretta+Jean's/data=!4m2!3m1!1s0x5495a0863d54156d:0x2aec5e03f8f53aaf</SimpleData>
+		<SimpleData name="lon">-122.629391</SimpleData>
+		<SimpleData name="lat">45.504588</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.629391,45.504588</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Village Kitchen</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Village+Kitchen/data=!4m2!3m1!1s0x54950b8ad575f499:0x986d93772569091e</SimpleData>
+		<SimpleData name="lon">-122.700037</SimpleData>
+		<SimpleData name="lat">45.536185</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.700037,45.536185</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Walk The Wok</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Walk+The+Wok/data=!4m2!3m1!1s0x54950b6ac6edb239:0x7db8ffab4f6762e3</SimpleData>
+		<SimpleData name="lon">-122.68677</SimpleData>
+		<SimpleData name="lat">45.516854</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.68677,45.516854</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Thai Peacock</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Thai+Peacock/data=!4m2!3m1!1s0x54950a03c3b0e46f:0x31e91c3ef4602fec</SimpleData>
+		<SimpleData name="lon">-122.680231</SimpleData>
+		<SimpleData name="lat">45.522731</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.680231,45.522731</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">El Pilón</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/El+Pil%C3%B3n/data=!4m2!3m1!1s0x54950a065d9b8673:0x17f92c08923ec36d</SimpleData>
+		<SimpleData name="lon">-122.675728</SimpleData>
+		<SimpleData name="lat">45.520928</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.675728,45.520928</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Fried Egg I'm In Love</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Fried+Egg+I'm+In+Love/data=!4m2!3m1!1s0x5495a04721dd7373:0x2e9d7c6479edc2df</SimpleData>
+		<SimpleData name="lon">-122.679653</SimpleData>
+		<SimpleData name="lat">45.518779</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.679653,45.518779</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Portland Juice Co.</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Portland+Juice+Co./data=!4m2!3m1!1s0x54950a7bba0cd045:0x2c164d9c893c88e5</SimpleData>
+		<SimpleData name="lon">-122.652757</SimpleData>
+		<SimpleData name="lat">45.500515</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.652757,45.500515</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Sincerely, Bagel</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Sincerely,+Bagel/data=!4m2!3m1!1s0x5495a1e462b0523f:0x89b3ef5073d259dd</SimpleData>
+		<SimpleData name="lon">-122.641695</SimpleData>
+		<SimpleData name="lat">45.527163</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.641695,45.527163</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Madrona Hill Cafe</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Madrona+Hill+Cafe/data=!4m2!3m1!1s0x5495a79e60754c69:0x329e7472c385fbc8</SimpleData>
+		<SimpleData name="lon">-122.593449709803</SimpleData>
+		<SimpleData name="lat">45.432540963227</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.593449709803,45.432540963227</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Tabor Bread</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Tabor+Bread/data=!4m2!3m1!1s0x5495a0f3ffc03b6b:0x70e555557892dc48</SimpleData>
+		<SimpleData name="lon">-122.616335</SimpleData>
+		<SimpleData name="lat">45.516391</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.616335,45.516391</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Speed-o Cappuccino</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Speed-o+Cappuccino/data=!4m2!3m1!1s0x5495a142e9db9637:0xa1f011e9274f50b9</SimpleData>
+		<SimpleData name="lon">-122.655259</SimpleData>
+		<SimpleData name="lat">45.519582</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.655259,45.519582</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Behind The Museum Cafe</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Behind+The+Museum+Cafe/data=!4m2!3m1!1s0x54950a1a5f3d68e5:0x806ad772fb9d0ebe</SimpleData>
+		<SimpleData name="lon">-122.684342</SimpleData>
+		<SimpleData name="lat">45.516432</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.684342,45.516432</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">One Moto Cafe / Sidewinder Subs</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/One+Moto+Cafe+%2F+Sidewinder+Subs/data=!4m2!3m1!1s0x5495a19b9c09f28b:0xb56a5584e043453b</SimpleData>
+		<SimpleData name="lon">-122.681425</SimpleData>
+		<SimpleData name="lat">45.516018</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.681425,45.516018</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Sweetpea Baking Co.</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Sweetpea+Baking+Co./data=!4m2!3m1!1s0x5495a0a4750c01db:0xab3adbb76f9fd998</SimpleData>
+		<SimpleData name="lon">-122.653444</SimpleData>
+		<SimpleData name="lat">45.519471</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.653444,45.519471</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Roste Chocolate House</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Roste+Chocolate+House/data=!4m2!3m1!1s0x54950902d48760fb:0xe72ca741cb67a51f</SimpleData>
+		<SimpleData name="lon">-122.681425</SimpleData>
+		<SimpleData name="lat">45.516018</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.681425,45.516018</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Cricket Cafe</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Cricket+Cafe/data=!4m2!3m1!1s0x5495a09413f0adb5:0x88583e1c8bff9156</SimpleData>
+		<SimpleData name="lon">-122.632503</SimpleData>
+		<SimpleData name="lat">45.51665</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.632503,45.51665</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Cherries &amp; Figs Wine Shop</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Cherries+%26+Figs+Wine+Shop/data=!4m2!3m1!1s0x5495a7140ba863c1:0x6bff9712cabd9d4c</SimpleData>
+		<SimpleData name="lon">-122.648514</SimpleData>
+		<SimpleData name="lat">45.559232</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.648514,45.559232</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Umami Sushi Pdx Food Cart</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Umami+Sushi+Pdx+Food+Cart/data=!4m2!3m1!1s0x5495a7a810ac79eb:0x90470b8d2fa6a4c</SimpleData>
+		<SimpleData name="lon">-122.6490367</SimpleData>
+		<SimpleData name="lat">45.5592714</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.6490367,45.5592714</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Yang's Noodle 煎饼师傅</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Yang's+Noodle+%E7%85%8E%E9%A5%BC%E5%B8%88%E5%82%85/data=!4m2!3m1!1s0x5495a7c23603e279:0xf986440f3c540b6</SimpleData>
+		<SimpleData name="lon">-122.648448</SimpleData>
+		<SimpleData name="lat">45.559376</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.648448,45.559376</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Pasture PDX</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Pasture+PDX/data=!4m2!3m1!1s0x5495a7a361acaff5:0x1e7fb4740a82bbb3</SimpleData>
+		<SimpleData name="lon">-122.65141</SimpleData>
+		<SimpleData name="lat">45.559293</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.65141,45.559293</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Norah Alberta</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Norah+Alberta/data=!4m2!3m1!1s0x5495a7006e10ed4d:0x461a2f183440bac1</SimpleData>
+		<SimpleData name="lon">-122.643494039142</SimpleData>
+		<SimpleData name="lat">45.566252020917</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.643494039142,45.566252020917</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">NoPoBoys</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/NoPoBoys/data=!4m2!3m1!1s0x5495a70d1913ac69:0xc5a20f9ffc9deca0</SimpleData>
+		<SimpleData name="lon">-122.681425</SimpleData>
+		<SimpleData name="lat">45.516018</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.681425,45.516018</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Radio Room</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Radio+Room/data=!4m2!3m1!1s0x5495a7193b5d9715:0x6f10035cf4467eb8</SimpleData>
+		<SimpleData name="lon">-122.654327</SimpleData>
+		<SimpleData name="lat">45.559315</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.654327,45.559315</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Bye and Bye</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Bye+and+Bye/data=!4m2!3m1!1s0x5495a71913f83e33:0x59407c50eb6ebb4e</SimpleData>
+		<SimpleData name="lon">-122.655133</SimpleData>
+		<SimpleData name="lat">45.55925</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.655133,45.55925</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Alberta Cooperative Grocery</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Alberta+Cooperative+Grocery/data=!4m2!3m1!1s0x5495a71f14b8aa9b:0x969d89a9f479a69d</SimpleData>
+		<SimpleData name="lon">-122.649503</SimpleData>
+		<SimpleData name="lat">45.558938</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.649503,45.558938</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Conscious Sedation Beer Garden</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Conscious+Sedation+Beer+Garden/data=!4m2!3m1!1s0x5495a793b3757631:0xfa0b1bc4c1af47da</SimpleData>
+		<SimpleData name="lon">-122.649456</SimpleData>
+		<SimpleData name="lat">45.559392</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.649456,45.559392</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Ranger Chocolate Co.</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Ranger+Chocolate+Co./data=!4m2!3m1!1s0x5495a0af3238a045:0xa3505562c739cfb4</SimpleData>
+		<SimpleData name="lon">-122.661356</SimpleData>
+		<SimpleData name="lat">45.52396</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.661356,45.52396</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Life of Pie Pizza</SimpleData>
+		<SimpleData name="desc">Has vegan option for pizza</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Life+of+Pie+Pizza/data=!4m2!3m1!1s0x5495a73f81f0b5df:0x4f2f17071f435088</SimpleData>
+		<SimpleData name="lon">-122.666507</SimpleData>
+		<SimpleData name="lat">45.549423</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.666507,45.549423</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Jinju Patisserie</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Jinju+Patisserie/data=!4m2!3m1!1s0x5495a7262ec5e87d:0x4584b054cf35ff11</SimpleData>
+		<SimpleData name="lon">-122.667031</SimpleData>
+		<SimpleData name="lat">45.552988</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.667031,45.552988</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Pacific Standard</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Pacific+Standard/data=!4m2!3m1!1s0x5495a13affeb3f15:0x457e3b3b93fd7b2</SimpleData>
+		<SimpleData name="lon">-122.661467</SimpleData>
+		<SimpleData name="lat">45.523807</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.661467,45.523807</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Rontoms</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Rontoms/data=!4m2!3m1!1s0x5495a0a5fed62565:0x9f04265b15024d83</SimpleData>
+		<SimpleData name="lon">-122.659434</SimpleData>
+		<SimpleData name="lat">45.52268</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.659434,45.52268</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Bao Bao</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Bao+Bao/data=!4m2!3m1!1s0x5495a17bfad148c9:0xfcc903b71fba1937</SimpleData>
+		<SimpleData name="lon">-122.660017</SimpleData>
+		<SimpleData name="lat">45.523874</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.660017,45.523874</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Han Oak Restaurant</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Han+Oak+Restaurant/data=!4m2!3m1!1s0x5495a0b8488b3da5:0x8afd852df2e1dd5f</SimpleData>
+		<SimpleData name="lon">-122.641664</SimpleData>
+		<SimpleData name="lat">45.526702</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.641664,45.526702</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Mikiko Mochi Donuts</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Mikiko+Mochi+Donuts/data=!4m2!3m1!1s0x5495098a8ac1c50b:0x62226f3ae73ff75b</SimpleData>
+		<SimpleData name="lon">-122.681425</SimpleData>
+		<SimpleData name="lat">45.516018</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.681425,45.516018</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Güero</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/G%C3%BCero/data=!4m2!3m1!1s0x5495a0be57da22db:0x36051eca18f8f166</SimpleData>
+		<SimpleData name="lon">-122.637063</SimpleData>
+		<SimpleData name="lat">45.524435</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.637063,45.524435</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Farag’s</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Farag%E2%80%99s/data=!4m2!3m1!1s0x5495a1002ae78b11:0xb23a3aa97b7b6c4e</SimpleData>
+		<SimpleData name="lon">-122.681425</SimpleData>
+		<SimpleData name="lat">45.516018</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.681425,45.516018</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">No Preference Coffee</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/No+Preference+Coffee/data=!4m2!3m1!1s0x5495a1adc350f3a9:0xadd8ea5dcf4a3306</SimpleData>
+		<SimpleData name="lon">-122.641821</SimpleData>
+		<SimpleData name="lat">45.523077</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.641821,45.523077</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Beulahland</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Beulahland/data=!4m2!3m1!1s0x5495a0bf39ef5cc3:0xdf1efcf6a638d750</SimpleData>
+		<SimpleData name="lon">-122.637011</SimpleData>
+		<SimpleData name="lat">45.523913</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.637011,45.523913</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Dear Sandy</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Dear+Sandy/data=!4m2!3m1!1s0x5495a1633c18a3f5:0x57a9c46378edb798</SimpleData>
+		<SimpleData name="lon">-122.636904</SimpleData>
+		<SimpleData name="lat">45.529038</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.636904,45.529038</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">The Sports Bra</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/The+Sports+Bra/data=!4m2!3m1!1s0x5495a152d54bf5fd:0x1af2809b32a9e777</SimpleData>
+		<SimpleData name="lon">-122.63978</SimpleData>
+		<SimpleData name="lat">45.534992</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.63978,45.534992</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Heavenly Creatures</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Heavenly+Creatures/data=!4m2!3m1!1s0x5495a133dd78dd57:0x9018db03c1d14ef2</SimpleData>
+		<SimpleData name="lon">-122.642551</SimpleData>
+		<SimpleData name="lat">45.534821</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.642551,45.534821</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Taste Tickler</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Taste+Tickler/data=!4m2!3m1!1s0x5495a0b5382195fd:0xa9224ea166afc3ef</SimpleData>
+		<SimpleData name="lon">-122.651341</SimpleData>
+		<SimpleData name="lat">45.535214</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.651341,45.535214</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">thơm® Portland</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/th%C6%A1m%C2%AE+Portland/data=!4m2!3m1!1s0x5495a742141479db:0x5260112319d702ac</SimpleData>
+		<SimpleData name="lon">-122.634051</SimpleData>
+		<SimpleData name="lat">45.559189</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.634051,45.559189</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Fat Kitty Ramen</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Fat+Kitty+Ramen/data=!4m2!3m1!1s0x5495a737d3313b59:0x975cde7f34dd59fb</SimpleData>
+		<SimpleData name="lon">-122.713786</SimpleData>
+		<SimpleData name="lat">45.467941</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.713786,45.467941</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">chelo</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/chelo/data=!4m2!3m1!1s0x5495a71898cde517:0x8e0317715d983eec</SimpleData>
+		<SimpleData name="lon">-122.635222</SimpleData>
+		<SimpleData name="lat">45.5625</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.635222,45.5625</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Urdaneta</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Urdaneta/data=!4m2!3m1!1s0x5495a6dc28888bf1:0xa7d45436a3425256</SimpleData>
+		<SimpleData name="lon">-122.634073</SimpleData>
+		<SimpleData name="lat">45.559177</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.634073,45.559177</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Nate's Oatmeal Cookies</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Nate's+Oatmeal+Cookies/data=!4m2!3m1!1s0x5495a153b8945687:0xa46b6f81eb9fcbac</SimpleData>
+		<SimpleData name="lon">-122.63075</SimpleData>
+		<SimpleData name="lat">45.516261</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.63075,45.516261</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Kabba’s Kitchen</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Kabba%E2%80%99s+Kitchen/data=!4m2!3m1!1s0x5495a7fa1380247d:0x103aef8df22b077</SimpleData>
+		<SimpleData name="lon">-122.655488</SimpleData>
+		<SimpleData name="lat">45.517709</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.655488,45.517709</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Kalé</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Kal%C3%A9/data=!4m2!3m1!1s0x54950a1953ad94a3:0xb9874d5030e5a989</SimpleData>
+		<SimpleData name="lon">-122.671547</SimpleData>
+		<SimpleData name="lat">45.520885</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.671547,45.520885</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Mother's Bistro &amp; Bar</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Mother's+Bistro+%26+Bar/data=!4m2!3m1!1s0x54950a06702a5de5:0x880b0bcd938f8871</SimpleData>
+		<SimpleData name="lon">-122.67407</SimpleData>
+		<SimpleData name="lat">45.52208</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.67407,45.52208</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Waffle On A Stick</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Waffle+On+A+Stick/data=!4m2!3m1!1s0x54950b78757dfb39:0xab4578df25896703</SimpleData>
+		<SimpleData name="lon">-122.681425</SimpleData>
+		<SimpleData name="lat">45.516018</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.681425,45.516018</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Eb &amp; Bean NW</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Eb+%26+Bean+NW/data=!4m2!3m1!1s0x54950997ff43551d:0x819b09be5bd8b291</SimpleData>
+		<SimpleData name="lon">-122.634196</SimpleData>
+		<SimpleData name="lat">45.504613</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.634196,45.504613</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Negociant</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Negociant/data=!4m2!3m1!1s0x5495094d7ff17a0b:0x56e629420ca68e50</SimpleData>
+		<SimpleData name="lon">-122.694706</SimpleData>
+		<SimpleData name="lat">45.527565</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.694706,45.527565</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Pine State Biscuits | NW 23rd</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Pine+State+Biscuits+%7C+NW+23rd/data=!4m2!3m1!1s0x549509cfae5715a5:0xb057d7f332174b9c</SimpleData>
+		<SimpleData name="lon">-122.698948</SimpleData>
+		<SimpleData name="lat">45.534876</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.698948,45.534876</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Stepping Stone Cafe</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Stepping+Stone+Cafe/data=!4m2!3m1!1s0x549509e581c2c13d:0xe5b897a14ef3af75</SimpleData>
+		<SimpleData name="lon">-122.700528</SimpleData>
+		<SimpleData name="lat">45.533166</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.700528,45.533166</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Tulip Shop Tavern</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Tulip+Shop+Tavern/data=!4m2!3m1!1s0x5495a7254d32cf4f:0xcf41808287338887</SimpleData>
+		<SimpleData name="lon">-122.67563</SimpleData>
+		<SimpleData name="lat">45.562859</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.67563,45.562859</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Birdie's</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Birdie's/data=!4m2!3m1!1s0x5495a7005ee53a8b:0x4a29227baede92e7</SimpleData>
+		<SimpleData name="lon">-122.842933553719</SimpleData>
+		<SimpleData name="lat">45.553854504842</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.842933553719,45.553854504842</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Native Bowl</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Native+Bowl/data=!4m2!3m1!1s0x5495a76ca002b1b7:0xdedc1ff1e7a80e80</SimpleData>
+		<SimpleData name="lon">-122.675802</SimpleData>
+		<SimpleData name="lat">45.554357</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.675802,45.554357</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Pip's Original Doughnuts &amp; Chai</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Pip's+Original+Doughnuts+%26+Chai/data=!4m2!3m1!1s0x5495a6d2c8494931:0xb0ca4c4b82cf63eb</SimpleData>
+		<SimpleData name="lon">-122.613801</SimpleData>
+		<SimpleData name="lat">45.548391</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.613801,45.548391</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Rangoon Bistro (N)</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Rangoon+Bistro+(N)/data=!4m2!3m1!1s0x5495a7d05c889b15:0x1ac460e78fb0c847</SimpleData>
+		<SimpleData name="lon">-122.675879</SimpleData>
+		<SimpleData name="lat">45.55011</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.675879,45.55011</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Broder Nord</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Broder+Nord/data=!4m2!3m1!1s0x5495a75a98aee2f3:0x57f94f542b5c37c9</SimpleData>
+		<SimpleData name="lon">-122.674456</SimpleData>
+		<SimpleData name="lat">45.539344</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.674456,45.539344</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Gravy</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Gravy/data=!4m2!3m1!1s0x5495a76bad32c0af:0x4caaadead7350eff</SimpleData>
+		<SimpleData name="lon">-122.675845</SimpleData>
+		<SimpleData name="lat">45.551724</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.675845,45.551724</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Churn Cafe</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Churn+Cafe/data=!4m2!3m1!1s0x5495a7b42627ed8f:0x8d0cb7eb1026092c</SimpleData>
+		<SimpleData name="lon">-122.681425</SimpleData>
+		<SimpleData name="lat">45.516018</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.681425,45.516018</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">The Meadow - N Mississippi Ave.</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/The+Meadow+-+N+Mississippi+Ave./data=!4m2!3m1!1s0x5495a76a111686f3:0x3bf0aec605b21330</SimpleData>
+		<SimpleData name="lon">-122.675908</SimpleData>
+		<SimpleData name="lat">45.550002</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.675908,45.550002</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Fly Awake Tea House</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Fly+Awake+Tea+House/data=!4m2!3m1!1s0x5495a73a5537943f:0xc411446a632f4069</SimpleData>
+		<SimpleData name="lon">-122.681425</SimpleData>
+		<SimpleData name="lat">45.516018</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.681425,45.516018</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Function NE</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Function+NE/data=!4m2!3m1!1s0x5495a711fb62c1c9:0x54bafb706676d9dc</SimpleData>
+		<SimpleData name="lon">-122.644529</SimpleData>
+		<SimpleData name="lat">45.558876</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.644529,45.558876</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Artisserie Fine Bakery</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Artisserie+Fine+Bakery/data=!4m2!3m1!1s0x54950949f11e0129:0xd003672fd5e5bd36</SimpleData>
+		<SimpleData name="lon">-122.698367</SimpleData>
+		<SimpleData name="lat">45.527898</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.698367,45.527898</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Little Griddle</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Little+Griddle/data=!4m2!3m1!1s0x5495a1fd8e1ac92b:0xc93b1fb41589d3be</SimpleData>
+		<SimpleData name="lon">-122.619893</SimpleData>
+		<SimpleData name="lat">45.548465</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.619893,45.548465</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">MÅURICE</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/M%C3%85URICE/data=!4m2!3m1!1s0x54950a03c051c9e7:0x95721c1a7a39b826</SimpleData>
+		<SimpleData name="lon">-122.680383</SimpleData>
+		<SimpleData name="lat">45.522802</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.680383,45.522802</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Khao Moo Dang</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Khao+Moo+Dang/data=!4m2!3m1!1s0x5495a133f5fff293:0x37541ad680dc3553</SimpleData>
+		<SimpleData name="lon">-122.632864</SimpleData>
+		<SimpleData name="lat">45.512239</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.632864,45.512239</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Wailua Shave Ice Portland</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Wailua+Shave+Ice+Portland/data=!4m2!3m1!1s0x5495a09fb638826d:0x9319ecf13bf12148</SimpleData>
+		<SimpleData name="lon">-122.681698</SimpleData>
+		<SimpleData name="lat">45.522474</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.681698,45.522474</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Phuket Cafe</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Phuket+Cafe/data=!4m2!3m1!1s0x549509833c9e4631:0xf0f13605647321eb</SimpleData>
+		<SimpleData name="lon">-122.699676</SimpleData>
+		<SimpleData name="lat">45.535704</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.699676,45.535704</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">McMenamins Chapel Pub</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/McMenamins+Chapel+Pub/data=!4m2!3m1!1s0x5495a70e4a5c9423:0x8a4167f2cd8480a9</SimpleData>
+		<SimpleData name="lon">-122.683398</SimpleData>
+		<SimpleData name="lat">45.522777</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.683398,45.522777</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Sweedeedee</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Sweedeedee/data=!4m2!3m1!1s0x5495a70d8d7534dd:0xfcc31c3a84d345a3</SimpleData>
+		<SimpleData name="lon">-122.674873</SimpleData>
+		<SimpleData name="lat">45.560566</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.674873,45.560566</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Junior's Cafe</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Junior's+Cafe/data=!4m2!3m1!1s0x54950a758b301a97:0xb8f565bd973285ba</SimpleData>
+		<SimpleData name="lon">-122.6535237</SimpleData>
+		<SimpleData name="lat">45.5102111</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.6535237,45.5102111</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">BREAD &amp; HONEY CAFE</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/BREAD+%26+HONEY+CAFE/data=!4m2!3m1!1s0x5495a740895abcc5:0xd1b23e28d21c56f4</SimpleData>
+		<SimpleData name="lon">-122.667778</SimpleData>
+		<SimpleData name="lat">45.548719</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.667778,45.548719</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Jam On Hawthorne</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Jam+On+Hawthorne/data=!4m2!3m1!1s0x5495a09bd5c8878b:0xdf24089baecbf929</SimpleData>
+		<SimpleData name="lon">-122.642707</SimpleData>
+		<SimpleData name="lat">45.512254</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.642707,45.512254</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Broder Söder</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Broder+S%C3%B6der/data=!4m2!3m1!1s0x54950cf55fb46597:0xe4f46dd186463112</SimpleData>
+		<SimpleData name="lon">-122.7676</SimpleData>
+		<SimpleData name="lat">45.456298</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.7676,45.456298</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Better Half</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Better+Half/data=!4m2!3m1!1s0x5495a7a436c1ff7b:0xece3fa21cce72549</SimpleData>
+		<SimpleData name="lon">-122.667171</SimpleData>
+		<SimpleData name="lat">45.548377</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.667171,45.548377</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Hengry Dumpling House</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Hengry+Dumpling+House/data=!4m2!3m1!1s0x5495a75ae80a5c8b:0xe29d5d149969f81f</SimpleData>
+		<SimpleData name="lon">-122.667071</SimpleData>
+		<SimpleData name="lat">45.554769</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.667071,45.554769</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Coco Donuts &amp; Coffee Williams</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Coco+Donuts+%26+Coffee+Williams/data=!4m2!3m1!1s0x5495a7143540561f:0x505189a8b837c3e6</SimpleData>
+		<SimpleData name="lon">-122.678893</SimpleData>
+		<SimpleData name="lat">45.518128</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.678893,45.518128</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Ba Mee Thai Noodle House</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Ba+Mee+Thai+Noodle+House/data=!4m2!3m1!1s0x5495a700409f529b:0xa764e4b495048350</SimpleData>
+		<SimpleData name="lon">-122.666469</SimpleData>
+		<SimpleData name="lat">45.553626</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.666469,45.553626</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Reel M Inn</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Reel+M+Inn/data=!4m2!3m1!1s0x5495a083af087315:0xb3a682ad2f1d78df</SimpleData>
+		<SimpleData name="lon">-122.640639</SimpleData>
+		<SimpleData name="lat">45.504562</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.640639,45.504562</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Eb &amp; Bean SE</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Eb+%26+Bean+SE/data=!4m2!3m1!1s0x5495a0842734cc35:0x152993d48856899b</SimpleData>
+		<SimpleData name="lon">-122.634196</SimpleData>
+		<SimpleData name="lat">45.504613</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.634196,45.504613</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Oma's Hideaway</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Oma's+Hideaway/data=!4m2!3m1!1s0x5495a1f8e8398df5:0x269b63bbb2c5f21</SimpleData>
+		<SimpleData name="lon">-122.632869</SimpleData>
+		<SimpleData name="lat">45.504942</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.632869,45.504942</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">The Whole Bowl</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/The+Whole+Bowl/data=!4m2!3m1!1s0x5495a7408812756b:0x2d76aa3301f609d1</SimpleData>
+		<SimpleData name="lon">-122.679409</SimpleData>
+		<SimpleData name="lat">45.518395</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.679409,45.518395</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Tamale Boy Russell</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Tamale+Boy+Russell/data=!4m2!3m1!1s0x5495a6fba5828c03:0xb52ccb9e75fe20e3</SimpleData>
+		<SimpleData name="lon">-122.67316</SimpleData>
+		<SimpleData name="lat">45.540821</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.67316,45.540821</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Eem - Thai BBQ &amp; Cocktails</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Eem+-+Thai+BBQ+%26+Cocktails/data=!4m2!3m1!1s0x5495a75a2a3cad39:0x864d1c31d67196fd</SimpleData>
+		<SimpleData name="lon">-122.681425</SimpleData>
+		<SimpleData name="lat">45.516018</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.681425,45.516018</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Happy Cup Coffee Bar</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Happy+Cup+Coffee+Bar/data=!4m2!3m1!1s0x5495a78bcfb87ec5:0x6cc7c49448c970e4</SimpleData>
+		<SimpleData name="lon">-122.666387</SimpleData>
+		<SimpleData name="lat">45.548133</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.666387,45.548133</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Baka Umai</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Baka+Umai/data=!4m2!3m1!1s0x5495a16b009afa3f:0xbfd28f5bcae4fc6b</SimpleData>
+		<SimpleData name="lon">-122.614111</SimpleData>
+		<SimpleData name="lat">45.512306</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.614111,45.512306</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Norah Belmont</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Norah+Belmont/data=!4m2!3m1!1s0x5495a1a868cfdc11:0x3b8a28e9a8f90e5f</SimpleData>
+		<SimpleData name="lon">-122.624283</SimpleData>
+		<SimpleData name="lat">45.516643</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.624283,45.516643</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Bluto's</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Bluto's/data=!4m2!3m1!1s0x5495a198f5670f4f:0xfda1b97ab1931088</SimpleData>
+		<SimpleData name="lon">-122.636321</SimpleData>
+		<SimpleData name="lat">45.516262</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.636321,45.516262</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Fair Weather</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Fair+Weather/data=!4m2!3m1!1s0x54950b1e7a05163d:0xce6e35141fcbd73a</SimpleData>
+		<SimpleData name="lon">-122.698415</SimpleData>
+		<SimpleData name="lat">45.528543</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.698415,45.528543</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Fifty Licks Ice Cream</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Fifty+Licks+Ice+Cream/data=!4m2!3m1!1s0x54950a7880600093:0x50f03aff5542012e</SimpleData>
+		<SimpleData name="lon">-122.64503</SimpleData>
+		<SimpleData name="lat">45.503583</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.64503,45.503583</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Hat Yai Belmont</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Hat+Yai+Belmont/data=!4m2!3m1!1s0x5495a13be7afccad:0xb5f4f9589f41d217</SimpleData>
+		<SimpleData name="lon">-122.659613</SimpleData>
+		<SimpleData name="lat">45.516647</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.659613,45.516647</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Kachka</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Kachka/data=!4m2!3m1!1s0x5495a0a7485bfdcd:0x859a3a4e9e7497eb</SimpleData>
+		<SimpleData name="lon">-122.654472</SimpleData>
+		<SimpleData name="lat">45.515701</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.654472,45.515701</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Voysey</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Voysey/data=!4m2!3m1!1s0x5495a14979dbb77f:0x52fc32e89c914bd9</SimpleData>
+		<SimpleData name="lon">-122.659438</SimpleData>
+		<SimpleData name="lat">45.517784</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.659438,45.517784</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Loyal Legion</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Loyal+Legion/data=!4m2!3m1!1s0x5495a0a731c090e9:0xbe761b29fb149550</SimpleData>
+		<SimpleData name="lon">-122.594678</SimpleData>
+		<SimpleData name="lat">45.588151</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.594678,45.588151</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Desperados Sandwiches</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Desperados+Sandwiches/data=!4m2!3m1!1s0x5495a701b5fb6457:0x20ab6b11565c0d90</SimpleData>
+		<SimpleData name="lon">-122.677284</SimpleData>
+		<SimpleData name="lat">45.522281</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.677284,45.522281</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Wonderwood Springs</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Wonderwood+Springs/data=!4m2!3m1!1s0x5495a98b23072045:0xd1a25114a0fa241e</SimpleData>
+		<SimpleData name="lon">-122.755826</SimpleData>
+		<SimpleData name="lat">45.591317</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.755826,45.591317</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">People's Food Co-op</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/People's+Food+Co-op/data=!4m2!3m1!1s0x54950a7f2e78bb17:0xa9cd2d1ea5d598f9</SimpleData>
+		<SimpleData name="lon">-122.644832</SimpleData>
+		<SimpleData name="lat">45.500829</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.644832,45.500829</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">AKADI PDX</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/AKADI+PDX/data=!4m2!3m1!1s0x5495a73ed9cbb00b:0x2727dbacd9f12fa4</SimpleData>
+		<SimpleData name="lon">-122.655428</SimpleData>
+		<SimpleData name="lat">45.505036</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.655428,45.505036</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">GNARLYS</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/GNARLYS/data=!4m2!3m1!1s0x5495a16a256b99d3:0x9c9ed667a8642d34</SimpleData>
+		<SimpleData name="lon">-122.661098</SimpleData>
+		<SimpleData name="lat">45.517537</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.661098,45.517537</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Epif</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Epif/data=!4m2!3m1!1s0x5495a0b8a0498f05:0xf82b47b716bee457</SimpleData>
+		<SimpleData name="lon">-122.636971</SimpleData>
+		<SimpleData name="lat">45.525934</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.636971,45.525934</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">ASTERA</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/ASTERA/data=!4m2!3m1!1s0x5495a132c73563af:0x1bc5e5c7036a8b7c</SimpleData>
+		<SimpleData name="lon">-122.651433</SimpleData>
+		<SimpleData name="lat">45.516708</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.651433,45.516708</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Jade Rabbit</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Jade+Rabbit/data=!4m2!3m1!1s0x5495a16f422fec9b:0x26b57748e5038519</SimpleData>
+		<SimpleData name="lon">-122.643947</SimpleData>
+		<SimpleData name="lat">45.528904</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.643947,45.528904</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Boxcar Pizza</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Boxcar+Pizza/data=!4m2!3m1!1s0x5495a1a95785b2b3:0x742d247e8945f55f</SimpleData>
+		<SimpleData name="lon">-122.683356</SimpleData>
+		<SimpleData name="lat">45.523511</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.683356,45.523511</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Mirisata</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Mirisata/data=!4m2!3m1!1s0x5495a70e406c0fa9:0xcfbfbed82b29ec15</SimpleData>
+		<SimpleData name="lon">-122.641003</SimpleData>
+		<SimpleData name="lat">45.516202</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.641003,45.516202</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Lilla</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Lilla/data=!4m2!3m1!1s0x5495a1dcf26d7eed:0x777b88c2ceb888de</SimpleData>
+		<SimpleData name="lon">-122.65601</SimpleData>
+		<SimpleData name="lat">45.512767</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.65601,45.512767</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Cooper's Co-op Cafe</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Cooper's+Co-op+Cafe/data=!4m2!3m1!1s0x5495a16e466f100b:0x8d706b421398d13b</SimpleData>
+		<SimpleData name="lon">-122.594475010681</SimpleData>
+		<SimpleData name="lat">45.473469442606</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.594475010681,45.473469442606</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">VeganO MexicanO pdx</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/VeganO+MexicanO+pdx/data=!4m2!3m1!1s0x5495a1aa5c523733:0xde9286601ab19b50</SimpleData>
+		<SimpleData name="lon">-122.6323559</SimpleData>
+		<SimpleData name="lat">45.512267</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.6323559,45.512267</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">GNARLYS</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/GNARLYS/data=!4m2!3m1!1s0x5495a168bc66648d:0xc51d2e5724206903</SimpleData>
+		<SimpleData name="lon">-122.661098</SimpleData>
+		<SimpleData name="lat">45.517537</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.661098,45.517537</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">TwentySix Cafe</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/TwentySix+Cafe/data=!4m2!3m1!1s0x5495a74821a88421:0x4e509a465552e6c0</SimpleData>
+		<SimpleData name="lon">-122.658774</SimpleData>
+		<SimpleData name="lat">45.542511</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.658774,45.542511</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Free House</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Free+House/data=!4m2!3m1!1s0x5495a73a55b95fad:0x27faac4ff9e0775</SimpleData>
+		<SimpleData name="lon">-122.652365</SimpleData>
+		<SimpleData name="lat">45.548395</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.652365,45.548395</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Mis Tacones</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Mis+Tacones/data=!4m2!3m1!1s0x5495a73128ed4bd3:0xadd92c75b990ef5b</SimpleData>
+		<SimpleData name="lon">-122.647993</SimpleData>
+		<SimpleData name="lat">45.562534</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.647993,45.562534</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Obon Shokudo</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Obon+Shokudo/data=!4m2!3m1!1s0x5495a0d75e155281:0x3f28bb4cb7a3b605</SimpleData>
+		<SimpleData name="lon">-122.655449</SimpleData>
+		<SimpleData name="lat">45.517667</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.655449,45.517667</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Feral</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Feral/data=!4m2!3m1!1s0x5495a7be82135551:0x514bff44e900f4a7</SimpleData>
+		<SimpleData name="lon">-122.648151</SimpleData>
+		<SimpleData name="lat">45.562609</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.648151,45.562609</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Rabbits Cafe</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Rabbits+Cafe/data=!4m2!3m1!1s0x54950a06b1767933:0x8a284be3ecfb849</SimpleData>
+		<SimpleData name="lon">-122.676318</SimpleData>
+		<SimpleData name="lat">45.522296</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.676318,45.522296</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Orange &amp; Blossom Patisserie</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Orange+%26+Blossom+Patisserie/data=!4m2!3m1!1s0x5495a1f33539c859:0xbcf5c1c0168b8921</SimpleData>
+		<SimpleData name="lon">-122.648551</SimpleData>
+		<SimpleData name="lat">45.562617</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.648551,45.562617</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Hail Snail</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Hail+Snail/data=!4m2!3m1!1s0x5495a74f1cf497eb:0xdef4e79f9aa92e13</SimpleData>
+		<SimpleData name="lon">-122.681738</SimpleData>
+		<SimpleData name="lat">45.57068</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.681738,45.57068</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Kate's Ice Cream</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Kate's+Ice+Cream/data=!4m2!3m1!1s0x5495a1bdf1d007cd:0x9bfec3bb644bc4cf</SimpleData>
+		<SimpleData name="lon">-122.675748</SimpleData>
+		<SimpleData name="lat">45.549801</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.675748,45.549801</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Dirty Lettuce</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Dirty+Lettuce/data=!4m2!3m1!1s0x5495a7e7399e29c3:0xa4d7ced203f7307e</SimpleData>
+		<SimpleData name="lon">-122.614328</SimpleData>
+		<SimpleData name="lat">45.548493</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.614328,45.548493</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Blossoming Lotus</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Blossoming+Lotus/data=!4m2!3m1!1s0x5495a0b54502159b:0x925132f58dc91d24</SimpleData>
+		<SimpleData name="lon">-122.695633</SimpleData>
+		<SimpleData name="lat">45.533262</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.695633,45.533262</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Best Friend Juice Bar &amp; Cafe</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Best+Friend+Juice+Bar+%26+Cafe/data=!4m2!3m1!1s0x54950b3d85a7490d:0xb9172920d41c0124</SimpleData>
+		<SimpleData name="lon">-122.636873</SimpleData>
+		<SimpleData name="lat">45.493089</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.636873,45.493089</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Rad Magic Subs</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Rad+Magic+Subs/data=!4m2!3m1!1s0x5495a12d5136f087:0x3fbe46c13880e452</SimpleData>
+		<SimpleData name="lon">-122.636871</SimpleData>
+		<SimpleData name="lat">45.493214</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.636871,45.493214</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">DC Vegetarian</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/DC+Vegetarian/data=!4m2!3m1!1s0x5495a060766d294b:0x32cb72e2b19b4941</SimpleData>
+		<SimpleData name="lon">-122.610567</SimpleData>
+		<SimpleData name="lat">45.505097</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.610567,45.505097</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Chubby Bunny</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Chubby+Bunny/data=!4m2!3m1!1s0x5495a15478bcba7b:0xc85c392ea2b28edb</SimpleData>
+		<SimpleData name="lon">-122.655167</SimpleData>
+		<SimpleData name="lat">45.559291</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.655167,45.559291</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Ben &amp; Esther’s Vegan Delicatessen</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Ben+%26+Esther%E2%80%99s+Vegan+Delicatessen/data=!4m2!3m1!1s0x5495a77494203d7f:0x6ca39ad5b313d45</SimpleData>
+		<SimpleData name="lon">-122.646612</SimpleData>
+		<SimpleData name="lat">45.558938</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.646612,45.558938</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Ramblin' Rose Vegan Ice Cream Truck</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Ramblin'+Rose+Vegan+Ice+Cream+Truck/data=!4m2!3m1!1s0x5495a717709b7d29:0xc646fb48fdcd14e3</SimpleData>
+		<SimpleData name="lon">-122.681425</SimpleData>
+		<SimpleData name="lat">45.516018</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.681425,45.516018</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Mississippi Pizza &amp; Atlantis Lounge</SimpleData>
+		<SimpleData name="desc">Has vegan pizza</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Mississippi+Pizza+%26+Atlantis+Lounge/data=!4m2!3m1!1s0x5495a742025c24f5:0xec1171e1d5116c53</SimpleData>
+		<SimpleData name="lon">-122.67517</SimpleData>
+		<SimpleData name="lat">45.548607</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.67517,45.548607</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Face Plant</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Face+Plant/data=!4m2!3m1!1s0x5495a775c783a68d:0x1fe64b181a547823</SimpleData>
+		<SimpleData name="lon">-122.488266470958</SimpleData>
+		<SimpleData name="lat">45.477921923645</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.488266470958,45.477921923645</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">No Clucks</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/No+Clucks/data=!4m2!3m1!1s0x5495a76fef1c49a7:0x2eb381583a6ddc82</SimpleData>
+		<SimpleData name="lon">-122.742609</SimpleData>
+		<SimpleData name="lat">45.587647</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.742609,45.587647</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Secret Pizza Society</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Secret+Pizza+Society/data=!4m2!3m1!1s0x5495a1ddc1269237:0xb9f404c4ef361288</SimpleData>
+		<SimpleData name="lon">-122.588548</SimpleData>
+		<SimpleData name="lat">45.526622</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.588548,45.526622</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Barista</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Barista/data=!4m2!3m1!1s0x549509f8cea1d88b:0xc17e2908aff5ebbc</SimpleData>
+		<SimpleData name="lon">-122.68456</SimpleData>
+		<SimpleData name="lat">45.526942</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.68456,45.526942</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Abba Coffee Roasters</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Abba+Coffee+Roasters/data=!4m2!3m1!1s0xa3d78282a982d8b9:0xd2d2f4215d283c15</SimpleData>
+		<SimpleData name="lon">-122.682616</SimpleData>
+		<SimpleData name="lat">45.527045</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.682616,45.527045</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Water Avenue Coffee Company</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Water+Avenue+Coffee+Company/data=!4m2!3m1!1s0x54950b00684951d7:0x22fa11b20aa06038</SimpleData>
+		<SimpleData name="lon">-122.665583</SimpleData>
+		<SimpleData name="lat">45.515236</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.665583,45.515236</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Less and More Coffee ii</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Less+and+More+Coffee+ii/data=!4m2!3m1!1s0x54950bb866d42245:0xa2d795c5b1007ccf</SimpleData>
+		<SimpleData name="lon">-122.679391</SimpleData>
+		<SimpleData name="lat">45.518292</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.679391,45.518292</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Sunny Day Coffee &amp; Pastry</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Sunny+Day+Coffee+%26+Pastry/data=!4m2!3m1!1s0x549512337b6f09a1:0xaffe8565d3b027ab</SimpleData>
+		<SimpleData name="lon">-122.698092</SimpleData>
+		<SimpleData name="lat">45.524951</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.698092,45.524951</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">The Dragonfly Coffee House</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/The+Dragonfly+Coffee+House/data=!4m2!3m1!1s0x549509e5da10f0c7:0x24648f5468257028</SimpleData>
+		<SimpleData name="lon">-122.700664</SimpleData>
+		<SimpleData name="lat">45.53561</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.700664,45.53561</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Sterling Coffee Roasters</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Sterling+Coffee+Roasters/data=!4m2!3m1!1s0x549509f73c9e6eef:0x88054f9974a67025</SimpleData>
+		<SimpleData name="lon">-122.694224</SimpleData>
+		<SimpleData name="lat">45.526646</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.694224,45.526646</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Barista</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Barista/data=!4m2!3m1!1s0x549509f059c61c59:0xdc97a1c440e95ac0</SimpleData>
+		<SimpleData name="lon">-122.68456</SimpleData>
+		<SimpleData name="lat">45.526942</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.68456,45.526942</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Coffee Time</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Coffee+Time/data=!4m2!3m1!1s0x549509f0a8776b07:0x27d522da6baac463</SimpleData>
+		<SimpleData name="lon">-122.681425</SimpleData>
+		<SimpleData name="lat">45.516018</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.681425,45.516018</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Good Coffee</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Good+Coffee/data=!4m2!3m1!1s0x54950915d8ecd071:0x8fcc5fd9bf6d1d6</SimpleData>
+		<SimpleData name="lon">-122.68056</SimpleData>
+		<SimpleData name="lat">45.520487</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.68056,45.520487</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Lei Brilla</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Lei+Brilla/data=!4m2!3m1!1s0x5495093c45cb0515:0x9f7ff5dddef26</SimpleData>
+		<SimpleData name="lon">-122.581178025613</SimpleData>
+		<SimpleData name="lat">45.402712498513</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.581178025613,45.402712498513</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Prince Coffee</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Prince+Coffee/data=!4m2!3m1!1s0x549509efc4dcaebd:0x98957fa3f80ee7b5</SimpleData>
+		<SimpleData name="lon">-122.616568</SimpleData>
+		<SimpleData name="lat">45.548455</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.616568,45.548455</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Cycle Town Coffee Roasters</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Cycle+Town+Coffee+Roasters/data=!4m2!3m1!1s0x54959882e02759bf:0xc04d5c1364b53296</SimpleData>
+		<SimpleData name="lon">-122.688285</SimpleData>
+		<SimpleData name="lat">45.535544</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.688285,45.535544</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Deadstock Coffee Roasters</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Deadstock+Coffee+Roasters/data=!4m2!3m1!1s0x54950bfd3c29a81b:0x843c92bf72e4ed1d</SimpleData>
+		<SimpleData name="lon">-122.674803</SimpleData>
+		<SimpleData name="lat">45.523704</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.674803,45.523704</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Workers Tap &amp; Cafe</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Workers+Tap+%26+Cafe/data=!4m2!3m1!1s0x5495a133a31dd3d1:0xca7a71a5302e50c5</SimpleData>
+		<SimpleData name="lon">-122.653847</SimpleData>
+		<SimpleData name="lat">45.522077</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.653847,45.522077</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">PUSH PULL | Stark</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/PUSH+PULL+%7C+Stark/data=!4m2!3m1!1s0x5495a0a6bb05abfd:0xb2e1a9fb64e8d9e3</SimpleData>
+		<SimpleData name="lon">-122.656875</SimpleData>
+		<SimpleData name="lat">45.519508</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.656875,45.519508</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Heart Coffee (Burnside)</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Heart+Coffee+(Burnside)/data=!4m2!3m1!1s0x5495a0bbf9a65e65:0x8f8ec0cd8726c3d2</SimpleData>
+		<SimpleData name="lon">-122.666220173441</SimpleData>
+		<SimpleData name="lat">45.523008838215</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.666220173441,45.523008838215</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Saint Simon Coffee Co.</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Saint+Simon+Coffee+Co./data=!4m2!3m1!1s0x5495a0ca58737bfb:0xae21c0da156b0e39</SimpleData>
+		<SimpleData name="lon">-122.64569</SimpleData>
+		<SimpleData name="lat">45.53526</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.64569,45.53526</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Nova Coffee</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Nova+Coffee/data=!4m2!3m1!1s0x5495a0a72a729cd1:0xf60fe43a7ae01efb</SimpleData>
+		<SimpleData name="lon">-122.645204</SimpleData>
+		<SimpleData name="lat">45.527313</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.645204,45.527313</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Crema Coffee + Bakery</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Crema+Coffee+%2B+Bakery/data=!4m2!3m1!1s0x5495a0bef903ee7b:0x857b8582ddbde3a</SimpleData>
+		<SimpleData name="lon">-122.607313</SimpleData>
+		<SimpleData name="lat">45.516865</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.607313,45.516865</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Autumn Coffee Roasting</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Autumn+Coffee+Roasting/data=!4m2!3m1!1s0x5495a7c0d0b72e67:0xe934418895a51754</SimpleData>
+		<SimpleData name="lon">-122.63095</SimpleData>
+		<SimpleData name="lat">45.562556</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.63095,45.562556</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Extracto Coffee Roasters</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Extracto+Coffee+Roasters/data=!4m2!3m1!1s0x5495a6e7716e4467:0xc012e6f92e20cb20</SimpleData>
+		<SimpleData name="lon">-122.592758</SimpleData>
+		<SimpleData name="lat">45.590192</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.592758,45.590192</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Capitola Coffee</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Capitola+Coffee/data=!4m2!3m1!1s0x5495a70195a98a47:0xbe58b2c646ce68c3</SimpleData>
+		<SimpleData name="lon">-122.711524</SimpleData>
+		<SimpleData name="lat">45.468613</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.711524,45.468613</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">KISS Coffee</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/KISS+Coffee/data=!4m2!3m1!1s0x5495a7646ee7519f:0xd3573cc52a976719</SimpleData>
+		<SimpleData name="lon">-122.634499</SimpleData>
+		<SimpleData name="lat">45.56618</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.634499,45.56618</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Albina Press</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Albina+Press/data=!4m2!3m1!1s0x5495a7132430431b:0x1ee724c4aeb7666</SimpleData>
+		<SimpleData name="lon">-122.67525</SimpleData>
+		<SimpleData name="lat">45.556774</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.67525,45.556774</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Bastion Coffee Roasters</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Bastion+Coffee+Roasters/data=!4m2!3m1!1s0x54950b84b269c303:0xa3632e76f9799085</SimpleData>
+		<SimpleData name="lon">-122.592758</SimpleData>
+		<SimpleData name="lat">45.590192</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.592758,45.590192</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Euko Coffee &amp; Company</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Euko+Coffee+%26+Company/data=!4m2!3m1!1s0x5495a7c4430e0695:0x8dffab6be5295070</SimpleData>
+		<SimpleData name="lon">-122.684215</SimpleData>
+		<SimpleData name="lat">45.530896</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.684215,45.530896</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Hypnos Coffee</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Hypnos+Coffee/data=!4m2!3m1!1s0x5495a7dfb3089685:0xf3a03085e18e8be7</SimpleData>
+		<SimpleData name="lon">-122.66698</SimpleData>
+		<SimpleData name="lat">45.550083</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.66698,45.550083</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Proud Mary Cafe</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Proud+Mary+Cafe/data=!4m2!3m1!1s0x5495a7201c5f890b:0xf06daafd81449972</SimpleData>
+		<SimpleData name="lon">-122.644473</SimpleData>
+		<SimpleData name="lat">45.558858</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.644473,45.558858</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Roseline Coffee</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Roseline+Coffee/data=!4m2!3m1!1s0x5495a71f9bf5a069:0x87c819fad45cb9c6</SimpleData>
+		<SimpleData name="lon">-122.677553</SimpleData>
+		<SimpleData name="lat">45.513347</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.677553,45.513347</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Memoire Cà Phê</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Memoire+C%C3%A0+Ph%C3%AA/data=!4m2!3m1!1s0x5495a7d22219017d:0x6030664ab59d769c</SimpleData>
+		<SimpleData name="lon">-122.650146</SimpleData>
+		<SimpleData name="lat">45.559238</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.650146,45.559238</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Case Study Coffee Roasters</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Case+Study+Coffee+Roasters/data=!4m2!3m1!1s0x5495a71f2ffdbcf7:0x7223b26591a70c4e</SimpleData>
+		<SimpleData name="lon">-122.684624</SimpleData>
+		<SimpleData name="lat">45.511155</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.684624,45.511155</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Alberta Street Coffee</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Alberta+Street+Coffee/data=!4m2!3m1!1s0x5495a78a4729d911:0x7218bf44375e50d7</SimpleData>
+		<SimpleData name="lon">-122.64719</SimpleData>
+		<SimpleData name="lat">45.55886</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.64719,45.55886</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Good Cart Coffee</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Good+Cart+Coffee/data=!4m2!3m1!1s0x5495a7ac4dd41b3f:0xebd6040202d2c49a</SimpleData>
+		<SimpleData name="lon">-122.659096</SimpleData>
+		<SimpleData name="lat">45.562936</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.659096,45.562936</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">red e café roasters</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/red+e+caf%C3%A9+roasters/data=!4m2!3m1!1s0x5495a70c47f15759:0x83379a7f17f531e5</SimpleData>
+		<SimpleData name="lon">-122.677236</SimpleData>
+		<SimpleData name="lat">45.562485</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.677236,45.562485</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">The Stacks Coffeehouse</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/The+Stacks+Coffeehouse/data=!4m2!3m1!1s0x5495a7f20fb31cd7:0x9ae2bbb0f02abd38</SimpleData>
+		<SimpleData name="lon">-122.686178</SimpleData>
+		<SimpleData name="lat">45.562923</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.686178,45.562923</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">La Perlita</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/La+Perlita/data=!4m2!3m1!1s0x549509ca495f4ee7:0xa12cd2c13d208b14</SimpleData>
+		<SimpleData name="lon">-122.681693</SimpleData>
+		<SimpleData name="lat">45.56355</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.681693,45.56355</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Futura Coffee Roasters - Arbor Lodge</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Futura+Coffee+Roasters+-+Arbor+Lodge/data=!4m2!3m1!1s0x5495a7a722bd5523:0x1ba2bea9af4320b5</SimpleData>
+		<SimpleData name="lon">-122.682469</SimpleData>
+		<SimpleData name="lat">45.570118</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.682469,45.570118</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Less and more coffee</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Less+and+more+coffee/data=!4m2!3m1!1s0x54950a0557af84a5:0xb27f6a7a45bcd13a</SimpleData>
+		<SimpleData name="lon">-122.679183</SimpleData>
+		<SimpleData name="lat">45.516546</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.679183,45.516546</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Case Study Coffee Roasters</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Case+Study+Coffee+Roasters/data=!4m2!3m1!1s0x549509e7e6e423e9:0xb20114e062153290</SimpleData>
+		<SimpleData name="lon">-122.684624</SimpleData>
+		<SimpleData name="lat">45.511155</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.684624,45.511155</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Shroom Coffee &amp; Bar</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Shroom+Coffee+%26+Bar/data=!4m2!3m1!1s0x5495a10a1414b769:0x5a494cd2716ff6b7</SimpleData>
+		<SimpleData name="lon">-122.618738</SimpleData>
+		<SimpleData name="lat">45.53686</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.618738,45.53686</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Cafe Rosetta</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Cafe+Rosetta/data=!4m2!3m1!1s0x5495a70053582c7b:0xb338807f9c3eb7c2</SimpleData>
+		<SimpleData name="lon">-122.830385059761</SimpleData>
+		<SimpleData name="lat">45.570228456901</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.830385059761,45.570228456901</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Slow Haste Coffee</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Slow+Haste+Coffee/data=!4m2!3m1!1s0x5495a1034399c96f:0xeb1de83b9f10e61f</SimpleData>
+		<SimpleData name="lon">-122.681425</SimpleData>
+		<SimpleData name="lat">45.516018</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.681425,45.516018</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Electrica Coffee</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Electrica+Coffee/data=!4m2!3m1!1s0x549509cade5d5903:0x5e24ebd287297a3f</SimpleData>
+		<SimpleData name="lon">-122.696754</SimpleData>
+		<SimpleData name="lat">45.54145</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.696754,45.54145</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Brave Neighbor Coffeehouse &amp; Social</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Brave+Neighbor+Coffeehouse+%26+Social/data=!4m2!3m1!1s0x5495a78627af372d:0xf458d22336aa1cf3</SimpleData>
+		<SimpleData name="lon">-122.6848444</SimpleData>
+		<SimpleData name="lat">45.5475775</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.6848444,45.5475775</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Honey Latte Cafe</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Honey+Latte+Cafe/data=!4m2!3m1!1s0x5495a1184f233779:0x23af70f5bd3fd5f5</SimpleData>
+		<SimpleData name="lon">-122.654958</SimpleData>
+		<SimpleData name="lat">45.513857</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.654958,45.513857</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Coava Coffee Roasters</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Coava+Coffee+Roasters/data=!4m2!3m1!1s0x54950a0ae93e6b79:0xc63aec4f3d1b3aad</SimpleData>
+		<SimpleData name="lon">-122.660581</SimpleData>
+		<SimpleData name="lat">45.513568</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.660581,45.513568</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Kalesa Coffee</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Kalesa+Coffee/data=!4m2!3m1!1s0x5495a9c41dc65545:0xdb00af124efb4f6d</SimpleData>
+		<SimpleData name="lon">-122.674396</SimpleData>
+		<SimpleData name="lat">45.539311</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.674396,45.539311</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Puff Coffee</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Puff+Coffee/data=!4m2!3m1!1s0x5495a18821692719:0x6a34850e59f3dff0</SimpleData>
+		<SimpleData name="lon">-122.681425</SimpleData>
+		<SimpleData name="lat">45.516018</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.681425,45.516018</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Saint Simon Coffee Co. - Brazee</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Saint+Simon+Coffee+Co.+-+Brazee/data=!4m2!3m1!1s0x5495a7fe6f284115:0xe41b60d3e09b0abd</SimpleData>
+		<SimpleData name="lon">-122.64569</SimpleData>
+		<SimpleData name="lat">45.53526</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.64569,45.53526</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Tiny's Coffee</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Tiny's+Coffee/data=!4m2!3m1!1s0x5495a09fbe84768d:0xca7c2f7fe7c55984</SimpleData>
+		<SimpleData name="lon">-122.653424</SimpleData>
+		<SimpleData name="lat">45.512593</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.653424,45.512593</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Upper Left Roasters</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Upper+Left+Roasters/data=!4m2!3m1!1s0x5495a09e32fabcd3:0x1ac42e464d67e013</SimpleData>
+		<SimpleData name="lon">-122.653435</SimpleData>
+		<SimpleData name="lat">45.511331</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.653435,45.511331</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Coava Coffee Roasters | Public Brew Bar &amp; Roastery</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Coava+Coffee+Roasters+%7C+Public+Brew+Bar+%26+Roastery/data=!4m2!3m1!1s0x5495a0a023d2676f:0xc9e01f6ed42ccb92</SimpleData>
+		<SimpleData name="lon">-122.681425</SimpleData>
+		<SimpleData name="lat">45.516018</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.681425,45.516018</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Wild Rose Coffee</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Wild+Rose+Coffee/data=!4m2!3m1!1s0x54950917061a97fd:0x690603b72c575481</SimpleData>
+		<SimpleData name="lon">-122.683727</SimpleData>
+		<SimpleData name="lat">45.510301</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.683727,45.510301</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Case Study Coffee Roasters</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Case+Study+Coffee+Roasters/data=!4m2!3m1!1s0x54950b5e047cabb3:0x404e3d9c0cc13e68</SimpleData>
+		<SimpleData name="lon">-122.684624</SimpleData>
+		<SimpleData name="lat">45.511155</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.684624,45.511155</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">The Great North (Coffee Shop &amp; Roastery)</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/The+Great+North+(Coffee+Shop+%26+Roastery)/data=!4m2!3m1!1s0x5495a70bc0899b89:0xb5d5b679d93257e</SimpleData>
+		<SimpleData name="lon">-122.681425</SimpleData>
+		<SimpleData name="lat">45.516018</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.681425,45.516018</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Eastside Coffee Bar and Workspace</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Eastside+Coffee+Bar+and+Workspace/data=!4m2!3m1!1s0x5495a16142e9446f:0x1398172ceae6c4d5</SimpleData>
+		<SimpleData name="lon">-122.645731</SimpleData>
+		<SimpleData name="lat">45.513244</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.645731,45.513244</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Guilder Coffee Company - Alameda Neighborhood</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Guilder+Coffee+Company+-+Alameda+Neighborhood/data=!4m2!3m1!1s0x5495a72f14c652e5:0x33ba1b72d99f0500</SimpleData>
+		<SimpleData name="lon">-122.6372745</SimpleData>
+		<SimpleData name="lat">45.549633</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.6372745,45.549633</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Old Friends Coffee Roasters</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Old+Friends+Coffee+Roasters/data=!4m2!3m1!1s0x5495a1b83882dd1f:0x2e4f0a45a4d379e1</SimpleData>
+		<SimpleData name="lon">-122.592758</SimpleData>
+		<SimpleData name="lat">45.590192</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.592758,45.590192</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">GrindHouse Coffee</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/GrindHouse+Coffee/data=!4m2!3m1!1s0x5495a7a11711e873:0x20e066ea2945782e</SimpleData>
+		<SimpleData name="lon">-122.687207</SimpleData>
+		<SimpleData name="lat">45.569722</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.687207,45.569722</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Coava Coffee Roasters</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Coava+Coffee+Roasters/data=!4m2!3m1!1s0x5495a09a7241025b:0x66d8129f57be9989</SimpleData>
+		<SimpleData name="lon">-122.660581</SimpleData>
+		<SimpleData name="lat">45.513568</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.660581,45.513568</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Woodlawn Coffee &amp; Pastry</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Woodlawn+Coffee+%26+Pastry/data=!4m2!3m1!1s0x5495a6fe6c8cc8a3:0xf14f717afe8438c8</SimpleData>
+		<SimpleData name="lon">-122.657101</SimpleData>
+		<SimpleData name="lat">45.57151</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.657101,45.57151</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Prince Coffee</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Prince+Coffee/data=!4m2!3m1!1s0x5495a6d31ed9cdb7:0xce757261aff2b573</SimpleData>
+		<SimpleData name="lon">-122.616568</SimpleData>
+		<SimpleData name="lat">45.548455</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.616568,45.548455</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Our Spot PDX</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Our+Spot+PDX/data=!4m2!3m1!1s0x54950b001f9a5e19:0x449f9b640fdf2294</SimpleData>
+		<SimpleData name="lon">-122.673297</SimpleData>
+		<SimpleData name="lat">45.508705</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.673297,45.508705</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Seven Virtues Coffee Roasters on Glisan</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Seven+Virtues+Coffee+Roasters+on+Glisan/data=!4m2!3m1!1s0x5495a0e1e7b97521:0x1a5970505da2bed8</SimpleData>
+		<SimpleData name="lon">-122.627981</SimpleData>
+		<SimpleData name="lat">45.511898</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.627981,45.511898</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Case Study Coffee Roasters</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Case+Study+Coffee+Roasters/data=!4m2!3m1!1s0x5495a12f16b23635:0x13713ddbaa14159c</SimpleData>
+		<SimpleData name="lon">-122.684624</SimpleData>
+		<SimpleData name="lat">45.511155</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.684624,45.511155</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">COTTA</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/COTTA/data=!4m2!3m1!1s0x54950b8195b47faf:0xf9706beb922aaa01</SimpleData>
+		<SimpleData name="lon">-122.681425</SimpleData>
+		<SimpleData name="lat">45.516018</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.681425,45.516018</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Futura Coffee Roasters - Glisan St</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Futura+Coffee+Roasters+-+Glisan+St/data=!4m2!3m1!1s0x5495a11b0217612f:0x2ea6063a3259061a</SimpleData>
+		<SimpleData name="lon">-122.588586</SimpleData>
+		<SimpleData name="lat">45.526652</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.588586,45.526652</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Loro Coffee Montavilla</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Loro+Coffee+Montavilla/data=!4m2!3m1!1s0x5495a16175d53465:0x66e7977024c19a45</SimpleData>
+		<SimpleData name="lon">-122.578032</SimpleData>
+		<SimpleData name="lat">45.521099</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.578032,45.521099</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Hinterland Coffee &amp; Clothing</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Hinterland+Coffee+%26+Clothing/data=!4m2!3m1!1s0x5495a1a94cde3667:0xf6ea08a2be9194ea</SimpleData>
+		<SimpleData name="lon">-122.681425</SimpleData>
+		<SimpleData name="lat">45.516018</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.681425,45.516018</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Rose City Coffee Co.</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Rose+City+Coffee+Co./data=!4m2!3m1!1s0x54950a7b65d4b37f:0xe87831d90e1624d4</SimpleData>
+		<SimpleData name="lon">-122.653727</SimpleData>
+		<SimpleData name="lat">45.498761</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.653727,45.498761</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Better Days Cafe</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Better+Days+Cafe/data=!4m2!3m1!1s0x5495a1000fa066d3:0x555a5e86c0ef33cc</SimpleData>
+		<SimpleData name="lon">-122.681425</SimpleData>
+		<SimpleData name="lat">45.516018</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.681425,45.516018</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">All Your Heart Coffee</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/All+Your+Heart+Coffee/data=!4m2!3m1!1s0x54950b6a81e3e733:0x622422e3b63abaa6</SimpleData>
+		<SimpleData name="lon">-122.671267</SimpleData>
+		<SimpleData name="lat">45.49528</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.671267,45.49528</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Presso Coffee Co.</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Presso+Coffee+Co./data=!4m2!3m1!1s0x5495a7b6d841239f:0xd7ecc13f4ae260a8</SimpleData>
+		<SimpleData name="lon">-122.687262</SimpleData>
+		<SimpleData name="lat">45.582954</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.687262,45.582954</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Bipartisan Cafe</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Bipartisan+Cafe/data=!4m2!3m1!1s0x5495a106cfafcff1:0x3f71faa89ba7dcdc</SimpleData>
+		<SimpleData name="lon">-122.582311</SimpleData>
+		<SimpleData name="lat">45.519293</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.582311,45.519293</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Posies Bakery &amp; Cafe</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Posies+Bakery+%26+Cafe/data=!4m2!3m1!1s0x5495a7b72aada1bd:0x66e213d4003d996d</SimpleData>
+		<SimpleData name="lon">-122.686651</SimpleData>
+		<SimpleData name="lat">45.582581</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.686651,45.582581</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Heart Coffee (Woodstock)</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Heart+Coffee+(Woodstock)/data=!4m2!3m1!1s0x5495a0045f5cef93:0xb131bd6180b3b9cd</SimpleData>
+		<SimpleData name="lon">-122.614428</SimpleData>
+		<SimpleData name="lat">45.479913</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.614428,45.479913</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Keeper Coffee Co</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Keeper+Coffee+Co/data=!4m2!3m1!1s0x54950b1de95b50c1:0x81cb7d42ff5e6ae7</SimpleData>
+		<SimpleData name="lon">-122.619978</SimpleData>
+		<SimpleData name="lat">45.489998</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.619978,45.489998</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Carnelian Coffee</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Carnelian+Coffee/data=!4m2!3m1!1s0x5495a015b7b62827:0x5547bcc2ca172b29</SimpleData>
+		<SimpleData name="lon">-122.581559</SimpleData>
+		<SimpleData name="lat">45.48354</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.581559,45.48354</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Yours Truly</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Yours+Truly/data=!4m2!3m1!1s0x54950baaba389015:0xa113d0b83677d6a</SimpleData>
+		<SimpleData name="lon">-122.6527505</SimpleData>
+		<SimpleData name="lat">45.4680613</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.6527505,45.4680613</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Refuge Coffee House</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Refuge+Coffee+House/data=!4m2!3m1!1s0x5495a1a5c5713f01:0x1aabd68f314a8444</SimpleData>
+		<SimpleData name="lon">-122.56795</SimpleData>
+		<SimpleData name="lat">45.479829</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.56795,45.479829</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Two Stroke Coffee Co.</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Two+Stroke+Coffee+Co./data=!4m2!3m1!1s0x5495a8021cdac485:0x59a1929fb99b3094</SimpleData>
+		<SimpleData name="lon">-122.754136</SimpleData>
+		<SimpleData name="lat">45.590236</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.754136,45.590236</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Living Room Coffee</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Living+Room+Coffee/data=!4m2!3m1!1s0x5495a797e794c923:0xd23203b14a5adb02</SimpleData>
+		<SimpleData name="lon">-122.5609055</SimpleData>
+		<SimpleData name="lat">45.5273666</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.5609055,45.5273666</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Case Study Coffee Roasters</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Case+Study+Coffee+Roasters/data=!4m2!3m1!1s0x54950a04cba5dd6b:0x736ecdb5e217595e</SimpleData>
+		<SimpleData name="lon">-122.684624</SimpleData>
+		<SimpleData name="lat">45.511155</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.684624,45.511155</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">HunnyMilk</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/HunnyMilk/data=!4m2!3m1!1s0x5495a0bf3dac6663:0xadd3fea7b33207e8</SimpleData>
+		<SimpleData name="lon">-122.692118</SimpleData>
+		<SimpleData name="lat">45.523261</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.692118,45.523261</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Angel Face</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Angel+Face/data=!4m2!3m1!1s0x5495a0bf184a4e63:0x7308f145d2d4cd0b</SimpleData>
+		<SimpleData name="lon">-122.637049</SimpleData>
+		<SimpleData name="lat">45.523181</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.637049,45.523181</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Hey Love</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Hey+Love/data=!4m2!3m1!1s0x5495a1a13f300c6f:0x7b4b705505bcae7</SimpleData>
+		<SimpleData name="lon">-122.704389</SimpleData>
+		<SimpleData name="lat">45.535248</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.704389,45.535248</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Silk Road</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Silk+Road/data=!4m2!3m1!1s0x549509d190a7d2c1:0x5ff6087c5cdb5a22</SimpleData>
+		<SimpleData name="lon">-122.683886</SimpleData>
+		<SimpleData name="lat">45.526982</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.683886,45.526982</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">The Uncanny</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/The+Uncanny/data=!4m2!3m1!1s0x5495a7728408285d:0xb813e929f0bde945</SimpleData>
+		<SimpleData name="lon">-122.675281</SimpleData>
+		<SimpleData name="lat">45.54875</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.675281,45.54875</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Too Soon</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Too+Soon/data=!4m2!3m1!1s0x5495a10d81d6f5e3:0x43dd1917a42028a5</SimpleData>
+		<SimpleData name="lon">-122.637007</SimpleData>
+		<SimpleData name="lat">45.523263</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.637007,45.523263</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">COLLECTOR</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/COLLECTOR/data=!4m2!3m1!1s0x5495a1568e1e634d:0x1f0c31c54f148465</SimpleData>
+		<SimpleData name="lon">-122.6519005</SimpleData>
+		<SimpleData name="lat">45.526689</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.6519005,45.526689</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Fried Egg I'm In Love</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Fried+Egg+I'm+In+Love/data=!4m2!3m1!1s0x5495a75e015a4b8b:0x9f80767db526b4e1</SimpleData>
+		<SimpleData name="lon">-122.679653</SimpleData>
+		<SimpleData name="lat">45.518779</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.679653,45.518779</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Dawnbringer</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Dawnbringer/data=!4m2!3m1!1s0x5495a7ba9873e2e9:0x4478b43297f144fe</SimpleData>
+		<SimpleData name="lon">-122.668249</SimpleData>
+		<SimpleData name="lat">45.548043</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.668249,45.548043</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Bernstein's Bagels</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Bernstein's+Bagels/data=!4m2!3m1!1s0x5495a72b9a93cd33:0x4478f6f23908775b</SimpleData>
+		<SimpleData name="lon">-122.67496</SimpleData>
+		<SimpleData name="lat">45.540846</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.67496,45.540846</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Just Bob</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Just+Bob/data=!4m2!3m1!1s0x5495a6dfc04bb8d5:0x205737da327f9d10</SimpleData>
+		<SimpleData name="lon">-122.640837</SimpleData>
+		<SimpleData name="lat">45.559205</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.640837,45.559205</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Jet Black Coffee Company</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Jet+Black+Coffee+Company/data=!4m2!3m1!1s0x5495a7d4a3e2a58f:0x686924ed6365ed6d</SimpleData>
+		<SimpleData name="lon">-122.547778</SimpleData>
+		<SimpleData name="lat">45.533797</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.547778,45.533797</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Le Petit Café NW</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Le+Petit+Caf%C3%A9+NW/data=!4m2!3m1!1s0x5495a70c763b66b9:0xa4b8777b972b2864</SimpleData>
+		<SimpleData name="lon">-122.688068</SimpleData>
+		<SimpleData name="lat">45.537317</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.688068,45.537317</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Memento Mori Cafe</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Memento+Mori+Cafe/data=!4m2!3m1!1s0x5495095196205135:0x6b5d7dd7e959c8e8</SimpleData>
+		<SimpleData name="lon">-122.681425</SimpleData>
+		<SimpleData name="lat">45.516018</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.681425,45.516018</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Bentley's Bagels</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Bentley's+Bagels/data=!4m2!3m1!1s0x54950997a91fb685:0x78c08ee9ba003666</SimpleData>
+		<SimpleData name="lon">-122.694344</SimpleData>
+		<SimpleData name="lat">45.529455</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.694344,45.529455</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Puddletown Bagels Bakery &amp; Cafe</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Puddletown+Bagels+Bakery+%26+Cafe/data=!4m2!3m1!1s0x5495a7f9a89ce3a9:0x5d6920b9086d2dba</SimpleData>
+		<SimpleData name="lon">-122.579318</SimpleData>
+		<SimpleData name="lat">45.463526</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.579318,45.463526</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Bialy Bird</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Bialy+Bird/data=!4m2!3m1!1s0x5495a74d606b0aa5:0x4e91d8fe1a4944f2</SimpleData>
+		<SimpleData name="lon">-122.635118</SimpleData>
+		<SimpleData name="lat">45.562399</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.635118,45.562399</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Henry Higgins Boiled Bagels</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Henry+Higgins+Boiled+Bagels/data=!4m2!3m1!1s0x5495a0b75665982b:0xc474606436364795</SimpleData>
+		<SimpleData name="lon">-122.596487</SimpleData>
+		<SimpleData name="lat">45.4893</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.596487,45.4893</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Gabriel's Bakery</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Gabriel's+Bakery/data=!4m2!3m1!1s0x549509fc723eb285:0x4e092dafd06eecb5</SimpleData>
+		<SimpleData name="lon">-122.644679</SimpleData>
+		<SimpleData name="lat">45.530847</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.644679,45.530847</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Providore Fine Foods</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Providore+Fine+Foods/data=!4m2!3m1!1s0x5495a0b847636f41:0xdfeb7d69ea45a859</SimpleData>
+		<SimpleData name="lon">-122.641658</SimpleData>
+		<SimpleData name="lat">45.527233</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.641658,45.527233</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Eb &amp; Bean NE Broadway</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Eb+%26+Bean+NE+Broadway/data=!4m2!3m1!1s0x5495a0b54724bcdb:0x5e8aeaa3ec0ef6c6</SimpleData>
+		<SimpleData name="lon">-122.650876</SimpleData>
+		<SimpleData name="lat">45.535177</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.650876,45.535177</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Twisted Croissant &amp; Patisserie</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Twisted+Croissant+%26+Patisserie/data=!4m2!3m1!1s0x54950c2055555555:0x5460c4caa171a6a</SimpleData>
+		<SimpleData name="lon">-122.64921</SimpleData>
+		<SimpleData name="lat">45.473872</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.64921,45.473872</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">The Pie Spot</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/The+Pie+Spot/data=!4m2!3m1!1s0x5495a0867ea3253d:0xaeabfb8f781c8ab9</SimpleData>
+		<SimpleData name="lon">-122.64171</SimpleData>
+		<SimpleData name="lat">45.52689</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.64171,45.52689</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">SORO SORO Coffee &amp; Dessert</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/SORO+SORO+Coffee+%26+Dessert/data=!4m2!3m1!1s0x5495a1f936285b13:0x945a58b2b8707416</SimpleData>
+		<SimpleData name="lon">-122.642425</SimpleData>
+		<SimpleData name="lat">45.522696</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.642425,45.522696</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Grand Central Bakery - Mississippi cafe</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Grand+Central+Bakery+-+Mississippi+cafe/data=!4m2!3m1!1s0x5495a7418e76f371:0xa34077211a8a89dd</SimpleData>
+		<SimpleData name="lon">-122.712074</SimpleData>
+		<SimpleData name="lat">45.467269</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.712074,45.467269</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">How Convenient</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/How+Convenient/data=!4m2!3m1!1s0x5495a1004ad70b67:0x9b76e2c1879b03ad</SimpleData>
+		<SimpleData name="lon">-122.601745</SimpleData>
+		<SimpleData name="lat">45.526301</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.601745,45.526301</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Goodies Snack Shop</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Goodies+Snack+Shop/data=!4m2!3m1!1s0x54950bee7e7aa7c7:0x906cf65e60a31dbe</SimpleData>
+		<SimpleData name="lon">-122.672735</SimpleData>
+		<SimpleData name="lat">45.524373</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.672735,45.524373</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Wellspent Market</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Wellspent+Market/data=!4m2!3m1!1s0x5495a0a00f492a69:0x735cda293f4c20e3</SimpleData>
+		<SimpleData name="lon">-122.629394</SimpleData>
+		<SimpleData name="lat">45.504576</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.629394,45.504576</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">zuckercreme | strawberry museum!</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/zuckercreme+%7C+strawberry+museum!/data=!4m2!3m1!1s0x54950bac2bbc8c97:0xc994106a9d96d2a5</SimpleData>
+		<SimpleData name="lon">-122.681425</SimpleData>
+		<SimpleData name="lat">45.516018</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.681425,45.516018</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Coquine Market &amp; Katy Jane's Oyster Bar</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Coquine+Market+%26+Katy+Jane's+Oyster+Bar/data=!4m2!3m1!1s0x5495a1bdfd5bb949:0x2505a39223e03371</SimpleData>
+		<SimpleData name="lon">-122.681425</SimpleData>
+		<SimpleData name="lat">45.516018</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.681425,45.516018</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Azar Indulgences</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Azar+Indulgences/data=!4m2!3m1!1s0x54950b539264723b:0xae430f780afff66f</SimpleData>
+		<SimpleData name="lon">-122.680981</SimpleData>
+		<SimpleData name="lat">45.517311</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.680981,45.517311</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Cheese &amp; Crack Snack Shop</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Cheese+%26+Crack+Snack+Shop/data=!4m2!3m1!1s0x5495a0bf027e95a7:0x35ab34eacb8883e1</SimpleData>
+		<SimpleData name="lon">-122.637119</SimpleData>
+		<SimpleData name="lat">45.522454</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.637119,45.522454</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Never Coffee</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Never+Coffee/data=!4m2!3m1!1s0x54950b932fcf87e9:0xcb6b31ed4bd8fb7</SimpleData>
+		<SimpleData name="lon">-122.684024</SimpleData>
+		<SimpleData name="lat">45.521484</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.684024,45.521484</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Delicious Donuts</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Delicious+Donuts/data=!4m2!3m1!1s0x5495a0a8a979b0a9:0x22e99ad050d9cb0b</SimpleData>
+		<SimpleData name="lon">-122.660326</SimpleData>
+		<SimpleData name="lat">45.522543</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.660326,45.522543</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Little Griddle</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Little+Griddle/data=!4m2!3m1!1s0x5495a6d3821049b1:0xd2021e11624a8f20</SimpleData>
+		<SimpleData name="lon">-122.619893</SimpleData>
+		<SimpleData name="lat">45.548465</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.619893,45.548465</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">MeKha Noodle</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/MeKha+Noodle/data=!4m2!3m1!1s0x5495a1371e755a9f:0x8c50828e541cbc5f</SimpleData>
+		<SimpleData name="lon">-122.681425</SimpleData>
+		<SimpleData name="lat">45.516018</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.681425,45.516018</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">An Xuyên Bakery</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/An+Xuy%C3%AAn+Bakery/data=!4m2!3m1!1s0x5495a06f2eac65cd:0x40c163709d9daa65</SimpleData>
+		<SimpleData name="lon">-122.60735</SimpleData>
+		<SimpleData name="lat">45.495134</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.60735,45.495134</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">El Salto PDX 100% Vegan Venezuelan Comfort Food</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/El+Salto+PDX+100%25+Vegan+Venezuelan+Comfort+Food/data=!4m2!3m1!1s0x54950be6e253d76f:0xcd94afb800a8cbeb</SimpleData>
+		<SimpleData name="lon">-122.6089242</SimpleData>
+		<SimpleData name="lat">45.4958909</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.6089242,45.4958909</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">COFFEE BEER</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/COFFEE+BEER/data=!4m2!3m1!1s0x5495a07091b19fc3:0xa506114387303658</SimpleData>
+		<SimpleData name="lon">-122.618694</SimpleData>
+		<SimpleData name="lat">45.492857</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.618694,45.492857</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Brooklyn Carreta Bar &amp; Carts</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Brooklyn+Carreta+Bar+%26+Carts/data=!4m2!3m1!1s0x54950bc41c815015:0xbdfc3a5734d7cae1</SimpleData>
+		<SimpleData name="lon">-122.650384</SimpleData>
+		<SimpleData name="lat">45.493983</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.650384,45.493983</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Fetch Coffee Roasters</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Fetch+Coffee+Roasters/data=!4m2!3m1!1s0x54950b78ca7da493:0xe5ad0d3436553930</SimpleData>
+		<SimpleData name="lon">-122.650288</SimpleData>
+		<SimpleData name="lat">45.473563</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.650288,45.473563</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portlandia_Food_Drink">
+		<SimpleData name="title">Cookie Mccakeface</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Cookie+Mccakeface/data=!4m2!3m1!1s0x54959f204fb8a6ed:0x6928adcb2b22558c</SimpleData>
+		<SimpleData name="lon">-122.678666</SimpleData>
+		<SimpleData name="lat">45.522787</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.678666,45.522787</coordinates></Point>
+  </Placemark>
+</Folder>
+</Document></kml>

@@ -1,0 +1,10 @@
+{
+"type": "FeatureCollection",
+"name": "Hikes_Trail_Runs",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "title": "", "desc": null, "address": "", "url": "", "lon": -122.681425, "lat": 45.516018 }, "geometry": { "type": "Point", "coordinates": [ -122.681425, 45.516018 ] } },
+{ "type": "Feature", "properties": { "title": "Leif Erikson Trail", "desc": null, "address": "", "url": "https://www.google.com/maps/place/Leif+Erikson+Trail/data=!4m2!3m1!1s0x549509c7457aab53:0xdabe371ac5b325d7", "lon": -122.725341, "lat": 45.539118 }, "geometry": { "type": "Point", "coordinates": [ -122.725341, 45.539118 ] } },
+{ "type": "Feature", "properties": { "title": "Aspen Trail", "desc": null, "address": "", "url": "https://www.google.com/maps/place/Aspen+Trail/data=!4m2!3m1!1s0x549509c0e5bcb817:0x440f9d640eefaf5d", "lon": -122.59711538296899, "lat": 45.434939190112999 }, "geometry": { "type": "Point", "coordinates": [ -122.597115382968994, 45.434939190112999 ] } }
+]
+}

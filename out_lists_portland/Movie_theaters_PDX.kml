@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document id="root_doc">
+<Schema name="Movie_theaters_PDX" id="Movie_theaters_PDX">
+	<SimpleField name="title" type="string"></SimpleField>
+	<SimpleField name="desc" type="string"></SimpleField>
+	<SimpleField name="address" type="string"></SimpleField>
+	<SimpleField name="url" type="string"></SimpleField>
+	<SimpleField name="lon" type="float"></SimpleField>
+	<SimpleField name="lat" type="float"></SimpleField>
+</Schema>
+<Folder><name>Movie_theaters_PDX</name>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Movie_theaters_PDX">
+		<SimpleData name="title"></SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url"></SimpleData>
+		<SimpleData name="lon">-122.681425</SimpleData>
+		<SimpleData name="lat">45.516018</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.681425,45.516018</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Movie_theaters_PDX">
+		<SimpleData name="title">Star Theater and Starlight Lounge</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Star+Theater+and+Starlight+Lounge/data=!4m2!3m1!1s0x54950a0138da9fa3:0xa8100cad84dda96e</SimpleData>
+		<SimpleData name="lon">-122.676748</SimpleData>
+		<SimpleData name="lat">45.5234</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.676748,45.5234</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Movie_theaters_PDX">
+		<SimpleData name="title">Joy Cinema</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Joy+Cinema/data=!4m2!3m1!1s0x54950ce3ffffffff:0xcba6d5ecbb04ddaa</SimpleData>
+		<SimpleData name="lon">-122.7659929</SimpleData>
+		<SimpleData name="lat">45.4340203</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.7659929,45.4340203</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Movie_theaters_PDX">
+		<SimpleData name="title">McMenamins Kennedy School Theater</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/McMenamins+Kennedy+School+Theater/data=!4m2!3m1!1s0x5495a6e841c06601:0xb0056712ce14fa3f</SimpleData>
+		<SimpleData name="lon">-122.629643</SimpleData>
+		<SimpleData name="lat">45.564506</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.629643,45.564506</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Movie_theaters_PDX">
+		<SimpleData name="title">Moreland Theater</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Moreland+Theater/data=!4m2!3m1!1s0x54950aea7a659a15:0x1ada3d4683d059bf</SimpleData>
+		<SimpleData name="lon">-122.6485018</SimpleData>
+		<SimpleData name="lat">45.4743443</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.6485018,45.4743443</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Movie_theaters_PDX">
+		<SimpleData name="title">St. Johns Twin Cinemas</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/St.+Johns+Twin+Cinemas/data=!4m2!3m1!1s0x5495a8006d3f3ca9:0x5bd589cfcf3c5687</SimpleData>
+		<SimpleData name="lon">-122.75566</SimpleData>
+		<SimpleData name="lat">45.59057</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.75566,45.59057</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Movie_theaters_PDX">
+		<SimpleData name="title">McMenamins Bagdad Theater &amp; Pub</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/McMenamins+Bagdad+Theater+%26+Pub/data=!4m2!3m1!1s0x5495a08d8dbaf3f1:0xbc101449ec08385</SimpleData>
+		<SimpleData name="lon">-122.6254</SimpleData>
+		<SimpleData name="lat">45.5119</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.6254,45.5119</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Movie_theaters_PDX">
+		<SimpleData name="title">5th Avenue Cinema</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/5th+Avenue+Cinema/data=!4m2!3m1!1s0x54950a16a052abfb:0x97e8be8b378049c7</SimpleData>
+		<SimpleData name="lon">-122.6827</SimpleData>
+		<SimpleData name="lat">45.5101</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.6827,45.5101</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Movie_theaters_PDX">
+		<SimpleData name="title">Avalon Theatre</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Avalon+Theatre/data=!4m2!3m1!1s0x5495a0937b4c1109:0xcca426e04f8117da</SimpleData>
+		<SimpleData name="lon">-122.861932170547</SimpleData>
+		<SimpleData name="lat">45.544108855091</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.861932170547,45.544108855091</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Movie_theaters_PDX">
+		<SimpleData name="title">Academy Theater</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Academy+Theater/data=!4m2!3m1!1s0x5495a106cd771e73:0x51cea234d37783a2</SimpleData>
+		<SimpleData name="lon">-122.582815</SimpleData>
+		<SimpleData name="lat">45.519014</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.582815,45.519014</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Movie_theaters_PDX">
+		<SimpleData name="title">Cinemagic</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Cinemagic/data=!4m2!3m1!1s0x5495a099435e76b7:0x23d8e09b427ad3d6</SimpleData>
+		<SimpleData name="lon">-122.645055</SimpleData>
+		<SimpleData name="lat">45.512319</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.645055,45.512319</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Movie_theaters_PDX">
+		<SimpleData name="title">Studio One Theaters</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Studio+One+Theaters/data=!4m2!3m1!1s0x5495a18b0576f215:0x774572a4db70f74d</SimpleData>
+		<SimpleData name="lon">-122.6213615</SimpleData>
+		<SimpleData name="lat">45.4981928</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.6213615,45.4981928</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Movie_theaters_PDX">
+		<SimpleData name="title">PAM CUT's Tomorrow Theater</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/PAM+CUT's+Tomorrow+Theater/data=!4m2!3m1!1s0x5495a148fad74e71:0x6a1fdf7772d20a3e</SimpleData>
+		<SimpleData name="lon">-122.627591</SimpleData>
+		<SimpleData name="lat">45.504606</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.627591,45.504606</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Movie_theaters_PDX">
+		<SimpleData name="title">Laurelhurst Theater</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Laurelhurst+Theater/data=!4m2!3m1!1s0x5495a0bf1dd67145:0xe4ad5612540de235</SimpleData>
+		<SimpleData name="lon">-122.6375138</SimpleData>
+		<SimpleData name="lat">45.5232385</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.6375138,45.5232385</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Movie_theaters_PDX">
+		<SimpleData name="title">Clinton Street Theater</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Clinton+Street+Theater/data=!4m2!3m1!1s0x5495a083d2cc3f73:0xad6c76ff40bcfd1d</SimpleData>
+		<SimpleData name="lon">-122.6402898</SimpleData>
+		<SimpleData name="lat">45.5032807</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.6402898,45.5032807</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Movie_theaters_PDX">
+		<SimpleData name="title">Hollywood Theatre</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Hollywood+Theatre/data=!4m2!3m1!1s0x5495a0d74331afef:0xa735454fea36ab36</SimpleData>
+		<SimpleData name="lon">-122.6207777</SimpleData>
+		<SimpleData name="lat">45.535574</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.6207777,45.535574</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Movie_theaters_PDX">
+		<SimpleData name="title">Living Room Theaters</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Living+Room+Theaters/data=!4m2!3m1!1s0x54950a03a2c82821:0x947db45651aa9a77</SimpleData>
+		<SimpleData name="lon">-122.681381</SimpleData>
+		<SimpleData name="lat">45.522337</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.681381,45.522337</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Movie_theaters_PDX">
+		<SimpleData name="title">Cinema 21</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Cinema+21/data=!4m2!3m1!1s0x549509f752b6135b:0x49a818903dae867</SimpleData>
+		<SimpleData name="lon">-122.69434</SimpleData>
+		<SimpleData name="lat">45.5273386</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.69434,45.5273386</coordinates></Point>
+  </Placemark>
+</Folder>
+</Document></kml>

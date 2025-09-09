@@ -1,0 +1,694 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document id="root_doc">
+<Schema name="Portland_stuff" id="Portland_stuff">
+	<SimpleField name="title" type="string"></SimpleField>
+	<SimpleField name="desc" type="string"></SimpleField>
+	<SimpleField name="address" type="string"></SimpleField>
+	<SimpleField name="url" type="string"></SimpleField>
+	<SimpleField name="lon" type="float"></SimpleField>
+	<SimpleField name="lat" type="float"></SimpleField>
+</Schema>
+<Folder><name>Portland_stuff</name>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title"></SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url"></SimpleData>
+		<SimpleData name="lon">-122.681425</SimpleData>
+		<SimpleData name="lat">45.516018</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.681425,45.516018</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">Art Supply Center- (formerly known as I’ve Been Framed)</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Art+Supply+Center-+(formerly+known+as+I%E2%80%99ve+Been+Framed)/data=!4m2!3m1!1s0x5495a065eb14d445:0x7b59bfed5a3d9be6</SimpleData>
+		<SimpleData name="lon">-122.606367</SimpleData>
+		<SimpleData name="lat">45.526498</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.606367,45.526498</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">Little Otsu (Still open online - Division store closed)</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Little+Otsu+(Still+open+online+-+Division+store+closed)/data=!4m2!3m1!1s0x5495a0867e98279f:0x670698f4666a50ce</SimpleData>
+		<SimpleData name="lon">-122.681425</SimpleData>
+		<SimpleData name="lat">45.516018</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.681425,45.516018</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">Oblation Papers &amp; Press</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Oblation+Papers+%26+Press/data=!4m2!3m1!1s0x549509ff4a2fed39:0x64da025dee31292a</SimpleData>
+		<SimpleData name="lon">-122.682976</SimpleData>
+		<SimpleData name="lat">45.526804</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.682976,45.526804</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">Mint Gallery Records</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Mint+Gallery+Records/data=!4m2!3m1!1s0x5495a70014e83d67:0x6a9eb05afb481ef</SimpleData>
+		<SimpleData name="lon">-122.681425</SimpleData>
+		<SimpleData name="lat">45.516018</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.681425,45.516018</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">H Mart Belmont</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/H+Mart+Belmont/data=!4m2!3m1!1s0x5495a14571766bef:0xaa8576f85bcf57fb</SimpleData>
+		<SimpleData name="lon">-122.664687874273</SimpleData>
+		<SimpleData name="lat">45.516549240311</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.664687874273,45.516549240311</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">MUJI Portland</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/MUJI+Portland/data=!4m2!3m1!1s0x54950bf407d77c1b:0x2c05ee8033eae2e0</SimpleData>
+		<SimpleData name="lon">-122.677671</SimpleData>
+		<SimpleData name="lat">45.519218</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.677671,45.519218</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">Queen of eyes Vintage</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Queen+of+eyes+Vintage/data=!4m2!3m1!1s0x5495a79f2e80c26d:0x4cb70137c1b65613</SimpleData>
+		<SimpleData name="lon">-122.611603904387</SimpleData>
+		<SimpleData name="lat">45.397208581389</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.611603904387,45.397208581389</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">Electric Lettuce Dispensary</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Electric+Lettuce+Dispensary/data=!4m2!3m1!1s0x5495a7e568308785:0x49d368c260b92ec2</SimpleData>
+		<SimpleData name="lon">-122.588335</SimpleData>
+		<SimpleData name="lat">45.526669</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.588335,45.526669</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">DIMEANDPENNY</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/DIMEANDPENNY/data=!4m2!3m1!1s0x5495a75776288ea9:0x9e88ff36b24e643</SimpleData>
+		<SimpleData name="lon">-122.681425</SimpleData>
+		<SimpleData name="lat">45.516018</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.681425,45.516018</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">Community Cycling Center</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Community+Cycling+Center/data=!4m2!3m1!1s0x5495a71f82ab6281:0x872cb64e8eeef29a</SimpleData>
+		<SimpleData name="lon">-122.647468</SimpleData>
+		<SimpleData name="lat">45.5589</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.647468,45.5589</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">Birdhouse Tattoo</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Birdhouse+Tattoo/data=!4m2!3m1!1s0x5495a7ccf5f3e19f:0x135f93738fddba73</SimpleData>
+		<SimpleData name="lon">-122.602267</SimpleData>
+		<SimpleData name="lat">45.497675</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.602267,45.497675</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">Citizens Photo</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Citizens+Photo/data=!4m2!3m1!1s0x5495a0a72e239ad5:0xa1960e358c2bf914</SimpleData>
+		<SimpleData name="lon">-122.633076</SimpleData>
+		<SimpleData name="lat">45.530529</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.633076,45.530529</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">Mountain Shop</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Mountain+Shop/data=!4m2!3m1!1s0x5495a0d08798b83f:0xac9f8e3b47d95cd7</SimpleData>
+		<SimpleData name="lon">-122.634707</SimpleData>
+		<SimpleData name="lat">45.530395</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.634707,45.530395</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">Looking Sideways Vintage</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Looking+Sideways+Vintage/data=!4m2!3m1!1s0x5495a18d4b5b7461:0x56396e61e7df574e</SimpleData>
+		<SimpleData name="lon">-122.636972</SimpleData>
+		<SimpleData name="lat">45.529529</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.636972,45.529529</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">Hollywood Vintage</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Hollywood+Vintage/data=!4m2!3m1!1s0x5495a0c7d2355d2b:0x682e74ca1a216585</SimpleData>
+		<SimpleData name="lon">-122.637279</SimpleData>
+		<SimpleData name="lat">45.529545</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.637279,45.529545</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">Lost Avenue Books</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Lost+Avenue+Books/data=!4m2!3m1!1s0x5495a74182fa8de1:0x726bc3ead15337b1</SimpleData>
+		<SimpleData name="lon">-122.857053270139</SimpleData>
+		<SimpleData name="lat">45.601369386874</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.857053270139,45.601369386874</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">Music Millennium</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Music+Millennium/data=!4m2!3m1!1s0x5495a0c06e22ab61:0x5f6f388a37b022d8</SimpleData>
+		<SimpleData name="lon">-122.631944</SimpleData>
+		<SimpleData name="lat">45.522717</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.631944,45.522717</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">Next Adventure Portland Outdoor Store</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Next+Adventure+Portland+Outdoor+Store/data=!4m2!3m1!1s0x5495a0a6daa4ebf9:0x72795722375e344a</SimpleData>
+		<SimpleData name="lon">-122.660512</SimpleData>
+		<SimpleData name="lat">45.519638</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.660512,45.519638</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">Hopscotch Portland</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Hopscotch+Portland/data=!4m2!3m1!1s0x5495a10000cec041:0x668987136e182301</SimpleData>
+		<SimpleData name="lon">-122.6555496</SimpleData>
+		<SimpleData name="lat">45.5156055</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.6555496,45.5156055</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">Next Adventure Portland Paddle Sports Center</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Next+Adventure+Portland+Paddle+Sports+Center/data=!4m2!3m1!1s0x5495a0a6daa4ebf9:0x8574945dba1049cb</SimpleData>
+		<SimpleData name="lon">-122.6248607</SimpleData>
+		<SimpleData name="lat">45.5347054</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.6248607,45.5347054</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">Portland Outdoor Store</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Portland+Outdoor+Store/data=!4m2!3m1!1s0x54950a0661d320c5:0xdbd10edecfd9b218</SimpleData>
+		<SimpleData name="lon">-122.67386</SimpleData>
+		<SimpleData name="lat">45.520705</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.67386,45.520705</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">Schoolhouse Showroom</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Schoolhouse+Showroom/data=!4m2!3m1!1s0x5495a0a64d198bbf:0x33ff83fc78e1b70d</SimpleData>
+		<SimpleData name="lon">-122.696901</SimpleData>
+		<SimpleData name="lat">45.541566</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.696901,45.541566</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">North Portland Bike Works</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/North+Portland+Bike+Works/data=!4m2!3m1!1s0x5495a76a4d4e04c3:0xe20c305ff0b5c5ef</SimpleData>
+		<SimpleData name="lon">-122.675195</SimpleData>
+		<SimpleData name="lat">45.551946</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.675195,45.551946</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">Joseph Wood Hill Park</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Joseph+Wood+Hill+Park/data=!4m2!3m1!1s0x5495a115cc9282a3:0x6f6470d94e47a25a</SimpleData>
+		<SimpleData name="lon">-122.5678241</SimpleData>
+		<SimpleData name="lat">45.5429524</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.5678241,45.5429524</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">The Grotto</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/The+Grotto/data=!4m2!3m1!1s0x5495a1512597471d:0xc2157262de9214aa</SimpleData>
+		<SimpleData name="lon">-122.574850022997</SimpleData>
+		<SimpleData name="lat">45.551014783278</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.574850022997,45.551014783278</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">CITY NOISE RECORDS</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/CITY+NOISE+RECORDS/data=!4m2!3m1!1s0x5495a1a1f8a45d8d:0x43c45757e238d069</SimpleData>
+		<SimpleData name="lon">-122.681425</SimpleData>
+		<SimpleData name="lat">45.516018</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.681425,45.516018</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">Mama &amp; Hapa's Zero Waste Shop</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Mama+%26+Hapa's+Zero+Waste+Shop/data=!4m2!3m1!1s0x5495a7142fd0ed49:0xafae7168962397c3</SimpleData>
+		<SimpleData name="lon">-122.640504</SimpleData>
+		<SimpleData name="lat">45.442345</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.640504,45.442345</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">ROSE CITY COMICS</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/ROSE+CITY+COMICS/data=!4m2!3m1!1s0x5495a758b94885a7:0x8c2af45645e3b291</SimpleData>
+		<SimpleData name="lon">-122.607173030708</SimpleData>
+		<SimpleData name="lat">45.394306831842</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.607173030708,45.394306831842</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">Kinokuniya Bookstore - Portland</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Kinokuniya+Bookstore+-+Portland/data=!4m2!3m1!1s0x54950bfdc0eb93e3:0x60b97959c4d6719</SimpleData>
+		<SimpleData name="lon">-122.681984</SimpleData>
+		<SimpleData name="lat">45.518679</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.681984,45.518679</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">William Temple House Thrift Store</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/William+Temple+House+Thrift+Store/data=!4m2!3m1!1s0x549509f6d3912ce1:0x23043ae579d509ce</SimpleData>
+		<SimpleData name="lon">-122.69714</SimpleData>
+		<SimpleData name="lat">45.526116</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.69714,45.526116</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">Crossroads Trading</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Crossroads+Trading/data=!4m2!3m1!1s0x549509f69d78572b:0x8195f97e0ae4b4ab</SimpleData>
+		<SimpleData name="lon">-122.625057</SimpleData>
+		<SimpleData name="lat">45.511853</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.625057,45.511853</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">McMenamins Chapel Pub</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/McMenamins+Chapel+Pub/data=!4m2!3m1!1s0x5495a70e4a5c9423:0x8a4167f2cd8480a9</SimpleData>
+		<SimpleData name="lon">-122.683398</SimpleData>
+		<SimpleData name="lat">45.522777</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.683398,45.522777</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">Portland Farmers Market - King</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Portland+Farmers+Market+-+King/data=!4m2!3m1!1s0x5495a719d411347d:0x49ef7f6422be5efa</SimpleData>
+		<SimpleData name="lon">-122.658303</SimpleData>
+		<SimpleData name="lat">45.557179</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.658303,45.557179</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">The Drawing Studio</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/The+Drawing+Studio/data=!4m2!3m1!1s0x5495a0888b08ae4b:0xa2af3d885f11761a</SimpleData>
+		<SimpleData name="lon">-122.6261</SimpleData>
+		<SimpleData name="lat">45.5046</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.6261,45.5046</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">PiPH by Paper Epiphanies</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/PiPH+by+Paper+Epiphanies/data=!4m2!3m1!1s0x5495a7506a1aaaab:0x1d6d7f87f311e609</SimpleData>
+		<SimpleData name="lon">-122.640121</SimpleData>
+		<SimpleData name="lat">45.503549</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.640121,45.503549</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">Joe Bike</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Joe+Bike/data=!4m2!3m1!1s0x5495a08d3e1e274b:0x93803db55b6ba4e0</SimpleData>
+		<SimpleData name="lon">-122.622867</SimpleData>
+		<SimpleData name="lat">45.508163</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.622867,45.508163</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">Village Merchants</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Village+Merchants/data=!4m2!3m1!1s0x5495a086152c581f:0xc2bc94af2881d287</SimpleData>
+		<SimpleData name="lon">-122.620806</SimpleData>
+		<SimpleData name="lat">45.504992</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.620806,45.504992</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">Workshop Vintage</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Workshop+Vintage/data=!4m2!3m1!1s0x5495a7157941544f:0xc04f6522b23f81e5</SimpleData>
+		<SimpleData name="lon">-122.666875</SimpleData>
+		<SimpleData name="lat">45.552302</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.666875,45.552302</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">Third Space</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Third+Space/data=!4m2!3m1!1s0x5495a18478d3ae33:0x28863f0bb61040b5</SimpleData>
+		<SimpleData name="lon">-122.673368483164</SimpleData>
+		<SimpleData name="lat">45.523118495719</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.673368483164,45.523118495719</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">Too Many Records</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Too+Many+Records/data=!4m2!3m1!1s0x5495a73c1205c0b9:0xec52a302629d4642</SimpleData>
+		<SimpleData name="lon">-122.685771</SimpleData>
+		<SimpleData name="lat">45.576846</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.685771,45.576846</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">Clinton Street Record &amp; Stereo</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Clinton+Street+Record+%26+Stereo/data=!4m2!3m1!1s0x5495a083cd4df2bf:0xb8fd779f22376ba0</SimpleData>
+		<SimpleData name="lon">-122.640055</SimpleData>
+		<SimpleData name="lat">45.50316</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.640055,45.50316</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">Telephone Vintage</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Telephone+Vintage/data=!4m2!3m1!1s0x54950b75d4a795e7:0xe274f17536e7447c</SimpleData>
+		<SimpleData name="lon">-122.654449</SimpleData>
+		<SimpleData name="lat">45.504625</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.654449,45.504625</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">Alien Mermaid Cove</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Alien+Mermaid+Cove/data=!4m2!3m1!1s0x5495a7a9c717aa53:0x414419f1af02cf43</SimpleData>
+		<SimpleData name="lon">-122.629245</SimpleData>
+		<SimpleData name="lat">45.51217</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.629245,45.51217</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">Experimental Vintage</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Experimental+Vintage/data=!4m2!3m1!1s0x5495a70e83aff8cd:0x58f2ba7b80aa7738</SimpleData>
+		<SimpleData name="lon">-122.651355</SimpleData>
+		<SimpleData name="lat">45.519544</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.651355,45.519544</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">Cultural Blends</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Cultural+Blends/data=!4m2!3m1!1s0x5495a1409c19de73:0x95a0c7b75eac4a7d</SimpleData>
+		<SimpleData name="lon">-122.653428</SimpleData>
+		<SimpleData name="lat">45.532502</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.653428,45.532502</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">Mix Tape, Mixtape vintage</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Mix+Tape,+Mixtape+vintage/data=!4m2!3m1!1s0x5495a1a92c5e1f1f:0x2812d96595cb28a6</SimpleData>
+		<SimpleData name="lon">-122.630746</SimpleData>
+		<SimpleData name="lat">45.516272</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.630746,45.516272</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">flower</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/flower/data=!4m2!3m1!1s0x5495a16d4658ef39:0x76067904b152ede4</SimpleData>
+		<SimpleData name="lon">-122.57520840423</SimpleData>
+		<SimpleData name="lat">45.399954186682</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.57520840423,45.399954186682</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">Tantrum Vintage</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Tantrum+Vintage/data=!4m2!3m1!1s0x5495a1fb9d9ae839:0xa3db4507f190a218</SimpleData>
+		<SimpleData name="lon">-122.629769</SimpleData>
+		<SimpleData name="lat">45.516288</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.629769,45.516288</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">Hello Sunshine Art + Vintage</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Hello+Sunshine+Art+%2B+Vintage/data=!4m2!3m1!1s0x5495a15e3fc5d759:0x4155ff451fd92b25</SimpleData>
+		<SimpleData name="lon">-122.634179</SimpleData>
+		<SimpleData name="lat">45.522727</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.634179,45.522727</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">ARTIFACT: CREATIVE RECYCLE</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/ARTIFACT:+CREATIVE+RECYCLE/data=!4m2!3m1!1s0x5495a0888abea9ab:0xb0c07614235c28ac</SimpleData>
+		<SimpleData name="lon">-122.625855</SimpleData>
+		<SimpleData name="lat">45.504607</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.625855,45.504607</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">Parcera Vintage</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Parcera+Vintage/data=!4m2!3m1!1s0x5495a14b4b4e9e49:0xe6e7493de9a34be8</SimpleData>
+		<SimpleData name="lon">-122.611603904387</SimpleData>
+		<SimpleData name="lat">45.397208581389</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.611603904387,45.397208581389</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">Mustard Seed Thrift Store &amp; Book Nook</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Mustard+Seed+Thrift+Store+%26+Book+Nook/data=!4m2!3m1!1s0x54950b0008f010eb:0x24aa908426ee3dba</SimpleData>
+		<SimpleData name="lon">-122.681425</SimpleData>
+		<SimpleData name="lat">45.516018</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.681425,45.516018</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">2nd Avenue Records</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/2nd+Avenue+Records/data=!4m2!3m1!1s0x54950a066e851a29:0x3b35cc277c80a6d8</SimpleData>
+		<SimpleData name="lon">-122.673373</SimpleData>
+		<SimpleData name="lat">45.519803</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.673373,45.519803</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">Everyday Music</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Everyday+Music/data=!4m2!3m1!1s0x54950a02e4ef934f:0xfac59ce0e7892f87</SimpleData>
+		<SimpleData name="lon">-122.684648</SimpleData>
+		<SimpleData name="lat">45.523163</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.684648,45.523163</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">Tomorrow Records</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Tomorrow+Records/data=!4m2!3m1!1s0x54950bc67f97c343:0x69a860702e39a800</SimpleData>
+		<SimpleData name="lon">-122.658536</SimpleData>
+		<SimpleData name="lat">45.512033</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.658536,45.512033</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">Melville Books</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Melville+Books/data=!4m2!3m1!1s0x5495a7b1384fb8c9:0x9f8c0c4b2d6ab470</SimpleData>
+		<SimpleData name="lon">-122.636251</SimpleData>
+		<SimpleData name="lat">45.559231</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.636251,45.559231</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">Wallace Books</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Wallace+Books/data=!4m2!3m1!1s0x54950ac18f323ac1:0x927ec67c193757a</SimpleData>
+		<SimpleData name="lon">-122.648721</SimpleData>
+		<SimpleData name="lat">45.471711</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.648721,45.471711</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">Daedalus Books</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Daedalus+Books/data=!4m2!3m1!1s0x549509f711de62a1:0xa0c0db576d8b5764</SimpleData>
+		<SimpleData name="lon">-122.693959</SimpleData>
+		<SimpleData name="lat">45.525473</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.693959,45.525473</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">Broadway Books</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Broadway+Books/data=!4m2!3m1!1s0x5495a0ca9b531df1:0xf23a0806945ccc2f</SimpleData>
+		<SimpleData name="lon">-122.648031</SimpleData>
+		<SimpleData name="lat">45.534741</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.648031,45.534741</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">Always Here Bookstore</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Always+Here+Bookstore/data=!4m2!3m1!1s0x5495a7095250f737:0xb7b9a395829e17bc</SimpleData>
+		<SimpleData name="lon">-122.792191013131</SimpleData>
+		<SimpleData name="lat">45.530854510391</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.792191013131,45.530854510391</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">Belmont Books</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Belmont+Books/data=!4m2!3m1!1s0x5495a185880e7ebf:0xb1d80be20566c521</SimpleData>
+		<SimpleData name="lon">-122.629289</SimpleData>
+		<SimpleData name="lat">45.516572</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.629289,45.516572</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">Revolutions Bookshop</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Revolutions+Bookshop/data=!4m2!3m1!1s0x5495a9278d21a269:0x983fffa92e9d53c</SimpleData>
+		<SimpleData name="lon">-122.755268</SimpleData>
+		<SimpleData name="lat">45.590847</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.755268,45.590847</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">Second Shapes Bookstore</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Second+Shapes+Bookstore/data=!4m2!3m1!1s0x5495a70077c8d093:0xd64ac846790d5e20</SimpleData>
+		<SimpleData name="lon">-122.792191013131</SimpleData>
+		<SimpleData name="lat">45.530854510391</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.792191013131,45.530854510391</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">Word Virus Books</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Word+Virus+Books/data=!4m2!3m1!1s0x5495a12193f82bdb:0x92d7df216433539b</SimpleData>
+		<SimpleData name="lon">-122.857053270139</SimpleData>
+		<SimpleData name="lat">45.601369386874</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.857053270139,45.601369386874</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">Nationale</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/Nationale/data=!4m2!3m1!1s0x5495a0a588ee74db:0x7ac44db9bf990d64</SimpleData>
+		<SimpleData name="lon">-122.64368</SimpleData>
+		<SimpleData name="lat">45.52263</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.64368,45.52263</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">The Arc Thrift Store</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/The+Arc+Thrift+Store/data=!4m2!3m1!1s0x5495a1d2a178509f:0x10f5e9248ca4a1ff</SimpleData>
+		<SimpleData name="lon">-122.681425</SimpleData>
+		<SimpleData name="lat">45.516018</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.681425,45.516018</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Portland_stuff">
+		<SimpleData name="title">The Realm Refillery</SimpleData>
+		<SimpleData name="address"></SimpleData>
+		<SimpleData name="url">https://www.google.com/maps/place/The+Realm+Refillery/data=!4m2!3m1!1s0x5495a15492f23dfd:0xaa75b7c648b2454f</SimpleData>
+		<SimpleData name="lon">-122.641982</SimpleData>
+		<SimpleData name="lat">45.534833</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.641982,45.534833</coordinates></Point>
+  </Placemark>
+</Folder>
+</Document></kml>
