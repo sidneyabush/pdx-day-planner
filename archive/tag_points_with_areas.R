@@ -1,3 +1,15 @@
+# tag_points_with_areas.R — Geographic Tagging Engine  
+# 
+# PURPOSE: Tags geocoded places with Portland neighborhood and section information
+# FEATURES:
+#   - Spatially joins places with neighborhood boundaries
+#   - Adds Portland administrative sextants (North, Northeast, etc.)
+#   - Normalizes neighborhood names using combo mapping
+#   - Deduplicates and combines multiple data sources
+#   - Exports tagged GeoJSON files
+# 
+# USAGE: Called by build_master_dataset.R (don't run directly)
+# 
 # tag_points_with_areas.R — v3.4 (robust + normalized combo join + mapped-first combine + safe logging)
 # - Tags saved places with City of Portland Neighborhood + Section (sextant)
 # - Normalized, case-insensitive join to your combo CSV (no NA combo_label)

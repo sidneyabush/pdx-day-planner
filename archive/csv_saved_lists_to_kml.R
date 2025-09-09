@@ -1,3 +1,15 @@
+# csv_saved_lists_to_kml.R — Core Geocoding Engine
+# 
+# PURPOSE: Converts CSV files from Google Maps Saved Lists to geographic formats (KML/GeoJSON)
+# FEATURES:
+#   - Extracts coordinates from Google Maps URLs
+#   - Multi-provider geocoding fallback (Google → ArcGIS → OSM)
+#   - Portland-area coordinate validation
+#   - Caching system to avoid redundant API calls
+#   - Exports both KML and GeoJSON formats
+# 
+# USAGE: Called by build_master_dataset.R (don't run directly)
+# 
 # csv_saved_lists_to_kml.R — v10 (PDX-aware + URL preference + per-row geocode + robust overrides)
 # - Trusts URL coords only if “Portland-ish” (~120 km of downtown)
 # - URL parsing preference configurable: "place" (!3d/!4d) vs "viewport" (@lat,lon)
