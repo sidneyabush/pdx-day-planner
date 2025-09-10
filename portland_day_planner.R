@@ -164,14 +164,45 @@ generate_day_plan <- function(available_places, context = NULL, selected_activit
   chosen_neighborhood <- sample(good_neighborhoods, 1)
   neighborhood_places <- places_with_neighborhoods[places_with_neighborhoods$neighborhood == chosen_neighborhood, ]
   
-  # Choose transportation based on distance
+  # Choose transportation based on distance AND context constraints
   avg_distance <- mean(neighborhood_places$distance_mi, na.rm = TRUE)
-  transit_mode <- if(avg_distance <= 2) {
-    "🚶 Walk"
-  } else if(avg_distance <= 8) {
-    "🚲 Bike" 
+  
+  # Check context constraints for transportation
+  force_drive <- FALSE
+  force_close <- FALSE
+  max_allowed_distance <- Inf
+  
+  if(!is.null(context)) {
+    context_config <- CONTEXT_FILTERS[[context]]
+    if(!is.null(context_config)) {
+      # Rainy weather: prefer driving, avoid walking/biking
+      if(context == "☔ Rainy Weather") {
+        force_drive <- TRUE
+        max_allowed_distance <- context_config$max_distance %||% 3
+      }
+      # Low energy: avoid biking, prefer close places for walking
+      else if(context == "😴 Low Energy") {
+        if(avg_distance > 1) force_drive <- TRUE
+        max_allowed_distance <- context_config$max_distance %||% 2
+      }
+      # Apply general max_distance if specified
+      else if("max_distance" %in% names(context_config)) {
+        max_allowed_distance <- context_config$max_distance
+      }
+    }
+  }
+  
+  # Select transportation based on constraints
+  if(force_drive || avg_distance > max_allowed_distance) {
+    transit_mode <- "🚗 Drive"
+  } else if(avg_distance <= 1) {
+    transit_mode <- "🚶 Walk"
+  } else if(avg_distance <= 2 && !force_drive) {
+    transit_mode <- "🚶 Walk"
+  } else if(avg_distance <= 8 && !force_drive && context != "😴 Low Energy") {
+    transit_mode <- "🚲 Bike"
   } else {
-    "🚗 Drive"
+    transit_mode <- "🚗 Drive"
   }
   
   # Choose activity based on available venues or selected modes
@@ -398,6 +429,186 @@ generate_day_plan <- function(available_places, context = NULL, selected_activit
   return(plans)
 }
 
+# Generate creative surprise adventures with varied activities
+generate_surprise_adventure <- function(available_places, time_available = "quick", context = NULL) {
+  if(nrow(available_places) == 0) return(list())
+  
+  # Define creative activity combinations
+  adventure_types <- list(
+    "Coffee + Photography" = list(
+      activities = c("coffee", "photography"),
+      venues = list(c("coffee", "cafe"), c("park", "bridge", "view", "mural", "art")),
+      description_templates = c(
+        "grab coffee at {venue1}, then take film photos of the area around {venue2}",
+        "start with coffee at {venue1} and wander to {venue2} to take film photos of the area"
+      )
+    ),
+    "Bike + Shopping" = list(
+      activities = c("biking", "shopping"),
+      venues = list(c("bike", "trail", "path"), c("thrift", "vintage", "record", "bookstore")),
+      description_templates = c(
+        "bike to {venue1}, then browse {venue2}",
+        "cycle around {venue1} area and check out {venue2}"
+      )
+    ),
+    "Draw + Coffee" = list(
+      activities = c("drawing", "coffee"),
+      venues = list(c("park", "garden", "scenic", "view"), c("coffee", "cafe")),
+      description_templates = c(
+        "sketch at {venue1}, then get coffee at {venue2}",
+        "find a spot to draw at {venue1} and refuel at {venue2}"
+      )
+    ),
+    "Thrift + Food" = list(
+      activities = c("shopping", "food"),
+      venues = list(c("thrift", "vintage", "shop"), c("food", "restaurant", "bar", "bakery")),
+      description_templates = c(
+        "hunt for treasures at {venue1}, then grab a bite at {venue2}",
+        "browse {venue1} and treat yourself at {venue2}"
+      )
+    ),
+    "Music + Drinks" = list(
+      activities = c("music", "drinks"),
+      venues = list(c("record", "music", "vinyl"), c("bar", "brewery", "pub")),
+      description_templates = c(
+        "dig through records at {venue1}, then drinks at {venue2}",
+        "browse music at {venue1} and unwind at {venue2}"
+      )
+    ),
+    "Nature + Reading" = list(
+      activities = c("nature", "reading"),
+      venues = list(c("park", "garden", "trail", "nature"), c("bookstore", "library", "cafe")),
+      description_templates = c(
+        "take a nature walk at {venue1}, then read at {venue2}",
+        "explore {venue1} and settle in with a book at {venue2}"
+      )
+    )
+  )
+  
+  # Filter adventure types based on context
+  suitable_adventures <- adventure_types
+  
+  if(!is.null(context)) {
+    if(context == "☔ Rainy Weather") {
+      # Remove outdoor activities for rainy weather
+      suitable_adventures <- suitable_adventures[!names(suitable_adventures) %in% c("Bike + Shopping", "Nature + Reading")]
+    } else if(context == "😴 Low Energy") {
+      # Remove high-energy activities for low energy
+      suitable_adventures <- suitable_adventures[!names(suitable_adventures) %in% c("Bike + Shopping")]
+    }
+  }
+  
+  # Pick a random adventure type from suitable options
+  if(length(suitable_adventures) == 0) suitable_adventures <- adventure_types  # fallback
+  adventure_name <- sample(names(suitable_adventures), 1)
+  adventure <- suitable_adventures[[adventure_name]]
+  
+  # Find venues for each activity
+  venues_found <- list()
+  for(i in seq_along(adventure$venues)) {
+    venue_tags <- adventure$venues[[i]]
+    matching_places <- available_places[
+      grepl(paste(venue_tags, collapse = "|"), available_places$tags, ignore.case = TRUE), 
+    ]
+    if(nrow(matching_places) > 0) {
+      venues_found[[i]] <- matching_places[sample(nrow(matching_places), 1), ]
+    }
+  }
+  
+  # If we found venues for the adventure, create the plan
+  if(length(venues_found) >= 2) {
+    venue1 <- venues_found[[1]]
+    venue2 <- venues_found[[2]]
+    
+    # Choose a random description template
+    template <- sample(adventure$description_templates, 1)
+    description <- gsub("\\{venue1\\}", venue1$title, template)
+    description <- gsub("\\{venue2\\}", venue2$title, description)
+    
+    # Determine neighborhood (use the first venue's neighborhood)
+    neighborhood <- if(!is.na(venue1$neighborhood)) venue1$neighborhood else "Portland"
+    
+    # Determine transportation based on distance AND context constraints
+    avg_distance <- mean(c(venue1$distance_mi, venue2$distance_mi), na.rm = TRUE)
+    
+    # Apply context constraints
+    if(!is.null(context)) {
+      if(context == "☔ Rainy Weather") {
+        # Force driving in rainy weather
+        transit_mode <- "🚗 Drive"
+      } else if(context == "😴 Low Energy" && avg_distance > 1) {
+        # Force driving if distance > 1 mile and low energy
+        transit_mode <- "🚗 Drive"
+      } else {
+        # Normal distance-based selection but respect energy levels
+        if(avg_distance <= 1) {
+          transit_mode <- "🚶 Walk"
+        } else if(avg_distance <= 2) {
+          transit_mode <- "🚶 Walk"
+        } else if(avg_distance <= 8 && context != "😴 Low Energy") {
+          transit_mode <- "🚲 Bike"
+        } else {
+          transit_mode <- "🚗 Drive"
+        }
+      }
+    } else {
+      # Default behavior
+      transit_mode <- if(avg_distance <= 2) "🚶 Walk" else if(avg_distance <= 8) "🚲 Bike" else "🚗 Drive"
+    }
+    
+    # Create base plan
+    plan <- list(
+      type = "adventure",
+      title = paste("🎲", adventure_name, "Adventure"),
+      description = description,
+      neighborhood = neighborhood,
+      transit = transit_mode,
+      activity = adventure_name,
+      places = rbind(venue1, venue2),
+      estimated_time = if(time_available == "quick") "2-3 hours" else "3-5 hours"
+    )
+    
+    # For longer time slots, add a third activity
+    if(time_available == "half_day" || time_available == "full_day") {
+      # Add a food/coffee stop
+      food_places <- available_places[grepl("coffee|cafe|food|bakery|restaurant", available_places$tags, ignore.case = TRUE), ]
+      if(nrow(food_places) > 0) {
+        food_venue <- food_places[sample(nrow(food_places), 1), ]
+        plan$description <- paste(plan$description, "and finish with a stop at", food_venue$title)
+        plan$places <- rbind(plan$places, food_venue)
+        plan$estimated_time <- if(time_available == "half_day") "3-4 hours" else "5-6 hours"
+      }
+    }
+    
+    return(list(plan))
+  }
+  
+  # Fallback: single interesting activity
+  interesting_tags <- c("vintage", "record", "bookstore", "gallery", "museum", "brewery", "coffee")
+  interesting_places <- available_places[
+    grepl(paste(interesting_tags, collapse = "|"), available_places$tags, ignore.case = TRUE), 
+  ]
+  
+  if(nrow(interesting_places) > 0) {
+    chosen_place <- interesting_places[sample(nrow(interesting_places), 1), ]
+    fallback_activities <- c("explore", "discover", "check out", "investigate", "wander around")
+    activity <- sample(fallback_activities, 1)
+    
+    return(list(list(
+      type = "adventure",
+      title = "🎲 Mystery Adventure",
+      description = paste(activity, chosen_place$title),
+      neighborhood = if(!is.na(chosen_place$neighborhood)) chosen_place$neighborhood else "Portland",
+      transit = if(chosen_place$distance_mi <= 2) "🚶 Walk" else if(chosen_place$distance_mi <= 8) "🚲 Bike" else "🚗 Drive",
+      activity = "exploration",
+      places = chosen_place,
+      estimated_time = "1-2 hours"
+    )))
+  }
+  
+  return(list())
+}
+
 # ---------------- LOAD PROCESSED DATA ----------------
 processed_file <- "data/portland_places_processed.rds"
 if(!file.exists(processed_file)) { cat("❌ No processed data. Run process_data.R first.
@@ -604,8 +815,45 @@ server <- function(input, output, session) {
   output$neighborhood_selector <- renderUI({
     if(!is.null(neighborhood_boundaries) && !is.null(NEI_NAME_COL) && NEI_NAME_COL %in% names(neighborhood_boundaries)) {
       tryCatch({
-        neighborhoods <- neighborhood_boundaries[[NEI_NAME_COL]] |> as.character() |> unique() |> sort()
-        selectizeInput("neighborhood_filter", "", choices = neighborhoods, selected = NULL, multiple = TRUE, options = list(placeholder = 'Any sub-neighborhoods'))
+        # Get all available neighborhoods
+        all_neighborhoods <- neighborhood_boundaries[[NEI_NAME_COL]] |> as.character() |> unique() |> sort()
+        
+        # Filter neighborhoods based on selected sections if any are selected
+        available_neighborhoods <- all_neighborhoods
+        if(!is.null(input$section_filter) && length(input$section_filter) > 0 && 
+           !is.null(sections_boundaries) && !is.null(SEC_NAME_COL)) {
+          
+          # Find neighborhoods that spatially intersect with selected sections
+          suppressWarnings(suppressMessages({
+            library(sf)
+            selected_sections <- sections_boundaries[sections_boundaries[[SEC_NAME_COL]] %in% input$section_filter, ]
+            
+            # Simple spatial intersection to find neighborhoods within selected sections
+            intersecting_idx <- st_intersects(neighborhood_boundaries, selected_sections, sparse = FALSE)
+            intersecting_neighborhoods <- neighborhood_boundaries[rowSums(intersecting_idx) > 0, ]
+            
+            if(nrow(intersecting_neighborhoods) > 0) {
+              available_neighborhoods <- intersecting_neighborhoods[[NEI_NAME_COL]] |> as.character() |> unique() |> sort()
+            } else {
+              available_neighborhoods <- character(0)  # No intersecting neighborhoods
+            }
+          }))
+        }
+        
+        # Create the selectInput with filtered choices
+        placeholder_text <- if(length(available_neighborhoods) == 0) {
+          'No sub-neighborhoods in selected areas'
+        } else if(!is.null(input$section_filter) && length(input$section_filter) > 0) {
+          paste('Sub-neighborhoods in', paste(input$section_filter, collapse = ', '))
+        } else {
+          'Any sub-neighborhoods'
+        }
+        
+        selectizeInput("neighborhood_filter", "", 
+                      choices = available_neighborhoods, 
+                      selected = NULL, 
+                      multiple = TRUE, 
+                      options = list(placeholder = placeholder_text))
       }, error = function(e) {
         p(paste("Error loading neighborhoods:", e$message), style = "font-size: 12px; color: #red;")
       })
@@ -614,6 +862,10 @@ server <- function(input, output, session) {
     }
   })
   
+  # Clear neighborhood selection when sections change
+  observeEvent(input$section_filter, {
+    updateSelectizeInput(session, "neighborhood_filter", selected = character(0))
+  }, ignoreNULL = FALSE)
   
   available_places <- reactive({
     df <- filtered_places()
@@ -677,7 +929,12 @@ server <- function(input, output, session) {
       }
     }
     
-    # Neighborhood (multi-select)
+    # Section filtering (main neighborhoods)
+    if(!is.null(input$section_filter) && length(input$section_filter) > 0) {
+      df <- df[!is.na(df$section) & df$section %in% input$section_filter, ]
+    }
+    
+    # Neighborhood (multi-select sub-neighborhoods)
     if(!is.null(input$neighborhood_filter) && length(input$neighborhood_filter) > 0) {
       df <- df[!is.na(df$neighborhood) & df$neighborhood %in% input$neighborhood_filter, ]
     }
@@ -703,7 +960,7 @@ server <- function(input, output, session) {
       # Generate smart day plans
       # Pass first context filter for now (day plan function needs updating for multiple contexts)
       context_for_plan <- if(length(input$context_filter) > 0) input$context_filter[1] else NULL
-      plans <- generate_day_plan(candidates, context_for_plan, input$selected_activities, input$selected_activity_modes)
+      plans <- generate_day_plan(candidates, context_for_plan, input$selected_activities, input$selected_activity_modes, input$time_filter)
       
       if(length(plans) > 0 && !is.null(plans[[1]])) {
         plan <- plans[[1]]
@@ -731,27 +988,45 @@ server <- function(input, output, session) {
       return() 
     }
     
-    # Generate a random day plan
-    plans <- generate_day_plan(all_available, NULL, NULL, NULL)
+    # Generate a surprise adventure
+    context_for_adventure <- if(length(input$context_filter) > 0) input$context_filter[1] else NULL
+    adventures <- generate_surprise_adventure(all_available, input$time_filter, context_for_adventure)
     
-    if(length(plans) > 0 && !is.null(plans[[1]])) {
-      plan <- plans[[1]]
-      values$suggested <- plan$places[1, ]
+    if(length(adventures) > 0 && !is.null(adventures[[1]])) {
+      adventure <- adventures[[1]]
+      # Set the first place as suggested for map highlighting
+      values$suggested <- adventure$places[1, ]
       values$inspiration_text <- list(
-        title = paste("🎲 Random Inspiration:", plan$title),
-        description = plan$description,
-        type = plan$type,
-        estimated_time = plan$estimated_time
+        title = adventure$title,
+        description = adventure$description,
+        type = adventure$type,
+        estimated_time = adventure$estimated_time,
+        transit = adventure$transit,
+        neighborhood = adventure$neighborhood
       )
     } else {
-      # Fallback
-      values$suggested <- all_available[sample(nrow(all_available), 1), ]
-      values$inspiration_text <- list(
-        title = "🎲 Random Adventure",
-        description = "Go explore this place and see what happens!",
-        type = "random",
-        estimated_time = "1-3 hours"
-      )
+      # Fallback to single interesting place
+      interesting_places <- all_available[grepl("coffee|vintage|record|bookstore|gallery|museum|brewery", all_available$tags, ignore.case = TRUE), ]
+      if(nrow(interesting_places) > 0) {
+        chosen_place <- interesting_places[sample(nrow(interesting_places), 1), ]
+        activities <- c("explore", "discover", "check out", "investigate", "wander around")
+        activity <- sample(activities, 1)
+        values$suggested <- chosen_place
+        values$inspiration_text <- list(
+          title = "🎲 Mystery Adventure",
+          description = paste(activity, chosen_place$title, "and see what happens!"),
+          type = "adventure",
+          estimated_time = "1-2 hours"
+        )
+      } else {
+        values$suggested <- all_available[sample(nrow(all_available), 1), ]
+        values$inspiration_text <- list(
+          title = "🎲 Random Adventure", 
+          description = "Go explore this place and see what happens!",
+          type = "random",
+          estimated_time = "1-3 hours"
+        )
+      }
     }
   })
   
@@ -818,7 +1093,7 @@ server <- function(input, output, session) {
         proxy <- proxy %>% addPolygons(
           data = secs_all[i,], 
           fillColor = base_color, 
-          fillOpacity = if(is_selected) 0.15 else 0.06,  # Reduced for better marker visibility
+          fillOpacity = if(is_selected) 0.08 else 0.03,  # Much reduced to allow marker clicks
           color = base_color, 
           weight = if(is_selected) 2.5 else 1.5, 
           opacity = if(is_selected) 0.9 else 0.7, 
@@ -847,7 +1122,7 @@ server <- function(input, output, session) {
         proxy <- proxy %>% addPolygons(
           data = nb[i,], 
           fillColor = if(is_selected) "#10b981" else "#ccfbf1", 
-          fillOpacity = if(is_selected) 0.12 else 0.02,  # Further reduced to allow marker clicks
+          fillOpacity = if(is_selected) 0.06 else 0.01,  # Minimal opacity to allow marker clicks
           color = if(is_selected) "#10b981" else "#0ea5a8", 
           weight = if(is_selected) 2 else 1.2,
           opacity = if(is_selected) 1 else 0.6, 
@@ -856,8 +1131,7 @@ server <- function(input, output, session) {
           options = pathOptions(interactive = TRUE, clickable = TRUE, pointerEvents = "auto"),
           popup = paste0("<b>", nb_name, "</b><br>", 
                         if(is_selected) "Click to remove from filter" else "Click to add to filter"),
-          highlightOptions = highlightOptions(weight = 2.5, fillOpacity = 0.25, bringToFront = TRUE),
-          options = pathOptions(interactive = TRUE, clickable = TRUE)  # Ensure proper click handling
+          highlightOptions = highlightOptions(weight = 2.5, fillOpacity = 0.25, bringToFront = TRUE)
         )
       }
     }
@@ -959,11 +1233,11 @@ server <- function(input, output, session) {
     df$clean_tags <- sapply(df$tags, clean_tags)
     
     display_df <- df %>% 
-      select(title, clean_tags, neighborhood, distance_mi, source_list) %>% 
+      select(title, clean_tags, feature, neighborhood, distance_mi) %>% 
       arrange(distance_mi)
     
     DT::datatable(display_df, options = list(pageLength = 8, scrollX = TRUE, dom = 'tip'), 
-                  colnames = c("Place","Features","Neighborhood","Distance (mi)","List"))
+                  colnames = c("Place", "Tags", "Feature", "Neighborhood", "Distance (mi)"))
   })
   output$visited_count <- renderText({ paste("Visited:", length(values$completed), "places") })
   output$visited_preview <- renderUI({
