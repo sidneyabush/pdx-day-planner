@@ -63,7 +63,10 @@ Portland_shiny_app/
 ├── data/                      # Visited places tracking (AUTO-CREATED)
 │   └── completed_places.rds  
 ├── portland_day_planner.R     # 🌟 MAIN APP (ONLY FILE NEEDED)
-└── archive/                   # Complex old scripts (IGNORE)
+├── process_data.R             # 🔄 DATA PROCESSING (RUN FIRST)
+└── archive/                   # Geographic files and old scripts
+    ├── Portland_Administrative_Sextants.geojson  # 🌈 SEXTANT BOUNDARIES
+    └── Neighborhood_Boundaries.geojson           # 🏘️ NEIGHBORHOOD BOUNDARIES
 ```
 
 ## CSV Data Format Expected

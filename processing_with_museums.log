@@ -1,0 +1,9 @@
+📋 Processed data is up-to-date ( 2025-09-09 19:45:35 )
+💡 CSV files haven't changed since last processing.
+🚀 You can launch the app directly: source('portland_day_planner.R')
+🔄 Or run this script again to force reprocessing.
+Reprocess anyway? (y/N): 
+⏭️  Skipping processing - using existing data.
+Warning messages:
+1: package ‘tidygeocoder’ was built under R version 4.3.3 
+2: package ‘sf’ was built under R version 4.3.3 

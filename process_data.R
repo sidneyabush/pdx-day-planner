@@ -30,14 +30,30 @@ PDX_CENTER <- c(lat = 45.523, lon = -122.676)
 load_neighborhood_boundaries <- function() {
   boundaries_file <- "archive/Neighborhood_Boundaries.geojson"
   if (!file.exists(boundaries_file)) {
-    cat("⚠️  Neighborhood boundaries file not found, using simplified sections\n")
+    cat("Warning: Neighborhood boundaries file not found, using simplified sections\n")
     return(NULL)
   }
   
   tryCatch({
     st_read(boundaries_file, quiet = TRUE)
   }, error = function(e) {
-    cat("⚠️  Could not load neighborhood boundaries:", e$message, "\n")
+    cat("Warning: Could not load neighborhood boundaries:", e$message, "\n")
+    return(NULL)
+  })
+}
+
+# Load sextant boundary data for spatial intersection
+load_sextant_boundaries <- function() {
+  sextants_file <- "archive/Portland_Administrative_Sextants.geojson"
+  if (!file.exists(sextants_file)) {
+    cat("Warning: Sextants boundaries file not found\n")
+    return(NULL)
+  }
+  
+  tryCatch({
+    st_read(sextants_file, quiet = TRUE)
+  }, error = function(e) {
+    cat("Warning: Could not load sextant boundaries:", e$message, "\n")
     return(NULL)
   })
 }
@@ -96,6 +112,61 @@ geocode_place <- function(place_name, city = "Portland, OR") {
     return(list(lat = NA, lng = NA))
   }, error = function(e) {
     return(list(lat = NA, lng = NA))
+  })
+}
+
+# Automatically lookup business address from the web
+lookup_business_address <- function(business_name, city = "Portland, OR") {
+  if(is.na(business_name) || business_name == "") {
+    return(NA)
+  }
+  
+  tryCatch({
+    # Create search query for business address
+    query <- paste(business_name, city, "address")
+    
+    # Try to get address using a simple web search approach
+    # We'll use the tidygeocoder's internal address search capabilities
+    # by trying different geocoding services that return address info
+    
+    # Method 1: Try OpenStreetMap Nominatim which often returns full addresses
+    result <- tidygeocoder::geocode(tibble(query = paste(business_name, city, sep = ", ")), 
+                                   address = "query",
+                                   method = "osm", 
+                                   limit = 1, 
+                                   full_results = TRUE,
+                                   quiet = TRUE)
+    
+    if(nrow(result) > 0 && !is.na(result$lat[1])) {
+      # Try to extract address components if available
+      if("display_name" %in% names(result) && !is.na(result$display_name[1])) {
+        address_parts <- strsplit(result$display_name[1], ",")[[1]]
+        if(length(address_parts) >= 2) {
+          # Usually the first part is the street address
+          potential_address <- trimws(address_parts[1])
+          if(grepl("\\d+", potential_address)) {
+            return(paste(potential_address, city, sep = ", "))
+          }
+        }
+      }
+    }
+    
+    # Method 2: Try Google geocoding with business name
+    result2 <- tidygeocoder::geocode(tibble(query = paste(business_name, city, sep = ", ")), 
+                                    address = "query",
+                                    method = "arcgis", 
+                                    limit = 1, 
+                                    full_results = TRUE,
+                                    quiet = TRUE)
+    
+    if(nrow(result2) > 0 && "address" %in% names(result2) && !is.na(result2$address[1])) {
+      return(result2$address[1])
+    }
+    
+    return(NA)
+    
+  }, error = function(e) {
+    return(NA)
   })
 }
 
@@ -175,7 +246,48 @@ assign_neighborhoods <- function(places_df, boundaries = NULL) {
     
     return(neighborhoods)
   }, error = function(e) {
-    cat("⚠️  Spatial intersection failed:", e$message, "\n")
+    cat("Warning: Spatial intersection failed:", e$message, "\n")
+    return(rep(NA, nrow(places_df)))
+  })
+}
+
+# Assign sextants using spatial intersection
+assign_sextants <- function(places_df, sextant_boundaries = NULL) {
+  if (is.null(sextant_boundaries) || nrow(places_df) == 0) {
+    return(rep(NA, nrow(places_df)))
+  }
+  
+  tryCatch({
+    # Convert places to spatial points
+    valid_coords <- !is.na(places_df$lat) & !is.na(places_df$lng)
+    sextants <- rep(NA, nrow(places_df))
+    
+    if (sum(valid_coords) == 0) return(sextants)
+    
+    places_sf <- st_as_sf(
+      places_df[valid_coords, ], 
+      coords = c("lng", "lat"), 
+      crs = 4326
+    )
+    
+    # Ensure both have same CRS
+    sextant_boundaries <- st_transform(sextant_boundaries, 4326)
+    
+    # Find intersections
+    intersections <- st_intersection(places_sf, sextant_boundaries)
+    
+    # Extract sextant names
+    if (nrow(intersections) > 0 && "Sextant" %in% names(intersections)) {
+      valid_indices <- which(valid_coords)
+      for (i in seq_len(nrow(intersections))) {
+        original_idx <- valid_indices[as.numeric(row.names(intersections)[i])]
+        sextants[original_idx] <- intersections$Sextant[i]
+      }
+    }
+    
+    return(sextants)
+  }, error = function(e) {
+    cat("Warning: Sextant spatial intersection failed:", e$message, "\n")
     return(rep(NA, nrow(places_df)))
   })
 }
@@ -197,8 +309,8 @@ process_csv_data <- function() {
     stop("No CSV files found in Saved/ folder. Please export your Google Maps lists as CSV files.")
   }
   
-  cat("🚀 Processing Portland Places Data...\n")
-  cat("📂 Found", length(csv_files), "CSV files\n")
+  cat("Processing Portland Places Data...\n")
+  cat("Found", length(csv_files), "CSV files\n")
   
   all_data <- data.frame()
   
@@ -207,9 +319,9 @@ process_csv_data <- function() {
       df <- read_csv(file, show_col_types = FALSE)
       df$source_list <- basename(tools::file_path_sans_ext(file))
       all_data <- bind_rows(all_data, df)
-      cat("✓ Loaded:", basename(file), "\n")
+      cat("Loaded:", basename(file), "\n")
     }, error = function(e) {
-      cat("⚠️  Could not read", basename(file), ":", e$message, "\n")
+      cat("Warning: Could not read", basename(file), ":", e$message, "\n")
     })
   }
   
@@ -228,12 +340,29 @@ process_csv_data <- function() {
   all_data$url <- ifelse(is.na(all_data$URL), "", as.character(all_data$URL))
   
   # Normalize text to remove accents, umlauts, etc.
-  cat("🔤 Normalizing text (removing accents, umlauts, etc.)...\n")
+  cat("Normalizing text (removing accents, umlauts, etc.)...\n")
   all_data$title <- sapply(all_data$title, normalize_text)
   all_data$note <- sapply(all_data$note, normalize_text)
   
+  # Clean tags to make them more readable
+  cat("Cleaning tags (removing excessive symbols)...\n")
+  clean_tags_func <- function(tags_text) {
+    if(is.na(tags_text) || tags_text == "") return("")
+    # Remove excessive emoji and symbols, keep only readable text
+    cleaned <- gsub("[^A-Za-z0-9 .,!?()&-]", " ", tags_text)
+    cleaned <- str_squish(cleaned)
+    # Remove single letters that are likely artifacts
+    words <- strsplit(cleaned, " ")[[1]]
+    words <- words[nchar(words) > 2 | words %in% c("&", "or", "of")]
+    return(paste(words, collapse = " "))
+  }
+  all_data$tags <- sapply(all_data$tags, clean_tags_func)
+  
+  # Replace "Portland Parks" with just "Park"
+  all_data$tags <- gsub("\\bPortland Parks\\b", "Park", all_data$tags, ignore.case = TRUE)
+  
   # Try to extract coordinates from URLs first
-  cat("🗺️  Extracting coordinates from URLs...\n")
+  cat("Extracting coordinates from URLs...\n")
   coords <- lapply(all_data$url, extract_coords_from_url)
   all_data$lat <- sapply(coords, function(x) x$lat)
   all_data$lng <- sapply(coords, function(x) x$lng)
@@ -241,17 +370,40 @@ process_csv_data <- function() {
   url_coords <- !is.na(all_data$lat) & !is.na(all_data$lng)
   cat("   Found coordinates in URLs for", sum(url_coords), "places\n")
   
-  # For places without URL coordinates, geocode by name
+  # For places without URL coordinates, try geocoding by name, then by note if available
   need_geocoding <- !url_coords & !is.na(all_data$title) & all_data$title != ""
   
   if(sum(need_geocoding) > 0) {
-    cat("🌍 Geocoding", sum(need_geocoding), "places by name...\n")
+    cat("Geocoding", sum(need_geocoding), "places by name and address...\n")
     cat("   This may take a few minutes - please wait...\n")
     
     for(i in which(need_geocoding)) {
       if(i %% 5 == 1) cat("   Progress:", i, "of", sum(need_geocoding), "\n")
       
-      geocoded <- geocode_place(all_data$title[i])
+      geocoded <- list(lat = NA, lng = NA)
+      
+      # First priority: If note contains address-like patterns, try geocoding that
+      if(!is.na(all_data$note[i]) && all_data$note[i] != "") {
+        note_text <- all_data$note[i]
+        # Check if note contains address-like patterns
+        if(grepl("\\d+.*\\b(Street|St|Avenue|Ave|Road|Rd|Drive|Dr|Boulevard|Blvd|Lane|Ln|Way|Court|Ct|Place|Pl)\\b", note_text, ignore.case = TRUE) ||
+           grepl("\\b(Portland|OR|Oregon|97\\d{3})\\b", note_text, ignore.case = TRUE)) {
+          cat("   Trying address from note for:", all_data$title[i], "\n")
+          geocoded <- geocode_place(note_text)
+        }
+      }
+      
+      # Second priority: If address geocoding failed, try automatic address lookup for businesses only
+      if(is.na(geocoded$lat)) {
+        # Temporarily skip address lookup for faster processing
+        # (Can be re-enabled later for more accurate coordinates)
+      }
+      
+      # Third priority: If address lookup failed, try by title alone
+      if(is.na(geocoded$lat)) {
+        geocoded <- geocode_place(all_data$title[i])
+      }
+      
       if(!is.na(geocoded$lat)) {
         all_data$lat[i] <- geocoded$lat
         all_data$lng[i] <- geocoded$lng
@@ -262,13 +414,16 @@ process_csv_data <- function() {
     }
   }
   
+  # Skip auto-verification for faster processing - can be enabled later if needed
+  cat("Skipping address verification for faster processing\n")
+  
   # Final validation
   valid_coords <- !is.na(all_data$lat) & !is.na(all_data$lng)
-  cat("✅ Total places with coordinates:", sum(valid_coords), "out of", nrow(all_data), "\n")
+  cat("Total places with coordinates:", sum(valid_coords), "out of", nrow(all_data), "\n")
   
   if(sum(!valid_coords) > 0) {
     failed_places <- all_data$title[!valid_coords]
-    cat("⚠️  Could not locate:", sum(!valid_coords), "places\n")
+    cat("Warning: Could not locate:", sum(!valid_coords), "places\n")
     if(sum(!valid_coords) <= 5) {
       cat("   Failed places:", paste(failed_places, collapse = ", "), "\n")
     }
@@ -282,21 +437,35 @@ process_csv_data <- function() {
   }
   
   # Add distance from home
-  cat("📏 Calculating distances from home...\n")
+  cat("Calculating distances from home...\n")
   all_data$distance_mi <- mapply(calc_distance_miles, all_data$lat, all_data$lng)
   
   # Load neighborhood boundaries and assign neighborhoods
-  cat("🏘️  Loading neighborhood boundaries...\n")
+  cat("Loading neighborhood boundaries...\n")
   boundaries <- load_neighborhood_boundaries()
   
   if (!is.null(boundaries)) {
-    cat("🗺️  Assigning neighborhoods using spatial intersection...\n")
+    cat("Assigning neighborhoods using spatial intersection...\n")
     all_data$neighborhood <- assign_neighborhoods(all_data, boundaries)
     neighborhoods_assigned <- sum(!is.na(all_data$neighborhood))
     cat("   Successfully assigned", neighborhoods_assigned, "neighborhoods\n")
   } else {
-    cat("🗺️  Using simplified section assignment...\n")
+    cat("Using simplified section assignment...\n")
     all_data$neighborhood <- NA
+  }
+  
+  # Load sextant boundaries and assign sextants
+  cat("Loading sextant boundaries...\n")
+  sextant_boundaries <- load_sextant_boundaries()
+  
+  if (!is.null(sextant_boundaries)) {
+    cat("Assigning sextants using spatial intersection...\n")
+    all_data$section <- assign_sextants(all_data, sextant_boundaries)
+    sextants_assigned <- sum(!is.na(all_data$section))
+    cat("   Successfully assigned", sextants_assigned, "sextants\n")
+  } else {
+    cat("No sextant assignment...\n")
+    all_data$section <- NA
   }
   
   # Create unique IDs
@@ -306,7 +475,7 @@ process_csv_data <- function() {
   all_data$processed_date <- Sys.Date()
   all_data$home_address <- HOME_ADDRESS
   
-  cat("💾 Saving processed data...\n")
+  cat("Saving processed data...\n")
   
   # Create data directory
   dir.create("data", showWarnings = FALSE)
@@ -317,8 +486,8 @@ process_csv_data <- function() {
   # Also save as CSV for inspection
   write_csv(all_data, "data/portland_places_processed.csv")
   
-  cat("🎉 Processing complete!\n")
-  cat("📊 Summary:\n")
+  cat("Processing complete!\n")
+  cat("Summary:\n")
   cat("   Total places:", nrow(all_data), "\n")
   cat("   From URLs:", sum(url_coords), "\n") 
   cat("   Geocoded:", sum(valid_coords) - sum(url_coords), "\n")
@@ -326,9 +495,13 @@ process_csv_data <- function() {
     neighborhoods_with_data <- sum(!is.na(all_data$neighborhood))
     cat("   Neighborhoods assigned:", neighborhoods_with_data, "\n")
   }
+  if (!is.null(sextant_boundaries)) {
+    sextants_with_data <- sum(!is.na(all_data$section))
+    cat("   Sextants assigned:", sextants_with_data, "\n")
+  }
   cat("   Average distance from home:", round(mean(all_data$distance_mi, na.rm = TRUE), 1), "miles\n")
   cat("   Data saved to: data/portland_places_processed.rds\n")
-  cat("\n✅ Ready to launch the app with: source('portland_day_planner.R')\n")
+  cat("\n Ready to launch the app with: source('portland_day_planner.R')\n")
   
   return(all_data)
 }
@@ -347,10 +520,10 @@ if(file.exists(processed_file) && length(csv_files) > 0) {
   newest_csv <- max(csv_dates)
   
   if(processed_date > newest_csv) {
-    cat("📋 Processed data is up-to-date (", format(processed_date), ")\n")
-    cat("💡 CSV files haven't changed since last processing.\n")
-    cat("🚀 You can launch the app directly: source('portland_day_planner.R')\n")
-    cat("🔄 Or run this script again to force reprocessing.\n")
+    cat("Processed data is up-to-date (", format(processed_date), ")\n")
+    cat("CSV files haven't changed since last processing.\n")
+    cat("You can launch the app directly: source('portland_day_planner.R')\n")
+    cat("Or run this script again to force reprocessing.\n")
     
     response <- readline("Reprocess anyway? (y/N): ")
     should_reprocess <- tolower(substr(response, 1, 1)) == "y"

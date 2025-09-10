@@ -1,0 +1,68 @@
+🚀 Processing Portland Places Data...
+📂 Found 5 CSV files
+✓ Loaded: Hikes & Trail Runs.csv 
+✓ Loaded: Movie theaters PDX.csv 
+✓ Loaded: Portland Parks.csv 
+✓ Loaded: Portland stuff.csv 
+✓ Loaded: Portlandia Food & Drink.csv 
+🔤 Normalizing text (removing accents, umlauts, etc.)...
+🏷️  Cleaning tags (removing excessive symbols)...
+🗺️  Extracting coordinates from URLs...
+   Found coordinates in URLs for 0 places
+🌍 Geocoding 398 places by name and address...
+   This may take a few minutes - please wait...
+   Progress: 1 of 398 
+   Progress: 6 of 398 
+   Progress: 11 of 398 
+   Progress: 16 of 398 
+   Looking up address for: Star Theater and Starlight Lounge 
+   Looking up address for: Joy Cinema 
+   Looking up address for: McMenamins Kennedy School Theater 
+   Progress: 21 of 398 
+   Looking up address for: Moreland Theater 
+   Looking up address for: McMenamins Bagdad Theater Pub 
+   Looking up address for: 5th Avenue Cinema 
+   Found address: 5th Avenue Cinemas, Portland, OR 
+   Looking up address for: Avalon Theatre 
+   Progress: 26 of 398 
+   Looking up address for: Academy Theater 
+   Looking up address for: PAM CUT's Tomorrow Theater 
+   Looking up address for: Laurelhurst Theater 
+   Progress: 31 of 398 
+   Looking up address for: Clinton Street Theater 
+   Looking up address for: Hollywood Theatre 
+   Looking up address for: Cinema 21 
+   Found address: Cinema 21, Portland, OR 
+   Progress: 36 of 398 
+   Progress: 41 of 398 
+   Progress: 46 of 398 
+   Progress: 51 of 398 
+   Progress: 56 of 398 
+   Looking up address for: Little Otsu (Still open online - Division store closed) 
+   Progress: 61 of 398 
+   Looking up address for: Mint Gallery Records 
+   Progress: 66 of 398 
+   Progress: 71 of 398 
+   Looking up address for: Mountain Shop 
+   Progress: 76 of 398 
+   Looking up address for: Next Adventure Portland Outdoor Store 
+   Looking up address for: Portland Outdoor Store 
+   Progress: 81 of 398 
+   Looking up address for: Mama Hapa's Zero Waste Shop 
+   Progress: 86 of 398 
+   Looking up address for: William Temple House Thrift Store 
+   Progress: 91 of 398 
+   Progress: 96 of 398 
+   Progress: 101 of 398 
+   Progress: 106 of 398 
+   Looking up address for: Mustard Seed Thrift Store Book Nook 
+   Progress: 111 of 398 
+   Progress: 116 of 398 
+   Progress: 121 of 398 
+   Looking up address for: The Arc Thrift Store 
+   Progress: 126 of 398 
+   Looking up address for: Based General Store 
+   Progress: 131 of 398 
+   Looking up address for: Cafe Olli 
+   Progress: 136 of 398 
+   Progress: 141 of 398 

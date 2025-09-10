@@ -1,0 +1,186 @@
+🚀 Processing Portland Places Data...
+📂 Found 5 CSV files
+✓ Loaded: Hikes & Trail Runs.csv 
+✓ Loaded: Movie theaters PDX.csv 
+✓ Loaded: Portland Parks.csv 
+✓ Loaded: Portland stuff.csv 
+✓ Loaded: Portlandia Food & Drink.csv 
+🔤 Normalizing text (removing accents, umlauts, etc.)...
+🏷️  Cleaning tags (removing excessive symbols)...
+🗺️  Extracting coordinates from URLs...
+   Found coordinates in URLs for 0 places
+🌍 Geocoding 398 places by name and address...
+   This may take a few minutes - please wait...
+   Progress: 1 of 398 
+   Progress: 6 of 398 
+   Progress: 11 of 398 
+   Progress: 16 of 398 
+   Looking up address for: Star Theater and Starlight Lounge 
+   Looking up address for: Joy Cinema 
+   Looking up address for: McMenamins Kennedy School Theater 
+   Progress: 21 of 398 
+   Looking up address for: Moreland Theater 
+   Looking up address for: McMenamins Bagdad Theater Pub 
+   Looking up address for: 5th Avenue Cinema 
+   Found address: 5th Avenue Cinemas, Portland, OR 
+   Looking up address for: Avalon Theatre 
+   Progress: 26 of 398 
+   Looking up address for: Academy Theater 
+   Looking up address for: PAM CUT's Tomorrow Theater 
+   Looking up address for: Laurelhurst Theater 
+   Progress: 31 of 398 
+   Looking up address for: Clinton Street Theater 
+   Looking up address for: Hollywood Theatre 
+   Looking up address for: Cinema 21 
+   Found address: Cinema 21, Portland, OR 
+   Progress: 36 of 398 
+   Progress: 41 of 398 
+   Progress: 46 of 398 
+   Progress: 51 of 398 
+   Progress: 56 of 398 
+   Looking up address for: Little Otsu (Still open online - Division store closed) 
+   Progress: 61 of 398 
+   Looking up address for: Mint Gallery Records 
+   Progress: 66 of 398 
+   Progress: 71 of 398 
+   Looking up address for: Mountain Shop 
+   Progress: 76 of 398 
+   Looking up address for: Next Adventure Portland Outdoor Store 
+   Looking up address for: Portland Outdoor Store 
+   Progress: 81 of 398 
+   Looking up address for: Mama Hapa's Zero Waste Shop 
+   Progress: 86 of 398 
+   Looking up address for: William Temple House Thrift Store 
+   Progress: 91 of 398 
+   Progress: 96 of 398 
+   Progress: 101 of 398 
+   Progress: 106 of 398 
+   Looking up address for: Mustard Seed Thrift Store Book Nook 
+   Progress: 111 of 398 
+   Progress: 116 of 398 
+   Progress: 121 of 398 
+   Looking up address for: The Arc Thrift Store 
+   Progress: 126 of 398 
+   Looking up address for: Based General Store 
+   Progress: 131 of 398 
+   Looking up address for: Cafe Olli 
+   Progress: 136 of 398 
+   Progress: 141 of 398 
+   Progress: 146 of 398 
+   Looking up address for: Madrona Hill Cafe 
+   Progress: 151 of 398 
+   Looking up address for: Behind The Museum Cafe 
+   Looking up address for: One Moto Cafe Sidewinder Subs 
+   Looking up address for: Cricket Cafe 
+   Progress: 156 of 398 
+   Looking up address for: Cherries Figs Wine Shop 
+   Progress: 161 of 398 
+   Progress: 166 of 398 
+   Progress: 171 of 398 
+   Looking up address for: Han Oak Restaurant 
+   Progress: 176 of 398 
+   Progress: 181 of 398 
+   Progress: 186 of 398 
+   Looking up address for: Mother's Bistro Bar 
+   Progress: 191 of 398 
+   Looking up address for: Stepping Stone Cafe 
+   Looking up address for: Tulip Shop Tavern 
+   Progress: 196 of 398 
+   Progress: 201 of 398 
+   Looking up address for: Churn Cafe 
+   Progress: 206 of 398 
+   Progress: 211 of 398 
+   Looking up address for: Phuket Cafe 
+   Looking up address for: Junior's Cafe 
+   Looking up address for: BREAD HONEY CAFE 
+   Progress: 216 of 398 
+   Progress: 221 of 398 
+   Progress: 226 of 398 
+   Looking up address for: Happy Cup Coffee Bar 
+   Progress: 231 of 398 
+   Progress: 236 of 398 
+   Progress: 241 of 398 
+   Progress: 246 of 398 
+   Looking up address for: Cooper's Co-op Cafe 
+   Progress: 251 of 398 
+   Looking up address for: TwentySix Cafe 
+   Progress: 256 of 398 
+   Looking up address for: Rabbits Cafe 
+   Progress: 261 of 398 
+   Looking up address for: Best Friend Juice Bar Cafe 
+   Progress: 266 of 398 
+   Progress: 271 of 398 
+   Progress: 276 of 398 
+   Progress: 281 of 398 
+   Progress: 286 of 398 
+   Looking up address for: Workers Tap Cafe 
+   Progress: 291 of 398 
+   Progress: 296 of 398 
+   Progress: 301 of 398 
+   Looking up address for: Proud Mary Cafe 
+   Progress: 306 of 398 
+   Looking up address for: red e cafe roasters 
+   Progress: 311 of 398 
+   Looking up address for: Shroom Coffee Bar 
+   Looking up address for: Cafe Rosetta 
+   Progress: 316 of 398 
+   Looking up address for: Honey Latte Cafe 
+   Progress: 321 of 398 
+   Looking up address for: Coava Coffee Roasters Public Brew Bar Roastery 
+   Progress: 326 of 398 
+   Looking up address for: The Great North (Coffee Shop Roastery) 
+   Looking up address for: Eastside Coffee Bar and Workspace 
+   Progress: 331 of 398 
+   Progress: 336 of 398 
+   Progress: 341 of 398 
+   Looking up address for: Better Days Cafe 
+   Progress: 346 of 398 
+   Looking up address for: Bipartisan Cafe 
+   Looking up address for: Posies Bakery Cafe 
+   Progress: 351 of 398 
+   Progress: 356 of 398 
+   Progress: 361 of 398 
+   Progress: 366 of 398 
+   Looking up address for: Le Petit Cafe NW 
+   Looking up address for: Memento Mori Cafe 
+   Progress: 371 of 398 
+   Looking up address for: Puddletown Bagels Bakery Cafe 
+   Progress: 376 of 398 
+   Progress: 381 of 398 
+   Looking up address for: Grand Central Bakery - Mississippi cafe 
+   Looking up address for: Goodies Snack Shop 
+   Looking up address for: zuckercreme strawberry museum! 
+   Progress: 386 of 398 
+   Looking up address for: Coquine Market Katy Jane's Oyster Bar 
+   Looking up address for: Cheese Crack Snack Shop 
+   Progress: 391 of 398 
+   Progress: 396 of 398 
+   Looking up address for: Brooklyn Carreta Bar Carts 
+⏭️ Skipping address verification for faster processing
+✅ Total places with coordinates: 397 out of 398 
+⚠️  Could not locate: 1 places
+   Failed places: Yours Truly 
+📏 Calculating distances from home...
+🏘️  Loading neighborhood boundaries...
+🗺️  Assigning neighborhoods using spatial intersection...
+   Successfully assigned 374 neighborhoods
+🌈 Loading sextant boundaries...
+🗺️  Assigning sextants using spatial intersection...
+   Successfully assigned 378 sextants
+💾 Saving processed data...
+🎉 Processing complete!
+📊 Summary:
+   Total places: 397 
+   From URLs: 0 
+   Geocoded: 397 
+   Neighborhoods assigned: 374 
+   Sextants assigned: 378 
+   Average distance from home: 3.5 miles
+   Data saved to: data/portland_places_processed.rds
+
+✅ Ready to launch the app with: source('portland_day_planner.R')
+Warning messages:
+1: package ‘tidygeocoder’ was built under R version 4.3.3 
+2: package ‘sf’ was built under R version 4.3.3 
+3: attribute variables are assumed to be spatially constant throughout all geometries 
+4: attribute variables are assumed to be spatially constant throughout all geometries 

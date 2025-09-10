@@ -1,0 +1,125 @@
+Processing Portland Places Data...
+Found 6 CSV files
+Loaded: Hikes & Trail Runs.csv 
+Loaded: Movie theaters PDX.csv 
+Loaded: Portland Museums.csv 
+Loaded: Portland Parks.csv 
+Loaded: Portland stuff.csv 
+Loaded: Portlandia Food & Drink.csv 
+Normalizing text (removing accents, umlauts, etc.)...
+Cleaning tags (removing excessive symbols)...
+Extracting coordinates from URLs...
+   Found coordinates in URLs for 0 places
+Geocoding 414 places by name and address...
+   This may take a few minutes - please wait...
+   Progress: 1 of 414 
+   Progress: 6 of 414 
+   Progress: 11 of 414 
+   Progress: 16 of 414 
+   Progress: 21 of 414 
+   Progress: 26 of 414 
+   Progress: 31 of 414 
+   Progress: 36 of 414 
+   Progress: 41 of 414 
+   Progress: 46 of 414 
+   Progress: 51 of 414 
+   Progress: 56 of 414 
+   Progress: 61 of 414 
+   Progress: 66 of 414 
+   Progress: 71 of 414 
+   Progress: 76 of 414 
+   Progress: 81 of 414 
+   Progress: 86 of 414 
+   Progress: 91 of 414 
+   Progress: 96 of 414 
+   Progress: 101 of 414 
+   Progress: 106 of 414 
+   Progress: 111 of 414 
+   Progress: 116 of 414 
+   Progress: 121 of 414 
+   Progress: 126 of 414 
+   Progress: 131 of 414 
+   Progress: 136 of 414 
+   Progress: 141 of 414 
+   Progress: 146 of 414 
+   Progress: 151 of 414 
+   Progress: 156 of 414 
+   Progress: 161 of 414 
+   Progress: 166 of 414 
+   Progress: 171 of 414 
+   Progress: 176 of 414 
+   Progress: 181 of 414 
+   Progress: 186 of 414 
+   Progress: 191 of 414 
+   Progress: 196 of 414 
+   Progress: 201 of 414 
+   Progress: 206 of 414 
+   Progress: 211 of 414 
+   Progress: 216 of 414 
+   Progress: 221 of 414 
+   Progress: 226 of 414 
+   Progress: 231 of 414 
+   Progress: 236 of 414 
+   Progress: 241 of 414 
+   Progress: 246 of 414 
+   Progress: 251 of 414 
+   Progress: 256 of 414 
+   Progress: 261 of 414 
+   Progress: 266 of 414 
+   Progress: 271 of 414 
+   Progress: 276 of 414 
+   Progress: 281 of 414 
+   Progress: 286 of 414 
+   Progress: 291 of 414 
+   Progress: 296 of 414 
+   Progress: 301 of 414 
+   Progress: 306 of 414 
+   Progress: 311 of 414 
+   Progress: 316 of 414 
+   Progress: 321 of 414 
+   Progress: 326 of 414 
+   Progress: 331 of 414 
+   Progress: 336 of 414 
+   Progress: 341 of 414 
+   Progress: 346 of 414 
+   Progress: 351 of 414 
+   Progress: 356 of 414 
+   Progress: 361 of 414 
+   Progress: 366 of 414 
+   Progress: 371 of 414 
+   Progress: 376 of 414 
+   Progress: 381 of 414 
+   Progress: 386 of 414 
+   Progress: 391 of 414 
+   Progress: 396 of 414 
+   Progress: 401 of 414 
+   Progress: 406 of 414 
+   Progress: 411 of 414 
+Skipping address verification for faster processing
+Total places with coordinates: 413 out of 414 
+Warning: Could not locate: 1 places
+   Failed places: Yours Truly 
+Calculating distances from home...
+Loading neighborhood boundaries...
+Assigning neighborhoods using spatial intersection...
+   Successfully assigned 390 neighborhoods
+Loading sextant boundaries...
+Assigning sextants using spatial intersection...
+   Successfully assigned 394 sextants
+Saving processed data...
+Processing complete!
+Summary:
+   Total places: 413 
+   From URLs: 0 
+   Geocoded: 413 
+   Neighborhoods assigned: 390 
+   Sextants assigned: 394 
+   Average distance from home: 3.5 miles
+   Data saved to: data/portland_places_processed.rds
+
+ Ready to launch the app with: source('portland_day_planner.R')
+Warning messages:
+1: package ‘tidygeocoder’ was built under R version 4.3.3 
+2: package ‘sf’ was built under R version 4.3.3 
+3: attribute variables are assumed to be spatially constant throughout all geometries 
+4: attribute variables are assumed to be spatially constant throughout all geometries 
