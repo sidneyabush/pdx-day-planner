@@ -207,7 +207,7 @@ ACTIVITY_CATEGORIES <- list(
   "🎭 Entertainment" = c("movies","theater","cinema","show","performance"),
   "🖋️ Creative" = c("tattoo","art studio","art")
 )
-TRANSPORT_MODES <- list("🚶 Walk"=2, "🚲 Bike"=10, "🚌 Transit"=15, "🚗 Drive"=30, "🌍 Any Distance"=999)
+TRANSPORT_MODES <- list("🚶 Walk"=2, "🚲 Bicycle Rights!"=10, "🚌 Public Transit"=15, "🚗 Drive"=30, "🌍 Any Distance"=999)
 ACTIVITY_MODES <- list(
   "📖 Reading"=c("coffee","cafe","bookstore","quiet","library","park"),
   "🎨 Drawing/Sketching"=c("coffee","cafe","park","outdoor","scenic","garden","museum"),
@@ -531,14 +531,26 @@ ui <- fluidPage(
     border-bottom:1px solid var(--border);
   }
 
-  /* Header typography improvements */
-  .header-grid { display:grid; grid-template-columns: 360px 1fr; gap:32px; align-items:start; }
-  .header-left { display:flex; flex-direction:column; gap:16px; align-items:center; width:360px; }
-  .header-photo { 
-    width:340px; height:340px; border-radius:var(--radius-lg); object-fit:cover; 
-    box-shadow:var(--shadow-medium); transition:transform 0.3s ease, box-shadow 0.3s ease;
+  /* Modern header layout */
+  .header-grid { display:grid; grid-template-columns: 420px 1fr; gap:40px; align-items:start; }
+  .header-left { width:420px; }
+  
+  .image-container {
+    position:relative; width:400px; height:400px; border-radius:var(--radius-xl); 
+    overflow:hidden; box-shadow:var(--shadow-medium); 
+    transition:transform 0.3s ease, box-shadow 0.3s ease;
   }
-  .header-photo:hover { transform:translateY(-4px); box-shadow:0 12px 40px rgba(0,0,0,0.15); }
+  .image-container:hover { transform:translateY(-4px); box-shadow:0 16px 48px rgba(0,0,0,0.15); }
+  
+  .header-photo { 
+    width:100%; height:100%; object-fit:cover; display:block;
+  }
+  
+  /* Weather overlay on top-right of image */
+  .weather-overlay {
+    position:absolute; top:16px; right:16px; 
+    display:flex; flex-direction:column; gap:8px; z-index:10;
+  }
 
   /* Modern weather/time display */
   .weather-under { 
@@ -546,51 +558,53 @@ ui <- fluidPage(
     align-items:stretch; justify-content:flex-start; 
   }
 
-  /* Time Display */
+  /* Overlay weather displays - compact and modern */
   .time-display {
-    background:linear-gradient(135deg, var(--tertiary-50) 0%, #f9f8f6 100%);
-    border:1px solid var(--tertiary); border-radius:var(--radius-md);
-    padding:16px; transition:all 0.3s ease;
+    background:rgba(255,255,255,0.95); backdrop-filter:blur(12px);
+    border:1px solid rgba(255,255,255,0.6); border-radius:var(--radius-md);
+    padding:12px 16px; transition:all 0.3s ease; min-width:140px;
+    box-shadow:0 4px 20px rgba(0,0,0,0.1);
   }
-  .time-display:hover { transform:translateY(-2px); box-shadow:var(--shadow-soft); }
+  .time-display:hover { transform:translateY(-2px); box-shadow:0 6px 24px rgba(0,0,0,0.15); }
   
   .time-label {
-    font-size:11px; text-transform:uppercase; letter-spacing:0.5px;
-    color:var(--tertiary-600); font-weight:600; margin-bottom:4px;
+    font-size:10px; text-transform:uppercase; letter-spacing:0.8px;
+    color:var(--muted); font-weight:600; margin-bottom:2px;
   }
   .time-value {
-    font-size:14px; font-weight:600; color:var(--tertiary-600);
-    font-family:'Poppins',sans-serif;
+    font-size:13px; font-weight:600; color:var(--text);
+    font-family:'Poppins',sans-serif; line-height:1.2;
   }
 
   /* Weather Display */
   .weather-display {
-    background:linear-gradient(135deg, var(--accent-50) 0%, #f7f8f6 100%);
-    border:1px solid var(--accent); border-radius:var(--radius-md);
-    padding:16px; transition:all 0.3s ease;
+    background:rgba(255,255,255,0.95); backdrop-filter:blur(12px);
+    border:1px solid rgba(255,255,255,0.6); border-radius:var(--radius-md);
+    padding:12px 16px; transition:all 0.3s ease; min-width:180px;
+    box-shadow:0 4px 20px rgba(0,0,0,0.1);
   }
-  .weather-display:hover { transform:translateY(-2px); box-shadow:var(--shadow-soft); }
+  .weather-display:hover { transform:translateY(-2px); box-shadow:0 6px 24px rgba(0,0,0,0.15); }
   
   .weather-main {
     display:flex; justify-content:space-between; align-items:center;
-    margin-bottom:12px;
+    margin-bottom:8px;
   }
   .weather-condition {
-    font-size:14px; font-weight:600; color:var(--accent-600);
+    font-size:12px; font-weight:600; color:var(--text);
     text-transform:capitalize; font-family:'Poppins',sans-serif;
   }
   .weather-temp {
-    font-size:18px; font-weight:700; color:var(--accent-600);
+    font-size:16px; font-weight:700; color:var(--text);
     font-family:'Poppins',sans-serif;
   }
   
   .weather-details {
-    display:flex; gap:12px; flex-wrap:wrap;
+    display:flex; gap:8px; flex-wrap:wrap;
   }
   .weather-detail {
-    font-size:11px; color:var(--accent-600); opacity:0.8;
-    background:rgba(255,255,255,0.5); padding:4px 8px;
-    border-radius:12px; font-weight:500;
+    font-size:9px; color:var(--muted); font-weight:500;
+    background:rgba(255,255,255,0.6); padding:2px 6px;
+    border-radius:8px; text-transform:uppercase; letter-spacing:0.5px;
   }
 
   /* Mobile responsive */
@@ -824,11 +838,13 @@ ui <- fluidPage(
   # ======= HEADER (bigger image left; weather under image; title/explainer/random + address on right) =======
   div(class = "header",
       div(class = "header-grid",
-          # Left: image, then weather/time chips underneath (same width)
+          # Left: image with weather overlay
           div(class="header-left",
-              if (!is.null(HEADER_IMG))
-                tags$img(src = HEADER_IMG, alt = "Portland", class = "header-photo"),
-              div(class="weather-under", uiOutput("weather_ui"))
+              div(class="image-container",
+                  if (!is.null(HEADER_IMG))
+                    tags$img(src = HEADER_IMG, alt = "Portland", class = "header-photo"),
+                  div(class="weather-overlay", uiOutput("weather_ui"))
+              )
           ),
           # Right: title, home info, explainer, centered random, then address box
           div(class = "header-right",
