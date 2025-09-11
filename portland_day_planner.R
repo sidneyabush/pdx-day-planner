@@ -327,8 +327,8 @@ simple_activity_from_tags <- function(tags_text) {
     "to draw your surroundings"
   ), 1))
   
-  # Restaurants & food - specific dining activities  
-  if (pick("restaurant","dining","eatery","kitchen","grill","bistro","tavern")) return(sample(c(
+  # Restaurants & food - specific dining activities (expanded pattern matching)
+  if (pick("restaurant","dining","eatery","kitchen","grill","bistro","tavern","food","cuisine","chef","menu","meal","eat")) return(sample(c(
     "to try the food", "for dinner", "to grab a bite", "to sample the menu", 
     "to enjoy a meal", "to try the local cuisine"
   ), 1))
@@ -382,10 +382,10 @@ simple_activity_from_tags <- function(tags_text) {
     "to hunt for treasures", "to browse vintage finds", "to search for unique items", "to thrift shop", "to find hidden gems"
   ), 1))
   if (pick("market","shopping","store")) return(sample(c(
-    "to browse around", "to shop", "to see what they have", "to explore"
+    "browse", "shop", "see what they have", "explore"
   ), 1))
   if (pick("record","vinyl","music")) return(sample(c(
-    "to dig for records", "to browse vinyl", "to discover new music", "to hunt for rare finds", "to find some good tunes"
+    "dig for records", "browse vinyl", "discover new music", "hunt for rare finds", "to find some good tunes"
   ), 1))
   
   # Sightseeing - photo and exploration activities  
@@ -421,7 +421,7 @@ simple_activity_from_tags <- function(tags_text) {
   
   # Generic but still specific fallback activities
   return(sample(c(
-    "to browse around", "to check it out", "to see what they offer", "to explore", "to discover something new"
+    "and browse", "and see what they offer", "and discover something new"
   ), 1))
 }
 
@@ -681,8 +681,8 @@ generate_contextual_activities <- function(places) {
     else if (grepl("museum|gallery", tags_lower)) {
       activities[i] <- sample(c("to explore the exhibits", "to see the art", "to learn something new", "to admire the collection"), 1)
     }
-    # Restaurants - food activities (check BEFORE shop/store pattern)
-    else if (grepl("restaurant|dining|eatery|kitchen|grill|bistro|tavern", tags_lower)) {
+    # Restaurants - food activities (check BEFORE shop/store pattern) - expanded pattern
+    else if (grepl("restaurant|dining|eatery|kitchen|grill|bistro|tavern|food|cuisine|chef|menu|meal|eat", tags_lower)) {
       activities[i] <- sample(c("to try the food", "to grab a bite", "to enjoy a meal", "for dinner", "for lunch"), 1)
     }
     # Bars, breweries - drink activities  
@@ -726,12 +726,21 @@ generate_guided_multi_stop <- function(available_places, num_stops, context = NU
   
   valid_places$time_category <- sapply(valid_places$tags, categorize_venue_time)
   
-  # Add venue type categorization for diversity enforcement
-  categorize_venue_type <- function(tags) {
+  # Add venue type categorization for diversity enforcement (expanded patterns + title fallback)
+  categorize_venue_type <- function(tags, title = "") {
     tags_lower <- tolower(tags %||% "")
-    if (grepl("restaurant|dining|eatery|kitchen|grill|bistro|tavern", tags_lower)) return("restaurant")
+    title_lower <- tolower(title %||% "")
+    
+    # Check tags first
+    if (grepl("restaurant|dining|eatery|kitchen|grill|bistro|tavern|food|cuisine|chef|menu|meal|eat", tags_lower)) return("restaurant")
     if (grepl("coffee|cafe|espresso", tags_lower)) return("coffee")
     if (grepl("bar|brewery|pub|beer|cocktail|wine", tags_lower)) return("bar")
+    
+    # Title-based fallback for common restaurant indicators
+    if (grepl("restaurant|kitchen|bistro|tavern|grill|diner|cafe", title_lower)) return("restaurant")
+    if (grepl("coffee|cafe|espresso", title_lower)) return("coffee") 
+    if (grepl("bar|pub|brewery|distillery", title_lower)) return("bar")
+    
     return("other")
   }
   
@@ -1439,7 +1448,7 @@ ui <- fluidPage(
   # ======= STARTING LOCATION & MAP SECTION =======
   fluidRow(
     column(
-      4,
+      3,
       div(class = "location-control-panel",
           h4("Starting Location"),
           p("Choose one option below or click anywhere on the map", style = "color: var(--muted); font-size: 1.3rem; margin-bottom: 16px; font-weight: 600;"),
@@ -1469,17 +1478,19 @@ ui <- fluidPage(
                                width = "100%")
                 )
               ),
-              div(style = "text-align: center;",
+              div(style = "text-align: center; margin-bottom: 12px;",
                   actionButton("set_area", "Set Area", class = "btn-outline-primary", style = "min-width: 140px;")
+              ),
+              # Confirm starting location button (shown when location is set but not locked)
+              conditionalPanel(
+                condition = "output.map_instructions",
+                div(style = "text-align: center; border-top: 1px solid var(--border); padding-top: 12px; margin-top: 12px;",
+                    uiOutput("map_instructions")
+                )
               )
           ),
           div(id = "address_status", class="address-status"),
           
-          br(),
-          div(style = "border-top: 1px solid var(--border); padding-top: 16px;",
-              h5("Interactive Map"),
-              uiOutput("map_instructions")
-          ),
           br(),
           div(style = "text-align: center; margin-top: 16px;",
               actionButton("random_inspiration", HTML("<span class='btn-icon'></span>Surprise Me"),
@@ -1490,7 +1501,7 @@ ui <- fluidPage(
     ),
     
     column(
-      8,
+      9,
       div(class="map-container", leafletOutput("map", height = 500)),
       div(id = "map_status", class="address-status", style = "margin-top: 8px;")
     )
@@ -1830,8 +1841,6 @@ server <- function(input, output, session) {
   output$map_instructions <- renderUI({
     if (!values$starting_location_locked) {
       div(
-        p("✨ Click anywhere on the map to set your starting location!", 
-          style = "color: var(--primary); font-weight: 600; font-size: 1rem; margin-bottom: 8px; text-align: center;"),
         if (!is.na(values$home_lat) && !is.na(values$home_lng)) {
           div(
             p(paste("Preview location set. Click below to confirm:"), 
@@ -1840,8 +1849,6 @@ server <- function(input, output, session) {
                          class = "btn-success", 
                          style = "width: 100%; font-weight: 500;")
           )
-        } else {
-          p("Map is ready for your click!", style = "color: var(--muted); font-size: 0.9rem; text-align: center;")
         }
       )
     } else {
@@ -2087,12 +2094,11 @@ server <- function(input, output, session) {
     
     # ---------- EXPLORE MODE (locked): your existing explore toggles ----------
     if (identical(click$group, "sextants")) {
-      showNotification("Quadrant clicked - processing...", type = "message")  # Debug message
       raw_name <- sub("^sextant::", "", click$id)
       sec_name <- normalize_sextant(raw_name)
       sx_choices <- get_sextant_choices(places, sections_boundaries, SEC_NAME_COL)
       if (!sec_name %in% sx_choices) { 
-        showNotification(paste("Unrecognized Quadrant:", raw_name), type = "warning") 
+        showNotification(paste("Unrecognized Quadrant:", raw_name), type = "warning", duration = 3) 
         return(NULL) 
       }
       cur <- isolate(input$section_filter); if (is.null(cur)) cur <- character(0)
@@ -2100,14 +2106,13 @@ server <- function(input, output, session) {
       was_selected <- sec_name %in% cur
       if (was_selected) {
         cur <- setdiff(cur, sec_name)
-        showNotification(paste("Removed", sec_name, "from selection"), type = "message")
+        showNotification(paste("✅ REMOVED", sec_name), type = "warning", duration = 2)
       } else {
         cur <- unique(c(cur, sec_name))
-        showNotification(paste("Added", sec_name, "to selection"), type = "message")
+        showNotification(paste("✅ ADDED", sec_name), type = "default", duration = 2)
       }
       updateSelectizeInput(session, "section_filter", choices = sx_choices, selected = cur, server = TRUE)
       updateSelectizeInput(session, "neighborhood_filter", choices = character(0), selected = character(0), server = TRUE)
-      showNotification(paste0("🧭 Final selection: ", if (length(cur)) paste(cur, collapse = ", ") else "Any"), type = "message")
       return(invisible(NULL))
     }
     
@@ -2489,10 +2494,17 @@ server <- function(input, output, session) {
       if (length(all_sx) > 0 &&
           !is.null(neighborhood_boundaries) && !is.null(NEI_NAME_COL) &&
           !is.null(sections_boundaries) && !is.null(SEC_NAME_COL)) {
+      # Get selected quadrant boundaries but show all neighborhoods (don't clip)
       sel_secs <- sections_boundaries[sections_boundaries[[SEC_NAME_COL]] %in% normalize_sextant(all_sx), , drop = FALSE]
-      rows_to_draw <- safe_st_intersects_rows(neighborhood_boundaries, sel_secs)
-      if (length(rows_to_draw) > 0) {
-        neigh_to_draw <- neighborhood_boundaries[rows_to_draw, , drop = FALSE]
+      
+      # Only show neighborhoods if quadrants are selected, but show ALL neighborhoods
+      if (nrow(sel_secs) > 0) {
+        neigh_to_draw <- neighborhood_boundaries
+      } else {
+        neigh_to_draw <- neighborhood_boundaries[0, , drop = FALSE] # Empty
+      }
+      
+      if (nrow(neigh_to_draw) > 0) {
         nb_names <- as.character(neigh_to_draw[[NEI_NAME_COL]])
         
         # Check both exploration AND starting location neighborhood selections
