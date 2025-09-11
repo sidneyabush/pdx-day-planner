@@ -509,11 +509,12 @@ ui <- fluidPage(
     tags$style(HTML("
   @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
   :root{ 
-    --bg:#fafafa; --bg-grad:#f8f9fa; --card:#ffffff; --border:#e9ecef; --text:#222222; --muted:#6c757d; 
-    --accent:#f68b8b; --accent-600:#e67e7e; --accent-50:#fdf2f2; --accent-hover:#f47a7a;
-    --secondary:#8b5cf6; --secondary-600:#7c3aed; --secondary-50:#f3f0ff;
-    --danger:#ef4444; --success:#10b981; --warning:#f59e0b; 
-    --shadow-soft:0 4px 20px rgba(0,0,0,0.08); --shadow-medium:0 8px 30px rgba(0,0,0,0.12);
+    --bg:#f7f8f6; --bg-grad:#f2f4f1; --card:#ffffff; --border:#e1e5e0; --text:#2d3436; --muted:#636e72; 
+    --accent:#6c7b5c; --accent-600:#5a6b4a; --accent-50:#f4f6f2; --accent-hover:#7d8e6d;
+    --secondary:#9b8b7a; --secondary-600:#877a68; --secondary-50:#f6f4f2;
+    --tertiary:#b8a082; --tertiary-600:#a58e70; --tertiary-50:#f8f6f3;
+    --danger:#d63031; --success:#00b894; --warning:#fdcb6e; 
+    --shadow-soft:0 4px 20px rgba(108,123,92,0.08); --shadow-medium:0 8px 30px rgba(108,123,92,0.12);
     --radius-sm:8px; --radius-md:12px; --radius-lg:16px; --radius-xl:24px;
   }
   * { box-sizing: border-box; }
@@ -547,24 +548,24 @@ ui <- fluidPage(
 
   /* Time Display */
   .time-display {
-    background:linear-gradient(135deg, var(--secondary-50) 0%, #faf9ff 100%);
-    border:1px solid var(--secondary); border-radius:var(--radius-md);
+    background:linear-gradient(135deg, var(--tertiary-50) 0%, #f9f8f6 100%);
+    border:1px solid var(--tertiary); border-radius:var(--radius-md);
     padding:16px; transition:all 0.3s ease;
   }
   .time-display:hover { transform:translateY(-2px); box-shadow:var(--shadow-soft); }
   
   .time-label {
     font-size:11px; text-transform:uppercase; letter-spacing:0.5px;
-    color:var(--secondary-600); font-weight:600; margin-bottom:4px;
+    color:var(--tertiary-600); font-weight:600; margin-bottom:4px;
   }
   .time-value {
-    font-size:14px; font-weight:600; color:var(--secondary-600);
+    font-size:14px; font-weight:600; color:var(--tertiary-600);
     font-family:'Poppins',sans-serif;
   }
 
   /* Weather Display */
   .weather-display {
-    background:linear-gradient(135deg, var(--accent-50) 0%, #fff5f5 100%);
+    background:linear-gradient(135deg, var(--accent-50) 0%, #f7f8f6 100%);
     border:1px solid var(--accent); border-radius:var(--radius-md);
     padding:16px; transition:all 0.3s ease;
   }
@@ -618,6 +619,7 @@ ui <- fluidPage(
   .explainer::before {
     content:''; position:absolute; top:0; left:0; right:0; height:3px;
     background:linear-gradient(90deg, var(--accent) 0%, var(--secondary) 100%);
+    pointer-events:none;
   }
   .explainer:hover { transform:translateY(-2px); box-shadow:var(--shadow-medium); }
   
@@ -639,10 +641,10 @@ ui <- fluidPage(
   .btn-big::before {
     content:''; position:absolute; top:0; left:-100%; width:100%; height:100%;
     background:linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-    transition:left 0.6s; z-index:1;
+    transition:left 0.6s; z-index:1; pointer-events:none;
   }
   .btn-big:hover { 
-    transform:translateY(-3px); box-shadow:0 8px 25px rgba(246,139,139,0.4);
+    transform:translateY(-3px); box-shadow:0 8px 25px rgba(108,123,92,0.4);
     background:linear-gradient(135deg, var(--accent-hover) 0%, var(--accent) 100%);
   }
   .btn-big:hover::before { left:100%; }
@@ -657,6 +659,7 @@ ui <- fluidPage(
   .btn-surprise .btn-icon::after {
     content:''; position:absolute; width:4px; height:4px;
     background:currentColor; border-radius:50%; animation:pulse 1.5s infinite;
+    pointer-events:none;
   }
   .btn-surprise .btn-icon::before {
     top:0; left:0; animation-delay:0s;
@@ -702,18 +705,18 @@ ui <- fluidPage(
   }
   .activity-btn::before {
     content:''; position:absolute; top:0; left:-100%; width:100%; height:100%;
-    background:linear-gradient(90deg, transparent, rgba(246,139,139,0.1), transparent);
-    transition:left 0.5s; z-index:0;
+    background:linear-gradient(90deg, transparent, rgba(108,123,92,0.1), transparent);
+    transition:left 0.5s; z-index:0; pointer-events:none;
   }
   .activity-btn:hover { 
     border-color:var(--accent); transform:translateY(-2px); 
-    box-shadow:0 4px 12px rgba(246,139,139,0.2); background:var(--accent-50);
+    box-shadow:0 4px 12px rgba(108,123,92,0.2); background:var(--accent-50);
   }
   .activity-btn:hover::before { left:100%; }
   .activity-btn.active { 
     background:linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%); 
     color:white; border-color:var(--accent); 
-    box-shadow:0 6px 16px rgba(246,139,139,0.4); transform:translateY(-1px);
+    box-shadow:0 6px 16px rgba(108,123,92,0.4); transform:translateY(-1px);
   }
 
   .transport-btn { 
@@ -724,18 +727,18 @@ ui <- fluidPage(
   }
   .transport-btn::before {
     content:''; position:absolute; top:0; left:-100%; width:100%; height:100%;
-    background:linear-gradient(90deg, transparent, rgba(139,92,246,0.1), transparent);
-    transition:left 0.5s; z-index:0;
+    background:linear-gradient(90deg, transparent, rgba(155,139,122,0.1), transparent);
+    transition:left 0.5s; z-index:0; pointer-events:none;
   }
   .transport-btn:hover { 
     border-color:var(--secondary); transform:translateY(-2px); 
-    box-shadow:0 4px 12px rgba(139,92,246,0.2); background:var(--secondary-50);
+    box-shadow:0 4px 12px rgba(155,139,122,0.2); background:var(--secondary-50);
   }
   .transport-btn:hover::before { left:100%; }
   .transport-btn.active { 
-    background:linear-gradient(135deg, var(--secondary-50) 0%, #f8f6ff 100%); 
+    background:linear-gradient(135deg, var(--secondary-50) 0%, #f7f6f4 100%); 
     border-color:var(--secondary); color:var(--secondary-600); 
-    box-shadow:0 4px 12px rgba(139,92,246,0.25); transform:translateY(-1px);
+    box-shadow:0 4px 12px rgba(155,139,122,0.25); transform:translateY(-1px);
   }
 
   /* Suggestion box improvements */
@@ -829,16 +832,16 @@ ui <- fluidPage(
           ),
           # Right: title, home info, explainer, centered random, then address box
           div(class = "header-right",
-              h1("Portland Day-Off Planner"),
+              h1("The Dream of the 90s is Alive in Portland"),
               uiOutput("home_info_ui"),
               div(class = "explainer",
-                  h4("Explorer Panel"),
-                  div(class = "muted",
-                      "Pick a Sextant, then optionally a Neighborhood in it. Add context and transport. ",
-                      "Enter your home address to enable distance-aware filters."
-                  ),
+                  h4("What Are We Doing Today?"),
                   div(style="margin-top:6px; color:#475569;",
-                      "Use “Get Suggestions” for a tailored plan or “Random Suggestion” for a spontaneous idea."
+                      "Use “Random Suggestion” for a spontaneous idea, or use “Get Suggestions” for a tailored plan."
+                  ),
+                  div(class = "muted",
+                      "Pick the kind of place you want to go to, add which part of town you want to visit, or how you want to get there.",
+                      "Enter your home address to enable distance-aware filters."
                   ),
                   div(class="cta-row-inside",
                       actionButton("random_inspiration", HTML("<span class='btn-icon'></span>Surprise Me"), class = "btn-big btn-surprise")
@@ -861,25 +864,25 @@ ui <- fluidPage(
     column(
       4,
       div(class = "control-panel",
-          h5("🌦️ Context"),
+          h5("What's the mood?"),
           selectizeInput("context_filter", "", choices = names(CONTEXT_FILTERS), selected = NULL, multiple = TRUE,
                          options = list(placeholder = 'Any context'), width = "100%"),
           
-          h5("⏰ Time Available"),
+          h5("How much time ya got?"),
           selectInput("time_filter", "",
                       choices = list("Quick (1-2 hours)" = "quick",
                                      "Half day (3-4 hours)" = "half_day",
                                      "Full day (5+ hours)" = "full_day"),
                       selected = "quick", width = "100%"),
           
-          h5(id="sextant_label","🧭 Sextant"),
+          h5(id="sextant_label","Quadrant"),
           uiOutput("section_selector"),
           
-          h5(id="neighborhood_label","🏘️ Neighborhood"),
+          h5(id="neighborhood_label","Neighborhood"),
           uiOutput("neighborhood_selector"),
           
           br(),
-          h4("🏪 What kind of places?"),
+          h4("What kinds of places?"),
           div(id = "activity_buttons",
               lapply(names(ACTIVITY_CATEGORIES), function(cat) {
                 actionButton(paste0("act_", gsub("[^A-Za-z0-9]", "", cat)), cat, class = "activity-btn")
@@ -887,7 +890,7 @@ ui <- fluidPage(
           ),
           
           br(),
-          h5("🎯 What do you want to do?"),
+          h5("Whatcha wanna do there?"),
           div(id = "activity_mode_buttons",
               lapply(names(ACTIVITY_MODES), function(mode) {
                 actionButton(paste0("mode_", gsub("[^A-Za-z0-9]", "", mode)), mode, class = "activity-btn")
@@ -895,7 +898,7 @@ ui <- fluidPage(
           ),
           
           br(), br(),
-          h5("🚶 How are you getting there?"),
+          h5("How ya getting there?"),
           div(id = "transport_buttons",
               lapply(names(TRANSPORT_MODES), function(mode) {
                 actionButton(paste0("trans_", gsub("[^A-Za-z0-9]", "", mode)), mode, class = "transport-btn")
@@ -911,7 +914,7 @@ ui <- fluidPage(
           ),
           
           hr(),
-          h5("✅ Places Visited"),
+          h5("Places Visited"),
           verbatimTextOutput("visited_count"),
           uiOutput("visited_preview")
       )
@@ -1179,7 +1182,7 @@ server <- function(input, output, session) {
       if (sec_name %in% cur) cur <- setdiff(cur, sec_name) else cur <- unique(c(cur, sec_name))
       updateSelectizeInput(session, "section_filter", choices = sx_choices, selected = cur, server = TRUE)
       updateSelectizeInput(session, "neighborhood_filter", choices = character(0), selected = character(0), server = TRUE)
-      showNotification(paste0("🧭 Sextant: ", if (length(cur)) paste(cur, collapse = ", ") else "Any"), type = "message")
+      showNotification(paste0("🧭 Quadrant: ", if (length(cur)) paste(cur, collapse = ", ") else "Any"), type = "message")
       return(invisible(NULL))
     }
     
@@ -1368,7 +1371,7 @@ server <- function(input, output, session) {
         ][sample(sum(has_coords(all_available)), 1), , drop = FALSE]
         values$inspiration_text <- list(
           title = "🎲 Mystery Adventure",
-          description = paste(activity, chosen_place$title, "find out!"),
+          description = paste(activity, chosen_place$title, "and find out!"),
           type = "adventure",
           estimated_time = "1-2 hours"
         )
@@ -1448,7 +1451,7 @@ server <- function(input, output, session) {
         base_color <- section_colors[[sx]] %||% section_colors[["Other"]]
         proxy <- proxy %>% addPolygons(
           data = secs_all[i, ],
-          fillColor = base_color, fillOpacity = if (is_selected) 0.08 else 0.03,
+          fillColor = base_color, fillOpacity = if (is_selected) 0.08 else 0.05,
           color = base_color, weight = if (is_selected) 2.5 else 1.5, opacity = if (is_selected) 0.9 else 0.7,
           group = "sextants", layerId = paste0("sextant::", sx),
           options = pathOptions(interactive = TRUE, clickable = TRUE, pointerEvents = "auto"),
