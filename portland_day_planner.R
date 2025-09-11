@@ -55,12 +55,14 @@ TRANSPORT_MODES <- list(
 
 # Portland quadrant and neighborhood centers
 PORTLAND_QUADRANTS <- list(
+  "North"     = list(lat = 45.5758, lng = -122.6759, name = "North Portland"),
   "Northwest" = list(lat = 45.5392, lng = -122.6981, name = "Northwest Portland"),
-  "Northeast" = list(lat = 45.5539, lng = -122.6398, name = "Northeast Portland"), 
+  "Northeast" = list(lat = 45.5539, lng = -122.6398, name = "Northeast Portland"),
+  "South"     = list(lat = 45.4900, lng = -122.6700, name = "South Portland"),
   "Southeast" = list(lat = 45.5059, lng = -122.6348, name = "Southeast Portland"),
-  "Southwest" = list(lat = 45.4971, lng = -122.6906, name = "Southwest Portland"),
-  "North" = list(lat = 45.5758, lng = -122.6759, name = "North Portland")
+  "Southwest" = list(lat = 45.4971, lng = -122.6906, name = "Southwest Portland")
 )
+
 
 NEIGHBORHOODS_BY_QUADRANT <- list(
   "Northwest" = list(
@@ -289,7 +291,7 @@ action_suffix_from_tags <- function(tags_text) {
   if (pick("record","vinyl","music")) return("dig through the records, and discover some new sounds")
   if (pick("brewery","bar","cocktail","wine","pub","beer")) return("sample their drinks, and enjoy the atmosphere")
   if (pick("bakery","dessert","sweet","donut","pastry","bagel")) return("indulge in their specialties, and savor the moment")
-  if (pick("restaurant","food","lunch","dinner","brunch","cart")) return("try their signature dishes, and enjoy a good meal")
+  if (pick("restaurant","food","lunch","dinner","brunch","cart")) return("grab a bite")
   "explore what they have to offer"
 }
 
@@ -518,7 +520,7 @@ generate_activity_from_tags <- function(tags) {
   
   # Coffee/cafe activities
   if (grepl("coffee|cafe", tags_lower)) {
-    return(sample(c("grab a coffee", "work on your laptop", "read a book", "people watch"), 1))
+    return(sample(c("grab a coffee", "draw your surroundings", "read a book", "people watch"), 1))
   }
   
   # Food activities  
@@ -628,13 +630,22 @@ normalize_sextant <- function(x) {
     "SE"="Southeast","S.E."="Southeast","South East"="Southeast",
     "NW"="Northwest","N.W."="Northwest","North West"="Northwest",
     "NE"="Northeast","N.E."="Northeast","North East"="Northeast",
-    "N" ="North","S"="South"
+    "N" ="North",
+    "S"="South"
   )
   out <- ifelse(!is.na(alias[x]), alias[x], x)
   proper <- c("North","South","Northeast","Northwest","Southeast","Southwest")
   out <- ifelse(out %in% proper, out, tools::toTitleCase(gsub("\\s+"," ", out)))
   out
 }
+
+neighborhood_to_quadrant <- function(name) {
+  for (q in names(NEIGHBORHOODS_BY_QUADRANT)) {
+    if (name %in% names(NEIGHBORHOODS_BY_QUADRANT[[q]])) return(q)
+  }
+  return(NA_character_)
+}
+
 neigh_display_vec <- function(geo, txt) ifelse(!is.na(geo) & nzchar(geo), geo, txt)
 label_with_neigh <- function(title, neigh) {
   if (!is.na(neigh) && nzchar(neigh)) paste0(title, " (", neigh, ")") else title
@@ -1172,12 +1183,10 @@ ui <- fluidPage(
                                   options = list(placeholder = 'Any context'), width = "100%"),
                    br(),
                    h5(id="sextant_label","Explore Quadrants"),
-                   selectizeInput("explore_sections", "", choices = c("Northwest", "Northeast", "Southeast", "Southwest", "North"), 
-                                  selected = NULL, multiple = TRUE,
-                                  options = list(placeholder = 'Any quadrant'), width = "100%"),
+                   uiOutput("section_selector"),
                    h5(id="neighborhood_label","Explore Neighborhoods"),
-                   selectizeInput("explore_neighborhoods", "", choices = NULL, selected = NULL, multiple = TRUE,
-                                  options = list(placeholder = 'Any neighborhood'), width = "100%")
+                   uiOutput("neighborhood_selector")
+                   
             ),
             column(3,
                    h4("What kinds of places?"),
@@ -1308,7 +1317,6 @@ get_weather_forecast <- function() {
 server <- function(input, output, session) {
   
   # ---- Weather/time (no emojis) ----
-  # ---- Weather/time (no emojis) ----
   current_weather <- reactive({
     invalidateLater(15 * 60 * 1000, session)  # refresh theme + data every 15 min
     get_weather_forecast() %||% list(success = FALSE)
@@ -1352,8 +1360,43 @@ server <- function(input, output, session) {
     home_address = "",
     preview_address = NULL,
     map_clicked = FALSE,
-    starting_location_locked = FALSE
+    starting_location_locked = FALSE,
+    pending_nb = NULL           # <-- new: stores desired neighborhood during quadrant refresh
   )
+  
+  
+  neighborhood_to_quadrant <- function(neigh) {
+    if (is.null(neigh) || !nzchar(neigh)) return(NA_character_)
+    target <- tolower(trimws(neigh))
+    for (q in names(NEIGHBORHOODS_BY_QUADRANT)) {
+      if (target %in% tolower(names(NEIGHBORHOODS_BY_QUADRANT[[q]]))) return(q)
+    }
+    NA_character_
+  }
+  strip_portland <- function(x) sub("\\s*portland\\s*$", "", tolower(trimws(x %||% "")))
+  normalize_quadrant_input <- function(x) normalize_sextant(tools::toTitleCase(strip_portland(x)))
+  
+  set_starting_selects <- function(q, nb = NULL) {
+    if (is.null(q) || !nzchar(q) || is.na(q)) return(invisible())
+    q_norm <- normalize_sextant(q)
+    
+    # Prime the neighborhood selection to survive the quadrant observer refresh
+    if (!is.null(nb) && nzchar(nb)) {
+      n_choices <- names(NEIGHBORHOODS_BY_QUADRANT[[q_norm]] %||% list())
+      hit <- n_choices[tolower(n_choices) == tolower(nb)]
+      values$pending_nb <- if (length(hit)) hit[[1]] else ""
+    } else {
+      values$pending_nb <- ""
+    }
+    
+    # Trigger the quadrant observer; it will apply pending_nb as selected
+    updateSelectInput(
+      session, "selected_quadrant",
+      choices = c("Choose a quadrant..." = "", names(PORTLAND_QUADRANTS)),
+      selected = q_norm
+    )
+  }
+  
   
   # Header: home info
   output$home_info_ui <- renderUI({
@@ -1373,8 +1416,8 @@ server <- function(input, output, session) {
             p(paste("Preview location set. Click below to confirm:"), 
               style = "color: var(--muted); font-size: 0.9rem; margin-bottom: 8px; text-align: center;"),
             actionButton("lock_starting_location", "✓ Confirm Starting Location", 
-                        class = "btn-success", 
-                        style = "width: 100%; font-weight: 500;")
+                         class = "btn-success", 
+                         style = "width: 100%; font-weight: 500;")
           )
         } else {
           p("Map is ready for your click!", style = "color: var(--muted); font-size: 0.9rem; text-align: center;")
@@ -1387,8 +1430,8 @@ server <- function(input, output, session) {
         p("Click map to explore areas for suggestions", 
           style = "color: var(--muted); font-size: 0.85rem; margin-bottom: 8px; text-align: center;"),
         actionButton("reset_starting_location", "Change Starting Location", 
-                    class = "btn-outline-secondary", 
-                    style = "width: 100%; font-size: 0.9rem;")
+                     class = "btn-outline-secondary", 
+                     style = "width: 100%; font-size: 0.9rem;")
       )
     }
   })
@@ -1420,31 +1463,33 @@ server <- function(input, output, session) {
   
   # Update neighborhood choices when quadrant changes (for starting location)
   observeEvent(input$selected_quadrant, {
-    if (!is.null(input$selected_quadrant) && input$selected_quadrant != "") {
-      neighborhoods <- names(NEIGHBORHOODS_BY_QUADRANT[[input$selected_quadrant]])
-      choices <- c("Use entire quadrant" = "", neighborhoods)
-      updateSelectInput(session, "selected_neighborhood", choices = choices)
+    q <- input$selected_quadrant %||% ""
+    if (!nzchar(q)) {
+      updateSelectInput(session, "selected_neighborhood",
+                        choices = c("Use entire quadrant" = ""), selected = "")
+      return()
     }
+    neighborhoods <- names(NEIGHBORHOODS_BY_QUADRANT[[q]] %||% list())
+    choices <- c("Use entire quadrant" = "", neighborhoods)
+    
+    # Prefer a programmatically requested neighborhood if present
+    sel <- values$pending_nb %||% isolate(input$selected_neighborhood) %||% ""
+    if (!nzchar(sel) || !(sel %in% neighborhoods)) sel <- ""
+    
+    updateSelectInput(session, "selected_neighborhood", choices = choices, selected = sel)
+    values$pending_nb <- NULL  # clear once applied
   })
   
-  # Populate exploration neighborhood choices (all neighborhoods from all quadrants)
-  observe({
-    all_neighborhoods <- character(0)
-    for (quad in names(NEIGHBORHOODS_BY_QUADRANT)) {
-      neighborhoods <- names(NEIGHBORHOODS_BY_QUADRANT[[quad]])
-      all_neighborhoods <- c(all_neighborhoods, neighborhoods)
-    }
-    updateSelectizeInput(session, "explore_neighborhoods", choices = all_neighborhoods)
-  })
   
   # Handle area selection (quadrant or neighborhood)
   observeEvent(input$set_area, {
     if (is.null(input$selected_quadrant) || input$selected_quadrant == "") {
-      output$address_status <- renderText("Please select a quadrant first."); return()
+      output$address_status <- renderText("Please select a quadrant first."); 
+      return()
     }
     
     # Check if a specific neighborhood is selected
-    if (!is.null(input$selected_neighborhood) && input$selected_neighborhood != "") {
+    if (!is.null(input$selected_neighborhood) && nzchar(input$selected_neighborhood)) {
       neighborhood_info <- NEIGHBORHOODS_BY_QUADRANT[[input$selected_quadrant]][[input$selected_neighborhood]]
       values$home_lat <- neighborhood_info$lat
       values$home_lng <- neighborhood_info$lng
@@ -1453,6 +1498,13 @@ server <- function(input, output, session) {
       values$map_clicked <- FALSE  # Clear any map click preview
       output$address_status <- renderText(paste("Starting from:", neighborhood_info$name))
       showNotification(paste("Starting location set to", neighborhood_info$name, "- Map now in exploration mode"), type = "message")
+      
+      # Sync explore selectors
+      updateSelectizeInput(session, "section_filter",
+                           selected = normalize_sextant(input$selected_quadrant), server = TRUE)
+      updateSelectizeInput(session, "neighborhood_filter",
+                           selected = input$selected_neighborhood, server = TRUE)
+      
     } else {
       # Use quadrant center
       quadrant_info <- PORTLAND_QUADRANTS[[input$selected_quadrant]]
@@ -1463,96 +1515,136 @@ server <- function(input, output, session) {
       values$map_clicked <- FALSE  # Clear any map click preview
       output$address_status <- renderText(paste("Starting from:", quadrant_info$name))
       showNotification(paste("Starting location set to", quadrant_info$name, "- Map now in exploration mode"), type = "message")
+      
+      # Sync explore selectors
+      updateSelectizeInput(session, "section_filter",
+                           selected = normalize_sextant(input$selected_quadrant), server = TRUE)
+      updateSelectizeInput(session, "neighborhood_filter",
+                           selected = character(0), server = TRUE)
     }
   })
   
-  # Map click for setting starting location or exploration area
+  # --- Replace your map_click observer with this ---
   observeEvent(input$map_click, {
     click <- input$map_click
-    if (!is.null(click)) {
-      showNotification(paste("Map clicked at", round(click$lat, 4), round(click$lng, 4)), type = "default", duration = 2)
+    if (is.null(click)) return()
+    
+    showNotification(paste("Map clicked at", round(click$lat, 4), round(click$lng, 4)),
+                     type = "default", duration = 2)
+    
+    if (!values$starting_location_locked) {
+      # Mode 1: setting the starting location (preview)
+      values$home_lat <- click$lat
+      values$home_lng <- click$lng
       
-      if (!values$starting_location_locked) {
-        # Mode 1: Setting starting location (before it's locked)
-        values$home_lat <- click$lat
-        values$home_lng <- click$lng
-        
-        # Try to determine if it's in a known Portland area
-        min_distance <- Inf
-        closest_area <- NULL
-        
-        # Check quadrants first
-        for (quad_name in names(PORTLAND_QUADRANTS)) {
-          quad_info <- PORTLAND_QUADRANTS[[quad_name]]
-          distance <- sqrt((click$lat - quad_info$lat)^2 + (click$lng - quad_info$lng)^2)
-          if (distance < min_distance) {
-            min_distance <- distance
-            closest_area <- quad_info$name
-          }
+      # Find closest named neighborhood first, else closest quadrant center
+      min_distance <- Inf
+      closest_neigh <- NULL
+      for (quad_name in names(NEIGHBORHOODS_BY_QUADRANT)) {
+        for (neigh_name in names(NEIGHBORHOODS_BY_QUADRANT[[quad_name]])) {
+          info <- NEIGHBORHOODS_BY_QUADRANT[[quad_name]][[neigh_name]]
+          d <- sqrt((click$lat - info$lat)^2 + (click$lng - info$lng)^2)
+          if (d < min_distance) { min_distance <- d; closest_neigh <- neigh_name }
         }
-        
-        # Check neighborhoods for a closer match
-        for (quad_name in names(NEIGHBORHOODS_BY_QUADRANT)) {
-          for (neigh_name in names(NEIGHBORHOODS_BY_QUADRANT[[quad_name]])) {
-            neigh_info <- NEIGHBORHOODS_BY_QUADRANT[[quad_name]][[neigh_name]]
-            distance <- sqrt((click$lat - neigh_info$lat)^2 + (click$lng - neigh_info$lng)^2)
-            if (distance < min_distance) {
-              min_distance <- distance
-              closest_area <- neigh_info$name
-            }
-          }
-        }
-        
-        if (!is.null(closest_area) && min_distance < 0.05) {  # Within reasonable distance
-          values$preview_address <- closest_area
-          values$map_clicked <- TRUE
-          output$address_status <- renderText(paste("Preview:", closest_area, "(click '✓ Confirm Map Location' to lock)"))
-          showNotification(paste("Starting location preview:", closest_area, "- Click '✓ Confirm Map Location' to confirm"), type = "default")
-        } else {
-          values$preview_address <- "Custom Location"
-          values$map_clicked <- TRUE
-          output$address_status <- renderText(paste("Preview: Custom Location (click '✓ Confirm Map Location' to lock)"))
-          showNotification("Starting location preview - Click '✓ Confirm Map Location' to confirm", type = "default")
-        }
-        
+      }
+      
+      if (!is.null(closest_neigh) && min_distance < 0.05) {
+        # Preview + auto-select starting pickers (quadrant + neighborhood)
+        values$preview_address <- closest_neigh
+        values$map_clicked <- TRUE
+        output$address_status <- renderText(
+          paste("Preview:", closest_neigh, "(click '✓ Confirm Map Location' to lock)")
+        )
+        showNotification(paste("Starting location preview:", closest_neigh,
+                               "- Click '✓ Confirm Map Location' to confirm"), type = "default")
+        q <- neighborhood_to_quadrant(closest_neigh)
+        if (!is.na(q)) set_starting_selects(q, closest_neigh)
       } else {
-        # Mode 2: Exploration mode (after starting location is locked)
-        # Find closest area for exploration suggestions
+        # Fall back to closest quadrant
         min_distance <- Inf
-        closest_area <- NULL
-        
-        # Check neighborhoods first for more specific suggestions
-        for (quad_name in names(NEIGHBORHOODS_BY_QUADRANT)) {
-          for (neigh_name in names(NEIGHBORHOODS_BY_QUADRANT[[quad_name]])) {
-            neigh_info <- NEIGHBORHOODS_BY_QUADRANT[[quad_name]][[neigh_name]]
-            distance <- sqrt((click$lat - neigh_info$lat)^2 + (click$lng - neigh_info$lng)^2)
-            if (distance < min_distance) {
-              min_distance <- distance
-              closest_area <- neigh_name
-            }
-          }
+        closest_quad <- NULL
+        for (quad_name in names(PORTLAND_QUADRANTS)) {
+          qinfo <- PORTLAND_QUADRANTS[[quad_name]]
+          d <- sqrt((click$lat - qinfo$lat)^2 + (click$lng - qinfo$lng)^2)
+          if (d < min_distance) { min_distance <- d; closest_quad <- quad_name }
         }
+        values$preview_address <- if (!is.null(closest_quad)) paste0(closest_quad, " Portland") else "Custom Location"
+        values$map_clicked <- TRUE
+        output$address_status <- renderText(
+          paste("Preview:", values$preview_address, "(click '✓ Confirm Map Location' to lock)")
+        )
+        showNotification("Starting location preview - Click '✓ Confirm Map Location' to confirm",
+                         type = "default")
         
-        if (!is.null(closest_area) && min_distance < 0.05) {
-          # Update the neighborhood selector in the exploration section
-          # This will trigger the filtering for suggestions in that area
-          showNotification(paste("Exploring", closest_area, "- suggestions will focus on this area"), type = "message")
-          # TODO: Update the exploration area selectors
+        if (!is.null(closest_quad)) set_starting_selects(closest_quad, NULL)
+      }
+      
+    } else {
+      # Mode 2: exploration (unchanged, still updates explore selectors)
+      min_distance <- Inf
+      closest_area <- NULL
+      for (quad_name in names(NEIGHBORHOODS_BY_QUADRANT)) {
+        for (neigh_name in names(NEIGHBORHOODS_BY_QUADRANT[[quad_name]])) {
+          info <- NEIGHBORHOODS_BY_QUADRANT[[quad_name]][[neigh_name]]
+          d <- sqrt((click$lat - info$lat)^2 + (click$lng - info$lng)^2)
+          if (d < min_distance) { min_distance <- d; closest_area <- neigh_name }
+        }
+      }
+      if (!is.null(closest_area) && min_distance < 0.05) {
+        showNotification(paste("Exploring", closest_area, "- suggestions will focus on this area"),
+                         type = "message")
+        q <- neighborhood_to_quadrant(closest_area)
+        if (!is.na(q)) {
+          updateSelectizeInput(session, "section_filter",
+                               selected = normalize_sextant(q), server = TRUE)
+          updateSelectizeInput(session, "neighborhood_filter",
+                               selected = closest_area, server = TRUE)
+          showNotification(paste("Exploring", closest_area, "in", q), type = "message")
         } else {
-          showNotification("Click closer to a neighborhood to explore that area", type = "default")
+          showNotification(paste("Exploring", closest_area), type = "message")
         }
+      } else {
+        showNotification("Click closer to a neighborhood to explore that area", type = "default")
       }
     }
   })
   
-  # Confirm map click location
+  # --- Replace your confirm_map_location observer with this ---
   observeEvent(input$confirm_map_location, {
     if (!is.na(values$home_lat) && !is.na(values$home_lng) && !is.null(values$preview_address)) {
       values$home_address <- values$preview_address
+      
+      # Try neighborhood first
+      prev <- values$preview_address %||% ""
+      q_guess <- neighborhood_to_quadrant(prev)
+      
+      if (!is.na(q_guess)) {
+        # Sync both Explore and Starting pickers
+        updateSelectizeInput(session, "section_filter",
+                             selected = normalize_sextant(q_guess), server = TRUE)
+        updateSelectizeInput(session, "neighborhood_filter",
+                             selected = prev, server = TRUE)
+        set_starting_selects(q_guess, prev)
+      } else {
+        # Maybe it was a quadrant-like string ("Northwest Portland")
+        q_guess2 <- normalize_quadrant_input(prev)
+        if (q_guess2 %in% names(PORTLAND_QUADRANTS)) {
+          updateSelectizeInput(session, "section_filter",
+                               selected = q_guess2, server = TRUE)
+          updateSelectizeInput(session, "neighborhood_filter",
+                               selected = character(0), server = TRUE)
+          set_starting_selects(q_guess2, NULL)
+        } else {
+          # Unknown area → clear neighborhood in Starting panel
+          set_starting_selects("", NULL)
+        }
+      }
+      
       values$starting_location_locked <- TRUE
       values$map_clicked <- FALSE
       output$address_status <- renderText(paste("Starting from:", values$home_address))
-      showNotification(paste("Starting location set to", values$home_address, "- Map now in exploration mode"), type = "success")
+      showNotification(paste("Starting location set to", values$home_address,
+                             "- Map now in exploration mode"), type = "success")
     }
   })
   
@@ -2010,9 +2102,8 @@ server <- function(input, output, session) {
     if (is.null(values$suggested)) {
       div(class = "hero-empty",
           h2("🎯 What should you do today?"),
-          p("First, set your starting location using the controls below."),
-          p("Then hit 'Surprise Me' for a spontaneous adventure, or use 'Guided Plan' for a tailored plan!"),
-          p("Set your preferences in the suggestion controls to get personalized recommendations.")
+          p("First, set your starting location."),
+          p("Then hit 'Surprise Me' for a spontaneous adventure, or set your preferences to get a personalized 'Guided Plan'!")
       )
     } else {
       place <- values$suggested
@@ -2050,13 +2141,12 @@ server <- function(input, output, session) {
               div(class = "adventure-details", location_details),
               div(class = "details", style = "margin-top: 16px;",
                   if (!is.null(values$inspiration_text$estimated_time)) div(class = "detail-chip", paste("⏱️", values$inspiration_text$estimated_time)),
-                  if (!is.null(values$inspiration_text$transit)) div(class = "detail-chip", values$inspiration_text$transit),
-                  # Removed starting neighborhood display
+                  if (!is.null(values$inspiration_text$transit)) div(class = "detail-chip", values$inspiration_text$transit)
               ),
               div(style = "margin-top: 20px; text-align: center;",
                   actionButton("mark_complete", "✅ Mark as Complete", 
-                              class = "btn-success", 
-                              style = "padding: 12px 24px; font-weight: 500;")
+                               class = "btn-success", 
+                               style = "padding: 12px 24px; font-weight: 500;")
               )
           )
         } else {
@@ -2073,8 +2163,8 @@ server <- function(input, output, session) {
               ),
               div(style = "margin-top: 20px; text-align: center;",
                   actionButton("mark_complete", "✅ Mark as Complete", 
-                              class = "btn-success", 
-                              style = "padding: 12px 24px; font-weight: 500;")
+                               class = "btn-success", 
+                               style = "padding: 12px 24px; font-weight: 500;")
               )
           )
         }
@@ -2089,8 +2179,8 @@ server <- function(input, output, session) {
             ),
             div(style = "margin-top: 20px; text-align: center;",
                 actionButton("mark_complete", "✅ Mark as Complete", 
-                            class = "btn-success", 
-                            style = "padding: 12px 24px; font-weight: 500;")
+                             class = "btn-success", 
+                             style = "padding: 12px 24px; font-weight: 500;")
             )
         )
       }
@@ -2124,17 +2214,11 @@ server <- function(input, output, session) {
             name
           )
         }),
-        if (length(values$completed) > 5) p(paste("...", length(values$completed) - 5, "more"))
-
-  )
-}
-})
+        if (length(values$completed) > 5) p(paste("...", length(values$completed) - 5, "more")) else NULL
+      )
+    }
+  })
 }
 
 # ---------------- LAUNCH ----------------
 shinyApp(ui, server)
-
-
-
-
-
