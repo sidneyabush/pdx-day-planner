@@ -13,6 +13,135 @@ suppressPackageStartupMessages({
 
 `%||%` <- function(a, b) if (!is.null(a)) a else b
 
+# ---------------- CONFIGURATION ----------------
+DEFAULT_ADDRESS <- "Portland, OR"
+DEFAULT_LAT <- 45.5152
+DEFAULT_LNG <- -122.6784
+
+# Activity categories that match your tags
+ACTIVITY_CATEGORIES <- list(
+  "☕️ Coffee & Cafes" = c("coffee", "cafe", "espresso"),
+  "🍰 Sweet Treats" = c("dessert", "bakery", "sweet", "pastry", "donut", "bagel"),
+  "🍃 Food & Restaurants" = c("restaurant", "food", "lunch", "dinner", "brunch", "cart", "vegan"),
+  "🍸 Drinks & Bars" = c("bar", "brewery", "cocktails", "drinks", "wine", "pub", "beer"),
+  "📚 Bookstores" = c("bookstore", "books", "library"),
+  "💽 Music & Records" = c("music", "records", "vinyl", "record"),
+  "🏷️ Thrift & Vintage" = c("vintage", "thrift", "antique", "used"),
+  "📔 Stationery & Art" = c("stationery", "art supplies", "paper", "gallery", "art"),
+  "🛴 Fun Stores" = c("toys", "games", "gifts", "shop"),
+  "🚲 Outdoor & Sports" = c("outdoor", "sports", "hikes", "nature", "bike", "trail"),
+  "🥕 Markets" = c("market", "farmers", "produce"),
+  "🎭 Entertainment" = c("entertainment", "cinema", "theater", "museum", "movie"),
+  "🖋️ Services & Creative" = c("tattoo", "salon", "spa")
+)
+
+# Activity modes
+ACTIVITY_MODES <- list(
+  "Coffee" = c("coffee", "cafe", "read", "draw", "relax", "people watch"),
+  "Photography" = c("scenic", "view", "mural", "architecture", "historic", "nature", "bridge", "waterfront", "garden", "park", "museum"),
+  "Walking Tour" = c("walk", "tour", "historic", "architecture"),
+  "Bike Ride" = c("bike", "cycling", "trail", "path"),
+  "Hiking" = c("hike", "hiking", "trail", "nature"),
+  "Shopping" = c("shop", "shopping", "browse")
+)
+
+# Transportation modes  
+TRANSPORT_MODES <- list(
+  "🚶 Walking" = 2,      # miles
+  "🚲 Biking" = 10,      # miles  
+  "🚗 Driving" = 30,     # miles
+  "🚌 Public Transit" = 50  # miles
+)
+
+# Portland quadrant and neighborhood centers
+PORTLAND_QUADRANTS <- list(
+  "Northwest" = list(lat = 45.5392, lng = -122.6981, name = "Northwest Portland"),
+  "Northeast" = list(lat = 45.5539, lng = -122.6398, name = "Northeast Portland"), 
+  "Southeast" = list(lat = 45.5059, lng = -122.6348, name = "Southeast Portland"),
+  "Southwest" = list(lat = 45.4971, lng = -122.6906, name = "Southwest Portland"),
+  "North" = list(lat = 45.5758, lng = -122.6759, name = "North Portland")
+)
+
+NEIGHBORHOODS_BY_QUADRANT <- list(
+  "Northwest" = list(
+    "Pearl District" = list(lat = 45.5347, lng = -122.6906, name = "Pearl District"),
+    "Nob Hill" = list(lat = 45.5314, lng = -122.6981, name = "Nob Hill"),
+    "Old Town" = list(lat = 45.5247, lng = -122.6714, name = "Old Town"),
+    "Downtown" = list(lat = 45.5152, lng = -122.6784, name = "Downtown"),
+    "Kerns" = list(lat = 45.5237, lng = -122.6548, name = "Kerns"),
+    "Overlook" = list(lat = 45.5459, lng = -122.6848, name = "Overlook")
+  ),
+  "Northeast" = list(
+    "Alberta" = list(lat = 45.5587, lng = -122.6536, name = "Alberta"),
+    "Fremont" = list(lat = 45.5481, lng = -122.6536, name = "Fremont"),
+    "Lloyd District" = list(lat = 45.5314, lng = -122.6537, name = "Lloyd District"),
+    "Beaumont-Wilshire" = list(lat = 45.5392, lng = -122.6298, name = "Beaumont-Wilshire"),
+    "Rose City Park" = list(lat = 45.5426, lng = -122.6098, name = "Rose City Park"),
+    "Alameda" = list(lat = 45.5459, lng = -122.6448, name = "Alameda"),
+    "Concordia" = list(lat = 45.5548, lng = -122.6448, name = "Concordia"),
+    "Sabin" = list(lat = 45.5548, lng = -122.6598, name = "Sabin"),
+    "Boise" = list(lat = 45.5481, lng = -122.6748, name = "Boise"),
+    "Humboldt" = list(lat = 45.5548, lng = -122.6748, name = "Humboldt"),
+    "King" = list(lat = 45.5481, lng = -122.6648, name = "King"),
+    "Eliot" = list(lat = 45.5392, lng = -122.6648, name = "Eliot"),
+    "Irvington" = list(lat = 45.5481, lng = -122.6448, name = "Irvington")
+  ),
+  "Southeast" = list(
+    "Hawthorne" = list(lat = 45.5122, lng = -122.6587, name = "Hawthorne"),
+    "Division" = list(lat = 45.5059, lng = -122.6348, name = "Division"),
+    "Belmont" = list(lat = 45.5165, lng = -122.6348, name = "Belmont"),
+    "Richmond" = list(lat = 45.5059, lng = -122.6398, name = "Richmond"),
+    "Sellwood" = list(lat = 45.4634, lng = -122.6348, name = "Sellwood"),
+    "Woodstock" = list(lat = 45.4792, lng = -122.6348, name = "Woodstock"),
+    "Laurelhurst" = list(lat = 45.5218, lng = -122.6298, name = "Laurelhurst"),
+    "Mount Tabor" = list(lat = 45.5165, lng = -122.5998, name = "Mount Tabor"),
+    "Eastmoreland" = list(lat = 45.4792, lng = -122.6348, name = "Eastmoreland"),
+    "Brooklyn" = list(lat = 45.4976, lng = -122.6648, name = "Brooklyn"),
+    "Hosford-Abernethy" = list(lat = 45.4976, lng = -122.6448, name = "Hosford-Abernethy"),
+    "Ladd's Addition" = list(lat = 45.5059, lng = -122.6548, name = "Ladd's Addition"),
+    "Buckman" = list(lat = 45.5165, lng = -122.6548, name = "Buckman"),
+    "Sunnyside" = list(lat = 45.5122, lng = -122.6448, name = "Sunnyside"),
+    "Creston-Kenilworth" = list(lat = 45.4792, lng = -122.6248, name = "Creston-Kenilworth"),
+    "Foster-Powell" = list(lat = 45.4892, lng = -122.6148, name = "Foster-Powell"),
+    "Lents" = list(lat = 45.4792, lng = -122.5748, name = "Lents"),
+    "Jade District" = list(lat = 45.4634, lng = -122.5998, name = "Jade District"),
+    "Powelhurst-Gilbert" = list(lat = 45.4892, lng = -122.5348, name = "Powelhurst-Gilbert")
+  ),
+  "Southwest" = list(
+    "Hillsdale" = list(lat = 45.4792, lng = -122.6998, name = "Hillsdale"),
+    "Burlingame" = list(lat = 45.4548, lng = -122.6898, name = "Burlingame"),
+    "Multnomah" = list(lat = 45.4634, lng = -122.6698, name = "Multnomah"),
+    "Westmoreland" = list(lat = 45.4634, lng = -122.6548, name = "Westmoreland")
+  ),
+  "North" = list(
+    "Mississippi" = list(lat = 45.5587, lng = -122.6759, name = "Mississippi District"),
+    "Kenton" = list(lat = 45.5835, lng = -122.6759, name = "Kenton"),
+    "Arbor Lodge" = list(lat = 45.5748, lng = -122.6798, name = "Arbor Lodge"),
+    "Piedmont" = list(lat = 45.5548, lng = -122.6898, name = "Piedmont"),
+    "St. Johns" = list(lat = 45.5892, lng = -122.7598, name = "St. Johns"),
+    "University Park" = list(lat = 45.5748, lng = -122.7148, name = "University Park"),
+    "Portland Meadows" = list(lat = 45.6048, lng = -122.6998, name = "Portland Meadows"),
+    "Cathedral Park" = list(lat = 45.5892, lng = -122.7448, name = "Cathedral Park")
+  )
+)
+
+# Context filters
+CONTEXT_FILTERS <- list(
+  "☔ Rainy Weather" = list(
+    exclude_activities = c("Hiking", "Photography"),
+    exclude_transport = c("🚶 Walking", "🚲 Biking"),
+    prefer_venues = c("📚 Bookstores", "☕ Coffee & Cafes", "🎭 Entertainment"),
+    max_distance = 15
+  ),
+  "🌞 Nice Weather" = list(),
+  "💰 Budget Friendly" = list(
+    exclude_venues = c("🍸 Drinks & Bars", "🍃 Food & Restaurants")
+  ),
+  "🚶 No Car" = list(
+    max_distance = 5
+  )
+)
+
 # ---------- Tag canonicalization & supercats ----------
 canonicalize_tags <- function(x) {
   if (is.null(x)) return("")
@@ -146,31 +275,291 @@ chain_ok <- function(home_lat, home_lng, pts, hop_radius = 1.0, detour_factor = 
   TRUE
 }
 
-# ---------- Natural-language suffix for “Surprise Me” card ----------
+# ---------- Natural-language suffix for "Surprise Me" card ----------
 action_suffix_from_tags <- function(tags_text) {
   t <- tolower(tags_text %||% "")
   pick <- function(...) any(grepl(paste0("(", paste(list(...), collapse="|"), ")"), t))
   
-  if (pick("mural","bridge","view","scenic","architecture","historic","photo","photos")) return("and take film photos")
-  if (pick("bookstore","library")) return("and find a new book")
-  if (pick("coffee","cafe")) return("and read")
-  if (pick("museum","gallery","art")) return("and draw/sketch")
-  if (pick("trail","hike","park","garden","arboretum","nature","forest")) return("and take a walk")
-  if (pick("thrift","vintage","antique","market")) return("and thrift")
-  if (pick("record","vinyl","music")) return("and dig for records")
-  if (pick("brewery","bar","cocktail","wine","pub","beer")) return("and grab a drink")
-  if (pick("bakery","dessert","sweet","donut","pastry","bagel")) return("and treat yourself")
-  if (pick("restaurant","food","lunch","dinner","brunch","cart")) return("and grab a bite")
-  "and explore"
+  if (pick("mural","bridge","view","scenic","architecture","historic","photo","photos")) return("take some film photos, and soak in the atmosphere")
+  if (pick("bookstore","library")) return("browse for a new book, and settle in with a coffee")
+  if (pick("coffee","cafe")) return("try a new drink, and spend some time reading or drawing")
+  if (pick("museum","gallery","art")) return("explore the exhibits, and do some sketching")
+  if (pick("trail","hike","park","garden","arboretum","nature","forest")) return("take a peaceful walk, and connect with nature")
+  if (pick("thrift","vintage","antique","market")) return("hunt for unique treasures, and enjoy the browsing")
+  if (pick("record","vinyl","music")) return("dig through the records, and discover some new sounds")
+  if (pick("brewery","bar","cocktail","wine","pub","beer")) return("sample their drinks, and enjoy the atmosphere")
+  if (pick("bakery","dessert","sweet","donut","pastry","bagel")) return("indulge in their specialties, and savor the moment")
+  if (pick("restaurant","food","lunch","dinner","brunch","cart")) return("try their signature dishes, and enjoy a good meal")
+  "explore what they have to offer"
 }
 
 # ---------- Transit selection by distance ----------
 transit_by_distance <- function(d_mi) {
   if (is.na(d_mi)) return("🚌 Public Transit")
-  if (d_mi <= 2) return("🚶 Walk")
-  if (d_mi <= 8) return("🚲 Bicycle Rights!")
-  if (d_mi > 10) return("🚗 Drive")
+  if (d_mi <= 2) return("🚶 Walking")
+  if (d_mi <= 10) return("🚲 Biking")
+  if (d_mi <= 30) return("🚗 Driving")
   "🚌 Public Transit"
+}
+
+# Convert transit mode to action verb
+transit_to_verb <- function(transit_mode) {
+  if (is.na(transit_mode) || transit_mode == "") return("Go to")
+  
+  if (grepl("Walking", transit_mode)) return("Walk to")
+  if (grepl("Biking", transit_mode)) return("Bike to") 
+  if (grepl("Driving", transit_mode)) return("Drive to")
+  if (grepl("Public Transit", transit_mode)) return("Take transit to")
+  
+  return("Go to")  # fallback
+}
+
+# Simple activity description for single stops
+simple_activity_from_tags <- function(tags_text) {
+  t <- tolower(tags_text %||% "")
+  pick <- function(...) any(grepl(paste0("(", paste(list(...), collapse="|"), ")"), t))
+  
+  if (pick("coffee","cafe")) return("for a drink")
+  if (pick("bakery","dessert","sweet","donut","pastry","bagel")) return("for a sweet treat")
+  if (pick("restaurant","food","lunch","dinner","brunch","cart")) return("for a meal")
+  if (pick("brewery","bar","cocktail","wine","pub","beer")) return("for a drink")
+  if (pick("bookstore","library")) return("to browse books")
+  if (pick("museum","gallery","art")) return("to explore")
+  if (pick("trail","hike","park","garden","arboretum","nature","forest")) return("for a walk")
+  if (pick("thrift","vintage","antique","market")) return("to browse")
+  if (pick("record","vinyl","music")) return("to dig for records")
+  if (pick("mural","bridge","view","scenic","architecture","historic")) return("to check out")
+  return("to visit")
+}
+
+# ---------- Portland time helper ----------
+pdx_time_string <- function() {
+  tryCatch({
+    portland_time <- as.POSIXct(Sys.time(), tz = "America/Los_Angeles")
+    format(portland_time, "%I:%M %p PST")
+  }, error = function(e) {
+    format(Sys.time(), "%I:%M %p")
+  })
+}
+
+# ---------- Day planning functions ----------
+generate_day_plan <- function(places, context = NULL, activities = NULL, modes = NULL, time_filter = NULL) {
+  if (is.null(places) || nrow(places) == 0) return(list())
+  
+  # Simple plan generation - return top place with context
+  top_place <- places[1, , drop = FALSE]
+  
+  plan <- list(
+    title = if (!is.null(context)) paste("Perfect for", context) else "Great Choice",
+    description = paste("Check out", top_place$title),
+    type = "suggestion",
+    estimated_time = "1-2 hours",
+    places = top_place
+  )
+  
+  list(plan)
+}
+
+generate_surprise_adventure <- function(available_places, time_available = NULL, context = NULL, 
+                                       home_lat = NULL, home_lng = NULL, home_addr = NULL) {
+  if (is.null(available_places) || nrow(available_places) == 0) return(list())
+  
+  # Filter to places with coordinates
+  valid_places <- available_places[!is.na(available_places$lat) & !is.na(available_places$lng), , drop = FALSE]
+  if (nrow(valid_places) == 0) return(list())
+  
+  # Determine number of locations (1-3)
+  num_locations <- sample(1:3, 1)
+  
+  # Categorize places by time of day preference
+  categorize_venue_time <- function(tags) {
+    tags_lower <- tolower(tags %||% "")
+    if (grepl("coffee|cafe|bakery|breakfast|brunch", tags_lower)) return("morning")
+    if (grepl("lunch|restaurant|food|museum|gallery|park|bookstore|shopping", tags_lower)) return("afternoon") 
+    if (grepl("bar|brewery|cocktail|wine|pub|beer|dinner|nightlife", tags_lower)) return("evening")
+    return("anytime")  # Default
+  }
+  
+  valid_places$time_category <- sapply(valid_places$tags, categorize_venue_time)
+  
+  # Select places with proper time progression
+  selected_places <- if (num_locations == 1) {
+    # Single location: any time is fine
+    valid_places[sample(nrow(valid_places), 1), , drop = FALSE]
+  } else if (num_locations == 2) {
+    # Two locations: try to get morning/afternoon first, then evening
+    morning_afternoon <- valid_places[valid_places$time_category %in% c("morning", "afternoon", "anytime"), , drop = FALSE]
+    evening <- valid_places[valid_places$time_category %in% c("evening", "anytime"), , drop = FALSE]
+    
+    if (nrow(morning_afternoon) > 0 && nrow(evening) > 0) {
+      first <- morning_afternoon[sample(nrow(morning_afternoon), 1), , drop = FALSE]
+      # Exclude the first place from evening options
+      evening_filtered <- evening[evening$id != first$id, , drop = FALSE]
+      if (nrow(evening_filtered) > 0) {
+        second <- evening_filtered[sample(nrow(evening_filtered), 1), , drop = FALSE]
+        rbind(first, second)
+      } else {
+        valid_places[sample(nrow(valid_places), 2), , drop = FALSE]
+      }
+    } else {
+      valid_places[sample(nrow(valid_places), min(2, nrow(valid_places))), , drop = FALSE]
+    }
+  } else {
+    # Three locations: morning -> afternoon -> evening progression
+    morning <- valid_places[valid_places$time_category %in% c("morning", "anytime"), , drop = FALSE]
+    afternoon <- valid_places[valid_places$time_category %in% c("afternoon", "anytime"), , drop = FALSE] 
+    evening <- valid_places[valid_places$time_category %in% c("evening", "anytime"), , drop = FALSE]
+    
+    selected <- data.frame()
+    used_ids <- character(0)
+    
+    # Try to get one from each time period
+    if (nrow(morning) > 0) {
+      first <- morning[sample(nrow(morning), 1), , drop = FALSE]
+      selected <- rbind(selected, first)
+      used_ids <- c(used_ids, first$id)
+    }
+    
+    if (nrow(afternoon) > 0) {
+      afternoon_filtered <- afternoon[!afternoon$id %in% used_ids, , drop = FALSE]
+      if (nrow(afternoon_filtered) > 0) {
+        second <- afternoon_filtered[sample(nrow(afternoon_filtered), 1), , drop = FALSE]
+        selected <- rbind(selected, second)
+        used_ids <- c(used_ids, second$id)
+      }
+    }
+    
+    if (nrow(evening) > 0) {
+      evening_filtered <- evening[!evening$id %in% used_ids, , drop = FALSE]
+      if (nrow(evening_filtered) > 0) {
+        third <- evening_filtered[sample(nrow(evening_filtered), 1), , drop = FALSE]
+        selected <- rbind(selected, third)
+      }
+    }
+    
+    # If we didn't get 3 places, fill with random ones
+    if (nrow(selected) < 3) {
+      remaining <- valid_places[!valid_places$id %in% used_ids, , drop = FALSE]
+      if (nrow(remaining) > 0) {
+        needed <- min(3 - nrow(selected), nrow(remaining))
+        additional <- remaining[sample(nrow(remaining), needed), , drop = FALSE]
+        selected <- rbind(selected, additional)
+      }
+    }
+    
+    selected
+  }
+  
+  # Calculate distances and determine overall transit mode
+  if (!is.null(home_lat) && !is.null(home_lng) && !is.na(home_lat) && !is.na(home_lng)) {
+    selected_places$distance_mi <- mapply(function(lat, lng) {
+      calc_distance_miles(home_lat, home_lng, lat, lng)
+    }, selected_places$lat, selected_places$lng)
+    
+    # Use the furthest distance to determine transit mode
+    max_distance <- max(selected_places$distance_mi, na.rm = TRUE)
+    if (!is.na(max_distance)) {
+      main_transit <- transit_by_distance(max_distance)
+    } else {
+      main_transit <- "🚌 Public Transit"
+    }
+  } else {
+    main_transit <- "🚌 Public Transit"
+  }
+  
+  # Generate activities based on place tags
+  activities <- c()
+  for (i in 1:nrow(selected_places)) {
+    place <- selected_places[i, ]
+    activity <- generate_activity_from_tags(place$tags)
+    activities <- c(activities, activity)
+  }
+  
+  # Create adventure description using transit verb
+  transit_verb <- tolower(transit_to_verb(main_transit))
+  
+  if (num_locations == 1) {
+    description <- paste(stringr::str_to_sentence(paste(transit_verb, selected_places$title[1], "and", activities[1])))
+  } else if (num_locations == 2) {
+    description <- paste(stringr::str_to_sentence(paste(transit_verb, selected_places$title[1], "and", activities[1])), 
+                        "then head to", selected_places$title[2], "to", activities[2])
+  } else {
+    description <- paste(stringr::str_to_sentence(paste(transit_verb, selected_places$title[1], "and", activities[1])),
+                        "then", selected_places$title[2], "to", activities[2], 
+                        "and finish at", selected_places$title[3], "to", activities[3])
+  }
+  
+  # Estimate time based on number of locations
+  time_estimate <- switch(as.character(num_locations),
+                         "1" = "1-2 hours",
+                         "2" = "2-3 hours", 
+                         "3" = "3-4 hours")
+  
+  adventure <- list(
+    title = paste(num_locations, "Stop Adventure"),
+    description = description,
+    type = "adventure",
+    estimated_time = time_estimate,
+    transit = main_transit,
+    neighborhood = selected_places$neighborhood[1] %||% "Portland",
+    places = selected_places,
+    activities = activities,
+    num_locations = num_locations
+  )
+  
+  list(adventure)
+}
+
+# Generate activity suggestions based on place tags
+generate_activity_from_tags <- function(tags) {
+  if (is.na(tags) || tags == "") return("explore")
+  
+  tags_lower <- tolower(tags)
+  
+  # Coffee/cafe activities
+  if (grepl("coffee|cafe", tags_lower)) {
+    return(sample(c("grab a coffee", "work on your laptop", "read a book", "people watch"), 1))
+  }
+  
+  # Food activities  
+  if (grepl("restaurant|food|lunch|dinner|brunch", tags_lower)) {
+    return(sample(c("grab a bite", "try the local cuisine", "enjoy a meal", "sample the menu"), 1))
+  }
+  
+  # Drinks/bar activities
+  if (grepl("bar|brewery|cocktail|drinks", tags_lower)) {
+    return(sample(c("grab a drink", "try a local beer", "enjoy happy hour", "sample cocktails"), 1))
+  }
+  
+  # Shopping activities
+  if (grepl("bookstore|books", tags_lower)) {
+    return(sample(c("browse for books", "find your next read", "explore the stacks", "discover new authors"), 1))
+  }
+  
+  if (grepl("vintage|thrift|antique", tags_lower)) {
+    return(sample(c("hunt for treasures", "browse vintage finds", "search for unique items", "thrift shop"), 1))
+  }
+  
+  if (grepl("record|music|vinyl", tags_lower)) {
+    return(sample(c("dig for records", "browse vinyl", "discover new music", "hunt for rare finds"), 1))
+  }
+  
+  # Entertainment activities
+  if (grepl("museum|gallery|art", tags_lower)) {
+    return(sample(c("explore the exhibits", "admire the art", "learn something new", "take in the culture"), 1))
+  }
+  
+  if (grepl("theater|cinema|movie", tags_lower)) {
+    return(sample(c("catch a show", "watch a film", "enjoy the performance", "see what's playing"), 1))
+  }
+  
+  # Outdoor activities
+  if (grepl("park|nature|trail|hike", tags_lower)) {
+    return(sample(c("take a walk", "enjoy nature", "get some fresh air", "explore the grounds"), 1))
+  }
+  
+  # Default activities
+  return(sample(c("explore", "try something new", "discover something new"), 1))
 }
 
 # ======= DATA & MAP SETUP (paste this after your helpers, before ui <- fluidPage) =======
@@ -201,6 +590,7 @@ if ("title" %in% names(places)) {
   places <- places[!grepl("^Unnamed place", places$title, ignore.case = TRUE), ]
   places <- places[!is.na(places$title) & nzchar(trimws(places$title)), ]
 }
+
 
 # --- Polygon helpers + load neighborhood/sextant boundaries ----------------
 load_map_file <- function(paths) { for (p in paths) if (file.exists(p)) return(p); NULL }
@@ -279,6 +669,120 @@ places <- geo_enrich_places(places, neighborhood_boundaries, NEI_NAME_COL,
 
 # --- Backfill tags (museum/theater/park/trail) + supercats ----------------
 places <- backfill_core_tags(places)
+
+# --- Apply automatic list-specific tags (AFTER backfill) -------------------
+apply_list_specific_tags <- function(df) {
+  if (!("source_list" %in% names(df)) || !("tags" %in% names(df))) return(df)
+  
+  # Initialize tags column if missing
+  df$tags <- ifelse(is.na(df$tags), "", as.character(df$tags))
+  
+  # Helper function to add tag if not already present (case insensitive check)
+  add_tag_if_missing <- function(existing_tags, new_tag) {
+    if (is.na(existing_tags) || existing_tags == "") return(new_tag)
+    
+    # Split existing tags and normalize
+    existing_split <- trimws(strsplit(existing_tags, ";")[[1]])
+    existing_lower <- tolower(existing_split)
+    
+    # Check if new tag already exists (case insensitive)
+    if (!tolower(new_tag) %in% existing_lower) {
+      return(paste(existing_tags, new_tag, sep = "; "))
+    }
+    
+    return(existing_tags)
+  }
+  
+  # Helper function to standardize duplicate tags (e.g., "Trail" and "trail")
+  standardize_tags <- function(tags_string) {
+    if (is.na(tags_string) || tags_string == "") return(tags_string)
+    
+    # Split, trim, and remove empty tags
+    tags_split <- trimws(strsplit(tags_string, ";")[[1]])
+    tags_split <- tags_split[tags_split != ""]
+    
+    # Create a standardized version lookup
+    standardized <- character(length(tags_split))
+    
+    for (i in seq_along(tags_split)) {
+      tag <- tags_split[i]
+      # Standardize all tags to lowercase
+      if (tolower(tag) %in% c("trail", "trails")) {
+        standardized[i] <- "trail"
+      } else if (tolower(tag) %in% c("park", "parks")) {
+        standardized[i] <- "park"
+      } else if (tolower(tag) %in% c("museum", "museums")) {
+        standardized[i] <- "museum"
+      } else if (tolower(tag) %in% c("nature")) {
+        standardized[i] <- "nature"
+      } else {
+        # Convert all other tags to lowercase as well
+        standardized[i] <- tolower(tag)
+      }
+    }
+    
+    # Remove duplicates (case insensitive) while preserving order
+    unique_tags <- character(0)
+    for (tag in standardized) {
+      if (!tolower(tag) %in% tolower(unique_tags)) {
+        unique_tags <- c(unique_tags, tag)
+      }
+    }
+    
+    return(paste(unique_tags, collapse = "; "))
+  }
+  
+  # Outdoor museums list (places that should get nature tag)
+  outdoor_museums <- c(
+    "pittock mansion",
+    "hoyt arboretum", 
+    "japanese garden",
+    "portland japanese garden",
+    "lan su chinese garden",
+    "world forestry center",
+    "oregon rail heritage center"
+  )
+  
+  # Add "museum" tag for Portland Museums list
+  museum_mask <- grepl("Portland.*Museums|Museums.*Portland", df$source_list, ignore.case = TRUE)
+  if (any(museum_mask)) {
+    for (i in which(museum_mask)) {
+      df$tags[i] <- add_tag_if_missing(df$tags[i], "museum")
+      
+      # Add nature tag for outdoor museums
+      title_lower <- tolower(df$title[i])
+      if (any(sapply(outdoor_museums, function(om) grepl(om, title_lower, fixed = TRUE)))) {
+        df$tags[i] <- add_tag_if_missing(df$tags[i], "nature")
+      }
+    }
+  }
+  
+  # Add "trail" and "nature" tags for Hikes & Trail Runs list
+  trail_mask <- grepl("Hikes.*Trail.*Runs|Trail.*Runs", df$source_list, ignore.case = TRUE)
+  if (any(trail_mask)) {
+    for (i in which(trail_mask)) {
+      df$tags[i] <- add_tag_if_missing(df$tags[i], "trail")
+      df$tags[i] <- add_tag_if_missing(df$tags[i], "nature")
+    }
+  }
+  
+  # Add "park" and "nature" tags for Portland Parks list
+  park_mask <- grepl("Portland.*Parks|Parks.*Portland", df$source_list, ignore.case = TRUE)
+  if (any(park_mask)) {
+    for (i in which(park_mask)) {
+      df$tags[i] <- add_tag_if_missing(df$tags[i], "park")
+      df$tags[i] <- add_tag_if_missing(df$tags[i], "nature")
+    }
+  }
+  
+  # Standardize all tags to remove duplicates and fix case issues
+  df$tags <- sapply(df$tags, standardize_tags)
+  
+  return(df)
+}
+
+# Apply the list-specific tags AFTER backfill
+places <- apply_list_specific_tags(places)
 
 # --- Activity & mode matchers + tag cleaner (used later) -------------------
 matches_activity <- function(tags_text, category_terms) {
@@ -447,7 +951,7 @@ ui <- fluidPage(
     font-family:'Poppins',sans-serif; font-weight:700; margin:0 0 16px 0; 
     font-size:3rem; letter-spacing:-0.02em; color:var(--text);
   }
-  .homebase-line { color:var(--muted); margin:0 0 16px 0; font-size:0.95rem; font-weight:400; }
+  .homebase-line { color:var(--muted); margin:0 0 16px 0; font-size:1.2rem; font-weight:400; }
 
   .header-controls { margin-top:24px; }
   .cta-row { display:flex; justify-content:center; margin-bottom:20px; }
@@ -504,13 +1008,13 @@ ui <- fluidPage(
   .hero-card{
     background:var(--accent-50); color:var(--text); border-radius:var(--radius-xl); padding:32px; 
     box-shadow:var(--shadow-medium); position:relative; overflow:hidden; transition:all .4s cubic-bezier(.4,0,.2,1);
-    border:none; height:280px; display:flex; flex-direction:column; justify-content:center;
+    border:none; min-height:400px; height:auto; display:flex; flex-direction:column; justify-content:center;
   }
   .hero-card::before{ content:''; position:absolute; top:0; left:0; right:0; bottom:0; background:linear-gradient(45deg, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%); transform:translateX(-100%); transition:transform .6s; pointer-events:none; }
   .hero-card:hover::before{ transform:translateX(100%); }
   .hero-card:hover{ transform:translateY(-4px) scale(1.02); box-shadow:0 12px 40px rgba(14,165,233,0.25); }
-  .hero-card h2{ font-family:'Poppins',sans-serif; font-size:2.6rem; font-weight:700; margin:0 0 16px 0; line-height:1.2; }
-  .hero-card .description{ font-size:1.4rem; font-weight:400; opacity:0.95; margin-bottom:20px; line-height:1.4; }
+  .hero-card h2{ font-family:'Poppins',sans-serif; font-size:3rem; font-weight:700; margin:0 0 20px 0; line-height:1.2; }
+  .hero-card .description{ font-size:1.8rem; font-weight:400; opacity:0.95; margin-bottom:24px; line-height:1.4; }
   .hero-card .details{ display:flex; gap:24px; flex-wrap:wrap; margin-top:auto; }
   .hero-card .detail-chip{ background:rgba(255,255,255,0.8); backdrop-filter:blur(10px); padding:8px 16px; border-radius:20px; font-size:14px; font-weight:500; color:var(--text); }
 
@@ -522,6 +1026,14 @@ ui <- fluidPage(
   .dataTables_wrapper:hover{ box-shadow:var(--shadow-medium); }
   .leaflet-container{ border-radius:var(--radius-lg); box-shadow:var(--shadow-medium); transition:all .3s ease; }
   .leaflet-container:hover{ box-shadow:0 12px 40px rgba(0,0,0,0.15); }
+
+  /* Location control panel */
+  .location-control-panel { 
+    background:var(--card); border-radius:var(--radius-lg); padding:24px; 
+    box-shadow:var(--shadow-soft); border:1px solid var(--border); 
+    transition:all .3s ease; height: fit-content;
+  }
+  .location-control-panel:hover { box-shadow:var(--shadow-medium); }
 
   /* Forms */
   .form-control, .selectize-input, input[type=text], select{
@@ -544,6 +1056,10 @@ ui <- fluidPage(
     .header-left { width:100%; align-items:center; }
     .header-photo { width:100%; max-width:420px; height:auto; }
     .control-panel { padding:20px; }
+    .hero-card { min-height:350px; padding:28px; }
+    .hero-card h2 { font-size:2.6rem; }
+    .hero-card .description { font-size:1.5rem; }
+    .adventure-stop { font-size: 1.1rem !important; padding: 12px 16px !important; }
   }
 ")),
   ),
@@ -551,7 +1067,7 @@ ui <- fluidPage(
   # ======= HEADER =======
   div(class = "header",
       div(class = "header-grid",
-          # Title + current home base string (server fills)
+          # Title + current starting location string (server fills)
           div(class = "header-title-section", style = "text-align: center; width: 100%;",
               h1("The Dream of the 90s is Alive in Portland"),
               uiOutput("home_info_ui")
@@ -572,90 +1088,139 @@ ui <- fluidPage(
                   )
               )
           ),
-          # Big Surprise button (center)
-          div(class = "header-controls", style = "text-align: center; width: 100%; margin-top: 8px;",
-              actionButton("random_inspiration", HTML("<span class='btn-icon'></span>Surprise Me"),
-                           class = "btn-big btn-surprise",
-                           style = "font-size: 1.5rem; padding: 24px 48px; font-weight: 700;")
-          )
       )
   ),
   
-  # ======= MAIN CONTENT =======
+  # ======= STARTING LOCATION & MAP SECTION =======
   fluidRow(
     column(
       4,
-      div(class = "control-panel",
-          div(class="address-box",
-              h5("Starting Address"),
+      div(class = "location-control-panel",
+          h4("Starting Location"),
+          p("Choose one option below or click anywhere on the map", style = "color: var(--muted); font-size: 0.9rem; margin-bottom: 16px;"),
+          
+          # Address Option
+          div(style = "margin-bottom: 16px; padding: 12px; border: 1px solid var(--border); border-radius: 8px;",
+              h6("Option 1: Specific Address", style = "margin: 0 0 8px 0; color: var(--primary);"),
               div(class="address-grid",
                   textInput("home_address", "", placeholder = "Enter your address (e.g., 123 Main St, Portland, OR)", value = "", width = "100%"),
-                  actionButton("geocode_address", "Set Location", class = "btn-outline-primary", style = "min-width: 140px;")
+                  actionButton("geocode_address", "Set Address", class = "btn-outline-primary", style = "min-width: 140px;")
+              )
+          ),
+          
+          # Area Option  
+          div(style = "margin-bottom: 16px; padding: 12px; border: 1px solid var(--border); border-radius: 8px;",
+              h6("Option 2: Portland Area", style = "margin: 0 0 8px 0; color: var(--primary);"),
+              div(style = "margin-bottom: 12px;",
+                  selectInput("selected_quadrant", "Choose a quadrant:", 
+                             choices = c("Choose a quadrant..." = "", names(PORTLAND_QUADRANTS)), 
+                             width = "100%")
               ),
-              div(id = "address_status", class="address-status")
+              conditionalPanel(
+                condition = "input.selected_quadrant != '' && input.selected_quadrant != null",
+                div(style = "margin-bottom: 12px;",
+                    selectInput("selected_neighborhood", "Optionally, narrow to a neighborhood:", 
+                               choices = c("Use entire quadrant" = ""), 
+                               width = "100%")
+                )
+              ),
+              div(style = "text-align: center;",
+                  actionButton("set_area", "Set Area", class = "btn-outline-primary", style = "min-width: 140px;")
+              )
           ),
-          br(),
-          h5("What's the mood?"),
-          selectizeInput("context_filter", "", choices = names(CONTEXT_FILTERS), selected = NULL, multiple = TRUE,
-                         options = list(placeholder = 'Any context'), width = "100%"),
+          div(id = "address_status", class="address-status"),
           
-          h5("How much time ya got?"),
-          selectInput("time_filter", "",
-                      choices = list("Quick (1-2 hours)" = "quick",
-                                     "Half day (3-4 hours)" = "half_day",
-                                     "Full day (5+ hours)" = "full_day"),
-                      selected = "quick", width = "100%"),
-          
-          h5(id="sextant_label","Quadrant"),
-          uiOutput("section_selector"),
-          
-          h5(id="neighborhood_label","Neighborhood"),
-          uiOutput("neighborhood_selector"),
-          
-          br(),
-          h4("What kinds of places?"),
-          div(id = "activity_buttons",
-              lapply(names(ACTIVITY_CATEGORIES), function(cat) {
-                actionButton(paste0("act_", gsub("[^A-Za-z0-9]", "", cat)), cat, class = "activity-btn")
-              })
+          # Map click confirmation button (only shown when map has been clicked)
+          conditionalPanel(
+            condition = "output.map_clicked == true",
+            div(style = "text-align: center; margin: 12px 0;",
+                actionButton("confirm_map_location", "✓ Confirm Map Location", 
+                           class = "btn-primary", style = "min-width: 180px;")
+            )
           ),
           
           br(),
-          h5("Whatcha wanna do there?"),
-          div(id = "activity_mode_buttons",
-              lapply(names(ACTIVITY_MODES), function(mode) {
-                actionButton(paste0("mode_", gsub("[^A-Za-z0-9]", "", mode)), mode, class = "activity-btn")
-              })
+          div(style = "border-top: 1px solid var(--border); padding-top: 16px;",
+              h5("Interactive Map"),
+              uiOutput("map_instructions")
           ),
-          
-          br(), br(),
-          h5("How ya getting there?"),
-          div(id = "transport_buttons",
-              lapply(names(TRANSPORT_MODES), function(mode) {
-                actionButton(paste0("trans_", gsub("[^A-Za-z0-9]", "", mode)), mode, class = "transport-btn")
-              })
-          ),
-          
-          br(), br(),
-          textInput("keyword_filter", "Additional keywords:", ""),
-          
-          hr(),
-          div(style = "text-align: center; margin-bottom: 12px;",
-              actionButton("suggest_place", "Get Suggestions", class = "btn-primary", style = "width: 100%;")
-          ),
-          
-          hr(),
-          h5("Places Visited"),
-          verbatimTextOutput("visited_count"),
-          uiOutput("visited_preview")
+          br(),
+          div(style = "text-align: center; margin-top: 16px;",
+              actionButton("random_inspiration", HTML("<span class='btn-icon'></span>Surprise Me"),
+                           class = "btn-big btn-surprise",
+                           style = "font-size: 1.3rem; padding: 20px 40px; font-weight: 700; width: 100%;")
+          )
       )
     ),
     
     column(
       8,
-      div(class="map-container", leafletOutput("map", height = 420)),
-      br(),
-      div(class="data-container",
+      div(class="map-container", leafletOutput("map", height = 500)),
+      div(id = "map_status", class="address-status", style = "margin-top: 8px;")
+    )
+  ),
+  
+  # ======= SUGGESTION CONTROLS =======
+  fluidRow(
+    column(
+      12,
+      div(class = "control-panel", style = "margin-top: 24px;",
+          fluidRow(
+            column(3,
+                   h5("What's the mood?"),
+                   selectizeInput("context_filter", "", choices = names(CONTEXT_FILTERS), selected = NULL, multiple = TRUE,
+                                  options = list(placeholder = 'Any context'), width = "100%"),
+                   br(),
+                   h5(id="sextant_label","Explore Quadrants"),
+                   selectizeInput("explore_sections", "", choices = c("Northwest", "Northeast", "Southeast", "Southwest", "North"), 
+                                  selected = NULL, multiple = TRUE,
+                                  options = list(placeholder = 'Any quadrant'), width = "100%"),
+                   h5(id="neighborhood_label","Explore Neighborhoods"),
+                   selectizeInput("explore_neighborhoods", "", choices = NULL, selected = NULL, multiple = TRUE,
+                                  options = list(placeholder = 'Any neighborhood'), width = "100%")
+            ),
+            column(3,
+                   h4("What kinds of places?"),
+                   div(id = "activity_buttons",
+                       lapply(names(ACTIVITY_CATEGORIES), function(cat) {
+                         actionButton(paste0("act_", gsub("[^A-Za-z0-9]", "", cat)), cat, class = "activity-btn")
+                       })
+                   )
+            ),
+            column(3,
+                   h5("Whatcha wanna do there?"),
+                   div(id = "activity_mode_buttons",
+                       lapply(names(ACTIVITY_MODES), function(mode) {
+                         actionButton(paste0("mode_", gsub("[^A-Za-z0-9]", "", mode)), mode, class = "activity-btn")
+                       })
+                   ),
+                   br(),
+                   h5("How ya getting there?"),
+                   div(id = "transport_buttons",
+                       lapply(names(TRANSPORT_MODES), function(mode) {
+                         actionButton(paste0("trans_", gsub("[^A-Za-z0-9]", "", mode)), mode, class = "transport-btn")
+                       })
+                   )
+            ),
+            column(3,
+                   div(style = "text-align: center; margin-top: 32px;",
+                       actionButton("suggest_place", "Guided Plan", class = "btn-primary", style = "width: 100%; padding: 16px 20px; font-size: 1.4rem; font-weight: 600;")
+                   ),
+                   br(), br(),
+                   h5("Places Visited"),
+                   verbatimTextOutput("visited_count"),
+                   uiOutput("visited_preview")
+            )
+          )
+      )
+    )
+  ),
+  
+  # ======= DATA TABLE =======
+  fluidRow(
+    column(
+      12,
+      div(class="data-container", style = "margin-top: 24px;",
           h5("All Available Places"),
           DT::dataTableOutput("places_table")
       )
@@ -687,16 +1252,27 @@ ui <- fluidPage(
     $(document).on('change', '#context_filter', function() {
       var contexts = $(this).val();
       $('#activity_mode_buttons .activity-btn').show();
+      $('#transport_buttons .transport-btn').show();
 
       if (contexts && contexts.includes('☔ Rainy Weather')) {
+        // Hide outdoor activities
         $('#activity_mode_buttons .activity-btn').each(function(){
           var t = $(this).text();
-          if (t.includes('Bike Ride') || t.includes('Hiking') || t.includes('Walking Tour') || t.includes('Photography')) {
+          if (t.includes('Hiking') || t.includes('Photography')) {
+            $(this).hide().removeClass('active');
+          }
+        });
+        // Hide walking and biking transport
+        $('#transport_buttons .transport-btn').each(function(){
+          var t = $(this).text();
+          if (t.includes('Walking') || t.includes('Biking')) {
             $(this).hide().removeClass('active');
           }
         });
         var active_modes = $('#activity_mode_buttons .activity-btn.active:visible').map(function(){return $(this).text();}).get();
+        var active_transport = $('#transport_buttons .transport-btn.active:visible').map(function(){return $(this).text();}).get();
         Shiny.setInputValue('selected_activity_modes', active_modes, {priority: 'event'});
+        Shiny.setInputValue('selected_transport', active_transport.join(', '), {priority: 'event'});
       }
     });
   "))
@@ -771,17 +1347,57 @@ server <- function(input, output, session) {
     completed = load_completed(),
     suggested = NULL,
     inspiration_text = NULL,
-    home_lat = DEFAULT_LAT,
-    home_lng = DEFAULT_LNG,
-    home_address = DEFAULT_ADDRESS
+    home_lat = NA_real_,
+    home_lng = NA_real_,
+    home_address = "",
+    preview_address = NULL,
+    map_clicked = FALSE,
+    starting_location_locked = FALSE
   )
   
   # Header: home info
   output$home_info_ui <- renderUI({
     if (!is.null(values$home_address) && nzchar(values$home_address)) {
-      tags$p(sprintf("home base: %s", values$home_address), class = "homebase-line")
+      tags$p(sprintf("starting from: %s", values$home_address), class = "homebase-line")
     } else NULL
   })
+  
+  # Map instructions based on state
+  output$map_instructions <- renderUI({
+    if (!values$starting_location_locked) {
+      div(
+        p("✨ Click anywhere on the map to set your starting location!", 
+          style = "color: var(--primary); font-weight: 600; font-size: 1rem; margin-bottom: 8px; text-align: center;"),
+        if (!is.na(values$home_lat) && !is.na(values$home_lng)) {
+          div(
+            p(paste("Preview location set. Click below to confirm:"), 
+              style = "color: var(--muted); font-size: 0.9rem; margin-bottom: 8px; text-align: center;"),
+            actionButton("lock_starting_location", "✓ Confirm Starting Location", 
+                        class = "btn-success", 
+                        style = "width: 100%; font-weight: 500;")
+          )
+        } else {
+          p("Map is ready for your click!", style = "color: var(--muted); font-size: 0.9rem; text-align: center;")
+        }
+      )
+    } else {
+      div(
+        p("✅ Starting location confirmed!", 
+          style = "color: var(--success); font-size: 0.95rem; margin-bottom: 8px; text-align: center; font-weight: 500;"),
+        p("Click map to explore areas for suggestions", 
+          style = "color: var(--muted); font-size: 0.85rem; margin-bottom: 8px; text-align: center;"),
+        actionButton("reset_starting_location", "Change Starting Location", 
+                    class = "btn-outline-secondary", 
+                    style = "width: 100%; font-size: 0.9rem;")
+      )
+    }
+  })
+  
+  # Output for conditional panel to show/hide map confirmation button
+  output$map_clicked <- reactive({
+    values$map_clicked
+  })
+  outputOptions(output, "map_clicked", suspendWhenHidden = FALSE)
   
   # Geocoding
   observeEvent(input$geocode_address, {
@@ -792,12 +1408,170 @@ server <- function(input, output, session) {
     result <- geocode_address(input$home_address)
     if (isTRUE(result$success)) {
       values$home_lat <- result$lat; values$home_lng <- result$lng; values$home_address <- result$formatted_address
+      values$starting_location_locked <- TRUE
+      values$map_clicked <- FALSE  # Clear any map click preview
       output$address_status <- renderText(paste("Location set:", result$formatted_address))
-      showNotification("Address successfully geocoded! Distances updated.", type = "message")
+      showNotification("Address successfully geocoded! Map now in exploration mode.", type = "message")
     } else {
       output$address_status <- renderText(paste("Error:", result$error %||% "Geocoding failed"))
       showNotification(paste("Geocoding failed:", result$error %||% "Unknown error"), type = "error")
     }
+  })
+  
+  # Update neighborhood choices when quadrant changes (for starting location)
+  observeEvent(input$selected_quadrant, {
+    if (!is.null(input$selected_quadrant) && input$selected_quadrant != "") {
+      neighborhoods <- names(NEIGHBORHOODS_BY_QUADRANT[[input$selected_quadrant]])
+      choices <- c("Use entire quadrant" = "", neighborhoods)
+      updateSelectInput(session, "selected_neighborhood", choices = choices)
+    }
+  })
+  
+  # Populate exploration neighborhood choices (all neighborhoods from all quadrants)
+  observe({
+    all_neighborhoods <- character(0)
+    for (quad in names(NEIGHBORHOODS_BY_QUADRANT)) {
+      neighborhoods <- names(NEIGHBORHOODS_BY_QUADRANT[[quad]])
+      all_neighborhoods <- c(all_neighborhoods, neighborhoods)
+    }
+    updateSelectizeInput(session, "explore_neighborhoods", choices = all_neighborhoods)
+  })
+  
+  # Handle area selection (quadrant or neighborhood)
+  observeEvent(input$set_area, {
+    if (is.null(input$selected_quadrant) || input$selected_quadrant == "") {
+      output$address_status <- renderText("Please select a quadrant first."); return()
+    }
+    
+    # Check if a specific neighborhood is selected
+    if (!is.null(input$selected_neighborhood) && input$selected_neighborhood != "") {
+      neighborhood_info <- NEIGHBORHOODS_BY_QUADRANT[[input$selected_quadrant]][[input$selected_neighborhood]]
+      values$home_lat <- neighborhood_info$lat
+      values$home_lng <- neighborhood_info$lng
+      values$home_address <- neighborhood_info$name
+      values$starting_location_locked <- TRUE
+      values$map_clicked <- FALSE  # Clear any map click preview
+      output$address_status <- renderText(paste("Starting from:", neighborhood_info$name))
+      showNotification(paste("Starting location set to", neighborhood_info$name, "- Map now in exploration mode"), type = "message")
+    } else {
+      # Use quadrant center
+      quadrant_info <- PORTLAND_QUADRANTS[[input$selected_quadrant]]
+      values$home_lat <- quadrant_info$lat
+      values$home_lng <- quadrant_info$lng
+      values$home_address <- quadrant_info$name
+      values$starting_location_locked <- TRUE
+      values$map_clicked <- FALSE  # Clear any map click preview
+      output$address_status <- renderText(paste("Starting from:", quadrant_info$name))
+      showNotification(paste("Starting location set to", quadrant_info$name, "- Map now in exploration mode"), type = "message")
+    }
+  })
+  
+  # Map click for setting starting location or exploration area
+  observeEvent(input$map_click, {
+    click <- input$map_click
+    if (!is.null(click)) {
+      showNotification(paste("Map clicked at", round(click$lat, 4), round(click$lng, 4)), type = "default", duration = 2)
+      
+      if (!values$starting_location_locked) {
+        # Mode 1: Setting starting location (before it's locked)
+        values$home_lat <- click$lat
+        values$home_lng <- click$lng
+        
+        # Try to determine if it's in a known Portland area
+        min_distance <- Inf
+        closest_area <- NULL
+        
+        # Check quadrants first
+        for (quad_name in names(PORTLAND_QUADRANTS)) {
+          quad_info <- PORTLAND_QUADRANTS[[quad_name]]
+          distance <- sqrt((click$lat - quad_info$lat)^2 + (click$lng - quad_info$lng)^2)
+          if (distance < min_distance) {
+            min_distance <- distance
+            closest_area <- quad_info$name
+          }
+        }
+        
+        # Check neighborhoods for a closer match
+        for (quad_name in names(NEIGHBORHOODS_BY_QUADRANT)) {
+          for (neigh_name in names(NEIGHBORHOODS_BY_QUADRANT[[quad_name]])) {
+            neigh_info <- NEIGHBORHOODS_BY_QUADRANT[[quad_name]][[neigh_name]]
+            distance <- sqrt((click$lat - neigh_info$lat)^2 + (click$lng - neigh_info$lng)^2)
+            if (distance < min_distance) {
+              min_distance <- distance
+              closest_area <- neigh_info$name
+            }
+          }
+        }
+        
+        if (!is.null(closest_area) && min_distance < 0.05) {  # Within reasonable distance
+          values$preview_address <- closest_area
+          values$map_clicked <- TRUE
+          output$address_status <- renderText(paste("Preview:", closest_area, "(click '✓ Confirm Map Location' to lock)"))
+          showNotification(paste("Starting location preview:", closest_area, "- Click '✓ Confirm Map Location' to confirm"), type = "default")
+        } else {
+          values$preview_address <- "Custom Location"
+          values$map_clicked <- TRUE
+          output$address_status <- renderText(paste("Preview: Custom Location (click '✓ Confirm Map Location' to lock)"))
+          showNotification("Starting location preview - Click '✓ Confirm Map Location' to confirm", type = "default")
+        }
+        
+      } else {
+        # Mode 2: Exploration mode (after starting location is locked)
+        # Find closest area for exploration suggestions
+        min_distance <- Inf
+        closest_area <- NULL
+        
+        # Check neighborhoods first for more specific suggestions
+        for (quad_name in names(NEIGHBORHOODS_BY_QUADRANT)) {
+          for (neigh_name in names(NEIGHBORHOODS_BY_QUADRANT[[quad_name]])) {
+            neigh_info <- NEIGHBORHOODS_BY_QUADRANT[[quad_name]][[neigh_name]]
+            distance <- sqrt((click$lat - neigh_info$lat)^2 + (click$lng - neigh_info$lng)^2)
+            if (distance < min_distance) {
+              min_distance <- distance
+              closest_area <- neigh_name
+            }
+          }
+        }
+        
+        if (!is.null(closest_area) && min_distance < 0.05) {
+          # Update the neighborhood selector in the exploration section
+          # This will trigger the filtering for suggestions in that area
+          showNotification(paste("Exploring", closest_area, "- suggestions will focus on this area"), type = "message")
+          # TODO: Update the exploration area selectors
+        } else {
+          showNotification("Click closer to a neighborhood to explore that area", type = "default")
+        }
+      }
+    }
+  })
+  
+  # Confirm map click location
+  observeEvent(input$confirm_map_location, {
+    if (!is.na(values$home_lat) && !is.na(values$home_lng) && !is.null(values$preview_address)) {
+      values$home_address <- values$preview_address
+      values$starting_location_locked <- TRUE
+      values$map_clicked <- FALSE
+      output$address_status <- renderText(paste("Starting from:", values$home_address))
+      showNotification(paste("Starting location set to", values$home_address, "- Map now in exploration mode"), type = "success")
+    }
+  })
+  
+  # Manual lock starting location
+  observeEvent(input$lock_starting_location, {
+    if (!is.na(values$home_lat) && !is.na(values$home_lng)) {
+      values$starting_location_locked <- TRUE
+      showNotification("Starting location locked! Map now in exploration mode.", type = "success")
+    }
+  })
+  
+  # Reset starting location
+  observeEvent(input$reset_starting_location, {
+    values$starting_location_locked <- FALSE
+    values$home_lat <- NA_real_
+    values$home_lng <- NA_real_
+    values$home_address <- ""
+    output$address_status <- renderText("")
+    showNotification("Starting location reset. Click map to set new location.", type = "message")
   })
   
   # Distances only when home is set
@@ -950,6 +1724,16 @@ server <- function(input, output, session) {
             "max_distance" %in% names(context)) {
           df <- df[!is.na(df$distance_mi) & df$distance_mi <= context$max_distance, , drop = FALSE]
         }
+        if ("exclude_transport" %in% names(context) && 
+            home_is_set(values$home_address, values$home_lat, values$home_lng)) {
+          # For rainy weather, limit to places reachable by car/transit (avoid short walks/bikes)
+          excluded_modes <- context$exclude_transport
+          if ("🚶 Walking" %in% excluded_modes && "🚲 Biking" %in% excluded_modes) {
+            # Exclude places that would primarily be reached by walking or biking
+            # Keep very close places (under 0.5 mi - short dash to car) or longer distance places
+            df <- df[is.na(df$distance_mi) | df$distance_mi <= 0.5 | df$distance_mi >= 3, , drop = FALSE]
+          }
+        }
       }
     }
     # Transport constraints
@@ -964,14 +1748,6 @@ server <- function(input, output, session) {
         }
       }
     }
-    # Free keywords
-    if (!is.null(input$keyword_filter) && nzchar(input$keyword_filter)) {
-      keywords <- stringr::str_split(input$keyword_filter, ",")[[1]] |> stringr::str_trim()
-      for (kw in keywords[keywords != ""]) {
-        kw_match <- stringr::str_detect(tolower(paste(df$title, df$tags, df$note)), stringr::fixed(tolower(kw)))
-        df <- df[kw_match, , drop = FALSE]
-      }
-    }
     df
   })
   
@@ -982,79 +1758,91 @@ server <- function(input, output, session) {
   
   # Suggestions
   observeEvent(input$suggest_place, {
+    # Check if address is set
+    if (!home_is_set(values$home_address, values$home_lat, values$home_lng)) {
+      showNotification("Please set your starting address first to get personalized suggestions!", type = "warning")
+      return()
+    }
+    
     candidates <- available_places()
     if (nrow(candidates) == 0) { showNotification("No unvisited places match your criteria!", type = "warning"); values$suggested <- NULL; return() }
     context_for_plan <- if (length(input$context_filter) > 0) input$context_filter[1] else NULL
-    plans <- generate_day_plan(candidates, context_for_plan, input$selected_activities, input$selected_activity_modes, input$time_filter)
+    plans <- generate_day_plan(candidates, context_for_plan, input$selected_activities, input$selected_activity_modes, NULL)
     if (length(plans) > 0 && !is.null(plans[[1]])) {
       plan <- plans[[1]]
-      values$suggested <- plan$places[1, , drop = FALSE]
-      values$inspiration_text <- list(title = plan$title, description = plan$description, type = plan$type, estimated_time = plan$estimated_time)
+      suggested_place <- plan$places[1, , drop = FALSE]
+      
+      # Calculate distance and determine transit mode
+      if (!is.na(suggested_place$distance_mi[1])) {
+        transit_mode <- transit_by_distance(suggested_place$distance_mi[1])
+      } else {
+        transit_mode <- "🚌 Public Transit"
+      }
+      
+      values$suggested <- suggested_place
+      values$inspiration_text <- list(
+        title = plan$title, 
+        description = paste(transit_to_verb(transit_mode), suggested_place$title[1], "in", suggested_place$neighborhood[1], simple_activity_from_tags(suggested_place$tags[1])), 
+        type = plan$type, 
+        estimated_time = plan$estimated_time,
+        transit = transit_mode
+      )
     } else {
-      values$suggested <- candidates[sample(nrow(candidates), 1), , drop = FALSE]
-      values$inspiration_text <- NULL
+      chosen_place <- candidates[sample(nrow(candidates), 1), , drop = FALSE]
+      
+      # Calculate distance and determine transit mode
+      if (!is.na(chosen_place$distance_mi[1])) {
+        transit_mode <- transit_by_distance(chosen_place$distance_mi[1])
+      } else {
+        transit_mode <- "🚌 Public Transit"
+      }
+      
+      values$suggested <- chosen_place
+      values$inspiration_text <- list(
+        title = "Great Choice",
+        description = paste(transit_to_verb(transit_mode), chosen_place$title[1], "in", chosen_place$neighborhood[1], simple_activity_from_tags(chosen_place$tags[1])),
+        type = "suggestion",
+        estimated_time = "1-2 hours",
+        transit = transit_mode
+      )
     }
   })
   
   observeEvent(input$random_inspiration, {
+    # Check if address is set
+    if (!home_is_set(values$home_address, values$home_lat, values$home_lng)) {
+      showNotification("Please set your starting address first for the best surprise recommendations!", type = "warning")
+      return()
+    }
+    
     all_available <- places[!(places$id %in% values$completed), , drop = FALSE]
     if (nrow(all_available) == 0) { showNotification("You've visited everywhere! Time for new places.", type = "warning"); values$suggested <- NULL; return() }
     context_for_adventure <- if (length(input$context_filter) > 0) input$context_filter[1] else NULL
     adventures <- generate_surprise_adventure(
       available_places = all_available,
-      time_available = input$time_filter,
+      time_available = NULL,
       context = context_for_adventure,
       home_lat = values$home_lat, home_lng = values$home_lng, home_addr = values$home_address
     )
+    
     if (length(adventures) > 0 && !is.null(adventures[[1]])) {
       adventure <- adventures[[1]]
-      if (!is.null(adventure$places) && nrow(adventure$places) > 0) {
-        values$suggested <- adventure$places[1, , drop = FALSE]
-        values$inspiration_text <- list(
-          title = adventure$title %||% "Adventure",
-          description = adventure$description %||% "Explore something new!",
-          type = adventure$type %||% "adventure",
-          estimated_time = adventure$estimated_time %||% "1-2 hours",
-          transit = adventure$transit %||% "Walk",
-          neighborhood = adventure$neighborhood %||% "Portland"
-        )
-      } else adventure <- NULL
+      
+      # The new adventure generator always includes proper transit mode, locations, and activities
+      values$suggested <- adventure$places[1, , drop = FALSE]  # First location for map display
+      values$inspiration_text <- list(
+        title = adventure$title,
+        description = adventure$description,
+        type = adventure$type,
+        estimated_time = adventure$estimated_time,
+        transit = adventure$transit,
+        neighborhood = adventure$neighborhood,
+        full_adventure = adventure  # Store full adventure details
+      )
     } else {
-      adventure <- NULL
-    }
-    
-    if (is.null(adventure)) {
-      interesting_places <- all_available[
-        has_coords(all_available) &
-          grepl("coffee|vintage|record|bookstore|gallery|museum|brewery",
-                all_available$tags, ignore.case = TRUE),
-        , drop = FALSE]
-      if (nrow(interesting_places) > 0) {
-        chosen_place <- interesting_places[sample(nrow(interesting_places), 1), , drop = FALSE]
-        if (nrow(chosen_place) > 0 && !is.null(chosen_place$title) && nzchar(chosen_place$title[1])) {
-          activities <- c("explore", "check out", "wander to")
-          activity <- sample(activities, 1)
-          values$suggested <- chosen_place
-          values$inspiration_text <- list(
-            title = "Mystery Adventure",
-            description = paste(activity, chosen_place$title[1], "and try something new!"),
-            type = "adventure",
-            estimated_time = "1-2 hours"
-          )
-        } else interesting_places <- data.frame()
-      }
-      if (nrow(interesting_places) == 0) {
-        coord_ok <- has_coords(all_available)
-        if (sum(coord_ok) == 0) { showNotification("No mappable places have coordinates — adjust filters or set your address.", type = "warning"); values$suggested <- NULL; return(invisible(NULL)) }
-        safe_places <- all_available[coord_ok, , drop = FALSE]
-        values$suggested <- safe_places[sample(nrow(safe_places), 1), , drop = FALSE]
-        values$inspiration_text <- list(
-          title = "🎲 Random Adventure",
-          description = "Go explore this place and see what happens!",
-          type = "random",
-          estimated_time = "1-3 hours"
-        )
-      }
+      showNotification("Unable to generate adventure - try adjusting your filters or check available places.", type = "warning")
+      values$suggested <- NULL
+      values$inspiration_text <- NULL
     }
   })
   
@@ -1075,6 +1863,18 @@ server <- function(input, output, session) {
       showNotification(paste("↩️", values$suggested$title, "unmarked!"), type = "success")
     }
   })
+  observeEvent(input$mark_complete, {
+    if (is.null(values$suggested)) { 
+      showNotification("No suggestion to mark as complete!", type = "warning") 
+    } else {
+      values$completed <- unique(c(values$completed, values$suggested$id))
+      save_completed(values$completed)
+      showNotification(paste("✅", values$suggested$title, "marked as complete!"), type = "success")
+      # Clear the suggestion after marking complete
+      values$suggested <- NULL
+      values$inspiration_text <- NULL
+    }
+  })
   observeEvent(input$reset_visited, {
     values$completed <- character(0); save_completed(values$completed)
     showNotification("♻️ All visited places reset!", type = "info")
@@ -1082,13 +1882,20 @@ server <- function(input, output, session) {
   
   # ---- MAP: panes so markers are above polygons (clickable) ----
   output$map <- renderLeaflet({
-    center_lat <- if (!is.na(values$home_lat)) values$home_lat else 45.5152
-    center_lng <- if (!is.na(values$home_lng)) values$home_lng else -122.6784
-    leaflet() %>%
+    center_lat <- if (!is.na(values$home_lat)) values$home_lat else DEFAULT_LAT
+    center_lng <- if (!is.na(values$home_lng)) values$home_lng else DEFAULT_LNG
+    m <- leaflet() %>%
       addProviderTiles(providers$CartoDB.Positron) %>%
       addMapPane("polygons", zIndex = 410) %>%
       addMapPane("markers",  zIndex = 420) %>%
       setView(lng = center_lng, lat = center_lat, zoom = 11)
+    
+    # Test: Add a marker to see if the map is working at all
+    if (!is.na(center_lat) && !is.na(center_lng)) {
+      m <- m %>% addMarkers(lng = center_lng, lat = center_lat, popup = "Test marker")
+    }
+    
+    m
   })
   
   # Layers
@@ -1203,24 +2010,74 @@ server <- function(input, output, session) {
     if (is.null(values$suggested)) {
       div(class = "hero-empty",
           h2("🎯 What should you do today?"),
-          p("Hit 'Surprise Me' for a spontaneous adventure, or use 'Get Suggestions' for a tailored plan!"),
-          p("Set your preferences on the left to get personalized recommendations.")
+          p("First, set your starting location using the controls below."),
+          p("Then hit 'Surprise Me' for a spontaneous adventure, or use 'Guided Plan' for a tailored plan!"),
+          p("Set your preferences in the suggestion controls to get personalized recommendations.")
       )
     } else {
       place <- values$suggested
       clean_tags_display <- clean_tags(place$tags)
       nb_disp <- neigh_display_vec(place$neighborhood_geo, place$neighborhood)
       if (!is.null(values$inspiration_text) && is.list(values$inspiration_text)) {
-        div(class = "hero-card",
-            h2(values$inspiration_text$title),
-            div(class = "description", values$inspiration_text$description),
-            div(class = "details",
-                if (!is.na(place$distance_mi)) div(class = "detail-chip", paste(round(place$distance_mi, 1), "miles away")),
-                if (!is.na(nb_disp)) div(class = "detail-chip", nb_disp),
-                if (!is.null(values$inspiration_text$estimated_time)) div(class = "detail-chip", paste("⏱️", values$inspiration_text$estimated_time)),
-                if (nzchar(place$url)) tags$a("📍 View on Map", href = place$url, target = "_blank", class = "detail-chip", style = "color: var(--text); text-decoration: none;")
+        # Check if this is a multi-location adventure
+        full_adventure <- values$inspiration_text$full_adventure
+        
+        if (!is.null(full_adventure) && !is.null(full_adventure$num_locations) && full_adventure$num_locations > 1) {
+          # Multi-location adventure display
+          adventure_places <- full_adventure$places
+          activities <- full_adventure$activities
+          
+          # Create location details for multi-stop adventure
+          location_details <- lapply(1:nrow(adventure_places), function(i) {
+            place_name <- adventure_places$title[i]
+            place_url <- adventure_places$url[i]
+            activity <- if (length(activities) >= i) activities[i] else "explore"
+            div(class = "adventure-stop", 
+                style = "margin: 8px 0; padding: 14px 18px; background: rgba(255,255,255,0.6); border-radius: 8px; font-size: 1.3rem; display: flex; justify-content: space-between; align-items: center;",
+                div(
+                  tags$strong(paste("Stop", i, ":")), " ", place_name, " - ", activity
+                ),
+                if (nzchar(place_url %||% "")) 
+                  tags$a("📍", href = place_url, target = "_blank", 
+                         style = "color: var(--text); text-decoration: none; font-size: 1.5rem; margin-left: 12px;",
+                         title = "View on Google Maps")
             )
-        )
+          })
+          
+          div(class = "hero-card",
+              h2(values$inspiration_text$title),
+              div(class = "description", style = "margin-bottom: 16px;", "Your multi-stop adventure:"),
+              div(class = "adventure-details", location_details),
+              div(class = "details", style = "margin-top: 16px;",
+                  if (!is.null(values$inspiration_text$estimated_time)) div(class = "detail-chip", paste("⏱️", values$inspiration_text$estimated_time)),
+                  if (!is.null(values$inspiration_text$transit)) div(class = "detail-chip", values$inspiration_text$transit),
+                  # Removed starting neighborhood display
+              ),
+              div(style = "margin-top: 20px; text-align: center;",
+                  actionButton("mark_complete", "✅ Mark as Complete", 
+                              class = "btn-success", 
+                              style = "padding: 12px 24px; font-weight: 500;")
+              )
+          )
+        } else {
+          # Single location display (existing format)
+          div(class = "hero-card",
+              h2(values$inspiration_text$title),
+              div(class = "description", values$inspiration_text$description),
+              div(class = "details",
+                  if (!is.na(place$distance_mi)) div(class = "detail-chip", paste(round(place$distance_mi, 1), "miles away")),
+                  if (!is.na(nb_disp)) div(class = "detail-chip", nb_disp),
+                  if (!is.null(values$inspiration_text$estimated_time)) div(class = "detail-chip", paste("⏱️", values$inspiration_text$estimated_time)),
+                  if (!is.null(values$inspiration_text$transit)) div(class = "detail-chip", values$inspiration_text$transit),
+                  if (nzchar(place$url)) tags$a("📍 View on Map", href = place$url, target = "_blank", class = "detail-chip", style = "color: var(--text); text-decoration: none;")
+              ),
+              div(style = "margin-top: 20px; text-align: center;",
+                  actionButton("mark_complete", "✅ Mark as Complete", 
+                              class = "btn-success", 
+                              style = "padding: 12px 24px; font-weight: 500;")
+              )
+          )
+        }
       } else {
         div(class = "hero-card",
             h2("✨ ", place$title),
@@ -1229,6 +2086,11 @@ server <- function(input, output, session) {
                 if (!is.na(place$distance_mi)) div(class = "detail-chip", paste(round(place$distance_mi, 1), "miles away")),
                 if (!is.na(nb_disp)) div(class = "detail-chip", nb_disp),
                 if (nzchar(place$url)) tags$a("📍 View on Map", href = place$url, target = "_blank", class = "detail-chip", style = "color: var(--text); text-decoration: none;")
+            ),
+            div(style = "margin-top: 20px; text-align: center;",
+                actionButton("mark_complete", "✅ Mark as Complete", 
+                            class = "btn-success", 
+                            style = "padding: 12px 24px; font-weight: 500;")
             )
         )
       }

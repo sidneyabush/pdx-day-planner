@@ -361,6 +361,42 @@ process_csv_data <- function() {
   # Replace "Portland Parks" with just "Park"
   all_data$tags <- gsub("\\bPortland Parks\\b", "Park", all_data$tags, ignore.case = TRUE)
   
+  # Add specific tags based on source list names
+  cat("Adding list-specific tags...\n")
+  
+  # Add "Museums" tag for PDX museums list
+  museum_mask <- grepl("PDX.*museums|museums.*PDX", all_data$source_list, ignore.case = TRUE)
+  if (any(museum_mask)) {
+    all_data$tags[museum_mask] <- ifelse(
+      nzchar(all_data$tags[museum_mask]), 
+      paste(all_data$tags[museum_mask], "Museums", sep = "; "),
+      "Museums"
+    )
+    cat("Added 'Museums' tag to", sum(museum_mask), "places from PDX museums list\n")
+  }
+  
+  # Add "Trail" tag for Hiking & Trail Running PDX list
+  trail_mask <- grepl("Hiking.*Trail.*Running.*PDX|Trail.*Running.*PDX", all_data$source_list, ignore.case = TRUE)
+  if (any(trail_mask)) {
+    all_data$tags[trail_mask] <- ifelse(
+      nzchar(all_data$tags[trail_mask]), 
+      paste(all_data$tags[trail_mask], "Trail", sep = "; "),
+      "Trail"
+    )
+    cat("Added 'Trail' tag to", sum(trail_mask), "places from Hiking & Trail Running PDX list\n")
+  }
+  
+  # Add "Park" tag for Portland Parks list
+  park_mask <- grepl("Portland.*Parks|Parks.*Portland", all_data$source_list, ignore.case = TRUE)
+  if (any(park_mask)) {
+    all_data$tags[park_mask] <- ifelse(
+      nzchar(all_data$tags[park_mask]), 
+      paste(all_data$tags[park_mask], "Park", sep = "; "),
+      "Park"
+    )
+    cat("Added 'Park' tag to", sum(park_mask), "places from Portland Parks list\n")
+  }
+  
   # Try to extract coordinates from URLs first
   cat("Extracting coordinates from URLs...\n")
   coords <- lapply(all_data$url, extract_coords_from_url)
