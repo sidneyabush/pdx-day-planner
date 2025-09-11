@@ -539,26 +539,57 @@ ui <- fluidPage(
   }
   .header-photo:hover { transform:translateY(-4px); box-shadow:0 12px 40px rgba(0,0,0,0.15); }
 
-  /* Weather/time styling improvements */
+  /* Modern weather/time display */
   .weather-under { 
-    width:340px; display:flex; flex-direction:column; gap:12px; 
+    width:340px; display:flex; flex-direction:column; gap:16px; 
     align-items:stretch; justify-content:flex-start; 
   }
 
-  .weather-chip, .time-chip { 
-    display:block; width:100%; text-align:center; 
-    border-radius:999px; padding:12px 16px; font-size:13px; font-weight:500;
-    transition:all 0.2s ease; backdrop-filter:blur(10px);
+  /* Time Display */
+  .time-display {
+    background:linear-gradient(135deg, var(--secondary-50) 0%, #faf9ff 100%);
+    border:1px solid var(--secondary); border-radius:var(--radius-md);
+    padding:16px; transition:all 0.3s ease;
+  }
+  .time-display:hover { transform:translateY(-2px); box-shadow:var(--shadow-soft); }
+  
+  .time-label {
+    font-size:11px; text-transform:uppercase; letter-spacing:0.5px;
+    color:var(--secondary-600); font-weight:600; margin-bottom:4px;
+  }
+  .time-value {
+    font-size:14px; font-weight:600; color:var(--secondary-600);
+    font-family:'Poppins',sans-serif;
   }
 
-  .weather-chip { 
-    background:linear-gradient(135deg, var(--accent-50) 0%, #fff5f5 100%); 
-    border:1px solid var(--accent); color:var(--accent-600); 
+  /* Weather Display */
+  .weather-display {
+    background:linear-gradient(135deg, var(--accent-50) 0%, #fff5f5 100%);
+    border:1px solid var(--accent); border-radius:var(--radius-md);
+    padding:16px; transition:all 0.3s ease;
   }
-
-  .time-chip { 
-    background:linear-gradient(135deg, var(--secondary-50) 0%, #faf9ff 100%); 
-    border:1px solid var(--secondary); color:var(--secondary-600); 
+  .weather-display:hover { transform:translateY(-2px); box-shadow:var(--shadow-soft); }
+  
+  .weather-main {
+    display:flex; justify-content:space-between; align-items:center;
+    margin-bottom:12px;
+  }
+  .weather-condition {
+    font-size:14px; font-weight:600; color:var(--accent-600);
+    text-transform:capitalize; font-family:'Poppins',sans-serif;
+  }
+  .weather-temp {
+    font-size:18px; font-weight:700; color:var(--accent-600);
+    font-family:'Poppins',sans-serif;
+  }
+  
+  .weather-details {
+    display:flex; gap:12px; flex-wrap:wrap;
+  }
+  .weather-detail {
+    font-size:11px; color:var(--accent-600); opacity:0.8;
+    background:rgba(255,255,255,0.5); padding:4px 8px;
+    border-radius:12px; font-weight:500;
   }
 
   /* Mobile responsive */
@@ -579,44 +610,209 @@ ui <- fluidPage(
   }
 
   /* Explainer + centered random button, then address box */
-  .explainer { background:var(--card); border:1.5px solid var(--border); border-radius:14px;
-               padding:16px; box-shadow:0 8px 24px rgba(0,0,0,.05); margin-top:8px; }
-  .explainer h4 { margin:0 0 8px 0; font-weight:650; }
-  .explainer .muted { color:var(--muted); }
+  .explainer { 
+    background:var(--card); border:1px solid var(--border); border-radius:var(--radius-lg);
+    padding:24px; box-shadow:var(--shadow-soft); margin-top:16px; 
+    transition:all 0.3s ease; position:relative; overflow:hidden;
+  }
+  .explainer::before {
+    content:''; position:absolute; top:0; left:0; right:0; height:3px;
+    background:linear-gradient(90deg, var(--accent) 0%, var(--secondary) 100%);
+  }
+  .explainer:hover { transform:translateY(-2px); box-shadow:var(--shadow-medium); }
+  
+  .explainer h4 { 
+    margin:0 0 12px 0; font-weight:600; font-size:1.1rem; 
+    font-family:'Poppins',sans-serif; color:var(--text);
+  }
+  .explainer .muted { color:var(--muted); line-height:1.5; }
 
-  .cta-row-inside { display:flex; justify-content:center; padding-top:12px; }
-  .btn-big { font-weight:700; padding:12px 18px; border-radius:12px; border:1.5px solid var(--accent);
-             background:var(--accent-50); color:var(--accent-600); box-shadow:0 3px 12px rgba(14,165,168,.18); }
-  .btn-big:hover { transform: translateY(-1px); }
+  .cta-row-inside { display:flex; justify-content:center; padding-top:20px; }
+  .btn-big { 
+    font-family:'Poppins',sans-serif; font-weight:600; padding:16px 32px; 
+    border-radius:var(--radius-md); border:none;
+    background:linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%); 
+    color:white; box-shadow:var(--shadow-soft); 
+    transition:all 0.3s cubic-bezier(0.4,0,0.2,1); cursor:pointer;
+    text-decoration:none; display:inline-block; position:relative; overflow:hidden;
+  }
+  .btn-big::before {
+    content:''; position:absolute; top:0; left:-100%; width:100%; height:100%;
+    background:linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition:left 0.6s; z-index:1;
+  }
+  .btn-big:hover { 
+    transform:translateY(-3px); box-shadow:0 8px 25px rgba(246,139,139,0.4);
+    background:linear-gradient(135deg, var(--accent-hover) 0%, var(--accent) 100%);
+  }
+  .btn-big:hover::before { left:100%; }
+  .btn-big:active { transform:translateY(-1px); }
+  
+  /* Surprise button with animated dots */
+  .btn-surprise .btn-icon {
+    display:inline-block; margin-right:8px; position:relative;
+    width:16px; height:16px; vertical-align:middle;
+  }
+  .btn-surprise .btn-icon::before,
+  .btn-surprise .btn-icon::after {
+    content:''; position:absolute; width:4px; height:4px;
+    background:currentColor; border-radius:50%; animation:pulse 1.5s infinite;
+  }
+  .btn-surprise .btn-icon::before {
+    top:0; left:0; animation-delay:0s;
+  }
+  .btn-surprise .btn-icon::after {
+    bottom:0; right:0; animation-delay:0.75s;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity:0.3; transform:scale(0.8); }
+    50% { opacity:1; transform:scale(1.2); }
+  }
 
-  /* Address box under the random button (inside header card) */
-  .address-box { margin-top:14px; padding:14px; border:1.5px solid var(--border); border-radius:12px; background:#fff; }
-  .address-grid { display:grid; grid-template-columns: 1fr auto; gap:10px; align-items:center; }
-  .address-status { font-size:12px; color:#666; margin-top:6px; }
+  /* Address box improvements */
+  .address-box { 
+    margin-top:20px; padding:20px; border:1px solid var(--border); 
+    border-radius:var(--radius-md); background:var(--card); 
+    box-shadow:var(--shadow-soft); transition:all 0.3s ease;
+  }
+  .address-box:hover { box-shadow:var(--shadow-medium); }
+  .address-grid { display:grid; grid-template-columns: 1fr auto; gap:16px; align-items:center; }
+  .address-status { font-size:13px; color:var(--muted); margin-top:8px; font-weight:500; }
 
-  /* Left control panel, map, etc. unchanged */
-  .control-panel { background:var(--card); border-radius:16px; padding:22px; border:1.5px solid var(--border); box-shadow:0 6px 18px rgba(0,0,0,0.05);}
-  .control-panel h4, .control-panel h5 { color:var(--text); font-weight:600; margin:6px 0 8px 0; font-size:1.02em; letter-spacing:-0.01em; }
+  /* Control panel improvements */
+  .control-panel { 
+    background:var(--card); border-radius:var(--radius-lg); padding:28px; 
+    border:1px solid var(--border); box-shadow:var(--shadow-soft);
+    transition:all 0.3s ease; position:relative;
+  }
+  .control-panel:hover { box-shadow:var(--shadow-medium); }
+  
+  .control-panel h4, .control-panel h5 { 
+    color:var(--text); font-weight:600; margin:8px 0 12px 0; 
+    font-size:1.05em; letter-spacing:-0.01em; font-family:'Poppins',sans-serif;
+  }
 
-  .activity-btn { margin:4px; padding:10px 14px; border-radius:14px; border:1.5px solid var(--border); background:#fff; color:#334155; cursor:pointer; font-size:13px; font-weight:500; transition:all .18s ease; display:inline-block;}
-  .activity-btn:hover { border-color:var(--accent); transform:translateY(-1px); box-shadow:0 3px 10px rgba(14,165,168,.15); background:#fafafa;}
-  .activity-btn.active { background:var(--accent); color:#fff; border-color:var(--accent); box-shadow:0 4px 12px rgba(14,165,168,.35);}
+  /* Activity and transport button improvements */
+  .activity-btn { 
+    margin:6px 4px; padding:12px 16px; border-radius:var(--radius-md); 
+    border:1px solid var(--border); background:var(--card); color:var(--text); 
+    cursor:pointer; font-size:13px; font-weight:500; 
+    transition:all 0.3s cubic-bezier(0.4,0,0.2,1); display:inline-block;
+    position:relative; overflow:hidden;
+  }
+  .activity-btn::before {
+    content:''; position:absolute; top:0; left:-100%; width:100%; height:100%;
+    background:linear-gradient(90deg, transparent, rgba(246,139,139,0.1), transparent);
+    transition:left 0.5s; z-index:0;
+  }
+  .activity-btn:hover { 
+    border-color:var(--accent); transform:translateY(-2px); 
+    box-shadow:0 4px 12px rgba(246,139,139,0.2); background:var(--accent-50);
+  }
+  .activity-btn:hover::before { left:100%; }
+  .activity-btn.active { 
+    background:linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%); 
+    color:white; border-color:var(--accent); 
+    box-shadow:0 6px 16px rgba(246,139,139,0.4); transform:translateY(-1px);
+  }
 
-  .transport-btn { margin:4px; padding:11px 16px; border-radius:14px; border:1.5px solid var(--border); background:#fff; cursor:pointer; font-weight:600; transition:all .18s ease; color:#334155;}
-  .transport-btn:hover { border-color:var(--accent); transform:translateY(-1px); box-shadow:0 3px 10px rgba(14,165,168,.15);}
-  .transport-btn.active { background:var(--accent-50); border-color:var(--accent); color:var(--accent-600); box-shadow:0 3px 12px rgba(14,165,168,.18);}
+  .transport-btn { 
+    margin:6px 4px; padding:14px 18px; border-radius:var(--radius-md); 
+    border:1px solid var(--border); background:var(--card); cursor:pointer; 
+    font-weight:600; transition:all 0.3s cubic-bezier(0.4,0,0.2,1); 
+    color:var(--text); position:relative; overflow:hidden;
+  }
+  .transport-btn::before {
+    content:''; position:absolute; top:0; left:-100%; width:100%; height:100%;
+    background:linear-gradient(90deg, transparent, rgba(139,92,246,0.1), transparent);
+    transition:left 0.5s; z-index:0;
+  }
+  .transport-btn:hover { 
+    border-color:var(--secondary); transform:translateY(-2px); 
+    box-shadow:0 4px 12px rgba(139,92,246,0.2); background:var(--secondary-50);
+  }
+  .transport-btn:hover::before { left:100%; }
+  .transport-btn.active { 
+    background:linear-gradient(135deg, var(--secondary-50) 0%, #f8f6ff 100%); 
+    border-color:var(--secondary); color:var(--secondary-600); 
+    box-shadow:0 4px 12px rgba(139,92,246,0.25); transform:translateY(-1px);
+  }
 
-  .suggestion-box { background:#fff; border-radius:14px; padding:20px; border-left:4px solid var(--accent); margin:18px 0; box-shadow:0 8px 20px rgba(0,0,0,.06); border:1px solid var(--border);}
-  .dataTables_wrapper { background:#fff; border-radius:14px; padding:16px; box-shadow:0 8px 20px rgba(0,0,0,.06); border:1px solid var(--border);}
-  .leaflet-container { border-radius:14px; box-shadow:0 8px 20px rgba(0,0,0,.06);}
+  /* Suggestion box improvements */
+  .suggestion-box { 
+    background:var(--card); border-radius:var(--radius-lg); padding:28px; 
+    border-left:4px solid var(--accent); margin:24px 0; 
+    box-shadow:var(--shadow-soft); border:1px solid var(--border);
+    transition:all 0.3s ease; position:relative; overflow:hidden;
+  }
+  .suggestion-box::before {
+    content:''; position:absolute; top:0; right:0; bottom:0; width:2px;
+    background:linear-gradient(180deg, var(--accent) 0%, var(--secondary) 100%);
+  }
+  .suggestion-box:hover { 
+    transform:translateY(-2px); box-shadow:var(--shadow-medium); 
+  }
+  .suggestion-box h3, .suggestion-box h4 { 
+    font-family:'Poppins',sans-serif; margin-bottom:12px; 
+  }
+  
+  /* Data table improvements */
+  .dataTables_wrapper { 
+    background:var(--card); border-radius:var(--radius-lg); padding:24px; 
+    box-shadow:var(--shadow-soft); border:1px solid var(--border);
+    transition:all 0.3s ease;
+  }
+  .dataTables_wrapper:hover { box-shadow:var(--shadow-medium); }
+  
+  /* Map improvements */
+  .leaflet-container { 
+    border-radius:var(--radius-lg); box-shadow:var(--shadow-medium);
+    transition:all 0.3s ease;
+  }
+  .leaflet-container:hover { box-shadow:0 12px 40px rgba(0,0,0,0.15); }
 
-  #sextant_label, #neighborhood_label { margin-bottom: 4px !important; }
+  /* Form improvements */
+  .form-control, .selectize-input, input[type=text], select {
+    border:1px solid var(--border) !important; border-radius:var(--radius-sm) !important;
+    padding:12px 16px !important; font-size:14px !important; 
+    transition:all 0.3s ease !important; background:var(--card) !important;
+  }
+  .form-control:focus, .selectize-input.focus, input[type=text]:focus, select:focus {
+    border-color:var(--accent) !important; 
+    box-shadow:0 0 0 3px rgba(246,139,139,0.1) !important;
+    outline:none !important;
+  }
+  
+  .btn-primary, .btn-outline-primary {
+    border-radius:var(--radius-sm) !important; font-weight:500 !important;
+    padding:12px 20px !important; transition:all 0.3s ease !important;
+    border:1px solid var(--accent) !important;
+  }
+  .btn-primary {
+    background:linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%) !important;
+    color:white !important;
+  }
+  .btn-primary:hover {
+    transform:translateY(-2px) !important; 
+    box-shadow:0 6px 16px rgba(246,139,139,0.3) !important;
+  }
+  .btn-outline-primary {
+    background:var(--card) !important; color:var(--accent) !important;
+  }
+  .btn-outline-primary:hover {
+    background:var(--accent-50) !important; transform:translateY(-1px) !important;
+  }
 
+  #sextant_label, #neighborhood_label { margin-bottom: 8px !important; }
+
+  /* Responsive improvements */
   @media (max-width: 1100px){
     .header-grid { grid-template-columns: 1fr; }
     .header-left { width:100%; align-items:center; }
     .header-photo { width:100%; max-width:420px; height:auto; }
     .weather-under { width:100%; max-width:420px; }
+    .control-panel { padding:20px; }
+    .suggestion-box { padding:20px; }
   }
 ")),
     uiOutput("theme_override")
@@ -636,7 +832,7 @@ ui <- fluidPage(
               h1("Portland Day-Off Planner"),
               uiOutput("home_info_ui"),
               div(class = "explainer",
-                  h4("🧭 Explorer Panel"),
+                  h4("Explorer Panel"),
                   div(class = "muted",
                       "Pick a Sextant, then optionally a Neighborhood in it. Add context and transport. ",
                       "Enter your home address to enable distance-aware filters."
@@ -645,10 +841,10 @@ ui <- fluidPage(
                       "Use “Get Suggestions” for a tailored plan or “Random Suggestion” for a spontaneous idea."
                   ),
                   div(class="cta-row-inside",
-                      actionButton("random_inspiration", "🎲 Random Suggestion", class = "btn-big")
+                      actionButton("random_inspiration", HTML("<span class='btn-icon'></span>Surprise Me"), class = "btn-big btn-surprise")
                   ),
                   div(class="address-box",
-                      h5("📍 Address (optional)"),
+                      h5("Address (optional)"),
                       div(class="address-grid",
                           textInput("home_address", "", placeholder = "Enter your address (e.g., 123 Main St, Portland, OR)", value = "", width = "100%"),
                           actionButton("geocode_address", "Set Location", class = "btn-outline-primary", style = "min-width: 140px;")
@@ -843,17 +1039,31 @@ server <- function(input, output, session) {
     get_weather_forecast() %||% list(success = FALSE)
   })
   
-  # Weather/time chips (uses emoji)
+  # Modern weather/time display without emojis
   output$weather_ui <- renderUI({
     w <- current_weather(); time_str <- pdx_time_string()
     if (isTRUE(w$success)) {
       tagList(
-        tags$span(class="time-chip",  paste(time_str)),
-        tags$span(class="weather-chip", paste(weather_emoji(w$condition), w$condition)),
-        tags$span(class="weather-chip", paste("Temp:", w$temperature))
+        div(class="time-display",
+            div(class="time-label", "Current Time"),
+            div(class="time-value", time_str)
+        ),
+        div(class="weather-display",
+            div(class="weather-main",
+                div(class="weather-condition", w$condition),
+                div(class="weather-temp", w$temperature)
+            ),
+            div(class="weather-details",
+                span(class="weather-detail", paste("Humidity:", w$humidity)),
+                span(class="weather-detail", paste("Wind:", w$wind))
+            )
+        )
       )
     } else {
-      tags$span(class="time-chip",  paste(time_str))
+      div(class="time-display",
+          div(class="time-label", "Current Time"),
+          div(class="time-value", time_str)
+      )
     }
   })
   
