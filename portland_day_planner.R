@@ -376,7 +376,15 @@ generate_day_plan <- function(available_places, context=NULL, selected_activitie
   else "1-2 hours"
   
   plan_title <- paste("🏡", chosen_neighborhood)
-  plan_description <- paste(transit_mode, "to", chosen_neighborhood, "and", activity_plan$description)
+  # Convert transit mode to verb form for description
+  transit_verb <- case_when(
+    transit_mode == "🚶 Walk" ~ "Walk",
+    transit_mode == "🚲 Bicycle Rights!" ~ "Bike",
+    transit_mode == "🚌 Public Transit" ~ "Take public transit",
+    transit_mode == "🚗 Drive" ~ "Drive",
+    TRUE ~ "Go"
+  )
+  plan_description <- paste(transit_verb, "to", chosen_neighborhood, "and", activity_plan$description)
   list(list(
     type="structured",
     title=plan_title,
@@ -573,8 +581,10 @@ ui <- fluidPage(
   }
 
   /* Modern header layout */
-  .header-grid { display:grid; grid-template-columns: 420px 1fr; gap:40px; align-items:start; }
-  .header-left { width:420px; }
+  .header-grid { display:flex; flex-direction:column; gap:24px; align-items:center; }
+  .header-content-row { display:grid; grid-template-columns: 1fr 1fr; gap:40px; width:80%; max-width:900px; align-items:start; margin:0 auto; }
+  .header-image-section { display:flex; justify-content:center; }
+  .header-suggestion-section { display:flex; align-items:center; }
   
   .image-container {
     position:relative; width:400px; height:400px; border-radius:var(--radius-xl); 
@@ -644,14 +654,15 @@ ui <- fluidPage(
   }
 
   /* Mobile responsive */
-  @media (max-width: 1100px){
-    .header { padding:24px; }
-    .header-grid { grid-template-columns: 1fr; gap:24px; }
-    .header-left { width:100%; display:flex; justify-content:center; }
-    .image-container { width:100%; max-width:400px; height:400px; }
+  @media (max-width: 768px){
+    .header { padding:20px; }
+    .header-grid { gap:16px; }
+    .header-content-row { grid-template-columns: 1fr; gap:24px; }
+    .image-container { width:100%; max-width:350px; height:350px; }
+    .header-controls { margin-top:16px; }
   }
 
-  .header-right h1 { 
+  .header h1 { 
     font-family:'Poppins',sans-serif; font-weight:700; margin:0 0 8px 0; 
     font-size:2.5rem; letter-spacing:-0.02em; color:var(--text);
     color:var(--text);
@@ -669,7 +680,7 @@ ui <- fluidPage(
   .btn-big { 
     font-family:'Poppins',sans-serif; font-weight:600; padding:16px 32px; 
     border-radius:var(--radius-md); border:none;
-    background:var(--accent); 
+    background:#d1d5db; 
     color:white; box-shadow:var(--shadow-soft); 
     transition:all 0.3s cubic-bezier(0.4,0,0.2,1); cursor:pointer;
     text-decoration:none; display:inline-block; position:relative; overflow:hidden;
@@ -890,25 +901,33 @@ ui <- fluidPage(
     uiOutput("theme_override")
   ),
   
-  # ======= HEADER (bigger image left; weather under image; title/explainer/random + address on right) =======
+  # ======= HEADER (title first, then image left + suggestion card right) =======
   div(class = "header",
       div(class = "header-grid",
-          # Left: just the image, clean
-          div(class="header-left",
-              div(class="image-container",
-                  if (!is.null(HEADER_IMG))
-                    tags$img(src = HEADER_IMG, alt = "Portland", class = "header-photo")
-              )
-          ),
-          # Right: title, home info, explainer, centered random
-          div(class = "header-right",
+          # Title and home info first
+          div(class = "header-title-section", style = "text-align: center; width: 100%;",
               h1("The Dream of the 90s is Alive in Portland"),
-              uiOutput("home_info_ui"),
-              div(class = "header-controls",
-                  div(class="cta-row",
-                      actionButton("random_inspiration", HTML("<span class='btn-icon'></span>Surprise Me"), class = "btn-big btn-surprise")
+              uiOutput("home_info_ui")
+          ),
+          # Image and suggestion side by side
+          div(class = "header-content-row",
+              # Image on left
+              div(class="header-image-section",
+                  div(class="image-container",
+                      if (!is.null(HEADER_IMG))
+                        tags$img(src = HEADER_IMG, alt = "Portland", class = "header-photo")
+                  )
+              ),
+              # Suggestion card on right
+              div(class="header-suggestion-section",
+                  div(class="hero-suggestion",
+                      uiOutput("hero_suggestion_display")
                   )
               )
+          ),
+          # Large surprise me button below 
+          div(class = "header-controls", style = "text-align: center; width: 100%; margin-top: 32px;",
+              actionButton("random_inspiration", HTML("<span class='btn-icon'></span>Surprise Me"), class = "btn-big btn-surprise", style = "font-size: 1.5rem; padding: 24px 48px; font-weight: 700;")
           )
       )
   ),
@@ -985,11 +1004,6 @@ ui <- fluidPage(
     
     column(
       8,
-      # HERO SUGGESTION CARD - After address input
-      div(class="hero-suggestion",
-          uiOutput("hero_suggestion_display")
-      ),
-      br(),
       # Map second
       div(class="map-container",
           leafletOutput("map", height = 420)
