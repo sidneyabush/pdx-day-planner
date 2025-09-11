@@ -321,44 +321,108 @@ simple_activity_from_tags <- function(tags_text) {
   t <- tolower(tags_text %||% "")
   pick <- function(...) any(grepl(paste0("(", paste(list(...), collapse="|"), ")"), t))
   
-  # Coffee & drinks - natural phrasing
-  if (pick("coffee","cafe","espresso","latte")) return(sample(c("for coffee", "to grab coffee", "for a coffee break"), 1))
+  # Coffee & drinks - detailed activities
+  if (pick("coffee","cafe","espresso","latte")) return(sample(c(
+    "for coffee and to read your book", "to grab coffee and people watch", "for a coffee break", 
+    "to draw your surroundings"
+  ), 1))
   
-  # Restaurants & food - what people actually say
-  if (pick("restaurant","dining","eatery","kitchen","grill","bistro","tavern")) return(sample(c("to grab food", "to eat", "for dinner", "to try the food"), 1))
-  if (pick("food","lunch","dinner","brunch","breakfast","meal")) return(sample(c("to eat", "for a meal", "to grab food"), 1))
-  if (pick("cart","truck","stand","street food")) return(sample(c("to try the food", "for a quick bite", "to grab something"), 1))
-  if (pick("pizza","burger","sandwich","taco","noodle","pasta","soup")) return(sample(c("to eat", "to try the food", "for a bite"), 1))
+  # Restaurants & food - specific dining activities  
+  if (pick("restaurant","dining","eatery","kitchen","grill","bistro","tavern")) return(sample(c(
+    "to try the food", "for dinner", "to grab a bite", "to sample the menu", 
+    "to enjoy a meal", "to try the local cuisine"
+  ), 1))
+  if (pick("food","lunch","dinner","brunch","breakfast","meal")) return(sample(c(
+    "to eat", "for a meal", "to grab food", "to try something new"
+  ), 1))
+  if (pick("cart","truck","stand","street food")) return(sample(c(
+    "to try street food", "for a quick bite", "to grab something tasty"
+  ), 1))
   
-  # Drinks & nightlife - more natural
-  if (pick("brewery","distillery")) return(sample(c("to try the beer", "for drinks", "to taste beer"), 1))
-  if (pick("bar","pub","cocktail","wine")) return(sample(c("for drinks", "to grab a drink", "for a cocktail"), 1))
+  # Drinks & nightlife - social activities
+  if (pick("brewery","distillery")) return(sample(c(
+    "to try the beer", "for drinks with friends", "to taste local brews", "for happy hour"
+  ), 1))
+  if (pick("bar","pub","cocktail","wine")) return(sample(c(
+    "for drinks", "to grab a cocktail", "to try the wine", "to meet friends"
+  ), 1))
   
-  # Sweets - how people talk about desserts
-  if (pick("bakery","pastry","donut")) return(sample(c("for pastries", "to grab a donut", "for something sweet"), 1))
-  if (pick("dessert","sweet","ice cream","gelato")) return(sample(c("for dessert", "for something sweet", "to treat yourself"), 1))
+  # Sweets & treats - indulgent activities
+  if (pick("bakery","pastry","donut")) return(sample(c(
+    "for a sweet treat", "to grab something sweet", "for something sweet", "to treat yourself"
+  ), 1))
+  if (pick("dessert","sweet","ice cream","gelato")) return(sample(c(
+    "for a sweet treat", "to treat yourself", "for something sweet"
+  ), 1))
   
-  # Nature & outdoors - active phrasing
-  if (pick("trail","hike")) return(sample(c("to go hiking", "for a hike", "to hit the trails"), 1))
-  if (pick("park","garden","arboretum")) return(sample(c("to walk around", "to enjoy nature", "for a stroll"), 1))
-  if (pick("nature","forest","outdoor")) return(sample(c("to enjoy nature", "to get outside", "for fresh air"), 1))
+  # Nature & outdoors - active detailed activities
+  if (pick("trail","hike")) return(sample(c(
+    "to go hiking", "for a hike", "to hit the trails", "to explore nature", "to get some exercise"
+  ), 1))
+  if (pick("park","garden","arboretum")) return(sample(c(
+    "to walk around", "to enjoy nature", "for a stroll", "to have a picnic", "to relax outdoors"
+  ), 1))
+  if (pick("nature","forest","outdoor")) return(sample(c(
+    "to enjoy nature", "to get outside", "for fresh air", "to disconnect from the city"
+  ), 1))
   
-  # Cultural & entertainment
-  if (pick("museum","gallery")) return(sample(c("to check out the exhibits", "to see the art", "to explore"), 1))
-  if (pick("theater","cinema","movie")) return(sample(c("to catch a show", "to see a movie", "for entertainment"), 1))
+  # Cultural & entertainment - engaging activities
+  if (pick("museum","gallery")) return(sample(c(
+    "to explore the exhibits", "to see the art", "to learn something new", "to take in the culture", "to admire the collection"
+  ), 1))
+  if (pick("theater","cinema","movie","film","screening")) return(sample(c(
+    "to see a movie", "to catch a film", "to watch a movie", "for a movie night"
+  ), 1))
   
-  # Shopping & browsing
-  if (pick("bookstore","library")) return(sample(c("to browse books", "to check out books", "to read"), 1))
-  if (pick("thrift","vintage","antique")) return(sample(c("to browse", "to treasure hunt", "to find something unique"), 1))
-  if (pick("market","shopping","store")) return(sample(c("to browse", "to shop around", "to check it out"), 1))
-  if (pick("record","vinyl","music")) return(sample(c("to dig for records", "to browse music", "to find some tunes"), 1))
+  # Shopping & browsing - discovery activities
+  if (pick("bookstore","library")) return(sample(c(
+    "to find your next read", "to browse books", "to discover new authors", "to explore the stacks", "to find a good book"
+  ), 1))
+  if (pick("thrift","vintage","antique")) return(sample(c(
+    "to hunt for treasures", "to browse vintage finds", "to search for unique items", "to thrift shop", "to find hidden gems"
+  ), 1))
+  if (pick("market","shopping","store")) return(sample(c(
+    "to browse around", "to shop", "to see what they have", "to explore"
+  ), 1))
+  if (pick("record","vinyl","music")) return(sample(c(
+    "to dig for records", "to browse vinyl", "to discover new music", "to hunt for rare finds", "to find some good tunes"
+  ), 1))
   
-  # Sightseeing
-  if (pick("mural","street art")) return(sample(c("to see the art", "to check out the murals", "for photos"), 1))
-  if (pick("bridge","view","scenic","lookout")) return(sample(c("for the view", "to see the sights", "for photos"), 1))
-  if (pick("architecture","historic","landmark")) return(sample(c("to see the architecture", "to check it out", "for the history"), 1))
+  # Sightseeing - photo and exploration activities  
+  if (pick("mural","street art")) return(sample(c(
+    "to see the street art", "to check out the murals", "for photos", "to admire the artwork"
+  ), 1))
+  if (pick("bridge","view","scenic","lookout")) return(sample(c(
+    "for the view", "to see the sights", "for photos", "to take in the scenery"
+  ), 1))
+  if (pick("architecture","historic","landmark")) return(sample(c(
+    "to see the architecture", "for the history", "to learn about the area", "to check out the landmark"
+  ), 1))
   
-  return("to check out")
+  # Specialized stores & services - specific purpose activities
+  if (pick("bike","cycling","bicycle")) return(sample(c(
+    "to look at bikes", "to get bike gear", "to ask about repairs", "to browse cycling equipment"
+  ), 1))
+  if (pick("tattoo","piercing")) return(sample(c(
+    "to browse designs", "to check out their work", "to get inspired", "to see the art"
+  ), 1))
+  if (pick("salon","spa","beauty")) return(sample(c(
+    "to treat yourself", "for some self-care", "to get pampered", "to relax"
+  ), 1))
+  if (pick("hardware","tool","repair")) return(sample(c(
+    "to find supplies", "to get what you need", "to solve your project", "to browse tools"
+  ), 1))
+  if (pick("game","toy","hobby")) return(sample(c(
+    "to browse games", "to find something fun", "to check out the selection", "to discover new games"
+  ), 1))
+  if (pick("art supplies","craft","creative")) return(sample(c(
+    "to get inspired", "to find art supplies", "to browse materials", "to fuel your creativity"
+  ), 1))
+  
+  # Generic but still specific fallback activities
+  return(sample(c(
+    "to browse around", "to check it out", "to see what they offer", "to explore", "to discover something new"
+  ), 1))
 }
 
 # ---------- Portland time helper ----------
@@ -496,11 +560,11 @@ generate_surprise_adventure <- function(available_places, time_available = NULL,
     main_transit <- "🚌 Public Transit"
   }
   
-  # Generate activities based on place tags
+  # Generate activities based on place tags using the improved function
   activities <- c()
   for (i in 1:nrow(selected_places)) {
     place <- selected_places[i, ]
-    activity <- generate_activity_from_tags(place$tags)
+    activity <- simple_activity_from_tags(place$tags)
     activities <- c(activities, activity)
   }
   
@@ -589,6 +653,179 @@ generate_activity_from_tags <- function(tags) {
   
   # Default activities
   return(sample(c("explore", "try something new", "discover something new"), 1))
+}
+
+# Generate contextually appropriate activities for multi-stop plans
+generate_contextual_activities <- function(places) {
+  if (is.null(places) || nrow(places) == 0) return(character(0))
+  
+  activities <- character(nrow(places))
+  
+  # Define activity types by venue characteristics
+  quiet_activities <- c("to read your book", "to work on your laptop", "to catch up with a friend", "to journal")
+  social_activities <- c("to people watch", "to draw your surroundings", "to take photos", "to soak in the atmosphere")
+  focused_activities <- c("to browse books", "to hunt for treasures", "to explore the collection", "to discover new music")
+  
+  for (i in seq_len(nrow(places))) {
+    tags_lower <- tolower(places$tags[i] %||% "")
+    
+    # Coffee shops, libraries - quiet, lingering activities
+    if (grepl("coffee|cafe|library", tags_lower)) {
+      activities[i] <- sample(quiet_activities, 1)
+    }
+    # Bookstores, record shops - focused browsing activities  
+    else if (grepl("bookstore|book|record|vinyl|music", tags_lower)) {
+      activities[i] <- sample(focused_activities, 1)
+    }
+    # Museums, galleries - contemplative activities
+    else if (grepl("museum|gallery", tags_lower)) {
+      activities[i] <- sample(c("to explore the exhibits", "to see the art", "to learn something new", "to admire the collection"), 1)
+    }
+    # Restaurants, bars - social activities
+    else if (grepl("restaurant|bar|brewery|pub|food|dining", tags_lower)) {
+      activities[i] <- sample(c("to try the food", "for drinks", "to grab a bite", "to enjoy a meal"), 1)
+    }
+    # Markets, busy places - observational activities
+    else if (grepl("market|bakery|bagel|busy|street", tags_lower) || grepl("shop|store|thrift|vintage", tags_lower)) {
+      activities[i] <- sample(social_activities, 1)
+    }
+    # Parks, outdoor spaces - nature activities
+    else if (grepl("park|garden|nature|outdoor|trail", tags_lower)) {
+      activities[i] <- sample(c("to walk around", "to enjoy nature", "for a stroll", "to relax outdoors"), 1)
+    }
+    # Fallback to simple activity assignment
+    else {
+      activities[i] <- simple_activity_from_tags(places$tags[i])
+    }
+  }
+  
+  return(activities)
+}
+
+# Generate guided multi-stop plans (similar to surprise adventure but with user filters)
+generate_guided_multi_stop <- function(available_places, num_stops, context = NULL, 
+                                      home_lat = NULL, home_lng = NULL, home_addr = NULL) {
+  if (is.null(available_places) || nrow(available_places) == 0 || num_stops < 2) return(NULL)
+  
+  # Filter to places with coordinates
+  valid_places <- available_places[!is.na(available_places$lat) & !is.na(available_places$lng), , drop = FALSE]
+  if (nrow(valid_places) < num_stops) return(NULL)
+  
+  # Use the same time categorization as surprise adventures
+  categorize_venue_time <- function(tags) {
+    tags_lower <- tolower(tags %||% "")
+    if (grepl("coffee|cafe|bakery|breakfast|brunch", tags_lower)) return("morning")
+    if (grepl("lunch|restaurant|food|museum|gallery|park|bookstore|shopping", tags_lower)) return("afternoon") 
+    if (grepl("bar|brewery|cocktail|wine|pub|beer|dinner|nightlife", tags_lower)) return("evening")
+    return("anytime")
+  }
+  
+  valid_places$time_category <- sapply(valid_places$tags, categorize_venue_time)
+  
+  # Select places with proper time progression
+  selected_places <- if (num_stops == 2) {
+    # Two locations: morning/afternoon first, then evening
+    morning_afternoon <- valid_places[valid_places$time_category %in% c("morning", "afternoon", "anytime"), , drop = FALSE]
+    evening <- valid_places[valid_places$time_category %in% c("evening", "anytime"), , drop = FALSE]
+    
+    if (nrow(morning_afternoon) > 0 && nrow(evening) > 0) {
+      first <- morning_afternoon[sample(nrow(morning_afternoon), 1), , drop = FALSE]
+      evening_filtered <- evening[evening$id != first$id, , drop = FALSE]
+      if (nrow(evening_filtered) > 0) {
+        second <- evening_filtered[sample(nrow(evening_filtered), 1), , drop = FALSE]
+        rbind(first, second)
+      } else {
+        valid_places[sample(nrow(valid_places), min(2, nrow(valid_places))), , drop = FALSE]
+      }
+    } else {
+      valid_places[sample(nrow(valid_places), min(2, nrow(valid_places))), , drop = FALSE]
+    }
+  } else {
+    # Three locations: morning -> afternoon -> evening progression
+    morning <- valid_places[valid_places$time_category %in% c("morning", "anytime"), , drop = FALSE]
+    afternoon <- valid_places[valid_places$time_category %in% c("afternoon", "anytime"), , drop = FALSE]
+    evening <- valid_places[valid_places$time_category %in% c("evening", "anytime"), , drop = FALSE]
+    
+    selected <- data.frame()
+    used_ids <- character(0)
+    
+    # Try to get one from each category
+    if (nrow(morning) > 0) {
+      first <- morning[sample(nrow(morning), 1), , drop = FALSE]
+      selected <- rbind(selected, first)
+      used_ids <- c(used_ids, first$id)
+    }
+    
+    if (nrow(afternoon) > 0) {
+      afternoon_filtered <- afternoon[!afternoon$id %in% used_ids, , drop = FALSE]
+      if (nrow(afternoon_filtered) > 0) {
+        second <- afternoon_filtered[sample(nrow(afternoon_filtered), 1), , drop = FALSE]
+        selected <- rbind(selected, second)
+        used_ids <- c(used_ids, second$id)
+      }
+    }
+    
+    if (nrow(evening) > 0) {
+      evening_filtered <- evening[!evening$id %in% used_ids, , drop = FALSE]
+      if (nrow(evening_filtered) > 0) {
+        third <- evening_filtered[sample(nrow(evening_filtered), 1), , drop = FALSE]
+        selected <- rbind(selected, third)
+        used_ids <- c(used_ids, third$id)
+      }
+    }
+    
+    # Fill remaining slots if needed
+    if (nrow(selected) < num_stops) {
+      remaining <- valid_places[!valid_places$id %in% used_ids, , drop = FALSE]
+      if (nrow(remaining) > 0) {
+        needed <- min(num_stops - nrow(selected), nrow(remaining))
+        additional <- remaining[sample(nrow(remaining), needed), , drop = FALSE]
+        selected <- rbind(selected, additional)
+      }
+    }
+    
+    selected
+  }
+  
+  # Calculate distances and determine transit mode
+  if (!is.null(home_lat) && !is.null(home_lng) && !is.na(home_lat) && !is.na(home_lng)) {
+    selected_places$distance_mi <- mapply(function(lat, lng) {
+      calc_distance_miles(home_lat, home_lng, lat, lng)
+    }, selected_places$lat, selected_places$lng)
+    
+    max_distance <- max(selected_places$distance_mi, na.rm = TRUE)
+    main_transit <- if (!is.na(max_distance)) transit_by_distance(max_distance) else "🚌 Public Transit"
+  } else {
+    main_transit <- "🚌 Public Transit"
+  }
+  
+  # Generate contextually appropriate activities for each stop
+  activities <- generate_contextual_activities(selected_places)
+  
+  # Create guided plan description
+  transit_verb <- tolower(transit_to_verb(main_transit))
+  
+  if (num_stops == 2) {
+    description <- paste(stringr::str_to_sentence(paste(transit_verb, selected_places$title[1], activities[1])), 
+                        "then head to", selected_places$title[2], activities[2])
+  } else {
+    description <- paste(stringr::str_to_sentence(paste(transit_verb, selected_places$title[1], activities[1])),
+                        "then", selected_places$title[2], activities[2], 
+                        "and finish at", selected_places$title[3], activities[3])
+  }
+  
+  # Return adventure structure
+  list(
+    title = paste(num_stops, "Stop Guided Plan"),
+    description = description,
+    type = "guided_plan",
+    estimated_time = paste(num_stops * 90, "minutes"),
+    transit = main_transit,
+    places = selected_places,
+    activities = activities,
+    num_locations = num_stops,
+    neighborhood = paste(unique(selected_places$neighborhood[!is.na(selected_places$neighborhood)]), collapse = ", ")
+  )
 }
 
 # ======= DATA & MAP SETUP (paste this after your helpers, before ui <- fluidPage) =======
@@ -1089,7 +1326,15 @@ ui <- fluidPage(
   .btn-outline-primary{ background:var(--card) !important; color:var(--accent) !important; }
   .btn-outline-primary:hover{ background:var(--accent-50) !important; transform:translateY(-1px) !important; }
 
-  #sextant_label, #neighborhood_label { margin-bottom: 8px !important; }
+
+  /* Disabled transport button styles */
+  .transport-btn.disabled, .transport-btn:disabled {
+    opacity: 0.4 !important;
+    color: #999 !important;
+    background-color: #f5f5f5 !important;
+    cursor: not-allowed !important;
+    pointer-events: none !important;
+  }
 
   @media (max-width:1100px){
     .header-grid { grid-template-columns: 1fr; }
@@ -1202,11 +1447,28 @@ ui <- fluidPage(
                    selectizeInput("context_filter", "", choices = names(CONTEXT_FILTERS), selected = NULL, multiple = TRUE,
                                   options = list(placeholder = 'Any context'), width = "100%"),
                    br(),
-                   h5(id="sextant_label","Explore Quadrants"),
-                   uiOutput("section_selector"),
-                   h5(id="neighborhood_label","Explore Neighborhoods"),
-                   uiOutput("neighborhood_selector")
-                   
+                   h5("Where to explore?"),
+                   fluidRow(
+                     column(12,
+                       div(style = "margin-bottom: 8px;",
+                           uiOutput("section_selector")
+                       )
+                     )
+                   ),
+                   fluidRow(
+                     column(8,
+                       div(style = "margin-bottom: 8px;",
+                           uiOutput("neighborhood_selector")
+                       )
+                     ),
+                     column(4,
+                       div(style = "margin-bottom: 8px;",
+                           selectInput("num_stops", "Stops", 
+                                      choices = c("1" = 1, "2" = 2, "3" = 3), 
+                                      selected = 1, width = "100%")
+                       )
+                     )
+                   )
             ),
             column(3,
                    h4("What kinds of places?"),
@@ -1287,6 +1549,26 @@ ui <- fluidPage(
         var active_transport = $('#transport_buttons .transport-btn.active:visible').map(function(){return $(this).text();}).get();
         Shiny.setInputValue('selected_transport', active_transport.join(', '), {priority: 'event'});
       }
+      
+      if (contexts && contexts.includes('🚶 No Car')) {
+        // Disable driving option
+        $('#transport_buttons .transport-btn').each(function(){
+          var t = $(this).text();
+          if (t.includes('Driving')) {
+            $(this).prop('disabled', true).addClass('disabled').removeClass('active');
+          }
+        });
+        var active_transport = $('#transport_buttons .transport-btn.active:not(.disabled)').map(function(){return $(this).text();}).get();
+        Shiny.setInputValue('selected_transport', active_transport.join(', '), {priority: 'event'});
+      } else {
+        // Re-enable driving option when No Car is not selected
+        $('#transport_buttons .transport-btn').each(function(){
+          var t = $(this).text();
+          if (t.includes('Driving')) {
+            $(this).prop('disabled', false).removeClass('disabled');
+          }
+        });
+      }
     });
   "))
 )
@@ -1365,17 +1647,86 @@ server <- function(input, output, session) {
     preview_address = NULL,
     map_clicked = FALSE,
     starting_location_locked = FALSE,
-    pending_nb = NULL           # <-- new: stores desired neighborhood during quadrant refresh
+    pending_nb = NULL           # stores desired neighborhood during quadrant refresh
   )
   
   
   neighborhood_to_quadrant <- function(neigh) {
     if (is.null(neigh) || !nzchar(neigh)) return(NA_character_)
     target <- tolower(trimws(neigh))
+    
+    # First check hardcoded neighborhoods
     for (q in names(NEIGHBORHOODS_BY_QUADRANT)) {
       if (target %in% tolower(names(NEIGHBORHOODS_BY_QUADRANT[[q]]))) return(q)
     }
+    
+    # If not found, check geographic boundaries
+    if (!is.null(neighborhood_boundaries) && !is.null(NEI_NAME_COL) &&
+        !is.null(sections_boundaries) && !is.null(SEC_NAME_COL)) {
+      # Try exact match first
+      nb_matches <- neighborhood_boundaries[tolower(as.character(neighborhood_boundaries[[NEI_NAME_COL]])) == target, , drop = FALSE]
+      
+      # If no exact match, try partial match (in case of slight naming differences)
+      if (nrow(nb_matches) == 0) {
+        all_nb_names <- tolower(as.character(neighborhood_boundaries[[NEI_NAME_COL]]))
+        partial_matches <- which(grepl(target, all_nb_names, fixed = TRUE) | grepl(all_nb_names, target, fixed = TRUE))
+        if (length(partial_matches) > 0) {
+          nb_matches <- neighborhood_boundaries[partial_matches[1], , drop = FALSE] # Take first match
+        }
+      }
+      
+      if (nrow(nb_matches) > 0) {
+        # Find which quadrant this neighborhood intersects with
+        for (q in names(PORTLAND_QUADRANTS)) {
+          q_norm <- normalize_sextant(q)
+          sel_secs <- sections_boundaries[sections_boundaries[[SEC_NAME_COL]] %in% q_norm, , drop = FALSE]
+          if (nrow(sel_secs) > 0) {
+            intersects <- safe_st_intersects_rows(nb_matches, sel_secs)
+            if (length(intersects) > 0) return(q)
+          }
+        }
+      }
+    }
+    
     NA_character_
+  }
+  
+  # Get neighborhood info (coordinates and name) from either hardcoded data or geographic boundaries
+  get_neighborhood_info <- function(neighborhood, quadrant) {
+    if (is.null(neighborhood) || !nzchar(neighborhood)) return(NULL)
+    
+    # First try hardcoded neighborhoods
+    if (!is.null(quadrant) && quadrant %in% names(NEIGHBORHOODS_BY_QUADRANT)) {
+      hardcoded_info <- NEIGHBORHOODS_BY_QUADRANT[[quadrant]][[neighborhood]]
+      if (!is.null(hardcoded_info)) return(hardcoded_info)
+    }
+    
+    # If not found, calculate from geographic boundaries
+    if (!is.null(neighborhood_boundaries) && !is.null(NEI_NAME_COL)) {
+      # Try exact match first (case insensitive)
+      nb_matches <- neighborhood_boundaries[tolower(as.character(neighborhood_boundaries[[NEI_NAME_COL]])) == tolower(neighborhood), , drop = FALSE]
+      
+      # If no exact match, try partial match
+      if (nrow(nb_matches) == 0) {
+        all_nb_names <- as.character(neighborhood_boundaries[[NEI_NAME_COL]])
+        target_lower <- tolower(neighborhood)
+        partial_matches <- which(grepl(target_lower, tolower(all_nb_names), fixed = TRUE) | grepl(tolower(all_nb_names), target_lower, fixed = TRUE))
+        if (length(partial_matches) > 0) {
+          nb_matches <- neighborhood_boundaries[partial_matches[1], , drop = FALSE] # Take first match
+        }
+      }
+      
+      if (nrow(nb_matches) > 0) {
+        # Calculate centroid of the neighborhood
+        bbox <- sf::st_bbox(nb_matches)
+        lat <- (bbox$ymin + bbox$ymax) / 2
+        lng <- (bbox$xmin + bbox$xmax) / 2
+        actual_name <- as.character(nb_matches[[NEI_NAME_COL]])[1]
+        return(list(lat = lat, lng = lng, name = actual_name))
+      }
+    }
+    
+    NULL
   }
   strip_portland <- function(x) sub("\\s*portland\\s*$", "", tolower(trimws(x %||% "")))
   normalize_quadrant_input <- function(x) normalize_sextant(tools::toTitleCase(strip_portland(x)))
@@ -1474,7 +1825,19 @@ server <- function(input, output, session) {
       return()
     }
     
-    neighborhoods <- names(NEIGHBORHOODS_BY_QUADRANT[[q]] %||% list())
+    # Use the same geographic boundary approach as exploration neighborhoods
+    if (!is.null(sections_boundaries) && !is.null(SEC_NAME_COL) &&
+        !is.null(neighborhood_boundaries) && !is.null(NEI_NAME_COL)) {
+      sel_secs <- sections_boundaries[sections_boundaries[[SEC_NAME_COL]] %in% normalize_sextant(q), , drop = FALSE]
+      rows_to_draw <- safe_st_intersects_rows(neighborhood_boundaries, sel_secs)
+      neighborhoods <- if (length(rows_to_draw)) {
+        neighborhood_boundaries[rows_to_draw, ][[NEI_NAME_COL]] |> as.character() |> unique() |> sort()
+      } else character(0)
+    } else {
+      # Fallback to hardcoded list if geographic data not available
+      neighborhoods <- names(NEIGHBORHOODS_BY_QUADRANT[[q]] %||% list())
+    }
+    
     choices <- c("Use entire quadrant" = "", neighborhoods)
     
     # Prefer a programmatically requested neighborhood if present
@@ -1495,14 +1858,19 @@ server <- function(input, output, session) {
     
     # Check if a specific neighborhood is selected
     if (!is.null(input$selected_neighborhood) && nzchar(input$selected_neighborhood)) {
-      neighborhood_info <- NEIGHBORHOODS_BY_QUADRANT[[input$selected_quadrant]][[input$selected_neighborhood]]
-      values$home_lat <- neighborhood_info$lat
-      values$home_lng <- neighborhood_info$lng
-      values$home_address <- neighborhood_info$name
-      values$starting_location_locked <- TRUE
-      values$map_clicked <- FALSE  # Clear any map click preview
-      output$address_status <- renderText(paste("Starting from:", neighborhood_info$name))
-      showNotification(paste("Starting location set to", neighborhood_info$name, "- Map now in exploration mode"), type = "message")
+      neighborhood_info <- get_neighborhood_info(input$selected_neighborhood, input$selected_quadrant)
+      if (!is.null(neighborhood_info)) {
+        values$home_lat <- neighborhood_info$lat
+        values$home_lng <- neighborhood_info$lng
+        values$home_address <- neighborhood_info$name
+        values$starting_location_locked <- TRUE
+        values$map_clicked <- FALSE  # Clear any map click preview
+        output$address_status <- renderText(paste("Starting from:", neighborhood_info$name))
+        showNotification(paste("Starting location set to", neighborhood_info$name, "- Map now in exploration mode"), type = "message")
+      } else {
+        output$address_status <- renderText("Neighborhood not found.")
+        return()
+      }
       
       # Sync explore selectors
       updateSelectizeInput(session, "section_filter",
@@ -1619,7 +1987,7 @@ server <- function(input, output, session) {
   output$section_selector <- renderUI({
     sextant_choices <- get_sextant_choices(places, sections_boundaries, SEC_NAME_COL)
     selectizeInput("section_filter", "", choices = sextant_choices, selected = NULL, multiple = TRUE,
-                   options = list(placeholder = "Choose Quadrant(s)"))
+                   options = list(placeholder = "Any quadrant"))
   })
   
   observeEvent(input$map_shape_click, {
@@ -1647,24 +2015,6 @@ server <- function(input, output, session) {
         return(invisible(NULL))
       }
       
-      if (identical(click$group, "neighborhoods")) {
-        nb <- sub("^neigh::", "", click$id)
-        q <- neighborhood_to_quadrant(nb)
-        if (is.na(q)) return(NULL)
-        
-        # Update both the quadrant and neighborhood dropdowns directly
-        updateSelectInput(session, "selected_quadrant", selected = q)
-        # Wait a moment for quadrant to update, then set neighborhood
-        updateSelectInput(session, "selected_neighborhood", selected = nb)
-        
-        info <- NEIGHBORHOODS_BY_QUADRANT[[q]][[nb]]
-        values$home_lat <- info$lat; values$home_lng <- info$lng
-        values$preview_address <- info$name
-        values$map_clicked <- TRUE
-        output$address_status <- renderText(paste("Preview:", info$name, "(click '✓ Confirm Map Location' to lock)"))
-        showNotification(paste("Starting location preview:", info$name), type = "default")
-        return(invisible(NULL))
-      }
       
       return(invisible(NULL))
     }
@@ -1707,7 +2057,7 @@ server <- function(input, output, session) {
         is.null(sections_boundaries) || is.null(SEC_NAME_COL) ||
         is.null(neighborhood_boundaries) || is.null(NEI_NAME_COL)) {
       return(selectizeInput("neighborhood_filter", "", choices = character(0), selected = NULL, multiple = TRUE,
-                            options = list(placeholder = "Select a Quadrant first")))
+                            options = list(placeholder = "Select quadrant first")))
     }
     sel_secs <- sections_boundaries[sections_boundaries[[SEC_NAME_COL]] %in% normalize_sextant(input$section_filter), , drop = FALSE]
     rows_to_draw <- safe_st_intersects_rows(neighborhood_boundaries, sel_secs)
@@ -1715,7 +2065,7 @@ server <- function(input, output, session) {
       neighborhood_boundaries[rows_to_draw, ][[NEI_NAME_COL]] |> as.character() |> unique() |> sort()
     } else character(0)
     selectizeInput("neighborhood_filter", "", choices = available_neighborhoods, selected = NULL, multiple = TRUE,
-                   options = list(placeholder = if (length(available_neighborhoods)) "Choose Neighborhoods (optional)" else "No Neighborhoods in the selected Quadrant(s)"))
+                   options = list(placeholder = if (length(available_neighborhoods)) "Any neighborhood" else "No neighborhoods found"))
   })
   
   # Filtering pipeline
@@ -1826,45 +2176,80 @@ server <- function(input, output, session) {
     
     candidates <- available_places()
     if (nrow(candidates) == 0) { showNotification("No unvisited places match your criteria!", type = "warning"); values$suggested <- NULL; return() }
-    context_for_plan <- if (length(input$context_filter) > 0) input$context_filter[1] else NULL
-    plans <- generate_day_plan(candidates, context_for_plan, input$selected_activities, character(0), NULL)
-    if (length(plans) > 0 && !is.null(plans[[1]])) {
-      plan <- plans[[1]]
-      suggested_place <- plan$places[1, , drop = FALSE]
-      
-      # Calculate distance and determine transit mode
-      if (!is.na(suggested_place$distance_mi[1])) {
-        transit_mode <- transit_by_distance(suggested_place$distance_mi[1])
+    
+    # Get user-selected number of stops
+    num_stops <- as.numeric(input$num_stops %||% 1)
+    
+    if (num_stops == 1) {
+      # Single stop: use original logic
+      context_for_plan <- if (length(input$context_filter) > 0) input$context_filter[1] else NULL
+      plans <- generate_day_plan(candidates, context_for_plan, input$selected_activities, character(0), NULL)
+      if (length(plans) > 0 && !is.null(plans[[1]])) {
+        plan <- plans[[1]]
+        suggested_place <- plan$places[1, , drop = FALSE]
+        
+        # Calculate distance and determine transit mode
+        if (!is.na(suggested_place$distance_mi[1])) {
+          transit_mode <- transit_by_distance(suggested_place$distance_mi[1])
+        } else {
+          transit_mode <- "🚌 Public Transit"
+        }
+        
+        values$suggested <- suggested_place
+        values$inspiration_text <- list(
+          title = plan$title, 
+          description = paste(transit_to_verb(transit_mode), suggested_place$title[1], "in", suggested_place$neighborhood[1], simple_activity_from_tags(suggested_place$tags[1])), 
+          type = plan$type, 
+          estimated_time = plan$estimated_time,
+          transit = transit_mode
+        )
       } else {
-        transit_mode <- "🚌 Public Transit"
+        chosen_place <- candidates[sample(nrow(candidates), 1), , drop = FALSE]
+        
+        # Calculate distance and determine transit mode
+        if (!is.na(chosen_place$distance_mi[1])) {
+          transit_mode <- transit_by_distance(chosen_place$distance_mi[1])
+        } else {
+          transit_mode <- "🚌 Public Transit"
+        }
+        
+        values$suggested <- chosen_place
+        values$inspiration_text <- list(
+          title = "Great Choice",
+          description = paste(transit_to_verb(transit_mode), chosen_place$title[1], "in", chosen_place$neighborhood[1], simple_activity_from_tags(chosen_place$tags[1])),
+          type = "suggestion",
+          estimated_time = "1-2 hours",
+          transit = transit_mode
+        )
       }
-      
-      values$suggested <- suggested_place
-      values$inspiration_text <- list(
-        title = plan$title, 
-        description = paste(transit_to_verb(transit_mode), suggested_place$title[1], "in", suggested_place$neighborhood[1], simple_activity_from_tags(suggested_place$tags[1])), 
-        type = plan$type, 
-        estimated_time = plan$estimated_time,
-        transit = transit_mode
-      )
     } else {
-      chosen_place <- candidates[sample(nrow(candidates), 1), , drop = FALSE]
+      # Multi-stop: use adventure generation with specified number of stops
+      context_for_adventure <- if (length(input$context_filter) > 0) input$context_filter[1] else NULL
       
-      # Calculate distance and determine transit mode
-      if (!is.na(chosen_place$distance_mi[1])) {
-        transit_mode <- transit_by_distance(chosen_place$distance_mi[1])
-      } else {
-        transit_mode <- "🚌 Public Transit"
-      }
-      
-      values$suggested <- chosen_place
-      values$inspiration_text <- list(
-        title = "Great Choice",
-        description = paste(transit_to_verb(transit_mode), chosen_place$title[1], "in", chosen_place$neighborhood[1], simple_activity_from_tags(chosen_place$tags[1])),
-        type = "suggestion",
-        estimated_time = "1-2 hours",
-        transit = transit_mode
+      # Create a custom adventure generation that respects the number of stops
+      adventure <- generate_guided_multi_stop(
+        available_places = candidates,
+        num_stops = num_stops,
+        context = context_for_adventure,
+        home_lat = values$home_lat, home_lng = values$home_lng, home_addr = values$home_address
       )
+      
+      if (!is.null(adventure)) {
+        values$suggested <- adventure$places[1, , drop = FALSE]  # First location for map display
+        values$inspiration_text <- list(
+          title = adventure$title,
+          description = adventure$description,
+          type = "guided_plan",
+          estimated_time = adventure$estimated_time,
+          transit = adventure$transit,
+          neighborhood = adventure$neighborhood,
+          full_adventure = adventure  # Store full adventure details
+        )
+      } else {
+        showNotification("Unable to generate multi-stop plan with your criteria. Try adjusting filters.", type = "warning")
+        values$suggested <- NULL
+        values$inspiration_text <- NULL
+      }
     }
   })
   
@@ -1961,9 +2346,20 @@ server <- function(input, output, session) {
     suggested <- values$suggested
     proxy <- leafletProxy("map") %>% clearMarkers() %>% clearShapes()
     
-    # NEW: only allow polygon interaction when exploration mode is on
+    # Store current zoom/center to maintain view during updates
+    current_zoom <- input$map_zoom %||% 11
+    current_center_lat <- input$map_center$lat %||% DEFAULT_LAT
+    current_center_lng <- input$map_center$lng %||% DEFAULT_LNG
+    
+    # Only allow polygon interaction when exploration mode is on
     clickable_now <- isTRUE(values$starting_location_locked)
     pointer_ev <- if (clickable_now) "auto" else "none"
+    
+    # Only show data points when location is locked (not in location setting mode)
+    show_data_points <- isTRUE(values$starting_location_locked)
+    
+    # Check if we have active suggestions
+    has_suggestions <- show_data_points && !is.null(suggested) && nrow(suggested) > 0 && has_coords(suggested)[1]
     
     # ---- Sextant polygons ----
     if (!is.null(sections_boundaries) && !is.null(SEC_NAME_COL) && SEC_NAME_COL %in% names(sections_boundaries)) {
@@ -1977,9 +2373,23 @@ server <- function(input, output, session) {
       # Combine both selections for highlighting
       all_selected <- unique(c(explore_selected, starting_selected))
       
+      # In exploration mode (location locked), show all quadrants for selection
+      # In location setting mode, only show selected quadrants to reduce clutter
+      if (isTRUE(values$starting_location_locked)) {
+        # Exploration mode - show all quadrants but highlight selected ones
+        quadrants_to_show <- sx_names
+      } else {
+        # Location setting mode - only show selected quadrants if any are selected
+        quadrants_to_show <- if (length(all_selected) > 0) all_selected else sx_names
+      }
+      
       section_colors <- c("Southwest"="#ff6b6b","Northwest"="#4ecdc4","Southeast"="#45b7d1","Northeast"="#96ceb4","North"="#feca57","South"="#fd79a8","Other"="#a29bfe")
       for (i in seq_along(sx_names)) {
-        sx <- sx_names[i]; is_selected <- sx %in% all_selected
+        sx <- sx_names[i]
+        # Only draw quadrants that should be shown
+        if (!(sx %in% quadrants_to_show)) next
+        
+        is_selected <- sx %in% all_selected
         base_color <- section_colors[[sx]] %||% section_colors[["Other"]]
         proxy <- proxy %>% addPolygons(
           data = secs_all[i, ],
@@ -1993,15 +2403,25 @@ server <- function(input, output, session) {
       }
     }
     
-    # ---- Neighborhood polygons (only when a Sextant is selected) ----
-    # Check both exploration AND starting location quadrant selections
-    explore_sx <- input$section_filter
-    starting_sx <- input$selected_quadrant
-    all_sx <- unique(c(explore_sx, if (!is.null(starting_sx) && starting_sx != "") starting_sx else character(0)))
-    
-    if (length(all_sx) > 0 &&
-        !is.null(neighborhood_boundaries) && !is.null(NEI_NAME_COL) &&
-        !is.null(sections_boundaries) && !is.null(SEC_NAME_COL)) {
+    # ---- Neighborhood polygons (only when a Sextant is selected and no suggestions active) ----
+    # During location setting: only show neighborhoods if starting quadrant is selected
+    # During exploration: show neighborhoods for both starting and exploration quadrants
+    # Hide neighborhoods when suggestions are active for clean display
+    if (!has_suggestions) {
+      explore_sx <- input$section_filter
+      starting_sx <- input$selected_quadrant
+      
+      if (isTRUE(values$starting_location_locked)) {
+        # Exploration mode - show neighborhoods for both starting and exploration quadrants
+        all_sx <- unique(c(explore_sx, if (!is.null(starting_sx) && starting_sx != "") starting_sx else character(0)))
+      } else {
+        # Location setting mode - only show neighborhoods if starting quadrant is selected
+        all_sx <- if (!is.null(starting_sx) && starting_sx != "") starting_sx else character(0)
+      }
+      
+      if (length(all_sx) > 0 &&
+          !is.null(neighborhood_boundaries) && !is.null(NEI_NAME_COL) &&
+          !is.null(sections_boundaries) && !is.null(SEC_NAME_COL)) {
       sel_secs <- sections_boundaries[sections_boundaries[[SEC_NAME_COL]] %in% normalize_sextant(all_sx), , drop = FALSE]
       rows_to_draw <- safe_st_intersects_rows(neighborhood_boundaries, sel_secs)
       if (length(rows_to_draw) > 0) {
@@ -2029,6 +2449,7 @@ server <- function(input, output, session) {
           )
         }
       }
+      }
     }
     
     # Home marker
@@ -2040,35 +2461,65 @@ server <- function(input, output, session) {
       )
     }
     
-    # Filtered places (markers on top)
-    fp <- filtered[has_coords(filtered), , drop = FALSE]
-    if (nrow(fp) > 0) {
-      dist_txt <- ifelse(is.na(fp$distance_mi), "", paste0("<br>", round(fp$distance_mi, 1), " miles from home"))
-      proxy <- proxy %>% addCircleMarkers(
-        lng = fp$lng, lat = fp$lat, radius = 6,
-        color = "#e08a63", fillColor = "#fef7f4", opacity = 0.95, fillOpacity = 0.85,
-        popup = paste0("<b>", fp$title, "</b><br>", fp$tags, dist_txt),
-        options = pathOptions(pane = "markers")
-      )
+    # Only show other places when there are NO active suggestions
+    if (show_data_points && !has_suggestions) {
+      # Filtered places (markers on top) - only show when no suggestions are active
+      fp <- filtered[has_coords(filtered), , drop = FALSE]
+      if (nrow(fp) > 0) {
+        dist_txt <- ifelse(is.na(fp$distance_mi), "", paste0("<br>", round(fp$distance_mi, 1), " miles from home"))
+        proxy <- proxy %>% addCircleMarkers(
+          lng = fp$lng, lat = fp$lat, radius = 6,
+          color = "#e08a63", fillColor = "#fef7f4", opacity = 0.95, fillOpacity = 0.85,
+          popup = paste0("<b>", fp$title, "</b><br>", fp$tags, dist_txt),
+          options = pathOptions(pane = "markers")
+        )
+      }
+      
+      # Visited places - only show when no suggestions are active
+      if (nrow(visited) > 0) {
+        proxy <- proxy %>% addCircleMarkers(
+          lng = visited$lng, lat = visited$lat, radius = 5,
+          color = "#9ca3af", fillColor = "#9ca3af", opacity = 0.95, fillOpacity = 0.75,
+          options = pathOptions(pane = "markers")
+        )
+      }
     }
     
-    # Visited
-    if (nrow(visited) > 0) {
-      proxy <- proxy %>% addCircleMarkers(
-        lng = visited$lng, lat = visited$lat, radius = 5,
-        color = "#9ca3af", fillColor = "#9ca3af", opacity = 0.95, fillOpacity = 0.75,
-        options = pathOptions(pane = "markers")
-      )
+    # Suggested highlights - different colors for single vs multi-stop, only when location is locked
+    if (has_suggestions) {
+      # Check if this is a multi-stop adventure
+      full_adventure <- values$inspiration_text$full_adventure
+      is_multi_stop <- !is.null(full_adventure) && !is.null(full_adventure$num_locations) && full_adventure$num_locations > 1
+      
+      if (is_multi_stop && !is.null(full_adventure$places) && nrow(full_adventure$places) > 1) {
+        # Multi-stop adventure: use different colors for each stop
+        adventure_places <- full_adventure$places[has_coords(full_adventure$places), , drop = FALSE]
+        stop_colors <- c("#3b82f6", "#ef4444", "#10b981")  # Blue, Red, Green
+        stop_names <- c("Stop 1", "Stop 2", "Stop 3")
+        
+        for (i in 1:min(nrow(adventure_places), 3)) {
+          place <- adventure_places[i, ]
+          proxy <- proxy %>% addCircleMarkers(
+            lng = place$lng, lat = place$lat, radius = 14,
+            color = stop_colors[i], fillColor = stop_colors[i], opacity = 1, fillOpacity = 0.9,
+            popup = paste0("<b>", stop_names[i], ": ", place$title, "</b>"),
+            options = pathOptions(pane = "markers")
+          )
+        }
+        # Don't force zoom - let user control the view
+      } else {
+        # Single stop: use bright blue
+        proxy <- proxy %>% addCircleMarkers(
+          lng = suggested$lng, lat = suggested$lat, radius = 14,
+          color = "#3b82f6", fillColor = "#3b82f6", opacity = 1, fillOpacity = 0.9,
+          popup = paste0("<b>", suggested$title, "</b>"),
+          options = pathOptions(pane = "markers")
+        )
+        # Don't force zoom - let user control the view
+      }
     }
     
-    # Suggested highlight
-    if (!is.null(suggested) && nrow(suggested) > 0 && has_coords(suggested)[1]) {
-      proxy <- proxy %>% addCircleMarkers(
-        lng = suggested$lng, lat = suggested$lat, radius = 12,
-        color = "#e8a083", fillColor = "#e8a083", opacity = 1, fillOpacity = 0.9,
-        options = pathOptions(pane = "markers")
-      ) %>% setView(lng = suggested$lng, lat = suggested$lat, zoom = 15)
-    }
+    # Never force view changes - let user control zoom and pan freely
   })
   
   # Auto-apply rainy context if detected and none chosen
