@@ -56,6 +56,28 @@ pdx_time_string <- function() {
   format(as.POSIXct(Sys.time(), tz="America/Los_Angeles"), "%a %b %d, %I:%M %p")
 }
 
+# Time-based activity filtering
+should_exclude_by_time <- function(tags_text) {
+  if (is.na(tags_text) || tags_text == "") return(FALSE)
+  
+  current_time <- as.POSIXct(Sys.time(), tz="America/Los_Angeles")
+  current_hour <- as.numeric(format(current_time, "%H"))
+  
+  tags_lower <- tolower(tags_text)
+  
+  # No coffee after 1pm (13:00)
+  if (current_hour >= 13 && grepl("coffee|cafe|espresso|latte", tags_lower)) {
+    return(TRUE)
+  }
+  
+  # No drinks before 5pm (17:00)
+  if (current_hour < 17 && grepl("beer|cocktails|bar|brewery|wine|spirits", tags_lower)) {
+    return(TRUE)
+  }
+  
+  return(FALSE)
+}
+
 # --- Geo helpers for neighborhoods & sextants ------------------------
 home_is_set <- function(addr, lat, lng) {
   !is.null(addr) && nzchar(addr) && !is.na(lat) && !is.na(lng)
@@ -1356,6 +1378,11 @@ server <- function(input, output, session) {
         df <- df[kw_match, , drop = FALSE]
       }
     }
+    
+    # Apply time-based filtering (no coffee after 1pm, no drinks before 5pm)
+    time_exclude <- sapply(df$tags, should_exclude_by_time)
+    df <- df[!time_exclude, , drop = FALSE]
+    
     df
   })
   
