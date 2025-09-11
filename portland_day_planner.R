@@ -639,11 +639,13 @@ normalize_sextant <- function(x) {
   out
 }
 
-neighborhood_to_quadrant <- function(name) {
+neighborhood_to_quadrant <- function(neigh) {
+  if (is.null(neigh) || !nzchar(neigh)) return(NA_character_)
+  tg <- tolower(trimws(neigh))
   for (q in names(NEIGHBORHOODS_BY_QUADRANT)) {
-    if (name %in% names(NEIGHBORHOODS_BY_QUADRANT[[q]])) return(q)
+    if (tg %in% tolower(names(NEIGHBORHOODS_BY_QUADRANT[[q]]))) return(q)
   }
-  return(NA_character_)
+  NA_character_
 }
 
 neigh_display_vec <- function(geo, txt) ifelse(!is.na(geo) & nzchar(geo), geo, txt)
@@ -1140,15 +1142,6 @@ ui <- fluidPage(
               )
           ),
           div(id = "address_status", class="address-status"),
-          
-          # Map click confirmation button (only shown when map has been clicked)
-          conditionalPanel(
-            condition = "output.map_clicked == true",
-            div(style = "text-align: center; margin: 12px 0;",
-                actionButton("confirm_map_location", "✓ Confirm Map Location", 
-                           class = "btn-primary", style = "min-width: 180px;")
-            )
-          ),
           
           br(),
           div(style = "border-top: 1px solid var(--border); padding-top: 16px;",
@@ -1700,10 +1693,44 @@ server <- function(input, output, session) {
                    options = list(placeholder = "Choose Quadrant(s)"))
   })
   
-  # Map clicks → selectors
   observeEvent(input$map_shape_click, {
     click <- input$map_shape_click
     if (is.null(click$id) || is.null(click$group)) return(NULL)
+    
+    # ---------- SET LOCATION MODE (not locked): update Starting Location only ----------
+    if (!isTRUE(values$starting_location_locked)) {
+      
+      if (identical(click$group, "sextants")) {
+        q <- normalize_sextant(sub("^sextant::", "", click$id))
+        if (!(q %in% names(PORTLAND_QUADRANTS))) return(NULL)
+        set_starting_selects(q, NULL)
+        info <- PORTLAND_QUADRANTS[[q]]
+        values$home_lat <- info$lat; values$home_lng <- info$lng
+        values$preview_address <- info$name
+        values$map_clicked <- TRUE
+        output$address_status <- renderText(paste("Preview:", info$name, "(click '✓ Confirm Map Location' to lock)"))
+        showNotification(paste("Starting location preview:", info$name), type = "default")
+        return(invisible(NULL))
+      }
+      
+      if (identical(click$group, "neighborhoods")) {
+        nb <- sub("^neigh::", "", click$id)
+        q <- neighborhood_to_quadrant(nb)
+        if (is.na(q)) return(NULL)
+        set_starting_selects(q, nb)
+        info <- NEIGHBORHOODS_BY_QUADRANT[[q]][[nb]]
+        values$home_lat <- info$lat; values$home_lng <- info$lng
+        values$preview_address <- info$name
+        values$map_clicked <- TRUE
+        output$address_status <- renderText(paste("Preview:", info$name, "(click '✓ Confirm Map Location' to lock)"))
+        showNotification(paste("Starting location preview:", info$name), type = "default")
+        return(invisible(NULL))
+      }
+      
+      return(invisible(NULL))
+    }
+    
+    # ---------- EXPLORE MODE (locked): your existing explore toggles ----------
     if (identical(click$group, "sextants")) {
       raw_name <- sub("^sextant::", "", click$id)
       sec_name <- normalize_sextant(raw_name)
@@ -1717,6 +1744,7 @@ server <- function(input, output, session) {
       showNotification(paste0("🧭 Quadrant: ", if (length(cur)) paste(cur, collapse = ", ") else "Any"), type = "message")
       return(invisible(NULL))
     }
+    
     if (identical(click$group, "neighborhoods")) {
       if (is.null(isolate(input$section_filter)) || !length(isolate(input$section_filter))) {
         showNotification("Select a Quadrant first to choose Neighborhoods.", type = "message"); return(NULL)
@@ -1728,6 +1756,7 @@ server <- function(input, output, session) {
       showNotification(paste0("🏘️ Neighborhood: ", if (length(cur)) paste(cur, collapse = ", ") else "Any"), type = "message")
     }
   }, ignoreInit = TRUE)
+  
   
   observeEvent(input$section_filter, {
     updateSelectizeInput(session, "neighborhood_filter", selected = character(0))
@@ -1976,19 +2005,14 @@ server <- function(input, output, session) {
   output$map <- renderLeaflet({
     center_lat <- if (!is.na(values$home_lat)) values$home_lat else DEFAULT_LAT
     center_lng <- if (!is.na(values$home_lng)) values$home_lng else DEFAULT_LNG
-    m <- leaflet() %>%
+    
+    leaflet(options = leafletOptions(doubleClickZoom = FALSE)) %>%  # ⬅️ prevent zoom-on-click
       addProviderTiles(providers$CartoDB.Positron) %>%
       addMapPane("polygons", zIndex = 410) %>%
       addMapPane("markers",  zIndex = 420) %>%
       setView(lng = center_lng, lat = center_lat, zoom = 11)
-    
-    # Test: Add a marker to see if the map is working at all
-    if (!is.na(center_lat) && !is.na(center_lng)) {
-      m <- m %>% addMarkers(lng = center_lng, lat = center_lat, popup = "Test marker")
-    }
-    
-    m
   })
+  
   
   # Layers
   observe({
@@ -1997,7 +2021,11 @@ server <- function(input, output, session) {
     suggested <- values$suggested
     proxy <- leafletProxy("map") %>% clearMarkers() %>% clearShapes()
     
-    # Sextant polygons
+    # NEW: only allow polygon interaction when exploration mode is on
+    clickable_now <- isTRUE(values$starting_location_locked)
+    pointer_ev <- if (clickable_now) "auto" else "none"
+    
+    # ---- Sextant polygons ----
     if (!is.null(sections_boundaries) && !is.null(SEC_NAME_COL) && SEC_NAME_COL %in% names(sections_boundaries)) {
       secs_all <- sections_boundaries
       sx_names_raw <- as.character(secs_all[[SEC_NAME_COL]]); sx_names <- normalize_sextant(sx_names_raw)
@@ -2018,7 +2046,7 @@ server <- function(input, output, session) {
       }
     }
     
-    # Neighborhood polygons (only when Sextant selected)
+    # ---- Neighborhood polygons (only when a Sextant is selected) ----
     selected_sx <- input$section_filter
     if (!is.null(selected_sx) && length(selected_sx) > 0 &&
         !is.null(neighborhood_boundaries) && !is.null(NEI_NAME_COL) &&
