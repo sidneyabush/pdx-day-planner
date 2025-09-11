@@ -505,23 +505,32 @@ generate_surprise_adventure <- function(available_places, time_available="quick"
 }
 
 ui <- fluidPage(
+  # Weather/time in top-right corner of app
+  div(class="app-weather-corner", uiOutput("weather_ui")),
+  
   tags$head(
     tags$style(HTML("
   @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
   :root{ 
-    --bg:#f7f8f6; --bg-grad:#f2f4f1; --card:#ffffff; --border:#e1e5e0; --text:#2d3436; --muted:#636e72; 
-    --accent:#6c7b5c; --accent-600:#5a6b4a; --accent-50:#f4f6f2; --accent-hover:#7d8e6d;
-    --secondary:#9b8b7a; --secondary-600:#877a68; --secondary-50:#f6f4f2;
-    --tertiary:#b8a082; --tertiary-600:#a58e70; --tertiary-50:#f8f6f3;
-    --danger:#d63031; --success:#00b894; --warning:#fdcb6e; 
-    --shadow-soft:0 4px 20px rgba(108,123,92,0.08); --shadow-medium:0 8px 30px rgba(108,123,92,0.12);
-    --radius-sm:8px; --radius-md:12px; --radius-lg:16px; --radius-xl:24px;
+    --bg:#fefefe; --bg-grad:#fdfdfd; --card:#ffffff; --border:#f0f0f0; --text:#1a1a1a; --muted:#888888; 
+    --accent:#000000; --accent-600:#000000; --accent-50:#f8f8f8; --accent-hover:#333333;
+    --secondary:#666666; --secondary-600:#555555; --secondary-50:#f9f9f9;
+    --tertiary:#999999; --tertiary-600:#777777; --tertiary-50:#fafafa;
+    --danger:#ff4444; --success:#00cc88; --warning:#ffaa00; 
+    --shadow-soft:0 2px 16px rgba(0,0,0,0.04); --shadow-medium:0 4px 24px rgba(0,0,0,0.08);
+    --radius-sm:4px; --radius-md:8px; --radius-lg:12px; --radius-xl:16px;
   }
   * { box-sizing: border-box; }
   body { 
     font-family:'Work Sans',system-ui,sans-serif !important; 
     background:linear-gradient(135deg,var(--bg) 0%,var(--bg-grad) 100%); 
     color:var(--text); margin:0; min-height:100vh; line-height:1.6;
+  }
+  
+  /* Weather in top-right corner of app */
+  .app-weather-corner {
+    position:fixed; top:80px; right:20px; z-index:1000;
+    display:flex; flex-direction:column; gap:8px;
   }
 
   /* Header card */
@@ -546,11 +555,6 @@ ui <- fluidPage(
     width:100%; height:100%; object-fit:cover; display:block;
   }
   
-  /* Weather overlay on top-right of image */
-  .weather-overlay {
-    position:absolute; top:16px; right:16px; 
-    display:flex; flex-direction:column; gap:8px; z-index:10;
-  }
 
   /* Modern weather/time display */
   .weather-under { 
@@ -609,9 +613,10 @@ ui <- fluidPage(
 
   /* Mobile responsive */
   @media (max-width: 1100px){
-    .weather-under { width:100%; max-width:420px; }
     .header { padding:24px; }
-    .header-grid { gap:24px; }
+    .header-grid { grid-template-columns: 1fr; gap:24px; }
+    .header-left { width:100%; display:flex; justify-content:center; }
+    .image-container { width:100%; max-width:400px; height:400px; }
   }
 
   .header-right h1 { 
@@ -838,12 +843,11 @@ ui <- fluidPage(
   # ======= HEADER (bigger image left; weather under image; title/explainer/random + address on right) =======
   div(class = "header",
       div(class = "header-grid",
-          # Left: image with weather overlay
+          # Left: just the image, clean
           div(class="header-left",
               div(class="image-container",
                   if (!is.null(HEADER_IMG))
-                    tags$img(src = HEADER_IMG, alt = "Portland", class = "header-photo"),
-                  div(class="weather-overlay", uiOutput("weather_ui"))
+                    tags$img(src = HEADER_IMG, alt = "Portland", class = "header-photo")
               )
           ),
           # Right: title, home info, explainer, centered random, then address box
@@ -1045,7 +1049,7 @@ weather_palette <- function(condition) {
   if (grepl("rain|drizzle|shower|storm", c)) return(list(accent="#3b82f6", accent600="#2563eb", accent50="#e8f0ff"))
   if (grepl("snow|sleet", c)) return(list(accent="#64748b", accent600="#475569", accent50="#eef2f6"))
   if (grepl("fog|mist|haze", c)) return(list(accent="#94a3b8", accent600="#64748b", accent50="#f1f5f9"))
-  list(accent="#0ea5a8", accent600="#0b8f92", accent50="#e6f7f7")
+  list(accent="#000000", accent600="#000000", accent50="#f8f8f8")
 }
 
 # ---------------- SERVER ----------------
@@ -1459,7 +1463,7 @@ server <- function(input, output, session) {
       sx_names_raw <- as.character(secs_all[[SEC_NAME_COL]]); sx_names <- normalize_sextant(sx_names_raw)
       selected <- isolate(input$section_filter); selected <- if (is.null(selected)) character(0) else normalize_sextant(selected)
       section_colors <- c(
-        "Southwest" = "#ff6b6b", "Northwest" = "#4ecdc4", "Southeast" = "#45b7d1",
+        "Southwest" = "#ff6b6b", "Northwest" = "#666666", "Southeast" = "#888888",
         "Northeast" = "#96ceb4", "North" = "#feca57", "South" = "#fd79a8", "Other" = "#a29bfe"
       )
       for (i in seq_along(sx_names)) {
@@ -1494,7 +1498,7 @@ server <- function(input, output, session) {
             data = neigh_to_draw[i, ],
             fillColor = if (is_selected) "#10b981" else "#ccfbf1",
             fillOpacity = if (is_selected) 0.06 else 0.01,
-            color = if (is_selected) "#10b981" else "#0ea5a8",
+            color = if (is_selected) "#000000" else "#666666",
             weight = if (is_selected) 2 else 1.2,
             opacity = if (is_selected) 1 else 0.6,
             group = "neighborhoods", layerId = paste0("neigh::", nb_name),
@@ -1520,7 +1524,7 @@ server <- function(input, output, session) {
       dist_txt <- ifelse(is.na(fp$distance_mi), "", paste0("<br>", round(fp$distance_mi, 1), " miles from home"))
       proxy <- proxy %>% addCircleMarkers(
         lng = fp$lng, lat = fp$lat, radius = 6,
-        color = "#0ea5a8", fillColor = "#99f6e4", opacity = 0.9, fillOpacity = 0.6,
+        color = "#666666", fillColor = "#f0f0f0", opacity = 0.9, fillOpacity = 0.6,
         popup = paste0("<b>", fp$title, "</b><br>", fp$tags, dist_txt),
         options = pathOptions()
       )
