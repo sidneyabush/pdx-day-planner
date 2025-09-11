@@ -124,6 +124,8 @@ places <- readRDS(processed_file)
 if (!is.data.frame(places) || nrow(places)==0) stop("❌ Invalid processed data.")
 if ("title" %in% names(places)) {
   places <- places[!grepl("^Unnamed place", places$title, ignore.case=TRUE), ]
+  # Also remove places with empty, NA, or whitespace-only titles
+  places <- places[!is.na(places$title) & nzchar(trimws(places$title)), ]
 }
 
 # Map boundaries
@@ -222,22 +224,21 @@ ACTIVITY_CATEGORIES <- list(
   "📚 Bookstores" = c("bookstore","books","reading","literature"),
   "💽 Music & Records" = c("record stores","music","records","vinyl","cd"),
   "🏷️ Thrift & Vintage" = c("thrift","vintage","antique","secondhand"),
-  "📔 Stationery & Art" = c("stationery","art supplies","paper","pens","notebooks"),
+  "📔 Stationery & Art" = c("stationery","art supplies","paper","pens","notebooks","art studio"),
   "🛴 Fun Shopping" = c("toys","games","gifts","novelty"),
   "🌲 Parks & Nature" = c("park","garden","nature","trail","hike","outdoor","forest"),
   "🥕 Markets" = c("market","farmers","produce","fresh food","grocery"),
-  "🎭 Entertainment" = c("movies","theater","cinema","show","performance"),
-  "🖋️ Creative" = c("tattoo","art studio","art")
+  "🎭 Entertainment" = c("movies","theater","cinema","show","performance","movie theater","film")
 )
-TRANSPORT_MODES <- list("🚶 Walk"=2, "🚲 Bicycle Rights!"=10, "🚌 Public Transit"=15, "🚗 Drive"=30, "🌍 Any Distance"=999)
+TRANSPORT_MODES <- list("🚶 Walk"=2, "🚲 Bicycle Rights!"=15, "🚌 Public Transit"=15, "🚗 Drive"=999)
 ACTIVITY_MODES <- list(
   "📖 Reading"=c("coffee","cafe","bookstore","quiet","library","park"),
   "🎨 Drawing/Sketching"=c("coffee","cafe","park","outdoor","scenic","garden","museum"),
   "🚲 Bike Ride"=c("trail","path","route","bike path","greenway"),
   "🥾 Hiking"=c("trail","hike","nature","forest","mountain","waterfall"),
   "📸 Photography"=c("scenic","architecture","vintage","historic","art","bridge","view","mural"),
-  "🚶 Walking Tour"=c("neighborhood","historic","architecture","street art","district"),
-  "🛍️ Shopping Spree"=c("thrift","vintage","bookstore","record","shopping","market"),
+  "🚶 Explore"=c("neighborhood","historic","architecture","street art","district"),
+  "🛍 Shop"=c("thrift","vintage","bookstore","record","shopping","market"),
   "🍽️ Food Adventure"=c("restaurant","food cart","market","bakery","brewery","cafe")
 )
 CONTEXT_FILTERS <- list(
@@ -309,6 +310,8 @@ generate_day_plan <- function(available_places, context=NULL, selected_activitie
   }
   if (force_drive || (!is.infinite(max_allowed_distance) && !is.na(avg_distance) && avg_distance > max_allowed_distance)) {
     transit_mode <- "🚗 Drive"
+  } else if (!is.na(avg_distance) && avg_distance <= 1) {
+    transit_mode <- "🚶 Walk"
   } else if (!is.na(avg_distance) && avg_distance <= 2) {
     transit_mode <- "🚶 Walk"
   } else if (!is.na(avg_distance) && avg_distance <= 8 && context != "😴 Low Energy") {
@@ -492,6 +495,8 @@ generate_surprise_adventure <- function(available_places, time_available="quick"
   
   if (is_rainy || is_low_energy || (!is.na(avg_d) && avg_d > 10)) {
     transit_mode <- "🚗 Drive"
+  } else if (!is.na(avg_d) && avg_d <= 1) {
+    transit_mode <- "🚶 Walk"
   } else if (!is.na(avg_d) && avg_d <= 2) {
     transit_mode <- "🚶 Walk"
   } else if (!is.na(avg_d) && avg_d <= 8) {
@@ -575,14 +580,14 @@ ui <- fluidPage(
 
   /* Header card */
   .header { 
-    background:var(--card); color:var(--text); padding:24px; margin:-15px -15px 0 -15px;
+    background:var(--card); color:var(--text); padding:20px; margin:-15px -15px 0 -15px;
     box-shadow:var(--shadow-soft); border-radius:0 0 var(--radius-xl) var(--radius-xl); 
     border-bottom:1px solid var(--border);
   }
 
   /* Modern header layout */
-  .header-grid { display:flex; flex-direction:column; gap:24px; align-items:center; }
-  .header-content-row { display:grid; grid-template-columns: 1fr 1fr; gap:40px; width:80%; max-width:900px; align-items:start; margin:0 auto; }
+  .header-grid { display:flex; flex-direction:column; gap:12px; align-items:center; }
+  .header-content-row { display:grid; grid-template-columns: 1fr 1fr; gap:24px; width:80%; max-width:900px; align-items:start; margin:0 auto; }
   .header-image-section { display:flex; justify-content:center; }
   .header-suggestion-section { display:flex; align-items:center; }
   
@@ -664,9 +669,8 @@ ui <- fluidPage(
   }
 
   .header h1 { 
-    font-family:'Poppins',sans-serif; font-weight:700; margin:0 0 8px 0; 
-    font-size:2.5rem; letter-spacing:-0.02em; color:var(--text);
-    color:var(--text);
+    font-family:'Poppins',sans-serif; font-weight:700; margin:0 0 16px 0; 
+    font-size:3rem; letter-spacing:-0.02em; color:var(--text);
   }
   .homebase-line { 
     color:var(--muted); margin:0 0 16px 0; font-size:0.95rem; font-weight:400;
@@ -681,7 +685,7 @@ ui <- fluidPage(
   .btn-big { 
     font-family:'Poppins',sans-serif; font-weight:600; padding:16px 32px; 
     border-radius:var(--radius-md); border:none;
-    background:#d1d5db; 
+    background:#e8a083 !important; 
     color:white; box-shadow:var(--shadow-soft); 
     transition:all 0.3s cubic-bezier(0.4,0,0.2,1); cursor:pointer;
     text-decoration:none; display:inline-block; position:relative; overflow:hidden;
@@ -693,7 +697,7 @@ ui <- fluidPage(
   }
   .btn-big:hover { 
     transform:translateY(-3px); box-shadow:0 8px 25px rgba(232,160,131,0.4);
-    background:var(--accent-hover);
+    background:#e08a63 !important;
   }
   .btn-big:hover::before { left:100%; }
   .btn-big:active { transform:translateY(-1px); }
@@ -758,13 +762,13 @@ ui <- fluidPage(
   }
   .activity-btn:hover { 
     border-color:var(--accent); transform:translateY(-2px); 
-    box-shadow:0 4px 12px rgba(108,123,92,0.2); background:var(--accent-50);
+    box-shadow:0 4px 12px rgba(232,160,131,0.2); background:var(--accent-50);
   }
   .activity-btn:hover::before { left:100%; }
   .activity-btn.active { 
     background:var(--accent); 
     color:white; border-color:var(--accent); 
-    box-shadow:0 6px 16px rgba(108,123,92,0.4); transform:translateY(-1px);
+    box-shadow:0 6px 16px rgba(232,160,131,0.4); transform:translateY(-1px);
   }
 
   .transport-btn { 
@@ -813,11 +817,11 @@ ui <- fluidPage(
   }
   
   .hero-card h2 { 
-    font-family:'Poppins',sans-serif; font-size:2.2rem; font-weight:700;
+    font-family:'Poppins',sans-serif; font-size:2.6rem; font-weight:700;
     margin:0 0 16px 0; line-height:1.2;
   }
   .hero-card .description { 
-    font-size:1.2rem; font-weight:400; opacity:0.95; margin-bottom:20px; 
+    font-size:1.4rem; font-weight:400; opacity:0.95; margin-bottom:20px; 
     line-height:1.4;
   }
   .hero-card .details {
@@ -927,7 +931,7 @@ ui <- fluidPage(
               )
           ),
           # Large surprise me button below 
-          div(class = "header-controls", style = "text-align: center; width: 100%; margin-top: 32px;",
+          div(class = "header-controls", style = "text-align: center; width: 100%; margin-top: 8px;",
               actionButton("random_inspiration", HTML("<span class='btn-icon'></span>Surprise Me"), class = "btn-big btn-surprise", style = "font-size: 1.5rem; padding: 24px 48px; font-weight: 700;")
           )
       )
@@ -939,7 +943,7 @@ ui <- fluidPage(
       4,
       div(class = "control-panel",
           div(class="address-box",
-              h5("Address (optional)"),
+              h5("Starting Address"),
               div(class="address-grid",
                   textInput("home_address", "", placeholder = "Enter your address (e.g., 123 Main St, Portland, OR)", value = "", width = "100%"),
                   actionButton("geocode_address", "Set Location", class = "btn-outline-primary", style = "min-width: 140px;")
@@ -967,9 +971,27 @@ ui <- fluidPage(
           br(),
           h4("What kinds of places?"),
           div(id = "activity_buttons",
-              lapply(names(ACTIVITY_CATEGORIES), function(cat) {
-                actionButton(paste0("act_", gsub("[^A-Za-z0-9]", "", cat)), cat, class = "activity-btn")
-              })
+              {
+                # Check if Creative category has any matching places
+                creative_terms <- ACTIVITY_CATEGORIES[["🖋️ Creative"]]
+                has_creative_places <- any(sapply(places$tags, function(tags) {
+                  if (is.na(tags) || tags == "") return(FALSE)
+                  any(vapply(creative_terms, function(term) {
+                    stringr::str_detect(tolower(tags), fixed(tolower(term)))
+                  }, logical(1)))
+                }))
+                
+                # Filter out Creative if no matching places
+                categories_to_show <- if (has_creative_places) {
+                  names(ACTIVITY_CATEGORIES)
+                } else {
+                  names(ACTIVITY_CATEGORIES)[names(ACTIVITY_CATEGORIES) != "🖋️ Creative"]
+                }
+                
+                lapply(categories_to_show, function(cat) {
+                  actionButton(paste0("act_", gsub("[^A-Za-z0-9]", "", cat)), cat, class = "activity-btn")
+                })
+              }
           ),
           
           br(),
@@ -1469,7 +1491,7 @@ server <- function(input, output, session) {
       if (nrow(interesting_places) > 0) {
         chosen_place <- interesting_places[sample(nrow(interesting_places), 1), , drop = FALSE]
         if (nrow(chosen_place) > 0 && !is.null(chosen_place$title) && nzchar(chosen_place$title[1])) {
-          activities <- c("explore", "discover", "check out", "investigate", "wander around")
+          activities <- c("explore", "check out", "wander to")
           activity <- sample(activities, 1)
           values$suggested <- chosen_place
           values$inspiration_text <- list(
@@ -1557,7 +1579,7 @@ server <- function(input, output, session) {
       sx_names_raw <- as.character(secs_all[[SEC_NAME_COL]]); sx_names <- normalize_sextant(sx_names_raw)
       selected <- isolate(input$section_filter); selected <- if (is.null(selected)) character(0) else normalize_sextant(selected)
       section_colors <- c(
-        "Southwest" = "#ff6b6b", "Northwest" = "#666666", "Southeast" = "#888888",
+        "Southwest" = "#ff6b6b", "Northwest" = "#4ecdc4", "Southeast" = "#45b7d1",
         "Northeast" = "#96ceb4", "North" = "#feca57", "South" = "#fd79a8", "Other" = "#a29bfe"
       )
       for (i in seq_along(sx_names)) {
@@ -1592,7 +1614,7 @@ server <- function(input, output, session) {
             data = neigh_to_draw[i, ],
             fillColor = if (is_selected) "#10b981" else "#ccfbf1",
             fillOpacity = if (is_selected) 0.06 else 0.01,
-            color = if (is_selected) "#000000" else "#666666",
+            color = if (is_selected) "#10b981" else "#0ea5a8",
             weight = if (is_selected) 2 else 1.2,
             opacity = if (is_selected) 1 else 0.6,
             group = "neighborhoods", layerId = paste0("neigh::", nb_name),
