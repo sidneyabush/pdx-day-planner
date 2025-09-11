@@ -290,9 +290,11 @@ generate_day_plan <- function(available_places, context=NULL, selected_activitie
   } else if (!is.na(avg_distance) && avg_distance <= 2) {
     transit_mode <- "🚶 Walk"
   } else if (!is.na(avg_distance) && avg_distance <= 8 && context != "😴 Low Energy") {
-    transit_mode <- "🚲 Bike"
-  } else {
+    transit_mode <- "🚲 Bicycle Rights!"
+  } else if (!is.na(avg_distance) && avg_distance > 10) {
     transit_mode <- "🚗 Drive"
+  } else {
+    transit_mode <- "🚌 Public Transit"
   }
   
   activity_plan <- if (!is.null(selected_modes) && length(selected_modes) > 0) {
@@ -454,10 +456,18 @@ generate_surprise_adventure <- function(available_places, time_available="quick"
   
   # Transit mode from avg distance (if computed)
   avg_d <- safe_mean(c(v1$distance_mi, v2$distance_mi))
-  transit_mode <- "🚗 Drive"
-  if (!is.na(avg_d)) {
-    if (avg_d <= 2) transit_mode <- "🚶 Walk"
-    else if (avg_d <= 8 && context != "😴 Low Energy") transit_mode <- "🚲 Bike"
+  # Only drive if >20mi round trip (>10mi one way), rainy, or low energy
+  is_rainy <- !is.null(context) && context == "☔ Rainy Weather"
+  is_low_energy <- !is.null(context) && context == "😴 Low Energy"
+  
+  if (is_rainy || is_low_energy || (!is.na(avg_d) && avg_d > 10)) {
+    transit_mode <- "🚗 Drive"
+  } else if (!is.na(avg_d) && avg_d <= 2) {
+    transit_mode <- "🚶 Walk"
+  } else if (!is.na(avg_d) && avg_d <= 8) {
+    transit_mode <- "🚲 Bicycle Rights!"
+  } else {
+    transit_mode <- "🚌 Public Transit"
   }
   
   plan <- list(
@@ -512,18 +522,18 @@ ui <- fluidPage(
     tags$style(HTML("
   @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
   :root{ 
-    --bg:#fefefe; --bg-grad:#fdfdfd; --card:#ffffff; --border:#f0f0f0; --text:#1a1a1a; --muted:#888888; 
-    --accent:#000000; --accent-600:#000000; --accent-50:#f8f8f8; --accent-hover:#333333;
-    --secondary:#666666; --secondary-600:#555555; --secondary-50:#f9f9f9;
-    --tertiary:#999999; --tertiary-600:#777777; --tertiary-50:#fafafa;
-    --danger:#ff4444; --success:#00cc88; --warning:#ffaa00; 
-    --shadow-soft:0 2px 16px rgba(0,0,0,0.04); --shadow-medium:0 4px 24px rgba(0,0,0,0.08);
-    --radius-sm:4px; --radius-md:8px; --radius-lg:12px; --radius-xl:16px;
+    --bg:#fefcfb; --bg-grad:#fcf8f6; --card:#ffffff; --border:#f4e8e1; --text:#2d2926; --muted:#8b7765; 
+    --accent:#e8a083; --accent-600:#e08a63; --accent-50:#fef7f4; --accent-hover:#dc8965;
+    --secondary:#f2c2a7; --secondary-600:#ee9f7a; --secondary-50:#fef9f6;
+    --tertiary:#f7d4c4; --tertiary-600:#f3b8a0; --tertiary-50:#fefaf8;
+    --success:#7fb069; --danger:#d67e7e; --warning:#e6c79c; 
+    --shadow-soft:0 4px 20px rgba(164,180,148,0.08); --shadow-medium:0 8px 32px rgba(164,180,148,0.12);
+    --radius-sm:8px; --radius-md:12px; --radius-lg:16px; --radius-xl:24px;
   }
   * { box-sizing: border-box; }
   body { 
     font-family:'Work Sans',system-ui,sans-serif !important; 
-    background:linear-gradient(135deg,var(--bg) 0%,var(--bg-grad) 100%); 
+    background:var(--bg); 
     color:var(--text); margin:0; min-height:100vh; line-height:1.6;
   }
   
@@ -622,37 +632,22 @@ ui <- fluidPage(
   .header-right h1 { 
     font-family:'Poppins',sans-serif; font-weight:700; margin:0 0 8px 0; 
     font-size:2.5rem; letter-spacing:-0.02em; color:var(--text);
-    background:linear-gradient(135deg, var(--text) 0%, var(--muted) 100%);
-    -webkit-background-clip:text; background-clip:text;
+    color:var(--text);
   }
   .homebase-line { 
     color:var(--muted); margin:0 0 16px 0; font-size:0.95rem; font-weight:400;
   }
 
-  /* Explainer + centered random button, then address box */
-  .explainer { 
-    background:var(--card); border:1px solid var(--border); border-radius:var(--radius-lg);
-    padding:24px; box-shadow:var(--shadow-soft); margin-top:16px; 
-    transition:all 0.3s ease; position:relative; overflow:hidden;
+  /* Simplified header controls */
+  .header-controls { 
+    margin-top:24px;
   }
-  .explainer::before {
-    content:''; position:absolute; top:0; left:0; right:0; height:3px;
-    background:linear-gradient(90deg, var(--accent) 0%, var(--secondary) 100%);
-    pointer-events:none;
-  }
-  .explainer:hover { transform:translateY(-2px); box-shadow:var(--shadow-medium); }
-  
-  .explainer h4 { 
-    margin:0 0 12px 0; font-weight:600; font-size:1.1rem; 
-    font-family:'Poppins',sans-serif; color:var(--text);
-  }
-  .explainer .muted { color:var(--muted); line-height:1.5; }
 
-  .cta-row-inside { display:flex; justify-content:center; padding-top:20px; }
+  .cta-row { display:flex; justify-content:center; margin-bottom:20px; }
   .btn-big { 
     font-family:'Poppins',sans-serif; font-weight:600; padding:16px 32px; 
     border-radius:var(--radius-md); border:none;
-    background:linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%); 
+    background:var(--accent); 
     color:white; box-shadow:var(--shadow-soft); 
     transition:all 0.3s cubic-bezier(0.4,0,0.2,1); cursor:pointer;
     text-decoration:none; display:inline-block; position:relative; overflow:hidden;
@@ -663,8 +658,8 @@ ui <- fluidPage(
     transition:left 0.6s; z-index:1; pointer-events:none;
   }
   .btn-big:hover { 
-    transform:translateY(-3px); box-shadow:0 8px 25px rgba(108,123,92,0.4);
-    background:linear-gradient(135deg, var(--accent-hover) 0%, var(--accent) 100%);
+    transform:translateY(-3px); box-shadow:0 8px 25px rgba(232,160,131,0.4);
+    background:var(--accent-hover);
   }
   .btn-big:hover::before { left:100%; }
   .btn-big:active { transform:translateY(-1px); }
@@ -733,7 +728,7 @@ ui <- fluidPage(
   }
   .activity-btn:hover::before { left:100%; }
   .activity-btn.active { 
-    background:linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%); 
+    background:var(--accent); 
     color:white; border-color:var(--accent); 
     box-shadow:0 6px 16px rgba(108,123,92,0.4); transform:translateY(-1px);
   }
@@ -755,27 +750,60 @@ ui <- fluidPage(
   }
   .transport-btn:hover::before { left:100%; }
   .transport-btn.active { 
-    background:linear-gradient(135deg, var(--secondary-50) 0%, #f7f6f4 100%); 
+    background:var(--secondary-50); 
     border-color:var(--secondary); color:var(--secondary-600); 
     box-shadow:0 4px 12px rgba(155,139,122,0.25); transform:translateY(-1px);
   }
 
-  /* Suggestion box improvements */
-  .suggestion-box { 
-    background:var(--card); border-radius:var(--radius-lg); padding:28px; 
-    border-left:4px solid var(--accent); margin:24px 0; 
-    box-shadow:var(--shadow-soft); border:1px solid var(--border);
-    transition:all 0.3s ease; position:relative; overflow:hidden;
+  /* HERO SUGGESTION CARD - Main focus! */
+  .hero-suggestion {
+    margin-bottom:32px;
   }
-  .suggestion-box::before {
-    content:''; position:absolute; top:0; right:0; bottom:0; width:2px;
-    background:linear-gradient(180deg, var(--accent) 0%, var(--secondary) 100%);
+  
+  .hero-card {
+    background:var(--accent-50); color:var(--text); 
+    border-radius:var(--radius-xl); padding:40px; 
+    box-shadow:var(--shadow-medium); position:relative; overflow:hidden;
+    transition:all 0.4s cubic-bezier(0.4,0,0.2,1);
+    border:none; min-height:200px; display:flex; flex-direction:column; justify-content:center;
   }
-  .suggestion-box:hover { 
-    transform:translateY(-2px); box-shadow:var(--shadow-medium); 
+  .hero-card::before {
+    content:''; position:absolute; top:0; left:0; right:0; bottom:0;
+    background:linear-gradient(45deg, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%);
+    transform:translateX(-100%); transition:transform 0.6s; pointer-events:none;
   }
-  .suggestion-box h3, .suggestion-box h4 { 
-    font-family:'Poppins',sans-serif; margin-bottom:12px; 
+  .hero-card:hover::before { transform:translateX(100%); }
+  .hero-card:hover { 
+    transform:translateY(-4px) scale(1.02); 
+    box-shadow:0 12px 40px rgba(14,165,233,0.25);
+  }
+  
+  .hero-card h2 { 
+    font-family:'Poppins',sans-serif; font-size:2.2rem; font-weight:700;
+    margin:0 0 16px 0; line-height:1.2;
+  }
+  .hero-card .description { 
+    font-size:1.2rem; font-weight:400; opacity:0.95; margin-bottom:20px; 
+    line-height:1.4;
+  }
+  .hero-card .details {
+    display:flex; gap:24px; flex-wrap:wrap; margin-top:auto;
+  }
+  .hero-card .detail-chip {
+    background:rgba(255,255,255,0.8); backdrop-filter:blur(10px);
+    padding:8px 16px; border-radius:20px; font-size:14px; font-weight:500;
+    color:var(--text);
+  }
+  
+  /* Empty state for hero card */
+  .hero-empty {
+    background:var(--card); border:2px dashed var(--border); 
+    border-radius:var(--radius-xl); padding:60px 40px; text-align:center;
+    color:var(--muted); min-height:200px; display:flex; flex-direction:column; justify-content:center;
+  }
+  .hero-empty h2 { 
+    font-family:'Poppins',sans-serif; font-size:1.8rem; margin-bottom:12px; 
+    color:var(--text);
   }
   
   /* Data table improvements */
@@ -811,7 +839,7 @@ ui <- fluidPage(
     border:1px solid var(--accent) !important;
   }
   .btn-primary {
-    background:linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%) !important;
+    background:var(--accent) !important;
     color:white !important;
   }
   .btn-primary:hover {
@@ -850,29 +878,13 @@ ui <- fluidPage(
                     tags$img(src = HEADER_IMG, alt = "Portland", class = "header-photo")
               )
           ),
-          # Right: title, home info, explainer, centered random, then address box
+          # Right: title, home info, explainer, centered random
           div(class = "header-right",
               h1("The Dream of the 90s is Alive in Portland"),
               uiOutput("home_info_ui"),
-              div(class = "explainer",
-                  h4("What Are We Doing Today?"),
-                  div(style="margin-top:6px; color:#475569;",
-                      "Use “Random Suggestion” for a spontaneous idea, or use “Get Suggestions” for a tailored plan."
-                  ),
-                  div(class = "muted",
-                      "Pick the kind of place you want to go to, add which part of town you want to visit, or how you want to get there.",
-                      "Enter your home address to enable distance-aware filters."
-                  ),
-                  div(class="cta-row-inside",
+              div(class = "header-controls",
+                  div(class="cta-row",
                       actionButton("random_inspiration", HTML("<span class='btn-icon'></span>Surprise Me"), class = "btn-big btn-surprise")
-                  ),
-                  div(class="address-box",
-                      h5("Address (optional)"),
-                      div(class="address-grid",
-                          textInput("home_address", "", placeholder = "Enter your address (e.g., 123 Main St, Portland, OR)", value = "", width = "100%"),
-                          actionButton("geocode_address", "Set Location", class = "btn-outline-primary", style = "min-width: 140px;")
-                      ),
-                      div(id = "address_status", class="address-status")
                   )
               )
           )
@@ -884,6 +896,15 @@ ui <- fluidPage(
     column(
       4,
       div(class = "control-panel",
+          div(class="address-box",
+              h5("Address (optional)"),
+              div(class="address-grid",
+                  textInput("home_address", "", placeholder = "Enter your address (e.g., 123 Main St, Portland, OR)", value = "", width = "100%"),
+                  actionButton("geocode_address", "Set Location", class = "btn-outline-primary", style = "min-width: 140px;")
+              ),
+              div(id = "address_status", class="address-status")
+          ),
+          br(),
           h5("What's the mood?"),
           selectizeInput("context_filter", "", choices = names(CONTEXT_FILTERS), selected = NULL, multiple = TRUE,
                          options = list(placeholder = 'Any context'), width = "100%"),
@@ -942,12 +963,21 @@ ui <- fluidPage(
     
     column(
       8,
-      leafletOutput("map", height = 520),
+      # HERO SUGGESTION CARD - After address input
+      div(class="hero-suggestion",
+          uiOutput("hero_suggestion_display")
+      ),
       br(),
-      uiOutput("suggestion_display"),
+      # Map second
+      div(class="map-container",
+          leafletOutput("map", height = 420)
+      ),
       br(),
-      h5("📋 Filtered Places"),
-      DT::dataTableOutput("places_table")
+      # Data table last
+      div(class="data-container",
+          h5("All Available Places"),
+          DT::dataTableOutput("places_table")
+      )
     )
   ),
   
@@ -1126,7 +1156,7 @@ server <- function(input, output, session) {
             "Use “Get Suggestions” for a tailored plan or “Random Suggestion” above for a spontaneous idea."
         ),
         div(class = "muted",
-            "Pick a Sextant, then optionally a Neighborhood within it. Add context and transport. ",
+            "Pick a Quadrant, then optionally a Neighborhood within it. Add context and transport. ",
             "Enter your home address to enable distance-aware filters."
         )
     )
@@ -1182,7 +1212,7 @@ server <- function(input, output, session) {
   output$section_selector <- renderUI({
     sextant_choices <- get_sextant_choices(places, sections_boundaries, SEC_NAME_COL)
     selectizeInput("section_filter", "", choices = sextant_choices, selected = NULL, multiple = TRUE,
-                   options = list(placeholder = "Choose Sextant(s)"))
+                   options = list(placeholder = "Choose Quadrant(s)"))
   })
   
   # Map clicks -> left panel sync (Sextants & Neighborhoods)
@@ -1195,7 +1225,7 @@ server <- function(input, output, session) {
       sec_name <- normalize_sextant(raw_name)
       sx_choices <- get_sextant_choices(places, sections_boundaries, SEC_NAME_COL)
       if (!sec_name %in% sx_choices) {
-        showNotification(paste("Unrecognized Sextant:", raw_name), type = "warning"); return(NULL)
+        showNotification(paste("Unrecognized Quadrant:", raw_name), type = "warning"); return(NULL)
       }
       cur <- isolate(input$section_filter); if (is.null(cur)) cur <- character(0)
       cur <- normalize_sextant(cur)
@@ -1208,7 +1238,7 @@ server <- function(input, output, session) {
     
     if (identical(click$group, "neighborhoods")) {
       if (is.null(isolate(input$section_filter)) || !length(isolate(input$section_filter))) {
-        showNotification("Select a Sextant first to choose Neighborhoods.", type = "message"); return(NULL)
+        showNotification("Select a Quadrant first to choose Neighborhoods.", type = "message"); return(NULL)
       }
       nb <- sub("^neigh::", "", click$id)
       cur <- isolate(input$neighborhood_filter); if (is.null(cur)) cur <- character(0)
@@ -1228,7 +1258,7 @@ server <- function(input, output, session) {
         is.null(sections_boundaries) || is.null(SEC_NAME_COL) ||
         is.null(neighborhood_boundaries) || is.null(NEI_NAME_COL)) {
       return(selectizeInput("neighborhood_filter", "", choices = character(0), selected = NULL, multiple = TRUE,
-                            options = list(placeholder = "Select a Sextant first")))
+                            options = list(placeholder = "Select a Quadrant first")))
     }
     sel_secs <- sections_boundaries[sections_boundaries[[SEC_NAME_COL]] %in% normalize_sextant(input$section_filter), , drop = FALSE]
     rows_to_draw <- safe_st_intersects_rows(neighborhood_boundaries, sel_secs)
@@ -1236,7 +1266,7 @@ server <- function(input, output, session) {
       neighborhood_boundaries[rows_to_draw, ][[NEI_NAME_COL]] |> as.character() |> unique() |> sort()
     } else character(0)
     selectizeInput("neighborhood_filter", "", choices = available_neighborhoods, selected = NULL, multiple = TRUE,
-                   options = list(placeholder = if (length(available_neighborhoods)) "Choose Neighborhoods (optional)" else "No Neighborhoods in the selected Sextant(s)"))
+                   options = list(placeholder = if (length(available_neighborhoods)) "Choose Neighborhoods (optional)" else "No Neighborhoods in the selected Quadrant(s)"))
   })
   
   # Filtering pipeline (unchanged except for distances reactive)
@@ -1370,12 +1400,25 @@ server <- function(input, output, session) {
     )
     if (length(adventures) > 0 && !is.null(adventures[[1]])) {
       adventure <- adventures[[1]]
-      values$suggested <- adventure$places[1, , drop = FALSE]
-      values$inspiration_text <- list(
-        title = adventure$title, description = adventure$description, type = adventure$type,
-        estimated_time = adventure$estimated_time, transit = adventure$transit, neighborhood = adventure$neighborhood
-      )
+      if (!is.null(adventure$places) && nrow(adventure$places) > 0) {
+        values$suggested <- adventure$places[1, , drop = FALSE]
+        values$inspiration_text <- list(
+          title = adventure$title %||% "Adventure", 
+          description = adventure$description %||% "Explore something new!", 
+          type = adventure$type %||% "adventure",
+          estimated_time = adventure$estimated_time %||% "1-2 hours", 
+          transit = adventure$transit %||% "Walk", 
+          neighborhood = adventure$neighborhood %||% "Portland"
+        )
+      } else {
+        # Adventure plan failed, fall through to backup logic
+        adventure <- NULL
+      }
     } else {
+      adventure <- NULL
+    }
+    
+    if (is.null(adventure)) {
       interesting_places <- all_available[
         has_coords(all_available) &
           grepl("coffee|vintage|record|bookstore|gallery|museum|brewery",
@@ -1383,19 +1426,23 @@ server <- function(input, output, session) {
         , drop = FALSE]
       if (nrow(interesting_places) > 0) {
         chosen_place <- interesting_places[sample(nrow(interesting_places), 1), , drop = FALSE]
-        activities <- c("explore", "discover", "check out", "investigate", "wander around")
-        activity <- sample(activities, 1)
-        values$suggested <- all_available[
-          has_coords(all_available),
-          , drop = FALSE
-        ][sample(sum(has_coords(all_available)), 1), , drop = FALSE]
-        values$inspiration_text <- list(
-          title = "🎲 Mystery Adventure",
-          description = paste(activity, chosen_place$title, "and find out!"),
-          type = "adventure",
-          estimated_time = "1-2 hours"
-        )
-      } else {
+        if (nrow(chosen_place) > 0 && !is.null(chosen_place$title) && nzchar(chosen_place$title[1])) {
+          activities <- c("explore", "discover", "check out", "investigate", "wander around")
+          activity <- sample(activities, 1)
+          values$suggested <- chosen_place
+          values$inspiration_text <- list(
+            title = "Mystery Adventure",
+            description = paste(activity, chosen_place$title[1], "and try something new!"),
+            type = "adventure",
+            estimated_time = "1-2 hours"
+          )
+        } else {
+          # Chosen place is invalid, use pure random fallback
+          interesting_places <- data.frame()
+        }
+      }
+      
+      if (nrow(interesting_places) == 0) {
         # pure random fallback — but only from rows with valid lat/lng
         coord_ok <- has_coords(all_available)
         if (sum(coord_ok) == 0) {
@@ -1403,9 +1450,14 @@ server <- function(input, output, session) {
           values$suggested <- NULL
           return(invisible(NULL))
         }
-        values$suggested <- all_available[coord_ok, , drop = FALSE][
-          sample(sum(coord_ok), 1), , drop = FALSE
-        ]
+        safe_places <- all_available[coord_ok, , drop = FALSE]
+        if (nrow(safe_places) > 0) {
+          values$suggested <- safe_places[sample(nrow(safe_places), 1), , drop = FALSE]
+        } else {
+          values$suggested <- NULL
+          showNotification("No valid places found for random selection.", type = "warning")
+          return(invisible(NULL))
+        }
         values$inspiration_text <- list(
           title = "🎲 Random Adventure",
           description = "Go explore this place and see what happens!",
@@ -1524,7 +1576,7 @@ server <- function(input, output, session) {
       dist_txt <- ifelse(is.na(fp$distance_mi), "", paste0("<br>", round(fp$distance_mi, 1), " miles from home"))
       proxy <- proxy %>% addCircleMarkers(
         lng = fp$lng, lat = fp$lat, radius = 6,
-        color = "#666666", fillColor = "#f0f0f0", opacity = 0.9, fillOpacity = 0.6,
+        color = "#e08a63", fillColor = "#fef7f4", opacity = 0.9, fillOpacity = 0.8,
         popup = paste0("<b>", fp$title, "</b><br>", fp$tags, dist_txt),
         options = pathOptions()
       )
@@ -1543,7 +1595,7 @@ server <- function(input, output, session) {
     if (!is.null(suggested) && nrow(suggested) > 0 && has_coords(suggested)[1]) {
       proxy <- proxy %>% addCircleMarkers(
         lng = suggested$lng, lat = suggested$lat, radius = 12,
-        color = "#dc2626", fillColor = "#dc2626", opacity = 1, fillOpacity = 0.85,
+        color = "#e8a083", fillColor = "#e8a083", opacity = 1, fillOpacity = 0.9,
         options = pathOptions()
       ) %>% setView(lng = suggested$lng, lat = suggested$lat, zoom = 15)
     }
@@ -1559,38 +1611,50 @@ server <- function(input, output, session) {
   })
   
   
-  # Suggestion display (unchanged)
-  output$suggestion_display <- renderUI({
+  # HERO Suggestion display - main focus!
+  output$hero_suggestion_display <- renderUI({
     if (is.null(values$suggested)) {
-      div(class = "suggestion-box",
-          h4("🎯 Ready to explore?"),
-          p("Use 'Get Suggestions' for an intelligent plan, or 'Random Suggestion' for spontaneous ideas!")
+      div(class = "hero-empty",
+          h2("🎯 What should you do today?"),
+          p("Hit 'Surprise Me' for a spontaneous adventure, or use 'Get Suggestions' for a tailored plan!"),
+          p("Set your preferences on the left to get personalized recommendations.")
       )
     } else {
       place <- values$suggested
       clean_tags_display <- clean_tags(place$tags)
       nb_disp <- neigh_display_vec(place$neighborhood_geo, place$neighborhood)
       
-      suggestion_header <- if (!is.null(values$inspiration_text) && is.list(values$inspiration_text)) {
-        div(
-          h4(values$inspiration_text$title, style = "color: var(--accent); margin-bottom: 8px;"),
-          p(style = "color: #666; font-style: italic; margin-bottom: 12px;", values$inspiration_text$description),
-          if (!is.null(values$inspiration_text$estimated_time))
-            p(style = "color: #666; font-size: 12px;", "⏱️ Estimated time: ", values$inspiration_text$estimated_time),
-          h3("✨ ", place$title)
+      if (!is.null(values$inspiration_text) && is.list(values$inspiration_text)) {
+        div(class = "hero-card",
+            h2(values$inspiration_text$title),
+            div(class = "description", values$inspiration_text$description),
+            div(class = "details",
+                if (!is.na(place$distance_mi)) 
+                  div(class = "detail-chip", paste(round(place$distance_mi, 1), "miles away")),
+                if (!is.na(nb_disp)) 
+                  div(class = "detail-chip", nb_disp),
+                if (!is.null(values$inspiration_text$estimated_time))
+                  div(class = "detail-chip", paste("⏱️", values$inspiration_text$estimated_time)),
+                if (nzchar(place$url))
+                  tags$a("📍 View on Map", href = place$url, target = "_blank", 
+                         class = "detail-chip", style = "color: var(--text); text-decoration: none;")
+            )
         )
       } else {
-        h3("🌟 ", place$title)
+        div(class = "hero-card",
+            h2("✨ ", place$title),
+            div(class = "description", if (nzchar(clean_tags_display)) clean_tags_display else "A great spot to explore!"),
+            div(class = "details",
+                if (!is.na(place$distance_mi)) 
+                  div(class = "detail-chip", paste(round(place$distance_mi, 1), "miles away")),
+                if (!is.na(nb_disp)) 
+                  div(class = "detail-chip", nb_disp),
+                if (nzchar(place$url))
+                  tags$a("📍 View on Map", href = place$url, target = "_blank", 
+                         class = "detail-chip", style = "color: var(--text); text-decoration: none;")
+            )
+        )
       }
-      
-      div(class = "suggestion-box",
-          suggestion_header,
-          if (nzchar(clean_tags_display)) p(strong("Features: "), clean_tags_display),
-          if (!is.na(place$distance_mi)) p(strong("Distance: "), round(place$distance_mi, 1), " miles from home"),
-          if (!is.na(nb_disp)) p(strong("Neighborhood: "), nb_disp),
-          if (nzchar(place$note)) p(strong("Note: "), place$note),
-          if (nzchar(place$url)) tags$a("📍 View on Google Maps", href = place$url, target = "_blank")
-      )
     }
   })
   
