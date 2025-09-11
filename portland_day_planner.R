@@ -575,7 +575,7 @@ ui <- fluidPage(
 
   /* Header card */
   .header { 
-    background:var(--card); color:var(--text); padding:32px; margin:-15px -15px 0 -15px;
+    background:var(--card); color:var(--text); padding:24px; margin:-15px -15px 0 -15px;
     box-shadow:var(--shadow-soft); border-radius:0 0 var(--radius-xl) var(--radius-xl); 
     border-bottom:1px solid var(--border);
   }
@@ -587,7 +587,7 @@ ui <- fluidPage(
   .header-suggestion-section { display:flex; align-items:center; }
   
   .image-container {
-    position:relative; width:400px; height:400px; border-radius:var(--radius-xl); 
+    position:relative; width:350px; height:280px; border-radius:var(--radius-xl); 
     overflow:hidden; box-shadow:var(--shadow-medium); 
     transition:transform 0.3s ease, box-shadow 0.3s ease;
   }
@@ -655,11 +655,12 @@ ui <- fluidPage(
 
   /* Mobile responsive */
   @media (max-width: 768px){
-    .header { padding:20px; }
-    .header-grid { gap:16px; }
-    .header-content-row { grid-template-columns: 1fr; gap:24px; }
-    .image-container { width:100%; max-width:350px; height:350px; }
-    .header-controls { margin-top:16px; }
+    .header { padding:16px; }
+    .header-grid { gap:12px; }
+    .header-content-row { grid-template-columns: 1fr; gap:16px; }
+    .image-container { width:100%; max-width:300px; height:240px; }
+    .hero-card { height:240px; padding:24px; }
+    .header-controls { margin-top:12px; }
   }
 
   .header h1 { 
@@ -795,10 +796,10 @@ ui <- fluidPage(
   
   .hero-card {
     background:var(--accent-50); color:var(--text); 
-    border-radius:var(--radius-xl); padding:40px; 
+    border-radius:var(--radius-xl); padding:32px; 
     box-shadow:var(--shadow-medium); position:relative; overflow:hidden;
     transition:all 0.4s cubic-bezier(0.4,0,0.2,1);
-    border:none; min-height:200px; display:flex; flex-direction:column; justify-content:center;
+    border:none; height:280px; display:flex; flex-direction:column; justify-content:center;
   }
   .hero-card::before {
     content:''; position:absolute; top:0; left:0; right:0; bottom:0;
