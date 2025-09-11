@@ -681,9 +681,13 @@ generate_contextual_activities <- function(places) {
     else if (grepl("museum|gallery", tags_lower)) {
       activities[i] <- sample(c("to explore the exhibits", "to see the art", "to learn something new", "to admire the collection"), 1)
     }
-    # Restaurants, bars - social activities
-    else if (grepl("restaurant|bar|brewery|pub|food|dining", tags_lower)) {
-      activities[i] <- sample(c("to try the food", "for drinks", "to grab a bite", "to enjoy a meal"), 1)
+    # Restaurants - food activities (check BEFORE shop/store pattern)
+    else if (grepl("restaurant|dining|eatery|kitchen|grill|bistro|tavern", tags_lower)) {
+      activities[i] <- sample(c("to try the food", "to grab a bite", "to enjoy a meal", "for dinner", "for lunch"), 1)
+    }
+    # Bars, breweries - drink activities  
+    else if (grepl("bar|brewery|pub|beer|cocktail|wine", tags_lower)) {
+      activities[i] <- sample(c("for drinks", "to try the beer", "for happy hour", "to grab a cocktail"), 1)
     }
     # Markets, busy places - observational activities
     else if (grepl("market|bakery|bagel|busy|street", tags_lower) || grepl("shop|store|thrift|vintage", tags_lower)) {
@@ -722,7 +726,18 @@ generate_guided_multi_stop <- function(available_places, num_stops, context = NU
   
   valid_places$time_category <- sapply(valid_places$tags, categorize_venue_time)
   
-  # Select places with proper time progression
+  # Add venue type categorization for diversity enforcement
+  categorize_venue_type <- function(tags) {
+    tags_lower <- tolower(tags %||% "")
+    if (grepl("restaurant|dining|eatery|kitchen|grill|bistro|tavern", tags_lower)) return("restaurant")
+    if (grepl("coffee|cafe|espresso", tags_lower)) return("coffee")
+    if (grepl("bar|brewery|pub|beer|cocktail|wine", tags_lower)) return("bar")
+    return("other")
+  }
+  
+  valid_places$venue_type <- sapply(valid_places$tags, categorize_venue_type)
+  
+  # Select places with proper time progression AND venue diversity
   selected_places <- if (num_stops == 2) {
     # Two locations: morning/afternoon first, then evening
     morning_afternoon <- valid_places[valid_places$time_category %in% c("morning", "afternoon", "anytime"), , drop = FALSE]
@@ -730,12 +745,20 @@ generate_guided_multi_stop <- function(available_places, num_stops, context = NU
     
     if (nrow(morning_afternoon) > 0 && nrow(evening) > 0) {
       first <- morning_afternoon[sample(nrow(morning_afternoon), 1), , drop = FALSE]
-      evening_filtered <- evening[evening$id != first$id, , drop = FALSE]
+      # Filter by ID and venue type to avoid duplicates
+      evening_filtered <- evening[evening$id != first$id & evening$venue_type != first$venue_type, , drop = FALSE]
       if (nrow(evening_filtered) > 0) {
         second <- evening_filtered[sample(nrow(evening_filtered), 1), , drop = FALSE]
         rbind(first, second)
       } else {
-        valid_places[sample(nrow(valid_places), min(2, nrow(valid_places))), , drop = FALSE]
+        # Fallback: at least avoid same ID, even if venue types match
+        evening_filtered_id_only <- evening[evening$id != first$id, , drop = FALSE]
+        if (nrow(evening_filtered_id_only) > 0) {
+          second <- evening_filtered_id_only[sample(nrow(evening_filtered_id_only), 1), , drop = FALSE]
+          rbind(first, second)
+        } else {
+          valid_places[sample(nrow(valid_places), min(2, nrow(valid_places))), , drop = FALSE]
+        }
       }
     } else {
       valid_places[sample(nrow(valid_places), min(2, nrow(valid_places))), , drop = FALSE]
@@ -748,39 +771,76 @@ generate_guided_multi_stop <- function(available_places, num_stops, context = NU
     
     selected <- data.frame()
     used_ids <- character(0)
+    used_venue_types <- character(0)
     
-    # Try to get one from each category
+    # Try to get one from each category with venue type diversity
     if (nrow(morning) > 0) {
       first <- morning[sample(nrow(morning), 1), , drop = FALSE]
       selected <- rbind(selected, first)
       used_ids <- c(used_ids, first$id)
+      used_venue_types <- c(used_venue_types, first$venue_type)
     }
     
     if (nrow(afternoon) > 0) {
-      afternoon_filtered <- afternoon[!afternoon$id %in% used_ids, , drop = FALSE]
+      # Filter by both ID and venue type
+      afternoon_filtered <- afternoon[!afternoon$id %in% used_ids & !afternoon$venue_type %in% used_venue_types, , drop = FALSE]
       if (nrow(afternoon_filtered) > 0) {
         second <- afternoon_filtered[sample(nrow(afternoon_filtered), 1), , drop = FALSE]
         selected <- rbind(selected, second)
         used_ids <- c(used_ids, second$id)
+        used_venue_types <- c(used_venue_types, second$venue_type)
+      } else {
+        # Fallback: at least avoid same ID
+        afternoon_filtered_id_only <- afternoon[!afternoon$id %in% used_ids, , drop = FALSE]
+        if (nrow(afternoon_filtered_id_only) > 0) {
+          second <- afternoon_filtered_id_only[sample(nrow(afternoon_filtered_id_only), 1), , drop = FALSE]
+          selected <- rbind(selected, second)
+          used_ids <- c(used_ids, second$id)
+          used_venue_types <- c(used_venue_types, second$venue_type)
+        }
       }
     }
     
     if (nrow(evening) > 0) {
-      evening_filtered <- evening[!evening$id %in% used_ids, , drop = FALSE]
+      # Filter by both ID and venue type
+      evening_filtered <- evening[!evening$id %in% used_ids & !evening$venue_type %in% used_venue_types, , drop = FALSE]
       if (nrow(evening_filtered) > 0) {
         third <- evening_filtered[sample(nrow(evening_filtered), 1), , drop = FALSE]
         selected <- rbind(selected, third)
         used_ids <- c(used_ids, third$id)
+        used_venue_types <- c(used_venue_types, third$venue_type)
+      } else {
+        # Fallback: at least avoid same ID
+        evening_filtered_id_only <- evening[!evening$id %in% used_ids, , drop = FALSE]
+        if (nrow(evening_filtered_id_only) > 0) {
+          third <- evening_filtered_id_only[sample(nrow(evening_filtered_id_only), 1), , drop = FALSE]
+          selected <- rbind(selected, third)
+          used_ids <- c(used_ids, third$id)
+          used_venue_types <- c(used_venue_types, third$venue_type)
+        }
       }
     }
     
-    # Fill remaining slots if needed
+    # Fill remaining slots if needed with venue diversity
     if (nrow(selected) < num_stops) {
-      remaining <- valid_places[!valid_places$id %in% used_ids, , drop = FALSE]
-      if (nrow(remaining) > 0) {
-        needed <- min(num_stops - nrow(selected), nrow(remaining))
-        additional <- remaining[sample(nrow(remaining), needed), , drop = FALSE]
+      # First try to avoid duplicate venue types
+      remaining_diverse <- valid_places[!valid_places$id %in% used_ids & !valid_places$venue_type %in% used_venue_types, , drop = FALSE]
+      if (nrow(remaining_diverse) > 0) {
+        needed <- min(num_stops - nrow(selected), nrow(remaining_diverse))
+        additional <- remaining_diverse[sample(nrow(remaining_diverse), needed), , drop = FALSE]
         selected <- rbind(selected, additional)
+        used_ids <- c(used_ids, additional$id)
+        used_venue_types <- c(used_venue_types, additional$venue_type)
+      }
+      
+      # If still need more, fall back to just avoiding same ID
+      if (nrow(selected) < num_stops) {
+        remaining_id_only <- valid_places[!valid_places$id %in% used_ids, , drop = FALSE]
+        if (nrow(remaining_id_only) > 0) {
+          needed <- min(num_stops - nrow(selected), nrow(remaining_id_only))
+          additional <- remaining_id_only[sample(nrow(remaining_id_only), needed), , drop = FALSE]
+          selected <- rbind(selected, additional)
+        }
       }
     }
     
@@ -1443,57 +1503,63 @@ ui <- fluidPage(
       div(class = "control-panel", style = "margin-top: 24px;",
           fluidRow(
             column(3,
-                   h5("What's the mood?"),
-                   selectizeInput("context_filter", "", choices = names(CONTEXT_FILTERS), selected = NULL, multiple = TRUE,
-                                  options = list(placeholder = 'Any context'), width = "100%"),
-                   br(),
-                   h5("Where to explore?"),
-                   fluidRow(
-                     column(12,
-                       div(style = "margin-bottom: 8px;",
-                           uiOutput("section_selector")
-                       )
-                     )
+                   # Context Filter
+                   div(style = "margin-bottom: 16px; padding: 12px; border: 1px solid var(--border); border-radius: 8px;",
+                       h6("What's the mood?", style = "margin: 0 0 8px 0; color: var(--primary);"),
+                       selectizeInput("context_filter", "", choices = names(CONTEXT_FILTERS), selected = NULL, multiple = TRUE,
+                                      options = list(placeholder = 'Any context'), width = "100%")
                    ),
-                   fluidRow(
-                     column(8,
-                       div(style = "margin-bottom: 8px;",
-                           uiOutput("neighborhood_selector")
-                       )
-                     ),
-                     column(4,
-                       div(style = "margin-bottom: 8px;",
-                           selectInput("num_stops", "Stops", 
-                                      choices = c("1" = 1, "2" = 2, "3" = 3), 
+                   
+                   # Location Filters
+                   div(style = "margin-bottom: 16px; padding: 12px; border: 1px solid var(--border); border-radius: 8px;",
+                       h6("Where to explore?", style = "margin: 0 0 8px 0; color: var(--primary);"),
+                       div(style = "margin-bottom: 12px;",
+                           uiOutput("section_selector")
+                       ),
+                       div(style = "margin-bottom: 12px;",
+                           uiOutput("neighborhood_selector")  
+                       ),
+                       div(style = "margin-bottom: 0;",
+                           selectInput("num_stops", "Number of stops:", 
+                                      choices = c("1 stop" = 1, "2 stops" = 2, "3 stops" = 3), 
                                       selected = 1, width = "100%")
                        )
-                     )
                    )
             ),
             column(3,
-                   h4("What kinds of places?"),
-                   div(id = "activity_buttons",
-                       lapply(names(ACTIVITY_CATEGORIES), function(cat) {
-                         actionButton(paste0("act_", gsub("[^A-Za-z0-9]", "", cat)), cat, class = "activity-btn")
-                       })
+                   # Activity Types
+                   div(style = "margin-bottom: 16px; padding: 12px; border: 1px solid var(--border); border-radius: 8px;",
+                       h6("What kinds of places?", style = "margin: 0 0 8px 0; color: var(--primary);"),
+                       div(id = "activity_buttons",
+                           lapply(names(ACTIVITY_CATEGORIES), function(cat) {
+                             actionButton(paste0("act_", gsub("[^A-Za-z0-9]", "", cat)), cat, class = "activity-btn")
+                           })
+                       )
                    )
             ),
             column(3,
-                   h5("How ya getting there?"),
-                   div(id = "transport_buttons",
-                       lapply(names(TRANSPORT_MODES), function(mode) {
-                         actionButton(paste0("trans_", gsub("[^A-Za-z0-9]", "", mode)), mode, class = "transport-btn")
-                       })
+                   # Transportation
+                   div(style = "margin-bottom: 16px; padding: 12px; border: 1px solid var(--border); border-radius: 8px;",
+                       h6("How ya getting there?", style = "margin: 0 0 8px 0; color: var(--primary);"),
+                       div(id = "transport_buttons",
+                           lapply(names(TRANSPORT_MODES), function(mode) {
+                             actionButton(paste0("trans_", gsub("[^A-Za-z0-9]", "", mode)), mode, class = "transport-btn")
+                           })
+                       )
                    )
             ),
             column(3,
-                   div(style = "text-align: center; margin-top: 32px;",
+                   # Guided Plan Button
+                   div(style = "text-align: center; margin-bottom: 16px;",
                        actionButton("suggest_place", "Guided Plan", class = "btn-primary", style = "width: 100%; padding: 16px 20px; font-size: 1.4rem; font-weight: 600;")
                    ),
-                   br(), br(),
-                   h5("Places Visited"),
-                   verbatimTextOutput("visited_count"),
-                   uiOutput("visited_preview")
+                   
+                   # Visited Places
+                   div(style = "margin-bottom: 16px; padding: 12px; border: 1px solid var(--border); border-radius: 8px;",
+                       h6("Places Visited", style = "margin: 0 0 8px 0; color: var(--primary);"),
+                       verbatimTextOutput("visited_count"),
+                       uiOutput("visited_preview")
+                   )
             )
           )
       )
@@ -2021,29 +2087,30 @@ server <- function(input, output, session) {
     
     # ---------- EXPLORE MODE (locked): your existing explore toggles ----------
     if (identical(click$group, "sextants")) {
+      showNotification("Quadrant clicked - processing...", type = "message")  # Debug message
       raw_name <- sub("^sextant::", "", click$id)
       sec_name <- normalize_sextant(raw_name)
       sx_choices <- get_sextant_choices(places, sections_boundaries, SEC_NAME_COL)
-      if (!sec_name %in% sx_choices) { showNotification(paste("Unrecognized Quadrant:", raw_name), type = "warning"); return(NULL) }
+      if (!sec_name %in% sx_choices) { 
+        showNotification(paste("Unrecognized Quadrant:", raw_name), type = "warning") 
+        return(NULL) 
+      }
       cur <- isolate(input$section_filter); if (is.null(cur)) cur <- character(0)
       cur <- normalize_sextant(cur)
-      if (sec_name %in% cur) cur <- setdiff(cur, sec_name) else cur <- unique(c(cur, sec_name))
+      was_selected <- sec_name %in% cur
+      if (was_selected) {
+        cur <- setdiff(cur, sec_name)
+        showNotification(paste("Removed", sec_name, "from selection"), type = "message")
+      } else {
+        cur <- unique(c(cur, sec_name))
+        showNotification(paste("Added", sec_name, "to selection"), type = "message")
+      }
       updateSelectizeInput(session, "section_filter", choices = sx_choices, selected = cur, server = TRUE)
       updateSelectizeInput(session, "neighborhood_filter", choices = character(0), selected = character(0), server = TRUE)
-      showNotification(paste0("🧭 Quadrant: ", if (length(cur)) paste(cur, collapse = ", ") else "Any"), type = "message")
+      showNotification(paste0("🧭 Final selection: ", if (length(cur)) paste(cur, collapse = ", ") else "Any"), type = "message")
       return(invisible(NULL))
     }
     
-    if (identical(click$group, "neighborhoods")) {
-      if (is.null(isolate(input$section_filter)) || !length(isolate(input$section_filter))) {
-        showNotification("Select a Quadrant first to choose Neighborhoods.", type = "message"); return(NULL)
-      }
-      nb <- sub("^neigh::", "", click$id)
-      cur <- isolate(input$neighborhood_filter); if (is.null(cur)) cur <- character(0)
-      if (nb %in% cur) cur <- setdiff(cur, nb) else cur <- unique(c(cur, nb))
-      updateSelectizeInput(session, "neighborhood_filter", selected = cur, server = TRUE)
-      showNotification(paste0("🏘️ Neighborhood: ", if (length(cur)) paste(cur, collapse = ", ") else "Any"), type = "message")
-    }
   }, ignoreInit = TRUE)
   
   
@@ -2412,8 +2479,8 @@ server <- function(input, output, session) {
       starting_sx <- input$selected_quadrant
       
       if (isTRUE(values$starting_location_locked)) {
-        # Exploration mode - show neighborhoods for both starting and exploration quadrants
-        all_sx <- unique(c(explore_sx, if (!is.null(starting_sx) && starting_sx != "") starting_sx else character(0)))
+        # Exploration mode - show neighborhoods ONLY for selected exploration quadrants (not starting location)
+        all_sx <- if (!is.null(explore_sx) && length(explore_sx) > 0) explore_sx else character(0)
       } else {
         # Location setting mode - only show neighborhoods if starting quadrant is selected
         all_sx <- if (!is.null(starting_sx) && starting_sx != "") starting_sx else character(0)
@@ -2443,9 +2510,8 @@ server <- function(input, output, session) {
             weight = if (is_selected) 2 else 1.2,
             opacity = if (is_selected) 1 else 0.6,
             group = "neighborhoods", layerId = paste0("neigh::", nb_name),
-            options = pathOptions(pane = "polygons", interactive = TRUE, clickable = TRUE, pointerEvents = "auto"),
-            highlightOptions = highlightOptions(weight = 2.5, fillOpacity = 0.25, bringToFront = TRUE),
-            popup = paste0("<b>", nb_name, "</b><br>", if (is_selected) "Click to remove" else "Click to add")
+            label = nb_name,
+            options = pathOptions(pane = "overlayPane", interactive = TRUE, clickable = FALSE, pointerEvents = "auto")
           )
         }
       }
