@@ -338,13 +338,12 @@ simple_activity_from_tags <- function(tags_text) {
     "to draw your surroundings"
   ), 1))
   
-  # Restaurants & food - specific dining activities (expanded pattern matching)
-  if (pick("restaurant","dining","eatery","kitchen","grill","bistro","tavern","food","cuisine","chef","menu","meal","eat")) return(sample(c(
-    "to try the food", "for dinner", "to grab a bite", "to sample the menu", 
-    "to enjoy a meal", "to try the local cuisine"
+  # Restaurants & food - specific dining activities (more appropriate)
+  if (pick("restaurant","dining","eatery","grill","bistro","tavern")) return(sample(c(
+    "for dinner", "for lunch", "to grab a bite", "for a meal"
   ), 1))
-  if (pick("food","lunch","dinner","brunch","breakfast","meal")) return(sample(c(
-    "to eat", "for a meal", "to grab food", "to try something new"
+  if (pick("brunch","breakfast")) return(sample(c(
+    "for brunch", "for breakfast", "to start the day"
   ), 1))
   if (pick("cart","truck","stand","street food")) return(sample(c(
     "to try street food", "for a quick bite", "to grab something tasty"
@@ -358,12 +357,12 @@ simple_activity_from_tags <- function(tags_text) {
     "for drinks", "to grab a cocktail", "to try the wine", "to meet friends"
   ), 1))
   
-  # Sweets & treats - indulgent activities
-  if (pick("bakery","pastry","donut")) return(sample(c(
-    "for a sweet treat", "to grab something sweet", "for something sweet", "to treat yourself"
+  # Sweets & treats - indulgent activities (MUST come before restaurant check)
+  if (pick("patisserie","pastry","bakery","donut","cupcake","cake","sweet","dessert")) return(sample(c(
+    "for a sweet treat", "to grab something sweet", "for a pastry", "to treat yourself", "for dessert"
   ), 1))
-  if (pick("dessert","sweet","ice cream","gelato")) return(sample(c(
-    "for a sweet treat", "to treat yourself", "for something sweet"
+  if (pick("ice cream","gelato","sorbet")) return(sample(c(
+    "for ice cream", "to cool down with a treat", "for something cold and sweet"
   ), 1))
   
   # Nature & outdoors - active detailed activities
@@ -432,7 +431,7 @@ simple_activity_from_tags <- function(tags_text) {
   
   # Generic but still specific fallback activities
   return(sample(c(
-    "and browse", "and see what they offer", "and discover something new"
+    "to browse", "to see what they offer", "to discover something new", "to explore", "to check it out"
   ), 1))
 }
 
@@ -692,16 +691,28 @@ generate_contextual_activities <- function(places) {
     else if (grepl("museum|gallery", tags_lower)) {
       activities[i] <- sample(c("to explore the exhibits", "to see the art", "to learn something new", "to admire the collection"), 1)
     }
-    # Restaurants - food activities (check BEFORE shop/store pattern) - expanded pattern
-    else if (grepl("restaurant|dining|eatery|kitchen|grill|bistro|tavern|food|cuisine|chef|menu|meal|eat", tags_lower)) {
-      activities[i] <- sample(c("to try the food", "to grab a bite", "to enjoy a meal", "for dinner", "for lunch"), 1)
+    # Bakeries and patisseries FIRST (before restaurants) - sweet treats
+    if (grepl("patisserie|pastry|bakery|donut|cupcake|sweet|dessert", tags_lower)) {
+      activities[i] <- sample(c("for a sweet treat", "for a pastry", "to treat yourself", "for dessert"), 1)
+    }
+    # Cinemas and theaters - entertainment
+    else if (grepl("cinema|theater|theatre|movie|film", tags_lower)) {
+      activities[i] <- sample(c("to see a movie", "to catch a film", "to watch a movie"), 1)
+    }
+    # Coffee shops - specific coffee activities
+    else if (grepl("coffee|cafe|espresso|latte", tags_lower)) {
+      activities[i] <- sample(c("for coffee", "to grab coffee", "for a coffee break", "to draw your surroundings"), 1)
+    }
+    # Restaurants - food activities (more specific pattern)
+    else if (grepl("restaurant|dining|eatery|grill|bistro|tavern", tags_lower)) {
+      activities[i] <- sample(c("for dinner", "for lunch", "to grab a bite", "for a meal"), 1)
     }
     # Bars, breweries - drink activities  
     else if (grepl("bar|brewery|pub|beer|cocktail|wine", tags_lower)) {
       activities[i] <- sample(c("for drinks", "to try the beer", "for happy hour", "to grab a cocktail"), 1)
     }
-    # Markets, busy places - observational activities
-    else if (grepl("market|bakery|bagel|busy|street", tags_lower) || grepl("shop|store|thrift|vintage", tags_lower)) {
+    # Markets, shops - browsing activities
+    else if (grepl("market|shop|store|thrift|vintage", tags_lower)) {
       activities[i] <- sample(social_activities, 1)
     }
     # Parks, outdoor spaces - nature activities
@@ -2628,12 +2639,18 @@ server <- function(input, output, session) {
       if (length(all_sx) > 0 &&
           !is.null(neighborhood_boundaries) && !is.null(NEI_NAME_COL) &&
           !is.null(sections_boundaries) && !is.null(SEC_NAME_COL)) {
-      # Get selected quadrant boundaries but show all neighborhoods (don't clip)
+      # Get selected quadrant boundaries and filter neighborhoods to only those within selected quadrants
       sel_secs <- sections_boundaries[sections_boundaries[[SEC_NAME_COL]] %in% normalize_sextant(all_sx), , drop = FALSE]
       
-      # Only show neighborhoods if quadrants are selected, but show ALL neighborhoods
+      # Only show neighborhoods that are within the selected quadrants
       if (nrow(sel_secs) > 0) {
-        neigh_to_draw <- neighborhood_boundaries
+        # Filter neighborhoods to only those that intersect with selected quadrants
+        rows_to_draw <- safe_st_intersects_rows(neighborhood_boundaries, sel_secs)
+        if (length(rows_to_draw) > 0) {
+          neigh_to_draw <- neighborhood_boundaries[rows_to_draw, , drop = FALSE]
+        } else {
+          neigh_to_draw <- neighborhood_boundaries[0, , drop = FALSE] # Empty
+        }
       } else {
         neigh_to_draw <- neighborhood_boundaries[0, , drop = FALSE] # Empty
       }
