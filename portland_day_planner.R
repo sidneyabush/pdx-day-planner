@@ -334,8 +334,8 @@ simple_activity_from_tags <- function(tags_text) {
   
   # Coffee & drinks - detailed activities
   if (pick("coffee","cafe","espresso","latte")) return(sample(c(
-    "for coffee and to read your book", "to grab coffee and people watch", "for a coffee break", 
-    "to draw your surroundings"
+    "for coffee and to people watch", "to grab coffee", "for a coffee break", 
+    "to draw your surroundings", "to relax with coffee"
   ), 1))
   
   # Restaurants & food - specific dining activities (more appropriate)
@@ -370,7 +370,7 @@ simple_activity_from_tags <- function(tags_text) {
     "to go hiking", "for a hike", "to hit the trails", "to explore nature", "to get some exercise"
   ), 1))
   if (pick("park","garden","arboretum")) return(sample(c(
-    "to walk around", "to enjoy nature", "for a stroll", "to have a picnic", "to relax outdoors"
+    "to walk around", "to enjoy nature", "for a stroll", "to relax outdoors", "to get some fresh air"
   ), 1))
   if (pick("nature","forest","outdoor")) return(sample(c(
     "to enjoy nature", "to get outside", "for fresh air", "to disconnect from the city"
@@ -392,10 +392,10 @@ simple_activity_from_tags <- function(tags_text) {
     "to hunt for treasures", "to browse vintage finds", "to search for unique items", "to thrift shop", "to find hidden gems"
   ), 1))
   if (pick("market","shopping","store")) return(sample(c(
-    "browse", "shop", "see what they have", "explore"
+    "to browse", "to shop", "to see what they have", "to explore"
   ), 1))
   if (pick("record","vinyl","music")) return(sample(c(
-    "dig for records", "browse vinyl", "discover new music", "hunt for rare finds", "to find some good tunes"
+    "to dig for records", "to browse vinyl", "to discover new music", "to hunt for rare finds", "to find some good tunes"
   ), 1))
   
   # Sightseeing - photo and exploration activities  
@@ -582,14 +582,14 @@ generate_surprise_adventure <- function(available_places, time_available = NULL,
   transit_verb <- tolower(transit_to_verb(main_transit))
   
   if (num_locations == 1) {
-    description <- paste(stringr::str_to_sentence(paste(transit_verb, selected_places$title[1], "and", activities[1])))
+    description <- paste(stringr::str_to_sentence(paste(transit_verb, selected_places$title[1], activities[1])))
   } else if (num_locations == 2) {
-    description <- paste(stringr::str_to_sentence(paste(transit_verb, selected_places$title[1], "and", activities[1])), 
-                        "then head to", selected_places$title[2], "to", activities[2])
+    description <- paste(stringr::str_to_sentence(paste(transit_verb, selected_places$title[1], activities[1])), 
+                        "then head to", selected_places$title[2], activities[2])
   } else {
-    description <- paste(stringr::str_to_sentence(paste(transit_verb, selected_places$title[1], "and", activities[1])),
-                        "then", selected_places$title[2], "to", activities[2], 
-                        "and finish at", selected_places$title[3], "to", activities[3])
+    description <- paste(stringr::str_to_sentence(paste(transit_verb, selected_places$title[1], activities[1])),
+                        "then", selected_places$title[2], activities[2], 
+                        "and finish at", selected_places$title[3], activities[3])
   }
   
   # Estimate time based on number of locations
@@ -672,15 +672,23 @@ generate_contextual_activities <- function(places) {
   activities <- character(nrow(places))
   
   # Define activity types by venue characteristics
-  quiet_activities <- c("to read your book", "to work on your laptop", "to catch up with a friend", "to journal")
+  quiet_activities <- c("to read", "to work", "to catch up with a friend", "to relax")
   social_activities <- c("to people watch", "to draw your surroundings", "to take photos", "to soak in the atmosphere")
-  focused_activities <- c("to browse books", "to hunt for treasures", "to explore the collection", "to discover new music")
+  focused_activities <- c("to browse", "to hunt for treasures", "to explore the collection", "to discover something new")
   
   for (i in seq_len(nrow(places))) {
     tags_lower <- tolower(places$tags[i] %||% "")
     
-    # Coffee shops, libraries - quiet, lingering activities
-    if (grepl("coffee|cafe|library", tags_lower)) {
+    # Bakeries and patisseries FIRST (before restaurants) - sweet treats
+    if (grepl("patisserie|pastry|bakery|donut|cupcake|sweet|dessert", tags_lower)) {
+      activities[i] <- sample(c("for a sweet treat", "for a pastry", "to treat yourself", "for dessert"), 1)
+    }
+    # Coffee shops - specific coffee activities
+    else if (grepl("coffee|cafe|espresso|latte", tags_lower)) {
+      activities[i] <- sample(c("for coffee", "to grab coffee", "for a coffee break", "to draw your surroundings"), 1)
+    }
+    # Libraries - quiet, focused activities
+    else if (grepl("library", tags_lower)) {
       activities[i] <- sample(quiet_activities, 1)
     }
     # Bookstores, record shops - focused browsing activities  
@@ -691,17 +699,9 @@ generate_contextual_activities <- function(places) {
     else if (grepl("museum|gallery", tags_lower)) {
       activities[i] <- sample(c("to explore the exhibits", "to see the art", "to learn something new", "to admire the collection"), 1)
     }
-    # Bakeries and patisseries FIRST (before restaurants) - sweet treats
-    if (grepl("patisserie|pastry|bakery|donut|cupcake|sweet|dessert", tags_lower)) {
-      activities[i] <- sample(c("for a sweet treat", "for a pastry", "to treat yourself", "for dessert"), 1)
-    }
     # Cinemas and theaters - entertainment
     else if (grepl("cinema|theater|theatre|movie|film", tags_lower)) {
       activities[i] <- sample(c("to see a movie", "to catch a film", "to watch a movie"), 1)
-    }
-    # Coffee shops - specific coffee activities
-    else if (grepl("coffee|cafe|espresso|latte", tags_lower)) {
-      activities[i] <- sample(c("for coffee", "to grab coffee", "for a coffee break", "to draw your surroundings"), 1)
     }
     # Restaurants - food activities (more specific pattern)
     else if (grepl("restaurant|dining|eatery|grill|bistro|tavern", tags_lower)) {
@@ -1470,7 +1470,7 @@ ui <- fluidPage(
   # ======= STARTING LOCATION & MAP SECTION =======
   fluidRow(
     column(
-      4,
+      3,
       div(class = "location-control-panel",
           h4("Starting Location"),
           p("Choose one option below or click anywhere on the map", style = "color: var(--muted); font-size: 1.3rem; margin-bottom: 16px; font-weight: 600;"),
@@ -1525,8 +1525,8 @@ ui <- fluidPage(
     ),
     
     column(
-      8,
-      div(class="map-container", leafletOutput("map", height = 650)),
+      9,
+      div(class="map-container", leafletOutput("map", height = 600)),
       div(id = "map_status", class="address-status", style = "margin-top: 8px;")
     )
   ),
@@ -1536,20 +1536,18 @@ ui <- fluidPage(
     column(
       12,
       div(class = "control-panel", style = "margin-top: 24px;",
-          # Row 1: What's the mood and Where to explore
           fluidRow(
-            column(6,
+            # Left narrow column: What's the mood and Where to explore (stacked)
+            column(3,
                    # Context Filter
                    div(style = "margin-bottom: 16px; padding: 12px; border: 1px solid var(--border); border-radius: 8px;",
-                       h6("What's the mood?", style = "margin: 0 0 8px 0; color: var(--primary); font-size: 1rem;"),
+                       h5("What's the mood?", style = "margin: 0 0 8px 0; color: var(--primary); font-size: 1.3rem; font-weight: 600;"),
                        selectizeInput("context_filter", "", choices = names(CONTEXT_FILTERS), selected = NULL, multiple = TRUE,
                                       options = list(placeholder = 'Any context'), width = "100%")
-                   )
-            ),
-            column(6,
-                   # Location Filters
+                   ),
+                   # Location Filters  
                    div(style = "margin-bottom: 16px; padding: 12px; border: 1px solid var(--border); border-radius: 8px;",
-                       h6("Where to explore?", style = "margin: 0 0 8px 0; color: var(--primary); font-size: 1rem;"),
+                       h5("Where to explore?", style = "margin: 0 0 8px 0; color: var(--primary); font-size: 1.3rem; font-weight: 600;"),
                        div(style = "margin-bottom: 12px;",
                            uiOutput("section_selector")
                        ),
@@ -1557,28 +1555,43 @@ ui <- fluidPage(
                            uiOutput("neighborhood_selector")  
                        )
                    )
-            )
-          ),
-          # Row 2: What kinds of places (full width)
-          fluidRow(
-            column(12,
-                   # Activity Types
+            ),
+            # Middle column: What kinds of places
+            column(6,
+                   # What kinds of places 
                    div(style = "margin-bottom: 16px; padding: 12px; border: 1px solid var(--border); border-radius: 8px;",
-                       h6("What kinds of places?", style = "margin: 0 0 8px 0; color: var(--primary); font-size: 1rem;"),
+                       h5("What kinds of places?", style = "margin: 0 0 8px 0; color: var(--primary); font-size: 1.3rem; font-weight: 600;"),
                        div(id = "activity_buttons",
                            lapply(names(ACTIVITY_CATEGORIES), function(cat) {
                              actionButton(paste0("act_", gsub("[^A-Za-z0-9]", "", cat)), cat, class = "activity-btn")
                            })
                        )
                    )
+            ),
+            # Right column: Number of stops above Guided Plan
+            column(3,
+                   # Number of stops
+                   div(style = "margin-bottom: 16px; padding: 12px; border: 1px solid var(--border); border-radius: 8px;",
+                       h5("Number of stops", style = "margin: 0 0 8px 0; color: var(--primary); font-size: 1.3rem; font-weight: 600;"),
+                       selectInput("num_stops", NULL, 
+                                  choices = c("1 stop" = 1, "2 stops" = 2, "3 stops" = 3), 
+                                  selected = 1, width = "100%")
+                   ),
+                   # Guided Plan Button
+                   div(style = "margin-bottom: 16px; padding: 12px; border: 1px solid var(--border); border-radius: 8px; height: fit-content;",
+                       div(style = "text-align: center;",
+                           actionButton("suggest_place", "Guided Plan", class = "btn-primary", style = "width: 100%; padding: 16px 20px; font-size: 1.4rem; font-weight: 600;")
+                       )
+                   )
             )
           ),
-          # Row 3: How ya getting there and Number of stops
           fluidRow(
-            column(8,
-                   # Transportation
+            # Transport row - below What kinds of places
+            column(3),  # Empty column to align with left column above
+            column(6,
+                   # Transportation - below What kinds of places
                    div(style = "margin-bottom: 16px; padding: 12px; border: 1px solid var(--border); border-radius: 8px;",
-                       h6("How ya getting there?", style = "margin: 0 0 8px 0; color: var(--primary); font-size: 1rem;"),
+                       h5("How ya getting there?", style = "margin: 0 0 8px 0; color: var(--primary); font-size: 1.3rem; font-weight: 600;"),
                        div(id = "transport_buttons",
                            lapply(names(TRANSPORT_MODES), function(mode) {
                              actionButton(paste0("trans_", gsub("[^A-Za-z0-9]", "", mode)), mode, class = "transport-btn")
@@ -1586,28 +1599,15 @@ ui <- fluidPage(
                        )
                    )
             ),
-            column(4,
-                   # Number of stops
-                   div(style = "margin-bottom: 16px; padding: 12px; border: 1px solid var(--border); border-radius: 8px;",
-                       h6("Number of stops", style = "margin: 0 0 8px 0; color: var(--primary); font-size: 1rem;"),
-                       selectInput("num_stops", NULL, 
-                                  choices = c("1 stop" = 1, "2 stops" = 2, "3 stops" = 3), 
-                                  selected = 1, width = "100%")
-                   )
-            )
+            column(3)  # Empty column to align with right column
           ),
-          # Row 4: Guided Plan and Visited Places
+          # Visited Places row
           fluidRow(
-            column(6,
-                   # Guided Plan Button
-                   div(style = "text-align: center; margin-bottom: 16px;",
-                       actionButton("suggest_place", "Guided Plan", class = "btn-primary", style = "width: 100%; padding: 16px 20px; font-size: 1.4rem; font-weight: 600;")
-                   )
-            ),
-            column(6,
+            column(3), # Empty column to align with left column
+            column(9,
                    # Visited Places
                    div(style = "margin-bottom: 16px; padding: 12px; border: 1px solid var(--border); border-radius: 8px;",
-                       h6("Places Visited", style = "margin: 0 0 8px 0; color: var(--primary); font-size: 1rem;"),
+                       h5("Places Visited", style = "margin: 0 0 8px 0; color: var(--primary); font-size: 1.3rem; font-weight: 600;"),
                        verbatimTextOutput("visited_count"),
                        uiOutput("visited_preview")
                    )
@@ -2062,7 +2062,14 @@ server <- function(input, output, session) {
   
   # --- Replace your confirm_map_location observer with this ---
   observeEvent(input$confirm_map_location, {
-    if (!is.na(values$home_lat) && !is.na(values$home_lng) && !is.null(values$preview_address)) {
+    # Validate location data before confirming
+    if (is.na(values$home_lat) || is.na(values$home_lng) || 
+        is.null(values$preview_address) || !nzchar(values$preview_address)) {
+      showNotification("Cannot confirm location. Please click on the map or set an address first.", type = "error")
+      return()
+    }
+    
+    tryCatch({
       values$home_address <- values$preview_address
       
       # Try neighborhood first
@@ -2096,15 +2103,32 @@ server <- function(input, output, session) {
       output$address_status <- renderText(paste("Starting from:", values$home_address))
       showNotification(paste("Starting location set to", values$home_address,
                              "- Map now in exploration mode"), type = "success")
-    }
+    }, error = function(e) {
+      showNotification(paste("Error confirming map location:", e$message), type = "error")
+    })
   })
   
   # Manual lock starting location
   observeEvent(input$lock_starting_location, {
-    if (!is.na(values$home_lat) && !is.na(values$home_lng)) {
+    # Comprehensive validation before locking
+    if (is.na(values$home_lat) || is.na(values$home_lng) || 
+        is.null(values$home_address) || !nzchar(values$home_address)) {
+      showNotification("Cannot confirm starting location. Please set your location first using 'Set Address' or 'Set Area'.", type = "error")
+      return()
+    }
+    
+    # Additional validation for reasonable coordinates
+    if (is.na(as.numeric(values$home_lat)) || is.na(as.numeric(values$home_lng))) {
+      showNotification("Invalid coordinates detected. Please set your location again.", type = "error")
+      return()
+    }
+    
+    tryCatch({
       values$starting_location_locked <- TRUE
       showNotification("Starting location locked! Map now in exploration mode.", type = "success")
-    }
+    }, error = function(e) {
+      showNotification(paste("Error confirming location:", e$message), type = "error")
+    })
   })
   
   # Reset starting location
@@ -2471,41 +2495,61 @@ server <- function(input, output, session) {
   })
   
   observeEvent(input$random_inspiration, {
-    # Check if address is set
-    if (!home_is_set(values$home_address, values$home_lat, values$home_lng)) {
-      showNotification("Please set your starting address first for the best surprise recommendations!", type = "warning")
+    # Check if address is set - multiple safety checks
+    if (!home_is_set(values$home_address, values$home_lat, values$home_lng) ||
+        is.na(values$home_lat) || is.na(values$home_lng) ||
+        is.null(values$home_address) || !nzchar(values$home_address)) {
+      showNotification("Please set your starting location first! Use 'Set Address' or 'Set Area' to choose where you're starting from.", type = "warning")
       return()
     }
     
-    all_available <- places[!(places$id %in% values$completed), , drop = FALSE]
-    if (nrow(all_available) == 0) { showNotification("You've visited everywhere! Time for new places.", type = "warning"); values$suggested <- NULL; return() }
-    context_for_adventure <- if (length(input$context_filter) > 0) input$context_filter[1] else NULL
-    adventures <- generate_surprise_adventure(
-      available_places = all_available,
-      time_available = NULL,
-      context = context_for_adventure,
-      home_lat = values$home_lat, home_lng = values$home_lng, home_addr = values$home_address
-    )
+    # Additional safety check for valid coordinates
+    if (is.na(as.numeric(values$home_lat)) || is.na(as.numeric(values$home_lng))) {
+      showNotification("Invalid starting location coordinates. Please set your location again.", type = "error")
+      return()
+    }
     
-    if (length(adventures) > 0 && !is.null(adventures[[1]])) {
-      adventure <- adventures[[1]]
+    tryCatch({
+      all_available <- places[!(places$id %in% values$completed), , drop = FALSE]
+      if (nrow(all_available) == 0) { 
+        showNotification("You've visited everywhere! Time for new places.", type = "warning")
+        values$suggested <- NULL
+        return() 
+      }
       
-      # The new adventure generator always includes proper transit mode, locations, and activities
-      values$suggested <- adventure$places[1, , drop = FALSE]  # First location for map display
-      values$inspiration_text <- list(
-        title = adventure$title,
-        description = adventure$description,
-        type = adventure$type,
-        estimated_time = adventure$estimated_time,
-        transit = adventure$transit,
-        neighborhood = adventure$neighborhood,
-        full_adventure = adventure  # Store full adventure details
+      context_for_adventure <- if (length(input$context_filter) > 0) input$context_filter[1] else NULL
+      adventures <- generate_surprise_adventure(
+        available_places = all_available,
+        time_available = NULL,
+        context = context_for_adventure,
+        home_lat = values$home_lat, home_lng = values$home_lng, home_addr = values$home_address
       )
-    } else {
-      showNotification("Unable to generate adventure - try adjusting your filters or check available places.", type = "warning")
+      
+      if (length(adventures) > 0 && !is.null(adventures[[1]])) {
+        adventure <- adventures[[1]]
+        
+        # The new adventure generator always includes proper transit mode, locations, and activities
+        values$suggested <- adventure$places[1, , drop = FALSE]  # First location for map display
+        values$inspiration_text <- list(
+          title = adventure$title,
+          description = adventure$description,
+          type = adventure$type,
+          estimated_time = adventure$estimated_time,
+          transit = adventure$transit,
+          neighborhood = adventure$neighborhood,
+          full_adventure = adventure  # Store full adventure details
+        )
+      } else {
+        showNotification("Unable to generate adventure - try adjusting your filters or check available places.", type = "warning")
+        values$suggested <- NULL
+        values$inspiration_text <- NULL
+      }
+    }, error = function(e) {
+      showNotification(paste("Error generating surprise adventure:", e$message, "Please try setting your location again."), type = "error")
       values$suggested <- NULL
       values$inspiration_text <- NULL
-    }
+      return()
+    })
   })
   
   # Visited toggles
