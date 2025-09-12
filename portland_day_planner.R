@@ -48,7 +48,7 @@ ACTIVITY_MODES <- list(
 # Transportation modes  
 TRANSPORT_MODES <- list(
   "🚶 Walking" = 2,      # miles
-  "🚲 Biking" = 6,       # miles - reduced from 10 to 6 for more reasonable biking distances
+  "🚲 Biking" = 8,       # miles - one-way biking distance
   "🚗 Driving" = 30,     # miles
   "🚌 Public Transit" = 50  # miles
 )
@@ -311,7 +311,7 @@ transit_by_distance <- function(d_mi, context = NULL) {
     "☔ Rainy Weather" %in% context
   )
   
-  if (d_mi <= 6) return("🚲 Biking")  # Reduced from 10 to 6 miles for more reasonable bike distances
+  if (d_mi <= 8) return("🚲 Biking")  # One-way biking distance
   if (d_mi <= 30 && allow_driving) return("🚗 Driving")
   "🚌 Public Transit"  # Default to transit if driving not allowed
 }
@@ -335,18 +335,23 @@ simple_activity_from_tags <- function(tags_text, title_text = "") {
   pick <- function(...) any(grepl(paste0("(", paste(list(...), collapse="|"), ")"), t))
   pick_title <- function(...) any(grepl(paste0("(", paste(list(...), collapse="|"), ")"), title_lower))
   
-  # Food & drinks - MUST come first to prevent being caught as "shops"
-  # First check title for obvious restaurant names
-  if (pick_title("restaurant|kitchen|bistro|tavern|grill|diner|cafe|eatery|food|pizza|burger|sandwich|taco|ramen|pho|bagel|wrap|burrito|bowl|sub|deli|dining|brasserie|steakhouse")) return(sample(c(
+  # Coffee & drinks - MUST come first to prevent being caught as restaurants
+  # First check title for coffee places
+  if (pick_title("coffee|cafe|espresso|cappuccino|americano|mocha|macchiato|latte")) return("to grab coffee")
+  # Then check tags for coffee
+  if (pick("coffee","cafe","espresso","latte","cappuccino","americano","mocha","macchiato")) return(sample(c(
+    "for coffee and to people watch", "to grab coffee", "for a coffee break", 
+    "to relax with coffee"
+  ), 1))
+  
+  # Food & drinks - general restaurants (after coffee detection)
+  # First check title for obvious restaurant names (removed "cafe" to avoid conflict with coffee)
+  if (pick_title("restaurant|kitchen|bistro|tavern|grill|diner|eatery|food|pizza|burger|sandwich|taco|ramen|pho|bagel|wrap|burrito|bowl|sub|deli|dining|brasserie|steakhouse")) return(sample(c(
     "to grab something to eat", "for a meal", "to grab a bite", "for dinner", "for lunch"
   ), 1))
   # Then check tags
   if (pick("restaurant","dining","eatery","grill","bistro","tavern","kitchen","food","meal","menu","cuisine","chef","bagel","sandwich","wrap","burrito","bowl")) return(sample(c(
     "to grab something to eat", "for a meal", "to grab a bite", "for dinner", "for lunch"
-  ), 1))
-  if (pick("coffee","cafe","espresso","latte","cappuccino","americano","mocha","macchiato")) return(sample(c(
-    "for coffee and to people watch", "to grab coffee", "for a coffee break", 
-    "to relax with coffee"
   ), 1))
 
   # Specialized stores - must be very specific first
@@ -516,17 +521,17 @@ generate_surprise_adventure <- function(available_places, time_available = NULL,
     tags_lower <- tolower(tags %||% "")
     title_lower <- tolower(title %||% "")
     
-    # Check tags first - be more specific about food types
+    # Check tags first - COFFEE MUST COME FIRST to avoid being caught as restaurant
+    if (grepl("coffee|cafe|espresso|latte|cappuccino|americano|mocha|macchiato", tags_lower)) return("coffee")
     if (grepl("bakery|donut|pastry|dessert|sweet|cake|cupcake|ice cream|gelato", tags_lower)) return("dessert")
     if (grepl("restaurant|dining|eatery|kitchen|grill|bistro|tavern|food|cuisine|chef|menu|meal|eat|lunch|dinner|brunch|breakfast|subs|sandwich|pizza|burger|noodle|taco|ramen|pho", tags_lower)) return("restaurant")
-    if (grepl("coffee|cafe|espresso|latte", tags_lower)) return("coffee")
     if (grepl("juice|smoothie|drink", tags_lower)) return("beverage")
     if (grepl("bar|brewery|pub|beer|cocktail|wine", tags_lower)) return("bar")
     
-    # Title-based fallback for common food indicators
+    # Title-based fallback for common food indicators - COFFEE MUST COME FIRST
+    if (grepl("coffee|cafe|espresso|cappuccino|americano|mocha|macchiato|latte", title_lower)) return("coffee")
     if (grepl("bakery|donut|pastry|dessert|sweet|cake|cupcake|ice cream|gelato", title_lower)) return("dessert")
-    if (grepl("restaurant|kitchen|bistro|tavern|grill|diner|cafe|subs|sandwich|pizza|burger|noodle|taco|ramen|pho", title_lower)) return("restaurant")
-    if (grepl("coffee|cafe|espresso", title_lower)) return("coffee") 
+    if (grepl("restaurant|kitchen|bistro|tavern|grill|diner|subs|sandwich|pizza|burger|noodle|taco|ramen|pho", title_lower)) return("restaurant") 
     if (grepl("juice|smoothie", title_lower)) return("beverage")
     if (grepl("bar|pub|brewery|distillery", title_lower)) return("bar")
     
@@ -783,7 +788,7 @@ generate_activity_from_tags <- function(tags) {
   }
   
   # Shopping activities
-  if (grepl("bookstore|books", tags_lower)) {
+  if (grepl("bookstore|books|book shop", tags_lower)) {
     return(sample(c("browse for books", "find your next read", "explore the stacks", "discover new authors"), 1))
   }
   
@@ -829,7 +834,7 @@ generate_contextual_activities <- function(places) {
     
     # Bakeries and patisseries FIRST (before restaurants) - sweet treats
     if (grepl("patisserie|pastry|bakery|donut|cupcake|sweet|dessert", tags_lower)) {
-      activities[i] <- sample(c("for a sweet treat", "for a pastry", "to treat yourself", "for dessert"), 1)
+      activities[i] <- sample(c("for a sweet treat", "to treat yourself", "for something sweet"), 1)
     }
     # Coffee shops - specific coffee activities
     else if (grepl("coffee|cafe|espresso|latte", tags_lower)) {
@@ -853,11 +858,11 @@ generate_contextual_activities <- function(places) {
     }
     # Restaurants - food activities (more specific pattern)
     else if (grepl("restaurant|dining|eatery|grill|bistro|tavern", tags_lower)) {
-      activities[i] <- sample(c("for dinner", "for lunch", "to grab a bite", "for a meal"), 1)
+      activities[i] <- sample(c("to grab a bite"), 1)
     }
     # Bars, breweries - drink activities  
     else if (grepl("bar|brewery|pub|beer|cocktail|wine", tags_lower)) {
-      activities[i] <- sample(c("for drinks", "to try the beer", "for happy hour", "to grab a cocktail"), 1)
+      activities[i] <- sample(c("for drinks"), 1)
     }
     # Markets, shops - browsing activities
     else if (grepl("market|shop|store|thrift|vintage", tags_lower)) {
@@ -910,17 +915,17 @@ generate_guided_multi_stop <- function(available_places, num_stops, context = NU
     tags_lower <- tolower(tags %||% "")
     title_lower <- tolower(title %||% "")
     
-    # Check tags first - be more specific about food types
+    # Check tags first - COFFEE MUST COME FIRST to avoid being caught as restaurant
+    if (grepl("coffee|cafe|espresso|latte|cappuccino|americano|mocha|macchiato", tags_lower)) return("coffee")
     if (grepl("bakery|donut|pastry|dessert|sweet|cake|cupcake|ice cream|gelato", tags_lower)) return("dessert")
     if (grepl("restaurant|dining|eatery|kitchen|grill|bistro|tavern|food|cuisine|chef|menu|meal|eat|lunch|dinner|brunch|breakfast|subs|sandwich|pizza|burger|noodle|taco|ramen|pho", tags_lower)) return("restaurant")
-    if (grepl("coffee|cafe|espresso|latte", tags_lower)) return("coffee")
     if (grepl("juice|smoothie|drink", tags_lower)) return("beverage")
     if (grepl("bar|brewery|pub|beer|cocktail|wine", tags_lower)) return("bar")
     
-    # Title-based fallback for common food indicators
+    # Title-based fallback for common food indicators - COFFEE MUST COME FIRST
+    if (grepl("coffee|cafe|espresso|cappuccino|americano|mocha|macchiato|latte", title_lower)) return("coffee")
     if (grepl("bakery|donut|pastry|dessert|sweet|cake|cupcake|ice cream|gelato", title_lower)) return("dessert")
-    if (grepl("restaurant|kitchen|bistro|tavern|grill|diner|cafe|subs|sandwich|pizza|burger|noodle|taco|ramen|pho", title_lower)) return("restaurant")
-    if (grepl("coffee|cafe|espresso", title_lower)) return("coffee") 
+    if (grepl("restaurant|kitchen|bistro|tavern|grill|diner|subs|sandwich|pizza|burger|noodle|taco|ramen|pho", title_lower)) return("restaurant") 
     if (grepl("juice|smoothie", title_lower)) return("beverage")
     if (grepl("bar|pub|brewery|distillery", title_lower)) return("bar")
     
@@ -1752,6 +1757,10 @@ ui <- fluidPage(
                        div(style = "text-align: center;",
                            actionButton("suggest_place", "Guided Plan", class = "btn-primary", style = "width: 100%; padding: 16px 20px; font-size: 1.4rem; font-weight: 600;")
                        )
+                   ),
+                   # Clear Selections Button
+                   div(style = "margin-bottom: 16px; text-align: center;",
+                       actionButton("clear_exploration", "Clear Selections", class = "btn-outline-secondary", style = "width: 100%; padding: 8px 16px; font-size: 1rem;")
                    )
             )
           ),
@@ -1840,6 +1849,17 @@ ui <- fluidPage(
           }
         });
       }
+    });
+    
+    // Handle clear exploration selections message from R
+    Shiny.addCustomMessageHandler('clearExplorationButtons', function(message) {
+      // Clear activity button selections
+      $('#activity_buttons .activity-btn').removeClass('active');
+      Shiny.setInputValue('selected_activities', [], {priority: 'event'});
+      
+      // Clear transport button selections
+      $('#transport_buttons .transport-btn').removeClass('active');
+      Shiny.setInputValue('selected_transport', '', {priority: 'event'});
     });
   "))
 )
@@ -2535,6 +2555,24 @@ server <- function(input, output, session) {
   available_places <- reactive({
     df <- filtered_places()
     df[!(df$id %in% values$completed), , drop = FALSE]
+  })
+  
+  # Clear exploration selections (but keep starting location)
+  observeEvent(input$clear_exploration, {
+    # Clear exploration filters
+    updateSelectizeInput(session, "context_filter", selected = NULL)
+    updateSelectizeInput(session, "section_filter", selected = character(0))
+    updateSelectizeInput(session, "neighborhood_filter", selected = character(0))
+    updateSelectInput(session, "num_stops", selected = 1)
+    
+    # Clear activity and transport button selections via JavaScript
+    session$sendCustomMessage("clearExplorationButtons", list())
+    
+    # Clear any current suggestions
+    values$suggested <- NULL
+    values$inspiration_text <- NULL
+    
+    showNotification("Exploration selections cleared", type = "message", duration = 2)
   })
   
   # Suggestions
