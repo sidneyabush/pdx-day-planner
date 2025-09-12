@@ -48,7 +48,7 @@ ACTIVITY_MODES <- list(
 # Transportation modes  
 TRANSPORT_MODES <- list(
   "🚶 Walking" = 2,      # miles
-  "🚲 Biking" = 10,      # miles  
+  "🚲 Biking" = 6,       # miles - reduced from 10 to 6 for more reasonable biking distances
   "🚗 Driving" = 30,     # miles
   "🚌 Public Transit" = 50  # miles
 )
@@ -147,11 +147,6 @@ CONTEXT_FILTERS <- list(
   ),
   "🚶 No Car" = list(
     max_distance = 5
-  ),
-  "😴 Low Energy" = list(
-    prefer_venues = c("📚 Bookstores", "☕ Coffee & Cafes", "🎭 Entertainment"),
-    exclude_activities = c("Hiking", "Photography"),
-    max_distance = 10
   )
 )
 
@@ -307,12 +302,18 @@ action_suffix_from_tags <- function(tags_text) {
 }
 
 # ---------- Transit selection by distance ----------
-transit_by_distance <- function(d_mi) {
+transit_by_distance <- function(d_mi, context = NULL) {
   if (is.na(d_mi)) return("🚌 Public Transit")
   if (d_mi <= 2) return("🚶 Walking")
-  if (d_mi <= 10) return("🚲 Biking")
-  if (d_mi <= 30) return("🚗 Driving")
-  "🚌 Public Transit"
+  
+  # Check if driving should be suggested based on context
+  allow_driving <- !is.null(context) && (
+    "☔ Rainy Weather" %in% context
+  )
+  
+  if (d_mi <= 6) return("🚲 Biking")  # Reduced from 10 to 6 miles for more reasonable bike distances
+  if (d_mi <= 30 && allow_driving) return("🚗 Driving")
+  "🚌 Public Transit"  # Default to transit if driving not allowed
 }
 
 # Convert transit mode to action verb
@@ -328,19 +329,58 @@ transit_to_verb <- function(transit_mode) {
 }
 
 # Simple activity description for single stops
-simple_activity_from_tags <- function(tags_text) {
+simple_activity_from_tags <- function(tags_text, title_text = "") {
   t <- tolower(tags_text %||% "")
+  title_lower <- tolower(title_text %||% "")
   pick <- function(...) any(grepl(paste0("(", paste(list(...), collapse="|"), ")"), t))
+  pick_title <- function(...) any(grepl(paste0("(", paste(list(...), collapse="|"), ")"), title_lower))
   
-  # Coffee & drinks - detailed activities
-  if (pick("coffee","cafe","espresso","latte")) return(sample(c(
+  # Food & drinks - MUST come first to prevent being caught as "shops"
+  # First check title for obvious restaurant names
+  if (pick_title("restaurant|kitchen|bistro|tavern|grill|diner|cafe|eatery|food|pizza|burger|sandwich|taco|ramen|pho|bagel|wrap|burrito|bowl|sub|deli|dining|brasserie|steakhouse")) return(sample(c(
+    "to grab something to eat", "for a meal", "to grab a bite", "for dinner", "for lunch"
+  ), 1))
+  # Then check tags
+  if (pick("restaurant","dining","eatery","grill","bistro","tavern","kitchen","food","meal","menu","cuisine","chef","bagel","sandwich","wrap","burrito","bowl")) return(sample(c(
+    "to grab something to eat", "for a meal", "to grab a bite", "for dinner", "for lunch"
+  ), 1))
+  if (pick("coffee","cafe","espresso","latte","cappuccino","americano","mocha","macchiato")) return(sample(c(
     "for coffee and to people watch", "to grab coffee", "for a coffee break", 
-    "to draw your surroundings", "to relax with coffee"
+    "to relax with coffee"
+  ), 1))
+
+  # Specialized stores - must be very specific first
+  if (pick("bike","cycling","bicycle")) return(sample(c(
+    "to look at bikes", "to get bike gear", "to ask about repairs", "to browse cycling equipment"
+  ), 1))
+  if (pick("hardware","tool","repair")) return(sample(c(
+    "to find supplies", "to get what you need", "to solve your project", "to browse tools"
+  ), 1))
+  if (pick("game","toy","hobby")) return(sample(c(
+    "to browse games", "to find something fun", "to check out the selection", "to discover new games"
+  ), 1))
+  if (pick("art supplies","craft","creative")) return(sample(c(
+    "to get inspired", "to find art supplies", "to browse materials", "to fuel your creativity"
+  ), 1))
+  if (pick("tattoo","piercing")) return(sample(c(
+    "to browse designs", "to check out their work", "to get inspired", "to see the art"
+  ), 1))
+  if (pick("salon","spa","beauty")) return(sample(c(
+    "to treat yourself", "for some self-care", "to get pampered", "to relax"
   ), 1))
   
-  # Restaurants & food - specific dining activities (more appropriate)
-  if (pick("restaurant","dining","eatery","grill","bistro","tavern")) return(sample(c(
-    "for dinner", "for lunch", "to grab a bite", "for a meal"
+  # General shopping & retail - comes after food detection
+  if (pick("store","shop","retail","market","mall","outlet")) return(sample(c(
+    "to browse", "to shop", "to see what they have", "to check out their selection"
+  ), 1))
+  if (pick("bookstore","library")) return(sample(c(
+    "to find your next read", "to browse books", "to discover new authors", "to explore the stacks", "to find a good book"
+  ), 1))
+  if (pick("thrift","vintage","antique")) return(sample(c(
+    "to hunt for treasures", "to browse vintage finds", "to search for unique items", "to thrift shop", "to find hidden gems"
+  ), 1))
+  if (pick("record","vinyl","music")) return(sample(c(
+    "to dig for records", "to browse vinyl", "to discover new music", "to hunt for rare finds", "to find some good tunes"
   ), 1))
   if (pick("brunch","breakfast")) return(sample(c(
     "for brunch", "for breakfast", "to start the day"
@@ -359,7 +399,7 @@ simple_activity_from_tags <- function(tags_text) {
   
   # Sweets & treats - indulgent activities (MUST come before restaurant check)
   if (pick("patisserie","pastry","bakery","donut","cupcake","cake","sweet","dessert")) return(sample(c(
-    "for a sweet treat", "to grab something sweet", "for a pastry", "to treat yourself", "for dessert"
+    "for a sweet treat", "to grab something sweet", "to treat yourself", "for dessert"
   ), 1))
   if (pick("ice cream","gelato","sorbet")) return(sample(c(
     "for ice cream", "to cool down with a treat", "for something cold and sweet"
@@ -384,19 +424,6 @@ simple_activity_from_tags <- function(tags_text) {
     "to see a movie", "to catch a film", "to watch a movie", "for a movie night"
   ), 1))
   
-  # Shopping & browsing - discovery activities
-  if (pick("bookstore","library")) return(sample(c(
-    "to find your next read", "to browse books", "to discover new authors", "to explore the stacks", "to find a good book"
-  ), 1))
-  if (pick("thrift","vintage","antique")) return(sample(c(
-    "to hunt for treasures", "to browse vintage finds", "to search for unique items", "to thrift shop", "to find hidden gems"
-  ), 1))
-  if (pick("market","shopping","store")) return(sample(c(
-    "to browse", "to shop", "to see what they have", "to explore"
-  ), 1))
-  if (pick("record","vinyl","music")) return(sample(c(
-    "to dig for records", "to browse vinyl", "to discover new music", "to hunt for rare finds", "to find some good tunes"
-  ), 1))
   
   # Sightseeing - photo and exploration activities  
   if (pick("mural","street art")) return(sample(c(
@@ -409,29 +436,19 @@ simple_activity_from_tags <- function(tags_text) {
     "to see the architecture", "for the history", "to learn about the area", "to check out the landmark"
   ), 1))
   
-  # Specialized stores & services - specific purpose activities
-  if (pick("bike","cycling","bicycle")) return(sample(c(
-    "to look at bikes", "to get bike gear", "to ask about repairs", "to browse cycling equipment"
-  ), 1))
-  if (pick("tattoo","piercing")) return(sample(c(
-    "to browse designs", "to check out their work", "to get inspired", "to see the art"
-  ), 1))
-  if (pick("salon","spa","beauty")) return(sample(c(
-    "to treat yourself", "for some self-care", "to get pampered", "to relax"
-  ), 1))
-  if (pick("hardware","tool","repair")) return(sample(c(
-    "to find supplies", "to get what you need", "to solve your project", "to browse tools"
-  ), 1))
-  if (pick("game","toy","hobby")) return(sample(c(
-    "to browse games", "to find something fun", "to check out the selection", "to discover new games"
-  ), 1))
-  if (pick("art supplies","craft","creative")) return(sample(c(
-    "to get inspired", "to find art supplies", "to browse materials", "to fuel your creativity"
-  ), 1))
   
-  # Generic but still specific fallback activities
+  # Additional title-based fallback detection for non-restaurant venues
+  if (pick_title("coffee|cafe|espresso|cappuccino|americano|mocha|macchiato|latte")) return("to grab coffee")
+  if (pick_title("bar|pub|brewery|distillery|cocktail|wine")) return("for drinks") 
+  if (pick_title("bakery|donut|pastry|dessert|sweet|cake|cupcake")) return("for a sweet treat")
+  if (pick_title("gallery|museum")) return("to see the exhibits")
+  if (pick_title("theater|cinema|movie")) return("to see a movie")
+  if (pick_title("bookstore|library")) return("to browse books")
+  if (pick_title("market|shop|store|boutique")) return("to browse")
+  
+  # Final fallback - be more specific than "check it out"
   return(sample(c(
-    "to browse", "to see what they offer", "to discover something new", "to explore", "to check it out"
+    "to browse", "to see what they offer", "to discover something new", "to see what's there"
   ), 1))
 }
 
@@ -474,6 +491,15 @@ generate_surprise_adventure <- function(available_places, time_available = NULL,
   # Determine number of locations (1-3)
   num_locations <- sample(1:3, 1)
   
+  # Calculate distances for proper venue arrangement
+  if (!is.null(home_lat) && !is.null(home_lng)) {
+    if (!"distance_mi" %in% names(valid_places) || any(is.na(valid_places$distance_mi))) {
+      valid_places$distance_mi <- mapply(function(lat, lng) {
+        calc_distance_miles(home_lat, home_lng, lat, lng)
+      }, valid_places$lat, valid_places$lng)
+    }
+  }
+  
   # Categorize places by time of day preference
   categorize_venue_time <- function(tags) {
     tags_lower <- tolower(tags %||% "")
@@ -484,6 +510,30 @@ generate_surprise_adventure <- function(available_places, time_available = NULL,
   }
   
   valid_places$time_category <- sapply(valid_places$tags, categorize_venue_time)
+  
+  # Add venue type categorization for diversity (reuse function from guided multi-stop)
+  categorize_venue_type_surprise <- function(tags, title = "") {
+    tags_lower <- tolower(tags %||% "")
+    title_lower <- tolower(title %||% "")
+    
+    # Check tags first - be more specific about food types
+    if (grepl("bakery|donut|pastry|dessert|sweet|cake|cupcake|ice cream|gelato", tags_lower)) return("dessert")
+    if (grepl("restaurant|dining|eatery|kitchen|grill|bistro|tavern|food|cuisine|chef|menu|meal|eat|lunch|dinner|brunch|breakfast|subs|sandwich|pizza|burger|noodle|taco|ramen|pho", tags_lower)) return("restaurant")
+    if (grepl("coffee|cafe|espresso|latte", tags_lower)) return("coffee")
+    if (grepl("juice|smoothie|drink", tags_lower)) return("beverage")
+    if (grepl("bar|brewery|pub|beer|cocktail|wine", tags_lower)) return("bar")
+    
+    # Title-based fallback for common food indicators
+    if (grepl("bakery|donut|pastry|dessert|sweet|cake|cupcake|ice cream|gelato", title_lower)) return("dessert")
+    if (grepl("restaurant|kitchen|bistro|tavern|grill|diner|cafe|subs|sandwich|pizza|burger|noodle|taco|ramen|pho", title_lower)) return("restaurant")
+    if (grepl("coffee|cafe|espresso", title_lower)) return("coffee") 
+    if (grepl("juice|smoothie", title_lower)) return("beverage")
+    if (grepl("bar|pub|brewery|distillery", title_lower)) return("bar")
+    
+    return("other")
+  }
+  
+  valid_places$venue_type <- mapply(categorize_venue_type_surprise, valid_places$tags, valid_places$title, SIMPLIFY = TRUE)
   
   # Select places with proper time progression
   selected_places <- if (num_locations == 1) {
@@ -496,13 +546,20 @@ generate_surprise_adventure <- function(available_places, time_available = NULL,
     
     if (nrow(morning_afternoon) > 0 && nrow(evening) > 0) {
       first <- morning_afternoon[sample(nrow(morning_afternoon), 1), , drop = FALSE]
-      # Exclude the first place from evening options
-      evening_filtered <- evening[evening$id != first$id, , drop = FALSE]
+      # Exclude the first place and same venue type from evening options
+      evening_filtered <- evening[evening$id != first$id & evening$venue_type != first$venue_type, , drop = FALSE]
       if (nrow(evening_filtered) > 0) {
         second <- evening_filtered[sample(nrow(evening_filtered), 1), , drop = FALSE]
         rbind(first, second)
       } else {
-        valid_places[sample(nrow(valid_places), 2), , drop = FALSE]
+        # Fallback: at least avoid same ID, even if venue types match
+        evening_filtered_id_only <- evening[evening$id != first$id, , drop = FALSE]
+        if (nrow(evening_filtered_id_only) > 0) {
+          second <- evening_filtered_id_only[sample(nrow(evening_filtered_id_only), 1), , drop = FALSE]
+          rbind(first, second)
+        } else {
+          valid_places[sample(nrow(valid_places), 2), , drop = FALSE]
+        }
       }
     } else {
       valid_places[sample(nrow(valid_places), min(2, nrow(valid_places))), , drop = FALSE]
@@ -515,28 +572,49 @@ generate_surprise_adventure <- function(available_places, time_available = NULL,
     
     selected <- data.frame()
     used_ids <- character(0)
+    used_venue_types <- character(0)
     
-    # Try to get one from each time period
+    # Try to get one from each time period with venue type diversity
     if (nrow(morning) > 0) {
       first <- morning[sample(nrow(morning), 1), , drop = FALSE]
       selected <- rbind(selected, first)
       used_ids <- c(used_ids, first$id)
+      used_venue_types <- c(used_venue_types, first$venue_type)
     }
     
     if (nrow(afternoon) > 0) {
-      afternoon_filtered <- afternoon[!afternoon$id %in% used_ids, , drop = FALSE]
+      # Filter by both ID and venue type
+      afternoon_filtered <- afternoon[!afternoon$id %in% used_ids & !afternoon$venue_type %in% used_venue_types, , drop = FALSE]
       if (nrow(afternoon_filtered) > 0) {
         second <- afternoon_filtered[sample(nrow(afternoon_filtered), 1), , drop = FALSE]
         selected <- rbind(selected, second)
         used_ids <- c(used_ids, second$id)
+        used_venue_types <- c(used_venue_types, second$venue_type)
+      } else {
+        # Fallback: at least avoid same ID
+        afternoon_filtered_id_only <- afternoon[!afternoon$id %in% used_ids, , drop = FALSE]
+        if (nrow(afternoon_filtered_id_only) > 0) {
+          second <- afternoon_filtered_id_only[sample(nrow(afternoon_filtered_id_only), 1), , drop = FALSE]
+          selected <- rbind(selected, second)
+          used_ids <- c(used_ids, second$id)
+          used_venue_types <- c(used_venue_types, second$venue_type)
+        }
       }
     }
     
     if (nrow(evening) > 0) {
-      evening_filtered <- evening[!evening$id %in% used_ids, , drop = FALSE]
+      # Filter by both ID and venue type
+      evening_filtered <- evening[!evening$id %in% used_ids & !evening$venue_type %in% used_venue_types, , drop = FALSE]
       if (nrow(evening_filtered) > 0) {
         third <- evening_filtered[sample(nrow(evening_filtered), 1), , drop = FALSE]
         selected <- rbind(selected, third)
+      } else {
+        # Fallback: at least avoid same ID
+        evening_filtered_id_only <- evening[!evening$id %in% used_ids, , drop = FALSE]
+        if (nrow(evening_filtered_id_only) > 0) {
+          third <- evening_filtered_id_only[sample(nrow(evening_filtered_id_only), 1), , drop = FALSE]
+          selected <- rbind(selected, third)
+        }
       }
     }
     
@@ -553,6 +631,76 @@ generate_surprise_adventure <- function(available_places, time_available = NULL,
     selected
   }
   
+  # Arrange venues by distance for logical journey flow (surprise adventures)
+  # Close venues should be first or last, not in the middle
+  if (num_locations > 2 && !is.null(home_lat) && !is.null(home_lng) && nrow(selected_places) > 2) {
+    # Ensure distances are calculated
+    selected_places$distance_mi <- mapply(function(lat, lng) {
+      calc_distance_miles(home_lat, home_lng, lat, lng)
+    }, selected_places$lat, selected_places$lng)
+    
+    # Sort by distance and rearrange for optimal journey
+    selected_places <- selected_places[order(selected_places$distance_mi, na.last = TRUE), , drop = FALSE]
+    
+    # For 3+ stops: keep closest first, furthest in middle, second closest last
+    # This creates a logical "out and back" pattern
+    if (nrow(selected_places) >= 3) {
+      reordered <- selected_places[1, , drop = FALSE]  # Start with closest
+      
+      # Add middle venues (furthest ones)
+      middle_count <- nrow(selected_places) - 2
+      if (middle_count > 0) {
+        middle_venues <- selected_places[(2:(1+middle_count)), , drop = FALSE]
+        # Reverse middle venues so furthest is first in the middle section
+        middle_venues <- middle_venues[nrow(middle_venues):1, , drop = FALSE]
+        reordered <- rbind(reordered, middle_venues)
+      }
+      
+      # End with second closest (if different from first)
+      if (nrow(selected_places) > 1) {
+        last_venue <- selected_places[nrow(selected_places), , drop = FALSE]
+        reordered <- rbind(reordered, last_venue)
+      }
+      
+      selected_places <- reordered
+    }
+  }
+  
+  # Arrange venues by distance for logical journey flow
+  # Close venues should be first or last, not in the middle
+  if (!is.null(home_lat) && !is.null(home_lng) && nrow(selected_places) > 2) {
+    # Ensure distances are calculated
+    selected_places$distance_mi <- mapply(function(lat, lng) {
+      calc_distance_miles(home_lat, home_lng, lat, lng)
+    }, selected_places$lat, selected_places$lng)
+    
+    # Sort by distance and rearrange for optimal journey
+    selected_places <- selected_places[order(selected_places$distance_mi, na.last = TRUE), , drop = FALSE]
+    
+    # For 3+ stops: keep closest first, furthest in middle, second closest last
+    # This creates a logical "out and back" pattern
+    if (nrow(selected_places) >= 3) {
+      reordered <- selected_places[1, , drop = FALSE]  # Start with closest
+      
+      # Add middle venues (furthest ones)
+      middle_count <- nrow(selected_places) - 2
+      if (middle_count > 0) {
+        middle_venues <- selected_places[(2:(1+middle_count)), , drop = FALSE]
+        # Reverse middle venues so furthest is first in the middle section
+        middle_venues <- middle_venues[nrow(middle_venues):1, , drop = FALSE]
+        reordered <- rbind(reordered, middle_venues)
+      }
+      
+      # End with second closest (if different from first)
+      if (nrow(selected_places) > 1) {
+        last_venue <- selected_places[nrow(selected_places), , drop = FALSE]
+        reordered <- rbind(reordered, last_venue)
+      }
+      
+      selected_places <- reordered
+    }
+  }
+  
   # Calculate distances and determine overall transit mode
   if (!is.null(home_lat) && !is.null(home_lng) && !is.na(home_lat) && !is.na(home_lng)) {
     selected_places$distance_mi <- mapply(function(lat, lng) {
@@ -562,7 +710,7 @@ generate_surprise_adventure <- function(available_places, time_available = NULL,
     # Use the furthest distance to determine transit mode
     max_distance <- max(selected_places$distance_mi, na.rm = TRUE)
     if (!is.na(max_distance)) {
-      main_transit <- transit_by_distance(max_distance)
+      main_transit <- transit_by_distance(max_distance, context)
     } else {
       main_transit <- "🚌 Public Transit"
     }
@@ -574,7 +722,7 @@ generate_surprise_adventure <- function(available_places, time_available = NULL,
   activities <- c()
   for (i in 1:nrow(selected_places)) {
     place <- selected_places[i, ]
-    activity <- simple_activity_from_tags(place$tags)
+    activity <- simple_activity_from_tags(place$tags, place$title)
     activities <- c(activities, activity)
   }
   
@@ -721,7 +869,7 @@ generate_contextual_activities <- function(places) {
     }
     # Fallback to simple activity assignment
     else {
-      activities[i] <- simple_activity_from_tags(places$tags[i])
+      activities[i] <- simple_activity_from_tags(places$tags[i], places$title[i])
     }
   }
   
@@ -736,6 +884,15 @@ generate_guided_multi_stop <- function(available_places, num_stops, context = NU
   # Filter to places with coordinates
   valid_places <- available_places[!is.na(available_places$lat) & !is.na(available_places$lng), , drop = FALSE]
   if (nrow(valid_places) < num_stops) return(NULL)
+  
+  # Calculate distances for proper venue arrangement
+  if (!is.null(home_lat) && !is.null(home_lng)) {
+    if (!"distance_mi" %in% names(valid_places) || any(is.na(valid_places$distance_mi))) {
+      valid_places$distance_mi <- mapply(function(lat, lng) {
+        calc_distance_miles(home_lat, home_lng, lat, lng)
+      }, valid_places$lat, valid_places$lng)
+    }
+  }
   
   # Use the same time categorization as surprise adventures
   categorize_venue_time <- function(tags) {
@@ -753,20 +910,24 @@ generate_guided_multi_stop <- function(available_places, num_stops, context = NU
     tags_lower <- tolower(tags %||% "")
     title_lower <- tolower(title %||% "")
     
-    # Check tags first
-    if (grepl("restaurant|dining|eatery|kitchen|grill|bistro|tavern|food|cuisine|chef|menu|meal|eat", tags_lower)) return("restaurant")
-    if (grepl("coffee|cafe|espresso", tags_lower)) return("coffee")
+    # Check tags first - be more specific about food types
+    if (grepl("bakery|donut|pastry|dessert|sweet|cake|cupcake|ice cream|gelato", tags_lower)) return("dessert")
+    if (grepl("restaurant|dining|eatery|kitchen|grill|bistro|tavern|food|cuisine|chef|menu|meal|eat|lunch|dinner|brunch|breakfast|subs|sandwich|pizza|burger|noodle|taco|ramen|pho", tags_lower)) return("restaurant")
+    if (grepl("coffee|cafe|espresso|latte", tags_lower)) return("coffee")
+    if (grepl("juice|smoothie|drink", tags_lower)) return("beverage")
     if (grepl("bar|brewery|pub|beer|cocktail|wine", tags_lower)) return("bar")
     
-    # Title-based fallback for common restaurant indicators
-    if (grepl("restaurant|kitchen|bistro|tavern|grill|diner|cafe", title_lower)) return("restaurant")
+    # Title-based fallback for common food indicators
+    if (grepl("bakery|donut|pastry|dessert|sweet|cake|cupcake|ice cream|gelato", title_lower)) return("dessert")
+    if (grepl("restaurant|kitchen|bistro|tavern|grill|diner|cafe|subs|sandwich|pizza|burger|noodle|taco|ramen|pho", title_lower)) return("restaurant")
     if (grepl("coffee|cafe|espresso", title_lower)) return("coffee") 
+    if (grepl("juice|smoothie", title_lower)) return("beverage")
     if (grepl("bar|pub|brewery|distillery", title_lower)) return("bar")
     
     return("other")
   }
   
-  valid_places$venue_type <- sapply(valid_places$tags, categorize_venue_type)
+  valid_places$venue_type <- mapply(categorize_venue_type, valid_places$tags, valid_places$title, SIMPLIFY = TRUE)
   
   # Select places with proper time progression AND venue diversity
   selected_places <- if (num_stops == 2) {
@@ -885,7 +1046,7 @@ generate_guided_multi_stop <- function(available_places, num_stops, context = NU
     }, selected_places$lat, selected_places$lng)
     
     max_distance <- max(selected_places$distance_mi, na.rm = TRUE)
-    main_transit <- if (!is.na(max_distance)) transit_by_distance(max_distance) else "🚌 Public Transit"
+    main_transit <- if (!is.na(max_distance)) transit_by_distance(max_distance, context) else "🚌 Public Transit"
   } else {
     main_transit <- "🚌 Public Transit"
   }
@@ -1470,7 +1631,7 @@ ui <- fluidPage(
   # ======= STARTING LOCATION & MAP SECTION =======
   fluidRow(
     column(
-      3,
+      4,
       div(class = "location-control-panel",
           h4("Starting Location"),
           p("Choose one option below or click anywhere on the map", style = "color: var(--muted); font-size: 1.3rem; margin-bottom: 16px; font-weight: 600;"),
@@ -1488,7 +1649,7 @@ ui <- fluidPage(
           div(style = "margin-bottom: 16px; padding: 12px; border: 1px solid var(--border); border-radius: 8px;",
               h5("Option 2: Portland Area", style = "margin: 0 0 8px 0; color: var(--primary); font-size: 1.4rem;"),
               div(style = "margin-bottom: 12px;",
-                  tags$label("Choose a quadrant:", style = "font-size: 0.9rem; font-weight: normal; color: var(--text-secondary); margin-bottom: 4px; display: block;"),
+                  tags$label("Choose a quadrant:", style = "font-size: 1.2rem; font-weight: normal; color: var(--text-secondary); margin-bottom: 4px; display: block;"),
                   selectInput("selected_quadrant", NULL, 
                              choices = c("Choose a quadrant..." = "", names(PORTLAND_QUADRANTS)), 
                              width = "100%")
@@ -1525,7 +1686,7 @@ ui <- fluidPage(
     ),
     
     column(
-      9,
+      8,
       div(class="map-container", leafletOutput("map", height = 600)),
       div(id = "map_status", class="address-status", style = "margin-top: 8px;")
     )
@@ -1537,14 +1698,8 @@ ui <- fluidPage(
       12,
       div(class = "control-panel", style = "margin-top: 24px;",
           fluidRow(
-            # Left narrow column: What's the mood and Where to explore (stacked)
+            # Left narrow column: Where to explore
             column(3,
-                   # Context Filter
-                   div(style = "margin-bottom: 16px; padding: 12px; border: 1px solid var(--border); border-radius: 8px;",
-                       h5("What's the mood?", style = "margin: 0 0 8px 0; color: var(--primary); font-size: 1.3rem; font-weight: 600;"),
-                       selectizeInput("context_filter", "", choices = names(CONTEXT_FILTERS), selected = NULL, multiple = TRUE,
-                                      options = list(placeholder = 'Any context'), width = "100%")
-                   ),
                    # Location Filters  
                    div(style = "margin-bottom: 16px; padding: 12px; border: 1px solid var(--border); border-radius: 8px;",
                        h5("Where to explore?", style = "margin: 0 0 8px 0; color: var(--primary); font-size: 1.3rem; font-weight: 600;"),
@@ -1556,7 +1711,7 @@ ui <- fluidPage(
                        )
                    )
             ),
-            # Middle column: What kinds of places
+            # Middle column: What kinds of places and transportation
             column(6,
                    # What kinds of places 
                    div(style = "margin-bottom: 16px; padding: 12px; border: 1px solid var(--border); border-radius: 8px;",
@@ -1566,10 +1721,25 @@ ui <- fluidPage(
                              actionButton(paste0("act_", gsub("[^A-Za-z0-9]", "", cat)), cat, class = "activity-btn")
                            })
                        )
+                   ),
+                   # Transportation - directly below What kinds of places
+                   div(style = "margin-bottom: 16px; padding: 12px; border: 1px solid var(--border); border-radius: 8px;",
+                       h5("How ya getting there?", style = "margin: 0 0 8px 0; color: var(--primary); font-size: 1.3rem; font-weight: 600;"),
+                       div(id = "transport_buttons",
+                           lapply(names(TRANSPORT_MODES), function(mode) {
+                             actionButton(paste0("trans_", gsub("[^A-Za-z0-9]", "", mode)), mode, class = "transport-btn")
+                           })
+                       )
                    )
             ),
-            # Right column: Number of stops above Guided Plan
+            # Right column: What's the mood, Number of stops, and Guided Plan
             column(3,
+                   # Context Filter
+                   div(style = "margin-bottom: 16px; padding: 12px; border: 1px solid var(--border); border-radius: 8px;",
+                       h5("What's the mood?", style = "margin: 0 0 8px 0; color: var(--primary); font-size: 1.3rem; font-weight: 600;"),
+                       selectizeInput("context_filter", "", choices = names(CONTEXT_FILTERS), selected = NULL, multiple = TRUE,
+                                      options = list(placeholder = 'Any context'), width = "100%")
+                   ),
                    # Number of stops
                    div(style = "margin-bottom: 16px; padding: 12px; border: 1px solid var(--border); border-radius: 8px;",
                        h5("Number of stops", style = "margin: 0 0 8px 0; color: var(--primary); font-size: 1.3rem; font-weight: 600;"),
@@ -1584,22 +1754,6 @@ ui <- fluidPage(
                        )
                    )
             )
-          ),
-          fluidRow(
-            # Transport row - below What kinds of places
-            column(3),  # Empty column to align with left column above
-            column(6,
-                   # Transportation - below What kinds of places
-                   div(style = "margin-bottom: 16px; padding: 12px; border: 1px solid var(--border); border-radius: 8px;",
-                       h5("How ya getting there?", style = "margin: 0 0 8px 0; color: var(--primary); font-size: 1.3rem; font-weight: 600;"),
-                       div(id = "transport_buttons",
-                           lapply(names(TRANSPORT_MODES), function(mode) {
-                             actionButton(paste0("trans_", gsub("[^A-Za-z0-9]", "", mode)), mode, class = "transport-btn")
-                           })
-                       )
-                   )
-            ),
-            column(3)  # Empty column to align with right column
           ),
           # Visited Places row
           fluidRow(
@@ -2345,10 +2499,9 @@ server <- function(input, output, session) {
         }
         if ("exclude_transport" %in% names(context) && 
             home_is_set(values$home_address, values$home_lat, values$home_lng)) {
-          # For rainy weather, limit to places reachable by car/transit (avoid short walks/bikes)
           excluded_modes <- context$exclude_transport
           if ("🚶 Walking" %in% excluded_modes && "🚲 Biking" %in% excluded_modes) {
-            # Exclude places that would primarily be reached by walking or biking
+            # For rainy weather: exclude places that would primarily be reached by walking or biking
             # Keep very close places (under 0.5 mi - short dash to car) or longer distance places
             df <- df[is.na(df$distance_mi) | df$distance_mi <= 0.5 | df$distance_mi >= 3, , drop = FALSE]
           }
@@ -2367,6 +2520,15 @@ server <- function(input, output, session) {
         }
       }
     }
+    
+    # Permanent filter: exclude bike shops
+    bike_shop_patterns <- c("bike", "cycling", "bicycle", "cycle")
+    is_bike_shop <- sapply(df$tags, function(tags) {
+      tags_lower <- tolower(tags %||% "")
+      any(sapply(bike_shop_patterns, function(pattern) grepl(pattern, tags_lower)))
+    })
+    df <- df[!is_bike_shop, , drop = FALSE]
+    
     df
   })
   
@@ -2377,30 +2539,30 @@ server <- function(input, output, session) {
   
   # Suggestions
   observeEvent(input$suggest_place, {
-    # Check for stay home conditions
-    stay_home_contexts <- c("☔ Rainy Weather", "😴 Low Energy")
+    # Check for stay home conditions  
     should_stay_home <- !is.null(input$context_filter) && 
                         length(input$context_filter) > 0 && 
-                        any(input$context_filter %in% stay_home_contexts)
+                        "☔ Rainy Weather" %in% input$context_filter
     
     if (should_stay_home) {
       # Generate stay-at-home suggestions
       stay_home_activities <- c(
-        "watching a new movie",
-        "starting a puzzle", 
-        "reading a book and getting really cozy",
-        "doing painting or drawing",
-        "sketching", 
-        "crafting"
+        "paint",
+        "finish a book",
+        "find a new movie to watch",
+        "draw", 
+        "craft",
+        "start a new puzzle",
+        "scan film negatives"
       )
       
       chosen_activity <- sample(stay_home_activities, 1)
-      mood <- input$context_filter[input$context_filter %in% stay_home_contexts][1]
+      mood <- "☔ Rainy Weather"
       
       values$suggested <- NULL  # No map location for staying home
       values$inspiration_text <- list(
         title = "Stay Home & Cozy",
-        description = paste("Perfect day for", chosen_activity, "at home!"),
+        description = paste("Stay at home to", chosen_activity),
         type = "stay_home",
         estimated_time = "As long as you want",
         transit = "🏠 Stay Home",
@@ -2409,14 +2571,23 @@ server <- function(input, output, session) {
       return()
     }
     
-    # Check if address is set for regular suggestions
-    if (!home_is_set(values$home_address, values$home_lat, values$home_lng)) {
-      showNotification("Please set your starting address first to get personalized suggestions!", type = "warning")
+    # Check if address is set - multiple safety checks
+    if (!home_is_set(values$home_address, values$home_lat, values$home_lng) ||
+        is.na(values$home_lat) || is.na(values$home_lng) ||
+        is.null(values$home_address) || !nzchar(values$home_address)) {
+      showNotification("Please set your starting location first! Use 'Set Address' or 'Set Area' to choose where you're starting from.", type = "warning")
       return()
     }
     
-    candidates <- available_places()
-    if (nrow(candidates) == 0) { showNotification("No unvisited places match your criteria!", type = "warning"); values$suggested <- NULL; return() }
+    # Additional safety check for valid coordinates
+    if (is.na(as.numeric(values$home_lat)) || is.na(as.numeric(values$home_lng))) {
+      showNotification("Invalid starting location coordinates. Please set your location again.", type = "error")
+      return()
+    }
+    
+    tryCatch({
+      candidates <- available_places()
+      if (nrow(candidates) == 0) { showNotification("No unvisited places match your criteria!", type = "warning"); values$suggested <- NULL; return() }
     
     # Get user-selected number of stops
     num_stops <- as.numeric(input$num_stops %||% 1)
@@ -2431,7 +2602,7 @@ server <- function(input, output, session) {
         
         # Calculate distance and determine transit mode
         if (!is.na(suggested_place$distance_mi[1])) {
-          transit_mode <- transit_by_distance(suggested_place$distance_mi[1])
+          transit_mode <- transit_by_distance(suggested_place$distance_mi[1], input$context_filter)
         } else {
           transit_mode <- "🚌 Public Transit"
         }
@@ -2439,7 +2610,7 @@ server <- function(input, output, session) {
         values$suggested <- suggested_place
         values$inspiration_text <- list(
           title = plan$title, 
-          description = paste(transit_to_verb(transit_mode), suggested_place$title[1], "in", suggested_place$neighborhood[1], simple_activity_from_tags(suggested_place$tags[1])), 
+          description = paste(transit_to_verb(transit_mode), suggested_place$title[1], simple_activity_from_tags(suggested_place$tags[1], suggested_place$title[1])), 
           type = plan$type, 
           estimated_time = plan$estimated_time,
           transit = transit_mode
@@ -2449,7 +2620,7 @@ server <- function(input, output, session) {
         
         # Calculate distance and determine transit mode
         if (!is.na(chosen_place$distance_mi[1])) {
-          transit_mode <- transit_by_distance(chosen_place$distance_mi[1])
+          transit_mode <- transit_by_distance(chosen_place$distance_mi[1], input$context_filter)
         } else {
           transit_mode <- "🚌 Public Transit"
         }
@@ -2457,7 +2628,7 @@ server <- function(input, output, session) {
         values$suggested <- chosen_place
         values$inspiration_text <- list(
           title = "Great Choice",
-          description = paste(transit_to_verb(transit_mode), chosen_place$title[1], "in", chosen_place$neighborhood[1], simple_activity_from_tags(chosen_place$tags[1])),
+          description = paste(transit_to_verb(transit_mode), chosen_place$title[1], simple_activity_from_tags(chosen_place$tags[1], chosen_place$title[1])),
           type = "suggestion",
           estimated_time = "1-2 hours",
           transit = transit_mode
@@ -2492,6 +2663,12 @@ server <- function(input, output, session) {
         values$inspiration_text <- NULL
       }
     }
+    }, error = function(e) {
+      showNotification(paste("Error generating guided plan:", e$message, "Please try setting your location again."), type = "error")
+      values$suggested <- NULL
+      values$inspiration_text <- NULL
+      return()
+    })
   })
   
   observeEvent(input$random_inspiration, {
