@@ -838,7 +838,7 @@ generate_contextual_activities <- function(places) {
     }
     # Coffee shops - specific coffee activities
     else if (grepl("coffee|cafe|espresso|latte", tags_lower)) {
-      activities[i] <- sample(c("for coffee", "to grab coffee", "for a coffee break", "to draw your surroundings"), 1)
+      activities[i] <- sample(c("for coffee", "to grab coffee", "for a coffee break"), 1)
     }
     # Libraries - quiet, focused activities
     else if (grepl("library", tags_lower)) {
