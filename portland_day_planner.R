@@ -124,6 +124,12 @@ NEIGHBORHOODS_BY_QUADRANT <- list(
     "University Park" = list(lat = 45.5748, lng = -122.7148, name = "University Park"),
     "Portland Meadows" = list(lat = 45.6048, lng = -122.6998, name = "Portland Meadows"),
     "Cathedral Park" = list(lat = 45.5892, lng = -122.7448, name = "Cathedral Park")
+  ),
+  "South" = list(
+    "South Portland" = list(lat = 45.4900, lng = -122.6700, name = "South Portland"),
+    "Lair Hill" = list(lat = 45.5059, lng = -122.6748, name = "Lair Hill"),
+    "South Waterfront" = list(lat = 45.4976, lng = -122.6714, name = "South Waterfront"),
+    "Johns Landing" = list(lat = 45.4634, lng = -122.6748, name = "Johns Landing")
   )
 )
 
@@ -141,6 +147,11 @@ CONTEXT_FILTERS <- list(
   ),
   "🚶 No Car" = list(
     max_distance = 5
+  ),
+  "😴 Low Energy" = list(
+    prefer_venues = c("📚 Bookstores", "☕ Coffee & Cafes", "🎭 Entertainment"),
+    exclude_activities = c("Hiking", "Photography"),
+    max_distance = 10
   )
 )
 
@@ -1448,14 +1459,14 @@ ui <- fluidPage(
   # ======= STARTING LOCATION & MAP SECTION =======
   fluidRow(
     column(
-      3,
+      4,
       div(class = "location-control-panel",
           h4("Starting Location"),
           p("Choose one option below or click anywhere on the map", style = "color: var(--muted); font-size: 1.3rem; margin-bottom: 16px; font-weight: 600;"),
           
           # Address Option
           div(style = "margin-bottom: 16px; padding: 12px; border: 1px solid var(--border); border-radius: 8px;",
-              h6("Option 1: Specific Address", style = "margin: 0 0 8px 0; color: var(--primary);"),
+              h5("Option 1: Specific Address", style = "margin: 0 0 8px 0; color: var(--primary); font-size: 1.4rem;"),
               div(class="address-grid",
                   textInput("home_address", "", placeholder = "Enter your address (e.g., 123 Main St, Portland, OR)", value = "", width = "100%"),
                   actionButton("geocode_address", "Set Address", class = "btn-outline-primary", style = "min-width: 140px;")
@@ -1464,16 +1475,18 @@ ui <- fluidPage(
           
           # Area Option  
           div(style = "margin-bottom: 16px; padding: 12px; border: 1px solid var(--border); border-radius: 8px;",
-              h6("Option 2: Portland Area", style = "margin: 0 0 8px 0; color: var(--primary);"),
+              h5("Option 2: Portland Area", style = "margin: 0 0 8px 0; color: var(--primary); font-size: 1.4rem;"),
               div(style = "margin-bottom: 12px;",
-                  selectInput("selected_quadrant", "Choose a quadrant:", 
+                  tags$label("Choose a quadrant:", style = "font-size: 0.9rem; font-weight: normal; color: var(--text-secondary); margin-bottom: 4px; display: block;"),
+                  selectInput("selected_quadrant", NULL, 
                              choices = c("Choose a quadrant..." = "", names(PORTLAND_QUADRANTS)), 
                              width = "100%")
               ),
               conditionalPanel(
                 condition = "input.selected_quadrant != '' && input.selected_quadrant != null",
                 div(style = "margin-bottom: 12px;",
-                    selectInput("selected_neighborhood", "Optionally, narrow to a neighborhood:", 
+                    tags$label("Optionally, narrow to a neighborhood:", style = "font-size: 0.9rem; font-weight: normal; color: var(--text-secondary); margin-bottom: 4px; display: block;"),
+                    selectInput("selected_neighborhood", NULL, 
                                choices = c("Use entire quadrant" = ""), 
                                width = "100%")
                 )
@@ -1501,8 +1514,8 @@ ui <- fluidPage(
     ),
     
     column(
-      9,
-      div(class="map-container", leafletOutput("map", height = 500)),
+      8,
+      div(class="map-container", leafletOutput("map", height = 650)),
       div(id = "map_status", class="address-status", style = "margin-top: 8px;")
     )
   ),
@@ -1512,46 +1525,49 @@ ui <- fluidPage(
     column(
       12,
       div(class = "control-panel", style = "margin-top: 24px;",
+          # Row 1: What's the mood and Where to explore
           fluidRow(
-            column(3,
+            column(6,
                    # Context Filter
                    div(style = "margin-bottom: 16px; padding: 12px; border: 1px solid var(--border); border-radius: 8px;",
-                       h6("What's the mood?", style = "margin: 0 0 8px 0; color: var(--primary);"),
+                       h6("What's the mood?", style = "margin: 0 0 8px 0; color: var(--primary); font-size: 1rem;"),
                        selectizeInput("context_filter", "", choices = names(CONTEXT_FILTERS), selected = NULL, multiple = TRUE,
                                       options = list(placeholder = 'Any context'), width = "100%")
-                   ),
-                   
+                   )
+            ),
+            column(6,
                    # Location Filters
                    div(style = "margin-bottom: 16px; padding: 12px; border: 1px solid var(--border); border-radius: 8px;",
-                       h6("Where to explore?", style = "margin: 0 0 8px 0; color: var(--primary);"),
+                       h6("Where to explore?", style = "margin: 0 0 8px 0; color: var(--primary); font-size: 1rem;"),
                        div(style = "margin-bottom: 12px;",
                            uiOutput("section_selector")
                        ),
-                       div(style = "margin-bottom: 12px;",
-                           uiOutput("neighborhood_selector")  
-                       ),
                        div(style = "margin-bottom: 0;",
-                           selectInput("num_stops", "Number of stops:", 
-                                      choices = c("1 stop" = 1, "2 stops" = 2, "3 stops" = 3), 
-                                      selected = 1, width = "100%")
+                           uiOutput("neighborhood_selector")  
                        )
                    )
-            ),
-            column(3,
+            )
+          ),
+          # Row 2: What kinds of places (full width)
+          fluidRow(
+            column(12,
                    # Activity Types
                    div(style = "margin-bottom: 16px; padding: 12px; border: 1px solid var(--border); border-radius: 8px;",
-                       h6("What kinds of places?", style = "margin: 0 0 8px 0; color: var(--primary);"),
+                       h6("What kinds of places?", style = "margin: 0 0 8px 0; color: var(--primary); font-size: 1rem;"),
                        div(id = "activity_buttons",
                            lapply(names(ACTIVITY_CATEGORIES), function(cat) {
                              actionButton(paste0("act_", gsub("[^A-Za-z0-9]", "", cat)), cat, class = "activity-btn")
                            })
                        )
                    )
-            ),
-            column(3,
+            )
+          ),
+          # Row 3: How ya getting there and Number of stops
+          fluidRow(
+            column(8,
                    # Transportation
                    div(style = "margin-bottom: 16px; padding: 12px; border: 1px solid var(--border); border-radius: 8px;",
-                       h6("How ya getting there?", style = "margin: 0 0 8px 0; color: var(--primary);"),
+                       h6("How ya getting there?", style = "margin: 0 0 8px 0; color: var(--primary); font-size: 1rem;"),
                        div(id = "transport_buttons",
                            lapply(names(TRANSPORT_MODES), function(mode) {
                              actionButton(paste0("trans_", gsub("[^A-Za-z0-9]", "", mode)), mode, class = "transport-btn")
@@ -1559,15 +1575,28 @@ ui <- fluidPage(
                        )
                    )
             ),
-            column(3,
+            column(4,
+                   # Number of stops
+                   div(style = "margin-bottom: 16px; padding: 12px; border: 1px solid var(--border); border-radius: 8px;",
+                       h6("Number of stops", style = "margin: 0 0 8px 0; color: var(--primary); font-size: 1rem;"),
+                       selectInput("num_stops", NULL, 
+                                  choices = c("1 stop" = 1, "2 stops" = 2, "3 stops" = 3), 
+                                  selected = 1, width = "100%")
+                   )
+            )
+          ),
+          # Row 4: Guided Plan and Visited Places
+          fluidRow(
+            column(6,
                    # Guided Plan Button
                    div(style = "text-align: center; margin-bottom: 16px;",
                        actionButton("suggest_place", "Guided Plan", class = "btn-primary", style = "width: 100%; padding: 16px 20px; font-size: 1.4rem; font-weight: 600;")
-                   ),
-                   
+                   )
+            ),
+            column(6,
                    # Visited Places
                    div(style = "margin-bottom: 16px; padding: 12px; border: 1px solid var(--border); border-radius: 8px;",
-                       h6("Places Visited", style = "margin: 0 0 8px 0; color: var(--primary);"),
+                       h6("Places Visited", style = "margin: 0 0 8px 0; color: var(--primary); font-size: 1rem;"),
                        verbatimTextOutput("visited_count"),
                        uiOutput("visited_preview")
                    )
@@ -1774,8 +1803,15 @@ server <- function(input, output, session) {
     
     # First try hardcoded neighborhoods
     if (!is.null(quadrant) && quadrant %in% names(NEIGHBORHOODS_BY_QUADRANT)) {
-      hardcoded_info <- NEIGHBORHOODS_BY_QUADRANT[[quadrant]][[neighborhood]]
-      if (!is.null(hardcoded_info)) return(hardcoded_info)
+      tryCatch({
+        quadrant_neighborhoods <- NEIGHBORHOODS_BY_QUADRANT[[quadrant]]
+        if (!is.null(quadrant_neighborhoods) && neighborhood %in% names(quadrant_neighborhoods)) {
+          hardcoded_info <- quadrant_neighborhoods[[neighborhood]]
+          if (!is.null(hardcoded_info)) return(hardcoded_info)
+        }
+      }, error = function(e) {
+        # Continue to geographic boundary approach
+      })
     }
     
     # If not found, calculate from geographic boundaries
@@ -1855,8 +1891,6 @@ server <- function(input, output, session) {
       div(
         p("✅ Starting location confirmed!", 
           style = "color: var(--success); font-size: 1.3rem; margin-bottom: 8px; text-align: center; font-weight: 700;"),
-        p("Click map to explore areas for suggestions", 
-          style = "color: var(--muted); font-size: 1.2rem; margin-bottom: 8px; text-align: center; font-weight: 600;"),
         actionButton("reset_starting_location", "Change Starting Location", 
                      class = "btn-outline-secondary", 
                      style = "width: 100%; font-size: 1.1rem; font-weight: 600;")
@@ -1898,17 +1932,39 @@ server <- function(input, output, session) {
       return()
     }
     
-    # Use the same geographic boundary approach as exploration neighborhoods
-    if (!is.null(sections_boundaries) && !is.null(SEC_NAME_COL) &&
-        !is.null(neighborhood_boundaries) && !is.null(NEI_NAME_COL)) {
-      sel_secs <- sections_boundaries[sections_boundaries[[SEC_NAME_COL]] %in% normalize_sextant(q), , drop = FALSE]
-      rows_to_draw <- safe_st_intersects_rows(neighborhood_boundaries, sel_secs)
-      neighborhoods <- if (length(rows_to_draw)) {
-        neighborhood_boundaries[rows_to_draw, ][[NEI_NAME_COL]] |> as.character() |> unique() |> sort()
-      } else character(0)
-    } else {
-      # Fallback to hardcoded list if geographic data not available
+    neighborhoods <- character(0)
+    
+    # First try hardcoded neighborhoods (this is reliable)
+    if (q %in% names(NEIGHBORHOODS_BY_QUADRANT)) {
       neighborhoods <- names(NEIGHBORHOODS_BY_QUADRANT[[q]] %||% list())
+    }
+    
+    # If hardcoded list is empty, try geographic boundary approach as fallback
+    if (length(neighborhoods) == 0 && 
+        !is.null(sections_boundaries) && !is.null(SEC_NAME_COL) &&
+        !is.null(neighborhood_boundaries) && !is.null(NEI_NAME_COL) &&
+        nrow(sections_boundaries) > 0 && nrow(neighborhood_boundaries) > 0) {
+      
+      tryCatch({
+        normalized_q <- normalize_sextant(q)
+        if (!is.na(normalized_q) && nzchar(normalized_q)) {
+          sel_secs <- sections_boundaries[sections_boundaries[[SEC_NAME_COL]] %in% normalized_q, , drop = FALSE]
+          if (nrow(sel_secs) > 0) {
+            rows_to_draw <- safe_st_intersects_rows(neighborhood_boundaries, sel_secs)
+            if (length(rows_to_draw) > 0) {
+              neighborhoods <- neighborhood_boundaries[rows_to_draw, ][[NEI_NAME_COL]] |> 
+                as.character() |> 
+                unique() |> 
+                sort()
+              # Filter out any NA or empty values
+              neighborhoods <- neighborhoods[!is.na(neighborhoods) & nzchar(neighborhoods)]
+            }
+          }
+        }
+      }, error = function(e) {
+        # Geographic approach also failed, neighborhoods remains empty
+        neighborhoods <- character(0)
+      })
     }
     
     choices <- c("Use entire quadrant" = "", neighborhoods)
@@ -1931,42 +1987,63 @@ server <- function(input, output, session) {
     
     # Check if a specific neighborhood is selected
     if (!is.null(input$selected_neighborhood) && nzchar(input$selected_neighborhood)) {
-      neighborhood_info <- get_neighborhood_info(input$selected_neighborhood, input$selected_quadrant)
-      if (!is.null(neighborhood_info)) {
-        values$home_lat <- neighborhood_info$lat
-        values$home_lng <- neighborhood_info$lng
-        values$home_address <- neighborhood_info$name
-        values$starting_location_locked <- TRUE
-        values$map_clicked <- FALSE  # Clear any map click preview
-        output$address_status <- renderText(paste("Starting from:", neighborhood_info$name))
-        showNotification(paste("Starting location set to", neighborhood_info$name, "- Map now in exploration mode"), type = "message")
-      } else {
-        output$address_status <- renderText("Neighborhood not found.")
+      tryCatch({
+        neighborhood_info <- get_neighborhood_info(input$selected_neighborhood, input$selected_quadrant)
+        if (!is.null(neighborhood_info)) {
+          values$home_lat <- neighborhood_info$lat
+          values$home_lng <- neighborhood_info$lng
+          values$home_address <- neighborhood_info$name
+          values$starting_location_locked <- TRUE
+          values$map_clicked <- FALSE  # Clear any map click preview
+          output$address_status <- renderText(paste("Starting from:", neighborhood_info$name))
+          showNotification(paste("Starting location set to", neighborhood_info$name, "- Map now in exploration mode"), type = "message")
+        } else {
+          output$address_status <- renderText("Neighborhood not found.")
+          return()
+        }
+        
+        # Sync explore selectors
+        updateSelectizeInput(session, "section_filter",
+                             selected = normalize_sextant(input$selected_quadrant), server = TRUE)
+        updateSelectizeInput(session, "neighborhood_filter",
+                             selected = input$selected_neighborhood, server = TRUE)
+      }, error = function(e) {
+        output$address_status <- renderText(paste("Error setting neighborhood:", e$message))
+        showNotification(paste("Error:", e$message), type = "error")
         return()
-      }
-      
-      # Sync explore selectors
-      updateSelectizeInput(session, "section_filter",
-                           selected = normalize_sextant(input$selected_quadrant), server = TRUE)
-      updateSelectizeInput(session, "neighborhood_filter",
-                           selected = input$selected_neighborhood, server = TRUE)
+      })
       
     } else {
-      # Use quadrant center
-      quadrant_info <- PORTLAND_QUADRANTS[[input$selected_quadrant]]
-      values$home_lat <- quadrant_info$lat
-      values$home_lng <- quadrant_info$lng
-      values$home_address <- quadrant_info$name
-      values$starting_location_locked <- TRUE
-      values$map_clicked <- FALSE  # Clear any map click preview
-      output$address_status <- renderText(paste("Starting from:", quadrant_info$name))
-      showNotification(paste("Starting location set to", quadrant_info$name, "- Map now in exploration mode"), type = "message")
-      
-      # Sync explore selectors
-      updateSelectizeInput(session, "section_filter",
-                           selected = normalize_sextant(input$selected_quadrant), server = TRUE)
-      updateSelectizeInput(session, "neighborhood_filter",
-                           selected = character(0), server = TRUE)
+      # Use quadrant center - add error handling here too
+      tryCatch({
+        if (!(input$selected_quadrant %in% names(PORTLAND_QUADRANTS))) {
+          output$address_status <- renderText("Invalid quadrant selection.")
+          return()
+        }
+        quadrant_info <- PORTLAND_QUADRANTS[[input$selected_quadrant]]
+        if (is.null(quadrant_info)) {
+          output$address_status <- renderText("Quadrant information not found.")
+          return()
+        }
+        
+        values$home_lat <- quadrant_info$lat
+        values$home_lng <- quadrant_info$lng
+        values$home_address <- quadrant_info$name
+        values$starting_location_locked <- TRUE
+        values$map_clicked <- FALSE  # Clear any map click preview
+        output$address_status <- renderText(paste("Starting from:", quadrant_info$name))
+        showNotification(paste("Starting location set to", quadrant_info$name, "- Map now in exploration mode"), type = "message")
+        
+        # Sync explore selectors
+        updateSelectizeInput(session, "section_filter",
+                             selected = normalize_sextant(input$selected_quadrant), server = TRUE)
+        updateSelectizeInput(session, "neighborhood_filter",
+                             selected = character(0), server = TRUE)
+      }, error = function(e) {
+        output$address_status <- renderText(paste("Error setting quadrant:", e$message))
+        showNotification(paste("Error:", e$message), type = "error")
+        return()
+      })
     }
   })
   
@@ -2125,19 +2202,44 @@ server <- function(input, output, session) {
   
   # Neighborhood selector based on selected Sextants
   output$neighborhood_selector <- renderUI({
+    # Add additional safety checks
     if (is.null(input$section_filter) || !length(input$section_filter) ||
         is.null(sections_boundaries) || is.null(SEC_NAME_COL) ||
-        is.null(neighborhood_boundaries) || is.null(NEI_NAME_COL)) {
+        is.null(neighborhood_boundaries) || is.null(NEI_NAME_COL) ||
+        nrow(sections_boundaries) == 0 || nrow(neighborhood_boundaries) == 0) {
       return(selectizeInput("neighborhood_filter", "", choices = character(0), selected = NULL, multiple = TRUE,
                             options = list(placeholder = "Select quadrant first")))
     }
-    sel_secs <- sections_boundaries[sections_boundaries[[SEC_NAME_COL]] %in% normalize_sextant(input$section_filter), , drop = FALSE]
-    rows_to_draw <- safe_st_intersects_rows(neighborhood_boundaries, sel_secs)
-    available_neighborhoods <- if (length(rows_to_draw)) {
-      neighborhood_boundaries[rows_to_draw, ][[NEI_NAME_COL]] |> as.character() |> unique() |> sort()
-    } else character(0)
-    selectizeInput("neighborhood_filter", "", choices = available_neighborhoods, selected = NULL, multiple = TRUE,
-                   options = list(placeholder = if (length(available_neighborhoods)) "Any neighborhood" else "No neighborhoods found"))
+    
+    # Additional safety in filtering
+    tryCatch({
+      normalized_sections <- normalize_sextant(input$section_filter)
+      if (length(normalized_sections) == 0 || any(is.na(normalized_sections))) {
+        return(selectizeInput("neighborhood_filter", "", choices = character(0), selected = NULL, multiple = TRUE,
+                              options = list(placeholder = "Invalid quadrant selection")))
+      }
+      
+      sel_secs <- sections_boundaries[sections_boundaries[[SEC_NAME_COL]] %in% normalized_sections, , drop = FALSE]
+      if (nrow(sel_secs) == 0) {
+        return(selectizeInput("neighborhood_filter", "", choices = character(0), selected = NULL, multiple = TRUE,
+                              options = list(placeholder = "No quadrant boundaries found")))
+      }
+      
+      rows_to_draw <- safe_st_intersects_rows(neighborhood_boundaries, sel_secs)
+      available_neighborhoods <- if (length(rows_to_draw) > 0) {
+        neighborhood_boundaries[rows_to_draw, ][[NEI_NAME_COL]] |> as.character() |> unique() |> sort()
+      } else character(0)
+      
+      # Filter out any NA or empty neighborhood names
+      available_neighborhoods <- available_neighborhoods[!is.na(available_neighborhoods) & nzchar(available_neighborhoods)]
+      
+      selectizeInput("neighborhood_filter", "", choices = available_neighborhoods, selected = NULL, multiple = TRUE,
+                     options = list(placeholder = if (length(available_neighborhoods)) "Any neighborhood" else "No neighborhoods found"))
+    }, error = function(e) {
+      # Fallback UI in case of any errors
+      selectizeInput("neighborhood_filter", "", choices = character(0), selected = NULL, multiple = TRUE,
+                     options = list(placeholder = "Error loading neighborhoods"))
+    })
   })
   
   # Filtering pipeline
@@ -2240,7 +2342,39 @@ server <- function(input, output, session) {
   
   # Suggestions
   observeEvent(input$suggest_place, {
-    # Check if address is set
+    # Check for stay home conditions
+    stay_home_contexts <- c("☔ Rainy Weather", "😴 Low Energy")
+    should_stay_home <- !is.null(input$context_filter) && 
+                        length(input$context_filter) > 0 && 
+                        any(input$context_filter %in% stay_home_contexts)
+    
+    if (should_stay_home) {
+      # Generate stay-at-home suggestions
+      stay_home_activities <- c(
+        "watching a new movie",
+        "starting a puzzle", 
+        "reading a book and getting really cozy",
+        "doing painting or drawing",
+        "sketching", 
+        "crafting"
+      )
+      
+      chosen_activity <- sample(stay_home_activities, 1)
+      mood <- input$context_filter[input$context_filter %in% stay_home_contexts][1]
+      
+      values$suggested <- NULL  # No map location for staying home
+      values$inspiration_text <- list(
+        title = "Stay Home & Cozy",
+        description = paste("Perfect day for", chosen_activity, "at home!"),
+        type = "stay_home",
+        estimated_time = "As long as you want",
+        transit = "🏠 Stay Home",
+        mood = mood
+      )
+      return()
+    }
+    
+    # Check if address is set for regular suggestions
     if (!home_is_set(values$home_address, values$home_lat, values$home_lng)) {
       showNotification("Please set your starting address first to get personalized suggestions!", type = "warning")
       return()
@@ -2470,7 +2604,7 @@ server <- function(input, output, session) {
           group = "sextants", layerId = paste0("sextant::", sx),
           options = pathOptions(pane = "polygons", interactive = TRUE, clickable = TRUE, pointerEvents = "auto"),
           highlightOptions = highlightOptions(weight = 3, fillOpacity = 0.25, bringToFront = FALSE),
-          popup = paste0("<b>", sx, "</b><br>", if (is_selected) "Click to remove" else "Click to add")
+          popup = paste0("<b>", sx, "</b>")
         )
       }
     }
