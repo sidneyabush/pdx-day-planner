@@ -521,17 +521,17 @@ generate_surprise_adventure <- function(available_places, time_available = NULL,
     tags_lower <- tolower(tags %||% "")
     title_lower <- tolower(title %||% "")
     
-    # Check tags first - COFFEE MUST COME FIRST to avoid being caught as restaurant
+    # Check tags first - COFFEE MUST COME FIRST to avoid being caught as food
     if (grepl("coffee|cafe|espresso|latte|cappuccino|americano|mocha|macchiato", tags_lower)) return("coffee")
-    if (grepl("bakery|donut|pastry|dessert|sweet|cake|cupcake|ice cream|gelato", tags_lower)) return("dessert")
-    if (grepl("restaurant|dining|eatery|kitchen|grill|bistro|tavern|food|cuisine|chef|menu|meal|eat|lunch|dinner|brunch|breakfast|subs|sandwich|pizza|burger|noodle|taco|ramen|pho", tags_lower)) return("restaurant")
+    # Consolidate ALL food-related venues under "food" to prevent multiple food selections
+    if (grepl("restaurant|dining|eatery|kitchen|grill|bistro|tavern|food|cuisine|chef|menu|meal|eat|lunch|dinner|brunch|breakfast|subs|sandwich|pizza|burger|noodle|taco|ramen|pho|bakery|donut|pastry|dessert|sweet|cake|cupcake|ice cream|gelato", tags_lower)) return("food")
     if (grepl("juice|smoothie|drink", tags_lower)) return("beverage")
     if (grepl("bar|brewery|pub|beer|cocktail|wine", tags_lower)) return("bar")
     
     # Title-based fallback for common food indicators - COFFEE MUST COME FIRST
     if (grepl("coffee|cafe|espresso|cappuccino|americano|mocha|macchiato|latte", title_lower)) return("coffee")
-    if (grepl("bakery|donut|pastry|dessert|sweet|cake|cupcake|ice cream|gelato", title_lower)) return("dessert")
-    if (grepl("restaurant|kitchen|bistro|tavern|grill|diner|subs|sandwich|pizza|burger|noodle|taco|ramen|pho", title_lower)) return("restaurant") 
+    # Consolidate ALL food-related venues under "food" in title check too
+    if (grepl("restaurant|kitchen|bistro|tavern|grill|diner|subs|sandwich|pizza|burger|noodle|taco|ramen|pho|bakery|donut|pastry|dessert|sweet|cake|cupcake|ice cream|gelato", title_lower)) return("food") 
     if (grepl("juice|smoothie", title_lower)) return("beverage")
     if (grepl("bar|pub|brewery|distillery", title_lower)) return("bar")
     
@@ -915,17 +915,17 @@ generate_guided_multi_stop <- function(available_places, num_stops, context = NU
     tags_lower <- tolower(tags %||% "")
     title_lower <- tolower(title %||% "")
     
-    # Check tags first - COFFEE MUST COME FIRST to avoid being caught as restaurant
+    # Check tags first - COFFEE MUST COME FIRST to avoid being caught as food
     if (grepl("coffee|cafe|espresso|latte|cappuccino|americano|mocha|macchiato", tags_lower)) return("coffee")
-    if (grepl("bakery|donut|pastry|dessert|sweet|cake|cupcake|ice cream|gelato", tags_lower)) return("dessert")
-    if (grepl("restaurant|dining|eatery|kitchen|grill|bistro|tavern|food|cuisine|chef|menu|meal|eat|lunch|dinner|brunch|breakfast|subs|sandwich|pizza|burger|noodle|taco|ramen|pho", tags_lower)) return("restaurant")
+    # Consolidate ALL food-related venues under "food" to prevent multiple food selections
+    if (grepl("restaurant|dining|eatery|kitchen|grill|bistro|tavern|food|cuisine|chef|menu|meal|eat|lunch|dinner|brunch|breakfast|subs|sandwich|pizza|burger|noodle|taco|ramen|pho|bakery|donut|pastry|dessert|sweet|cake|cupcake|ice cream|gelato", tags_lower)) return("food")
     if (grepl("juice|smoothie|drink", tags_lower)) return("beverage")
     if (grepl("bar|brewery|pub|beer|cocktail|wine", tags_lower)) return("bar")
     
     # Title-based fallback for common food indicators - COFFEE MUST COME FIRST
     if (grepl("coffee|cafe|espresso|cappuccino|americano|mocha|macchiato|latte", title_lower)) return("coffee")
-    if (grepl("bakery|donut|pastry|dessert|sweet|cake|cupcake|ice cream|gelato", title_lower)) return("dessert")
-    if (grepl("restaurant|kitchen|bistro|tavern|grill|diner|subs|sandwich|pizza|burger|noodle|taco|ramen|pho", title_lower)) return("restaurant") 
+    # Consolidate ALL food-related venues under "food" in title check too
+    if (grepl("restaurant|kitchen|bistro|tavern|grill|diner|subs|sandwich|pizza|burger|noodle|taco|ramen|pho|bakery|donut|pastry|dessert|sweet|cake|cupcake|ice cream|gelato", title_lower)) return("food") 
     if (grepl("juice|smoothie", title_lower)) return("beverage")
     if (grepl("bar|pub|brewery|distillery", title_lower)) return("bar")
     
