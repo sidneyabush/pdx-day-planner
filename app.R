@@ -1,4 +1,6 @@
 # Shinyapps.io deployment file
-# This file sources the main application
+# Source the main application and capture the shiny app object
+app <- source("portland_day_planner.R")$value
 
-source("portland_day_planner.R")
+# Return the app object for shinyapps.io
+app

@@ -3144,4 +3144,6 @@ server <- function(input, output, session) {
 }
 
 # ---------------- LAUNCH ----------------
+# For shinyapps.io deployment, the app object needs to be returned
+# This allows app.R to capture and return it properly
 shinyApp(ui, server)
