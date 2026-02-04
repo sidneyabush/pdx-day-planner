@@ -1,7 +1,7 @@
-# Portland Day-Off Planner
+# The Dream of the 90s is Alive in Portland
 *A tool for exploring Portland's local spots*
 
-My current app can be found and run [**here**](https://sidneyabush.shinyapps.io/portland-day-planner/), but you can also populate the app with your own saved lists from Google Maps by following the steps below.
+My current app can be found [**here**](https://sidneyabush.shinyapps.io/portland-day-planner/), but you can also populate the app with your own saved lists from Google Maps by following the steps below.
 
 ## Workflow
 
