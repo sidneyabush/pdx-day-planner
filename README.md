@@ -14,11 +14,11 @@ My current app can be found and run [**here**](https://sidneyabush.shinyapps.io/
 ## Current Features
 
 ### Mood-Based Filtering
-- **Coffee & Cafes** 
-- **Sweet Treats**  
-- **Bookstores**
-- **Drinks & Bars** 
-- **Thrift & Vintage** 
+- Coffee & Cafes
+- Sweet Treats  
+- Bookstores
+- Drinks & Bars 
+- Thrift & Vintage 
 
 ### Transportation Filtering
 - **Walking**: 2 miles or less from home
@@ -67,7 +67,7 @@ Modify `TRANSPORT_MODES` in the script:
 install.packages(c("shiny", "leaflet", "dplyr", "readr", "stringr", "DT", "httr", "jsonlite"))
 ```
 
-## Future to-dos'
+## Future feature additions (WIP)
 - Weather-aware suggestions
 - Time-of-day filtering
 - Route planning for multi-stop days
