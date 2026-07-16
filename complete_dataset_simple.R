@@ -1,4 +1,3 @@
-#!/usr/bin/env Rscript
 
 # Simple Dataset Completion Script (no geocoding)
 # Fill in missing columns without API calls

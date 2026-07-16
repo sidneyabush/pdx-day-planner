@@ -1,4 +1,3 @@
-#!/usr/bin/env Rscript
 
 # Dataset Harmonization Script
 # Combines existing Portland places data with new Reddit activities data

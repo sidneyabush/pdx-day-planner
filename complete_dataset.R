@@ -1,4 +1,3 @@
-#!/usr/bin/env Rscript
 
 # Complete Dataset Script
 # Fill in all missing columns in the harmonized dataset
