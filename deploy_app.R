@@ -1,6 +1,6 @@
 library(rsconnect)
 
-# Deploy the app
+# deploy the app
 cat("Starting deployment to shinyapps.io...\n")
 
 rsconnect::deployApp(

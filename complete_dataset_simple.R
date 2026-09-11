@@ -1,17 +1,17 @@
 
-# Simple Dataset Completion Script (no geocoding)
-# Fill in missing columns without API calls
+# simple dataset completion script (no geocoding)
+# fill in missing columns without api calls
 
 library(dplyr)
 library(readr)
 
-# Read the combined dataset
+# read the combined dataset
 data <- read_csv("data/portland_places_combined.csv", show_col_types = FALSE)
 
 cat("Starting simple dataset completion...\n")
 cat("Total rows:", nrow(data), "\n")
 
-# Function to get neighborhood from coordinates (vectorized)
+# function to get neighborhood from coordinates (vectorized)
 get_neighborhood_from_coords <- function(lat, lng) {
   ifelse(is.na(lat) | is.na(lng), NA_character_,
     ifelse(lat > 45.5152,
@@ -21,7 +21,7 @@ get_neighborhood_from_coords <- function(lat, lng) {
   )
 }
 
-# Function to assign section based on neighborhood (vectorized)
+# function to assign section based on neighborhood (vectorized)
 get_section_from_neighborhood <- function(neighborhood) {
   ifelse(is.na(neighborhood), NA_character_,
     ifelse(grepl("Northeast|NE", neighborhood, ignore.case = TRUE), "Northeast",
@@ -34,79 +34,79 @@ get_section_from_neighborhood <- function(neighborhood) {
   )
 }
 
-# Function to calculate distance from home address (vectorized)
+# function to calculate distance from home address (vectorized)
 calculate_distance <- function(lat1, lng1, lat2 = 45.558, lng2 = -122.665) {
   ifelse(is.na(lat1) | is.na(lng1), NA_real_, {
-    R <- 3959  # Earth's radius in miles
+    R <- 3959  # earth's radius in miles
     lat1_rad <- lat1 * pi / 180
     lat2_rad <- lat2 * pi / 180
     dlat <- (lat2 - lat1) * pi / 180
     dlng <- (lng2 - lng1) * pi / 180
-    a <- sin(dlat/2)^2 + cos(lat1_rad) * cos(lat2_rad) * sin(dlng/2)^2
-    c <- 2 * atan2(sqrt(a), sqrt(1-a))
+    a <- sin(dlat / 2)^2 + cos(lat1_rad) * cos(lat2_rad) * sin(dlng / 2)^2
+    c <- 2 * atan2(sqrt(a), sqrt(1 - a))
     round(R * c, 1)
   })
 }
 
-# Function to determine seasonal availability based on activity type
+# function to determine seasonal availability based on activity type
 get_seasonal_availability <- function(title, activity_type, source_list) {
   title_lower <- tolower(paste(title, activity_type))
 
-  # Outdoor activities are seasonal in Portland (Spring-Fall)
+  # outdoor activities are seasonal in portland (spring-fall)
   if (grepl("hike|trail|park|outdoor|garden|zoo|waterfall|beach|river|lake|forest", title_lower) ||
-      activity_type == "Nature/Outdoor" ||
-      grepl("Hikes|Parks", source_list)) {
+    activity_type == "Nature/Outdoor" ||
+    grepl("Hikes|Parks", source_list)) {
     return("Seasonal (Spring-Fall)")
   }
 
-  # Winter-specific activities
+  # winter-specific activities
   if (grepl("ski|snow|winter|christmas|holiday", title_lower)) {
     return("Seasonal (Winter)")
   }
 
-  # Summer-specific activities
+  # summer-specific activities
   if (grepl("swim|beach|float|water park|outdoor concert|festival", title_lower)) {
     return("Seasonal (Summer)")
   }
 
-  # Default to year-round for indoor activities
+  # default to year-round for indoor activities
   return("Year-round")
 }
 
-# Function to determine time of day suitability
+# function to determine time of day suitability
 get_time_suitability <- function(title, when_available = "", activity_type = "") {
   title_lower <- tolower(paste(title, when_available, activity_type))
 
-  # Morning activities
+  # morning activities
   if (grepl("breakfast|brunch|farmer|market|hike|trail|morning", title_lower)) {
     return("Morning,Afternoon")
   }
 
-  # Evening/night activities
+  # evening/night activities
   if (grepl("bar|brewery|dinner|theater|movie|nightlife|evening|night", title_lower)) {
     return("Afternoon,Evening")
   }
 
-  # All-day activities
+  # all-day activities
   if (grepl("museum|park|zoo|shop|gallery", title_lower)) {
     return("Morning,Afternoon,Evening")
   }
 
-  # Default to afternoon/evening
+  # default to afternoon/evening
   return("Afternoon,Evening")
 }
 
-# Function to generate tags from activity type and title (vectorized)
+# function to generate tags from activity type and title (vectorized)
 generate_tags <- function(activity_type, title, note = "") {
-  # Handle NAs
+  # handle nas
   activity_type <- ifelse(is.na(activity_type), "", activity_type)
   title <- ifelse(is.na(title), "", title)
   note <- ifelse(is.na(note), "", note)
 
-  # Create base tags from activity type
+  # create base tags from activity type
   base_tags <- gsub("[/]", " ", tolower(activity_type))
 
-  # Extract additional tags from title and notes
+  # extract additional tags from title and notes
   text <- tolower(paste(title, note))
 
   additional_tags <- sapply(text, function(txt) {
@@ -124,53 +124,53 @@ generate_tags <- function(activity_type, title, note = "") {
     return(paste(tags, collapse = ", "))
   })
 
-  # Combine base and additional tags
+  # combine base and additional tags
   final_tags <- ifelse(base_tags != "" & additional_tags != "",
-                      paste(base_tags, additional_tags, sep = ", "),
-                      ifelse(base_tags != "", base_tags, additional_tags))
+    paste(base_tags, additional_tags, sep = ", "),
+    ifelse(base_tags != "", base_tags, additional_tags))
 
   return(final_tags)
 }
 
 cat("Processing data...\n")
 
-# Fill in missing data
+# fill in missing data
 data <- data %>%
   mutate(
-    # Fill neighborhoods based on existing coordinates
+    # fill neighborhoods based on existing coordinates
     neighborhood = case_when(
       !is.na(neighborhood) & neighborhood != "" ~ neighborhood,
       !is.na(lat) & !is.na(lng) ~ get_neighborhood_from_coords(lat, lng),
       TRUE ~ "Portland Area"
     ),
 
-    # Fill sections based on neighborhoods
+    # fill sections based on neighborhoods
     section = case_when(
       !is.na(section) & section != "" ~ section,
       !is.na(neighborhood) ~ get_section_from_neighborhood(neighborhood),
       TRUE ~ "Central"
     ),
 
-    # Calculate distances for existing coordinates
+    # calculate distances for existing coordinates
     distance_mi = case_when(
       !is.na(distance_mi) ~ distance_mi,
       !is.na(lat) & !is.na(lng) ~ calculate_distance(lat, lng),
       TRUE ~ 5.0
     ),
 
-    # Update seasonal categories based on activity type and source
+    # update seasonal categories based on activity type and source
     seasonal_category = mapply(get_seasonal_availability, title, activity_type, source_list),
 
-    # Add time of day suitability
+    # add time of day suitability
     time_suitability = mapply(get_time_suitability, title, when_available, activity_type),
 
-    # Generate tags for empty tags
+    # generate tags for empty tags
     tags = case_when(
       !is.na(tags) & tags != "" ~ tags,
       TRUE ~ generate_tags(activity_type, title, note)
     ),
 
-    # Ensure all character fields are not NA
+    # ensure all character fields are not na
     title = ifelse(is.na(title), "Unknown Place", title),
     note = ifelse(is.na(note), "", note),
     url = ifelse(is.na(url), "", url),
@@ -179,7 +179,7 @@ data <- data %>%
     activity_type = ifelse(is.na(activity_type), "Other", activity_type),
     location_text = ifelse(is.na(location_text), title, location_text),
 
-    # Set default coordinates for Reddit activities without them (Portland center)
+    # set default coordinates for reddit activities without them (portland center)
     lat = case_when(
       !is.na(lat) ~ lat,
       source_list == "Reddit Portland Activities" ~ 45.5152,
@@ -195,7 +195,7 @@ data <- data %>%
     processed_date = ifelse(is.na(processed_date), as.character(Sys.Date()), as.character(processed_date))
   )
 
-# Handle special location mappings for known Portland places
+# handle special location mappings for known portland places
 known_locations <- list(
   "Powell's Books" = list(lat = 45.5230, lng = -122.6814, neighborhood = "Pearl District", section = "Northwest"),
   "Pioneer Courthouse Square" = list(lat = 45.5190, lng = -122.6787, neighborhood = "Downtown", section = "Southwest"),
@@ -206,13 +206,13 @@ known_locations <- list(
   "Multnomah Falls" = list(lat = 45.5762, lng = -122.1158, neighborhood = "Columbia River Gorge", section = "Outside Portland")
 )
 
-# Apply known location data
+# apply known location data
 for (place_name in names(known_locations)) {
   matches <- which(grepl(place_name, data$title, ignore.case = TRUE))
   if (length(matches) > 0) {
     loc_data <- known_locations[[place_name]]
     for (idx in matches) {
-      # Only update if coordinates are default Portland center
+      # only update if coordinates are default portland center
       if (abs(data$lat[idx] - 45.5152) < 0.001 && abs(data$lng[idx] - (-122.6784)) < 0.001) {
         data$lat[idx] <- loc_data$lat
         data$lng[idx] <- loc_data$lng
@@ -224,21 +224,21 @@ for (place_name in names(known_locations)) {
   }
 }
 
-# Final data validation
+# final data validation
 data <- data %>%
   mutate(
-    # Ensure distance is calculated for all rows with coordinates
+    # ensure distance is calculated for all rows with coordinates
     distance_mi = ifelse(is.na(distance_mi) & !is.na(lat) & !is.na(lng),
-                        calculate_distance(lat, lng), distance_mi),
+      calculate_distance(lat, lng), distance_mi),
 
-    # Clean up any remaining NAs
+    # clean up any remaining nas
     distance_mi = ifelse(is.na(distance_mi), 5.0, distance_mi)
   )
 
-# Save the completed dataset
+# save the completed dataset
 write_csv(data, "data/portland_places_complete.csv")
 
-# Generate completion report
+# generate completion report
 cat("\nDataset completion summary:\n")
 cat("Total rows:", nrow(data), "\n")
 cat("Rows with coordinates:", sum(!is.na(data$lat) & !is.na(data$lng)), "\n")
@@ -246,21 +246,21 @@ cat("Rows with neighborhoods:", sum(!is.na(data$neighborhood) & data$neighborhoo
 cat("Rows with non-empty tags:", sum(!is.na(data$tags) & data$tags != ""), "\n")
 cat("Rows with distances:", sum(!is.na(data$distance_mi)), "\n")
 
-# Check seasonal distribution
+# check seasonal distribution
 cat("\nSeasonal category distribution:\n")
 seasonal_counts <- table(data$seasonal_category)
 for (season in names(seasonal_counts)) {
   cat(paste0(season, ": ", seasonal_counts[season]), "\n")
 }
 
-# Activity type breakdown
+# activity type breakdown
 cat("\nActivity type distribution:\n")
 activity_counts <- table(data$activity_type)
 for (activity in names(activity_counts)) {
   cat(paste0(activity, ": ", activity_counts[activity]), "\n")
 }
 
-# Time suitability breakdown
+# time suitability breakdown
 cat("\nTime suitability breakdown (sample):\n")
 time_sample <- head(table(data$time_suitability), 5)
 for (time in names(time_sample)) {
