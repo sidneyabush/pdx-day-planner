@@ -1432,6 +1432,8 @@ if (!exists("save_completed", mode = "function")) {
 }
 
 
+source("coffee_passport.R", local = TRUE)
+
 ui <- fluidPage(
   # floating weather/time stack in top-right of app
   div(class = "app-weather-corner", uiOutput("weather_ui")),
@@ -1654,6 +1656,10 @@ ui <- fluidPage(
 ")),
   ),
 
+  tags$head(tags$style(HTML(coffee_styles))),
+  tags$script(HTML(coffee_storage_script)),
+  tabsetPanel(id = "main_tabs",
+  tabPanel("Day planner",
   # ---- header ----
   div(class = "header",
     div(class = "header-grid",
@@ -1839,6 +1845,10 @@ ui <- fluidPage(
     )
   ),
 
+  ),
+  tabPanel("Coffee Passport", coffee_passport_ui(), icon = icon("mug-hot"))
+  ),
+
   # js toggles
   tags$script(HTML("
     $(document).on('click', '.activity-btn', function() {
@@ -1942,6 +1952,7 @@ get_weather_forecast <- function() {
 
 # ---- server ----
 server <- function(input, output, session) {
+  coffee_passport_server(input, output, session, places)
   # ---- weather/time (no emojis) ----
   current_weather <- reactive({
     invalidateLater(15 * 60 * 1000, session)  # refresh theme + data every 15 min
